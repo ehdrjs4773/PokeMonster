@@ -1,9 +1,12 @@
 #pragma once
 #include "gameNode.h"
+#include "worldMapScene.h"
 
 class playGround : public gameNode
 {
 private:
+
+	gameNode* _currentScene;
 
 public:
 	virtual HRESULT init(void);		//초기화 함수
