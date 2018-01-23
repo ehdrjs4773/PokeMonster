@@ -55,6 +55,24 @@
     <Filter Include="2DGameFramework\DB">
       <UniqueIdentifier>{a19bc8ae-54d9-4a2a-a988-88e3ecfadd86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\한재윤">
+      <UniqueIdentifier>{188ef26d-5d76-4dc4-9155-a0490bebf93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\최동건">
+      <UniqueIdentifier>{6213c533-de1d-4efe-b50a-eb07b213ad0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\정동윤">
+      <UniqueIdentifier>{368b1062-408f-478b-9142-749fa6d257c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\박근화">
+      <UniqueIdentifier>{489828b6-ce22-47e3-b2be-c570fbb7422a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\이정민">
+      <UniqueIdentifier>{a85a9058-757f-478f-92c4-0fc585867e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\배건하">
+      <UniqueIdentifier>{d3880e20-cd71-4602-b012-2afbf83068d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
