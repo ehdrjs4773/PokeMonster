@@ -29,7 +29,7 @@ class worldMapScene : public gameNode
 private:
 	select _select[GYM_END];
 	int SelectNum;
-	int _isClear[GYM_END];
+	bool _isClear[GYM_END];
 
 public:
 	HRESULT init();

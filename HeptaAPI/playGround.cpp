@@ -15,12 +15,8 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	gameNode::init(true);
-	
-	IMAGEMANAGER->addImage("¹è°æ", "worldmap1.bmp", WINSIZEX, WINSIZEY, true, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("¿ùµå¸Ê¾À", new worldMapScene);
-	IMAGEMANAGER->addImage("Ç¥½Ã", "select.bmp", 50, 78, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("clear", "clear.bmp", 101, 42, true, true, RGB(255, 0, 255));
 
 
 	return S_OK;
