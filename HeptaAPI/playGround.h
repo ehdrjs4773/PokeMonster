@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "worldMapScene.h"
+#include "battleScene.h"
 
 class playGround : public gameNode
 {

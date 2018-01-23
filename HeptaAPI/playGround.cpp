@@ -17,6 +17,7 @@ HRESULT playGround::init()
 	gameNode::init(true);
 
 	SCENEMANAGER->addScene("¿ùµå¸Ê¾À", new worldMapScene);
+	SCENEMANAGER->addScene("battleScene", new battleScene);
 
 
 	return S_OK;
@@ -36,6 +37,22 @@ void playGround::update(void)
 
 	SCENEMANAGER->update();
 	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+
+	// ¹èÆ²¾À Å×½ºÆ®
+	if (KEYMANAGER->isOnceKeyDown(VK_F1))
+	{
+		vector<pokemon*> vPokemon;
+		vector<pokemon*> vPokemon2;
+
+		pokemon* pika = new pokemon;
+		vPokemon.push_back(pika);
+		vPokemon2.push_back(pika);
+
+		DATABASE->setVPlayerPokemon(&vPokemon);
+		DATABASE->setVEnemyPokemon(&vPokemon2);
+
+		SCENEMANAGER->changeScene("battleScene");
+	}
 }
 
 //±×¸®´Â°Å.......

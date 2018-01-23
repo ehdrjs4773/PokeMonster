@@ -3,35 +3,18 @@
 #include <vector>
 #include <map>
 
-//elements == 속성들 
-class elements
-{
-public:
-	const char* name;
-	int currentHP;
-	int maxHP;
-	float angle;
-	float accelaration;
-	float maxSpeed;
-
-	elements() {};
-	~elements() {};
-};
+class pokemon;
 
 //내부 싱글톤 DB 만들어둔다
 class database : public singletonBase <database>
 {
 private:
-	typedef vector<string> arrElements;
-	typedef vector<string>::iterator iterElements;
-
-	typedef map<string, elements*> arrElement;
-	typedef map<string, elements*>::iterator iterElement;
+	typedef vector<pokemon*> vPokemon;
+	typedef vector<pokemon*>::iterator viPokemon;
 
 private:
-	arrElement _mTotalElement;
-	float _angle;
-	int _selectCharacter;
+	vPokemon * _vPlayerPokemon;
+	vPokemon* _vEnemyPokemon;
 
 public:
 	HRESULT init();
@@ -39,23 +22,12 @@ public:
 
 	void loadDatabase(string name);
 
-	//속성에 대한 접근자
-	elements* getElementData(string str) { return _mTotalElement.find(str)->second; }
-
-	//설정자
-	void setElementDataCurrentHP(string str, float ch);
-	void setElementDataMaxHP(string str, float mh);
-	void setElementDataAngle(string str, float a);
-	void setElementDataAccelaration(string str, float accel);
-	void setElementDataMaxSpeed(string str, float ms);
-
-	void setAngle(float angle) { _angle = angle; }
-	float getAngle() { return _angle; }
-
-	void setCharacter(int character) { _selectCharacter = character; }
-	int getCharacter() { return _selectCharacter; }
-
 	database();
 	~database();
+
+	inline vPokemon* getVPlayerPokemon() { return _vPlayerPokemon; }
+	inline vPokemon* getVEnemyPokemon() { return _vEnemyPokemon; }
+	inline void setVPlayerPokemon(vPokemon* poke) { _vPlayerPokemon = poke; }
+	inline void setVEnemyPokemon(vPokemon* poke) { _vEnemyPokemon = poke; }
 };
 
