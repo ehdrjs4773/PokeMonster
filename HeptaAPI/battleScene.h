@@ -3,6 +3,14 @@
 #include "pokemon.h"
 #include "battleSceneUI.h"
 
+#define LIMIT_X_LEFT		80
+#define LIMIT_X_RIGHT		400
+#define LIMIT_Y_BOTTOM		266
+#define LIMIT_Y_TOP			36
+
+#define POKEMON_WIDTH		120
+#define POKEMON_HEIGHT		120
+
 // 데미지 판정에 사용할 이넘문	
 enum DAMAGE_JUDGEMENT
 {
@@ -18,6 +26,9 @@ class battleScene : public gameNode
 private:
 	vector<pokemon*>* _playerPokemon;
 	vector<pokemon*>* _enemyPokemon;
+
+	RECT _playerImageRect;
+	RECT _enemyImageRect;
 
 	int _playerCurrentPokemon;
 	int _enemyCurrentPokemon;

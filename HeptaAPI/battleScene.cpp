@@ -51,6 +51,14 @@ HRESULT battleScene::init()
 		_UI = new battleSceneUI;
 	_UI->init();
 
+	// 테스트용
+	IMAGEMANAGER->addFrameImage("pikachu_back", ".\\bmps\\battleScene\\pikachu_back.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("pikachu_front", ".\\bmps\\battleScene\\pikachu_front.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
+	//_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
+	//_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
+	_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
+	_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
+
 	return S_OK;
 }
 
@@ -61,11 +69,27 @@ void battleScene::release()
 
 void battleScene::update()
 {
+	if (_playerImageRect.left < LIMIT_X_LEFT)
+	{
+		_playerImageRect.left++;
+		_playerImageRect.right++;
+	}
+	if (_enemyImageRect.right > LIMIT_X_RIGHT)
+	{
+		_enemyImageRect.left--;
+		_enemyImageRect.right--;
+	}
+
 	_UI->update();
 }
 
 void battleScene::render()
 {
+	// 테스트용
+	Rectangle(getMemDC(), _playerImageRect.left, _playerImageRect.top, _playerImageRect.right, _playerImageRect.bottom);
+	Rectangle(getMemDC(), _enemyImageRect.left, _enemyImageRect.top, _enemyImageRect.right, _enemyImageRect.bottom);
+	IMAGEMANAGER->findImage("pikachu_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top);
+	IMAGEMANAGER->findImage("pikachu_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 	_UI->render();
 }
 
