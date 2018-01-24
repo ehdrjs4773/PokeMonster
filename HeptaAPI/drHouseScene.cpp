@@ -22,6 +22,7 @@ HRESULT drHouseScene::init()
 
 	_drRc = RectMakeCenter(_x, _y, _drO->getFrameWidth(), _drO->getFrameHeight());
 
+	_player = new player;
 	_player->init();
 	return S_OK;
 }
