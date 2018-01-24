@@ -11,6 +11,14 @@
 #define POKEMON_WIDTH		120
 #define POKEMON_HEIGHT		120
 
+// 적 타입 (야생, 트레이너)
+enum ENEMY_TYPE
+{
+	ENEMY_WILD,
+	ENEMY_TRAINNER,
+	ENEMY_TYPE_END
+};
+
 // 데미지 판정에 사용할 이넘문	
 enum DAMAGE_JUDGEMENT
 {
@@ -23,10 +31,11 @@ enum DAMAGE_JUDGEMENT
 
 enum BATTLE_SEQUENCE
 {
-	BATTLE_INTRO,	// 플레이어가 나와서 몬스터볼 던지는 시퀀스
-	BATTLE_FIGHT,	// 몬스터끼리 싸우는 시퀀스
-	BATTLE_FINAL,	// 적 몬스터 죽고 적이 몬스터 고르는 시퀀스
-	BATTLE_END		// 모든 적을 죽인 시퀀스
+	BATTLE_INTRO,		// 플레이어, 적 등장
+	BATTLE_BALLTHROW,	// 몬스터볼 던지는 시퀀스
+	BATTLE_FIGHT,		// 몬스터끼리 싸우는 시퀀스
+	BATTLE_FINAL,		// 적 몬스터 죽고 적이 몬스터 고르는 시퀀스
+	BATTLE_END			// 모든 적을 죽인 시퀀스
 };
 
 class battleScene : public gameNode
@@ -47,6 +56,14 @@ private:
 
 	battleSceneUI* _UI;
 
+	string _currentPlayerKey;
+	string _currentEnemyKey;
+
+	ENEMY_TYPE _enemyType;
+
+	int _frameTime;
+	int _frameX;
+
 public:
 	battleScene();
 	~battleScene();
@@ -55,6 +72,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void frameUpdate();
 
 	// 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수
 	DAMAGE_JUDGEMENT judgement(ELEMENT attackerSkill, ELEMENT defencer);

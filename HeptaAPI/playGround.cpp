@@ -19,9 +19,6 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("월드맵씬", new worldMapScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 
-	//DIALOGUE->loadingTextFile(".\\textData\\battleScene_dialogue.txt");
-	DIALOGUE->setPoint(PointMake(WINSIZEX / 2, WINSIZEY / 2));
-
 	SCENEMANAGER->addScene("오프닝씬", new Opening);
 	SCENEMANAGER->addScene("SelectScene", new SelectScene);
 	SCENEMANAGER->addScene("DR5", new drHouseScene);
@@ -61,9 +58,6 @@ void playGround::update(void)
 		SCENEMANAGER->changeScene("battleScene");
 	}
 
-	DIALOGUE->update();
-
-
 	if (KEYMANAGER->isOnceKeyDown(VK_F3))
 	{
 		SCENEMANAGER->changeScene("오프닝씬");
@@ -77,7 +71,6 @@ void playGround::render(void)
 	//================== 이 위는 손대지 마시오 =========================
 
 	SCENEMANAGER->render();
-	DIALOGUE->render(getMemDC());
 
 	//================== 이 아래는 손대지 마시오 ========================
 	this->getBackBuffer()->render(getHDC(), 0, 0);//hdc영역에 그려준다 
