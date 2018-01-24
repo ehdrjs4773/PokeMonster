@@ -86,7 +86,7 @@ void shopScene::render()
 		IMAGEMANAGER->findImage("상점오픈버튼_SELL")->render(getMemDC(), _selectMenu[BUTTON_SELL].pt.x, _selectMenu[BUTTON_SELL].pt.y);
 		IMAGEMANAGER->findImage("상점오픈버튼_CANCEL")->render(getMemDC(), _selectMenu[BUTTON_CANCEL].pt.x, _selectMenu[BUTTON_CANCEL].pt.y);
 	
-		ITEMMANAGER->findItem("몬스터볼")->render(getMemDC(), 10, 10);
+		ITEMMANAGER->findItem("몬스터볼")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), 100, 100);
 
 	for (int i = 0; i <BUTTON_END; i++)
 	{
