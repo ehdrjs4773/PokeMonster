@@ -33,26 +33,26 @@ HRESULT shopScene::init()
 	_selectMenu[BUTTON_CANCEL].pt.x = 110;
 	_selectMenu[BUTTON_CANCEL].pt.y = 260;
 
-
+	ITEMMANAGER->addItem("몬스터볼");
 	
 	//ITEM BUTTON 좌표
-	_selectItem[ITEM_0].pt.x = 115;
-	_selectItem[ITEM_0].pt.y = 0;
+	//_selectItem[ITEM_0].pt.x = 115;
+	//_selectItem[ITEM_0].pt.y = 0;
 
-	_selectItem[ITEM_1].pt.x = 45;
-	_selectItem[ITEM_1].pt.y = 90;
+	//_selectItem[ITEM_1].pt.x = 45;
+	//_selectItem[ITEM_1].pt.y = 90;
 
-	_selectItem[ITEM_2].pt.x = 100;
-	_selectItem[ITEM_2].pt.y = 240;
+	//_selectItem[ITEM_2].pt.x = 100;
+	//_selectItem[ITEM_2].pt.y = 240;
 
-	_selectItem[ITEM_3].pt.x = 330;
-	_selectItem[ITEM_3].pt.y = 250;
+	//_selectItem[ITEM_3].pt.x = 330;
+	//_selectItem[ITEM_3].pt.y = 250;
 
-	_selectItem[ITEM_4].pt.x = 450;
-	_selectItem[ITEM_4].pt.y = 230;
+	//_selectItem[ITEM_4].pt.x = 450;
+	//_selectItem[ITEM_4].pt.y = 230;
 
-	_selectItem[ITEM_5].pt.x = 600;
-	_selectItem[ITEM_5].pt.y = 230;
+	//_selectItem[ITEM_5].pt.x = 600;
+	//_selectItem[ITEM_5].pt.y = 230;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -86,7 +86,7 @@ void shopScene::render()
 		IMAGEMANAGER->findImage("상점오픈버튼_SELL")->render(getMemDC(), _selectMenu[BUTTON_SELL].pt.x, _selectMenu[BUTTON_SELL].pt.y);
 		IMAGEMANAGER->findImage("상점오픈버튼_CANCEL")->render(getMemDC(), _selectMenu[BUTTON_CANCEL].pt.x, _selectMenu[BUTTON_CANCEL].pt.y);
 	
-
+		ITEMMANAGER->findItem("몬스터볼")->render(getMemDC(), 10, 10);
 
 	for (int i = 0; i <BUTTON_END; i++)
 	{
@@ -141,7 +141,7 @@ void shopScene::MenuSelectMove()
 			if (SelectNum == i)
 			{
 				_selectMenu[i].isSelect = true;
-				_isClear[i] = true;
+				//_isClear[i] = true;
 
 
 			}
@@ -187,7 +187,7 @@ void shopScene::ShopelectMove()
 			if (SelectNum == i)
 			{
 				_selectMenu[i].isSelect = true;
-				_isClear[i] = true;
+				//_isClear[i] = true;
 
 
 			}

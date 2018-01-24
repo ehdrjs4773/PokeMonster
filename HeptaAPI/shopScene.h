@@ -12,16 +12,6 @@ enum CHOICEBUTTON
 
 };
 
-enum ITEM
-{
-	ITEM_0,
-	ITEM_1,
-	ITEM_2,
-	ITEM_3,
-	ITEM_4,
-	ITEM_5,
-	ITEM_END
-};
 
 struct SelectButton
 {
@@ -36,9 +26,9 @@ class shopScene : public gameNode
 private:
 
 	SelectButton _selectMenu[BUTTON_END];
-	SelectButton _selectItem[ITEM_END];
+	//SelectButton _selectItem[ITEM_END];
 	int SelectNum;
-	bool _isClear[ITEM_END];
+	//bool _isClear[ITEM_END];
 
 public:
 	HRESULT init();

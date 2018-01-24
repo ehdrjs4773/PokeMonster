@@ -19,7 +19,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("¿ùµå¸Ê¾À", new worldMapScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 
-	DIALOGUE->loadingTextFile(".\\textData\\battleScene_dialogue.txt");
+	//DIALOGUE->loadingTextFile(".\\textData\\battleScene_dialogue.txt");
 	DIALOGUE->setPoint(PointMake(WINSIZEX / 2, WINSIZEY / 2));
 
 	SCENEMANAGER->addScene("¿ÀÇÁ´×¾À", new Opening);
