@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Opening.h"
 
 
@@ -18,6 +18,8 @@ Opening::~Opening()
 
 HRESULT Opening::init(void)
 {
+
+	//================================= 오프닝 이미지 초기화 =============================================================================//
 	IMAGEMANAGER->addImage("openingBackGround", ".\\bmps\\opening\\openingBackGround.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("openingBackGroundSun", ".\\bmps\\opening\\openingSun.bmp", 64, 64, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("openingBackGround2", ".\\bmps\\opening\\openingBackGround2.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
@@ -28,6 +30,17 @@ HRESULT Opening::init(void)
 	IMAGEMANAGER->addImage("openingBakcGroundSin1", ".\\bmps\\opening\\openingBackGroundSin1.bmp", 480, 120, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("openingBakcGroundSin2", ".\\bmps\\opening\\openingBackGroundSin2.bmp", 480, 120, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("openingBakcGroundSin3", ".\\bmps\\opening\\openingBackGroundSin3.bmp", 480, 120, false, true, MAGENTA);
+	
+
+
+	//==================================================================================================================================//
+
+	//============== 사운드 초기화======================//
+	SOUNDMANAGER->addSound("오프닝 사운드", ".\\sounds\\pokemonBGM\\opening.mp3", true, true);
+
+
+	SOUNDMANAGER->play("오프닝 사운드", 1.0F);
+
 
 	_x = WINSIZEX / 2 - 32;
 	_y = WINSIZEY / 2 + 50;
@@ -91,7 +104,7 @@ void Opening::update(void)
 	{
 		if (_p1x < 100)
 		{
-			_p1x += 3;
+			_p1x += Opening_Speed;
 		}
 
 		if (_p2x > WINSIZEX - 120)
@@ -102,28 +115,31 @@ void Opening::update(void)
 		else _opening = Opening_Four;
 	}
 
-//if (_p2x <= WINSIZEX - 120)
-//{
-//	_opening = Opening_Four;
-//}
-	
-
 	if (_opening == Opening_Four)
 	{
 		if (_sin1x <= 0)
 		{
-			_sin1x += 3;
-
+			_sin1x += Opening_Speed;
 		}
 
 		if (_sin2x >= 0 && _sin1x >= 0)
-		{
-			_sin2x -= 3;
+		{	
+			_sin1x = 0;
+			_sin2x -= Opening_Speed;
+
 		}
 
 		if (_sin2x <= 0 && _sin3x <=0)
+		{	
+			_sin2x = 0;
+			_sin3x += Opening_Speed;
+		}
+
+		if(_sin3x >= 0)
 		{
-			_sin3x +=3;
+			_sin1x = 0;
+			_sin2x = 0;
+			_sin3x = 0;
 		}
 	}
 
@@ -141,6 +157,7 @@ void Opening::render(void)
 	{
 		IMAGEMANAGER->findImage("openingBackGround")->render(getMemDC());
 		IMAGEMANAGER->findImage("openingBackGroundSun")->render(getMemDC(), _x, _y);
+
 	}
 
 	if (_opening == Opening_Two)
