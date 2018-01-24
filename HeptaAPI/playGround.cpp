@@ -22,6 +22,11 @@ HRESULT playGround::init()
 	DIALOGUE->loadingTextFile(".\\textData\\battleScene_dialogue.txt");
 	DIALOGUE->setPoint(PointMake(WINSIZEX / 2, WINSIZEY / 2));
 
+	SCENEMANAGER->addScene("¿ÀÇÁ´×¾À", new Opening);
+	SCENEMANAGER->addScene("SelectScene", new SelectScene);
+	SCENEMANAGER->addScene("DR5", new drHouseScene);
+	SCENEMANAGER->addScene("»óÁ¡¾À", new shopScene);
+
 	return S_OK;
 }
 
@@ -38,7 +43,7 @@ void playGround::update(void)
 	gameNode::update();
 
 	SCENEMANAGER->update();
-	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("»óÁ¡¾À");
 
 	// ¹èÆ²¾À Å×½ºÆ®
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
@@ -57,6 +62,12 @@ void playGround::update(void)
 	}
 
 	DIALOGUE->update();
+
+
+	if (KEYMANAGER->isOnceKeyDown(VK_F3))
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
 }
 
 //±×¸®´Â°Å.......

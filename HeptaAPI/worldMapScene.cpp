@@ -120,5 +120,4 @@ void worldMapScene::selectMove()
 			}
 		}
 	}
-	
 }

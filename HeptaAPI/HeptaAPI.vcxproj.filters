@@ -16,9 +16,6 @@
     <Filter Include="2DGameFramework">
       <UniqueIdentifier>{b4146623-4b24-44c1-87dc-0e8cec034f06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2DGameFramework\Manager">
-      <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2DGameFramework\SingletonBase">
       <UniqueIdentifier>{2a373353-7049-468b-aafa-704bf915bc37}</UniqueIdentifier>
     </Filter>
@@ -74,7 +71,10 @@
       <UniqueIdentifier>{d3880e20-cd71-4602-b012-2afbf83068d0}</UniqueIdentifier>
     </Filter>
     <Filter Include="2DGameFramework\dialogue">
-      <UniqueIdentifier>{ec3ed16d-4f38-45f0-b90b-3812bb4ba4c7}</UniqueIdentifier>
+      <UniqueIdentifier>{0da971c6-1a93-4451-b38d-0a6f89adefbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager">
+      <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -186,17 +186,32 @@
     <ClInclude Include="Opening.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>playGround\최동건</Filter>
+    </ClInclude>
     <ClInclude Include="dialogue.h">
       <Filter>2DGameFramework\dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="drHouseScene.h">
+      <Filter>playGround\박근화</Filter>
     </ClInclude>
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>playGround\배건하</Filter>
+    </ClInclude>
+    <ClInclude Include="shopScene.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
+    <ClInclude Include="itemManager.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="winMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -290,11 +305,32 @@
     <ClCompile Include="Opening.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>playGround\최동건</Filter>
+    </ClCompile>
     <ClCompile Include="dialogue.cpp">
       <Filter>2DGameFramework\dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="drHouseScene.cpp">
+      <Filter>playGround\박근화</Filter>
+    </ClCompile>
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="shopScene.cpp">
+      <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="itemManager.cpp">
+      <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
