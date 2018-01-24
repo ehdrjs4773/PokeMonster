@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "player.h"
 
 class drHouseScene : public gameNode
 {
@@ -8,6 +9,9 @@ private:
 	image* _drO;
 	float _x, _y;
 	RECT _drRc;
+
+	player* _player;
+
 
 public:
 	drHouseScene();
