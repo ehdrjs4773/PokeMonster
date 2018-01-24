@@ -74,10 +74,12 @@ vector<string> txtData::txtLoad(const char* loadFileName)
 	file = CreateFile(loadFileName, GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	DWORD tempSize = GetFileSize(file, NULL);
 	char* str = new char [GetFileSize(file, NULL) + 1];
 	ZeroMemory(str, sizeof(str));
 
-	ReadFile(file, str, GetFileSize(file, NULL) + 1, &read, NULL);
+	ReadFile(file, str, GetFileSize(file, NULL), &read, NULL);
+	str[GetFileSize(file, NULL)] = '\0';
 
 	CloseHandle(file);
 

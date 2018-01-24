@@ -2,6 +2,13 @@
 #include "singletonBase.h"
 #include <vector>
 
+enum LANGUAGE
+{
+	LANGUAGE_DEFAULT = 1,
+	LANGUAGE_KOREAN,
+	LANGUAGE_END
+};
+
 class dialogue : public singletonBase<dialogue>
 {
 private:
@@ -12,25 +19,32 @@ private:
 	int _elapsedTime;
 
 	float _startX, _startY;
-	int _length;
-	char _str[1024];
+	int* _length;
+
+	int _currentLine;
+	int _printLinesNum;
+	LANGUAGE _language;
 
 public:
 	dialogue();
 	~dialogue();
 
-	HRESULT init(float dt);
+	HRESULT init(float dt, int printLines, LANGUAGE lan);
+	void release();
 	void update();
 	void render(HDC hdc);
 
-	void loadingTextFile(string fileName);
+	void loadingTextFile(const char* fileName);
 
-	inline void setString(const char* str)
+	inline int getCurrentLine() { return _currentLine; }
+	inline void setCurrentLine(int line)
 	{
-		sprintf(_str, "%s", str);
-		_length = 0;
-		_elapsedTime = 0;
+		_currentLine = line;
+		if (_currentLine > _vString.size() - (_printLinesNum - 1))
+			_currentLine = _vString.size() - (_printLinesNum - 1);
 	}
+
+	inline POINT getPoint() { return PointMake(_startX, _startY); }
 	inline void setPoint(POINT pos)
 	{
 		_startX = pos.x;

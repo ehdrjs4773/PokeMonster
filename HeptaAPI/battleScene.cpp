@@ -86,7 +86,6 @@ void battleScene::update()
 			{
 				_sequence = BATTLE_FIGHT;
 				DIALOGUE->setPoint(PointMake(WINSIZEX / 2, WINSIZEY / 2));
-				DIALOGUE->setString("안녕하세요");
 			}
 		break;
 

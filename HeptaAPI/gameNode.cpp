@@ -36,7 +36,7 @@ HRESULT gameNode::init(bool managerInit)
 		SCENEMANAGER->init();
 		KEYANIMANAGER->init();
 		INIDATA->init();
-		DIALOGUE->init(10);
+		DIALOGUE->init(10, 2, LANGUAGE_KOREAN);
 	}
 
 	return S_OK;
@@ -66,6 +66,7 @@ void gameNode::release(void)
 		KEYANIMANAGER->releaseSingleton();
 		DATABASE->release();
 		DATABASE->releaseSingleton();
+		DIALOGUE->release();
 		DIALOGUE->releaseSingleton();
 	}
 
