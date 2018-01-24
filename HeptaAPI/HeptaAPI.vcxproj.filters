@@ -201,6 +201,9 @@
     <ClInclude Include="player.h">
       <Filter>playGround\배건하</Filter>
     </ClInclude>
+    <ClInclude Include="shopScene.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -313,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="shopScene.cpp">
+      <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
