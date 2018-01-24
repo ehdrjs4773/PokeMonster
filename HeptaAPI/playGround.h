@@ -2,6 +2,9 @@
 #include "gameNode.h"
 #include "worldMapScene.h"
 #include "battleScene.h"
+#include "Opening.h"
+#include "SelectScene.h"
+#include "drHouseScene.h"
 
 class playGround : public gameNode
 {

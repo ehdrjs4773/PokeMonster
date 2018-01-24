@@ -9,7 +9,9 @@ enum OpeningSin
 	Opening_One,
 	Opening_Two,
 	Opening_Three,
-	Opening_Four
+	Opening_Four,
+	Opening_Five,
+	Opening_END
 };
 
 class Opening : public gameNode
@@ -38,6 +40,13 @@ private :
 	// SIN ÁÂÇ¥ //
 
 	int _sin1x, _sin1y, _sin2x, _sin2y, _sin3x, _sin3y;
+	//=================================================//
+
+
+	//==== ¿ÀÇÁ´×¾À 5 =====//
+
+	int _alpha;
+
 
 
 

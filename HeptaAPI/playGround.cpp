@@ -18,8 +18,9 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->addScene("¿ùµå¸Ê¾À", new worldMapScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
-
-
+	SCENEMANAGER->addScene("¿ÀÇÁ´×¾À", new Opening);
+	SCENEMANAGER->addScene("SelectScene", new SelectScene);
+	SCENEMANAGER->addScene("DR5", new drHouseScene);
 	return S_OK;
 }
 
@@ -53,6 +54,14 @@ void playGround::update(void)
 
 		SCENEMANAGER->changeScene("battleScene");
 	}
+
+
+
+	if (KEYMANAGER->isOnceKeyDown(VK_F3))
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+
 }
 
 //±×¸®´Â°Å.......
