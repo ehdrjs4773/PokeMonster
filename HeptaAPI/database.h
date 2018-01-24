@@ -13,7 +13,7 @@ private:
 	typedef vector<pokemon*>::iterator viPokemon;
 
 private:
-	vPokemon * _vPlayerPokemon;
+	vPokemon* _vPlayerPokemon;
 	vPokemon* _vEnemyPokemon;
 
 public:

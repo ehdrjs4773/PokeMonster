@@ -143,6 +143,7 @@
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="database.cpp" />
+    <ClCompile Include="dialogue.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="Ending.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="database.h" />
+    <ClInclude Include="dialogue.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="Ending.h" />

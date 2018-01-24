@@ -35,6 +35,7 @@ HRESULT gameNode::init(bool managerInit)
 		EFFECTMANAGER->init();
 		SCENEMANAGER->init();
 		INIDATA->init();
+		DIALOGUE->init(10);
 	}
 
 	return S_OK;
@@ -62,6 +63,7 @@ void gameNode::release(void)
 		SCENEMANAGER->releaseSingleton();
 		DATABASE->release();
 		DATABASE->releaseSingleton();
+		DIALOGUE->releaseSingleton();
 	}
 
 	ReleaseDC(_hWnd, _hdc);

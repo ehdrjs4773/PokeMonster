@@ -73,6 +73,9 @@
     <Filter Include="playGround\배건하">
       <UniqueIdentifier>{d3880e20-cd71-4602-b012-2afbf83068d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DGameFramework\dialogue">
+      <UniqueIdentifier>{ec3ed16d-4f38-45f0-b90b-3812bb4ba4c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -183,6 +186,9 @@
     <ClInclude Include="Opening.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
+    <ClInclude Include="dialogue.h">
+      <Filter>2DGameFramework\dialogue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -280,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="Opening.cpp">
       <Filter>playGround\최동건</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogue.cpp">
+      <Filter>2DGameFramework\dialogue</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -46,6 +46,8 @@ HRESULT battleScene::init()
 	else
 		_isPlayerTurn = false;
 
+	_sequence = BATTLE_INTRO;
+
 	// UI 초기화
 	if (_UI == NULL)
 		_UI = new battleSceneUI;
@@ -54,8 +56,6 @@ HRESULT battleScene::init()
 	// 테스트용
 	IMAGEMANAGER->addFrameImage("pikachu_back", ".\\bmps\\battleScene\\pikachu_back.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addFrameImage("pikachu_front", ".\\bmps\\battleScene\\pikachu_front.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
-	//_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
-	//_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 	_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 	_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 
@@ -69,28 +69,45 @@ void battleScene::release()
 
 void battleScene::update()
 {
-	if (_playerImageRect.left < LIMIT_X_LEFT)
+	switch (_sequence)
 	{
-		_playerImageRect.left++;
-		_playerImageRect.right++;
-	}
-	if (_enemyImageRect.right > LIMIT_X_RIGHT)
-	{
-		_enemyImageRect.left--;
-		_enemyImageRect.right--;
-	}
+		case BATTLE_INTRO:
+			if (_playerImageRect.left < LIMIT_X_LEFT)
+			{
+				_playerImageRect.left++;
+				_playerImageRect.right++;
+			}
+			if (_enemyImageRect.right > LIMIT_X_RIGHT)
+			{
+				_enemyImageRect.left--;
+				_enemyImageRect.right--;
+			}
+			else
+			{
+				_sequence = BATTLE_FIGHT;
+				DIALOGUE->setPoint(PointMake(WINSIZEX / 2, WINSIZEY / 2));
+				DIALOGUE->setString("안녕하세요");
+			}
+		break;
 
+		case BATTLE_FIGHT:
+			DIALOGUE->update();
+		break;
+	}
 	_UI->update();
 }
 
 void battleScene::render()
 {
 	// 테스트용
-	Rectangle(getMemDC(), _playerImageRect.left, _playerImageRect.top, _playerImageRect.right, _playerImageRect.bottom);
-	Rectangle(getMemDC(), _enemyImageRect.left, _enemyImageRect.top, _enemyImageRect.right, _enemyImageRect.bottom);
+	//Rectangle(getMemDC(), _playerImageRect.left, _playerImageRect.top, _playerImageRect.right, _playerImageRect.bottom);
+	//Rectangle(getMemDC(), _enemyImageRect.left, _enemyImageRect.top, _enemyImageRect.right, _enemyImageRect.bottom);
 	IMAGEMANAGER->findImage("pikachu_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top);
 	IMAGEMANAGER->findImage("pikachu_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 	_UI->render();
+
+	if (_sequence == BATTLE_FIGHT)
+		DIALOGUE->render(getMemDC());
 }
 
 // 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수

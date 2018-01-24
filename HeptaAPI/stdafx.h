@@ -30,6 +30,7 @@
 // 자체제작
 #include "groundDestroyManager.h"
 #include "cameraManager.h"
+#include "dialogue.h"
 
 using namespace std;
 using namespace HEPTA_UTIL;
@@ -59,6 +60,7 @@ using namespace HEPTA_UTIL;
 // 자체제작
 #define DESTROY			groundDestroyManager::getSingleton()
 #define CAMERAMANAGER	cameraManager::getSingleton()
+#define DIALOGUE		dialogue::getSingleton()
 
 #define BLACK		RGB(0, 0, 0)
 #define RED			RGB(255, 0, 0)

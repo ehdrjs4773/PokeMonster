@@ -30,6 +30,8 @@ private:
 	string _skillName;
 	ELEMENT _element;
 	int _damage;
+	int _maxPP;
+	int _currentPP;
 
 public:
 	skill();

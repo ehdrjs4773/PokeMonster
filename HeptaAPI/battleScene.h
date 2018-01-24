@@ -21,11 +21,21 @@ enum DAMAGE_JUDGEMENT
 	DAMAGE_END
 };
 
+enum BATTLE_SEQUENCE
+{
+	BATTLE_INTRO,	// 플레이어가 나와서 몬스터볼 던지는 시퀀스
+	BATTLE_FIGHT,	// 몬스터끼리 싸우는 시퀀스
+	BATTLE_FINAL,	// 적 몬스터 죽고 적이 몬스터 고르는 시퀀스
+	BATTLE_END		// 모든 적을 죽인 시퀀스
+};
+
 class battleScene : public gameNode
 {
 private:
 	vector<pokemon*>* _playerPokemon;
 	vector<pokemon*>* _enemyPokemon;
+
+	BATTLE_SEQUENCE _sequence;
 
 	RECT _playerImageRect;
 	RECT _enemyImageRect;
