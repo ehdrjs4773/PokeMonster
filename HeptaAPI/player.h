@@ -34,10 +34,10 @@ public:
 	void update();
 	void render();
 
-	static void rightStop(void* obj);
-	static void leftStop(void* obj);
-	static void frontStop(void* obj);
-	static void backStop(void* obj);
+	static void _rightStop(void* obj);
+	static void _leftStop(void* obj);
+	static void _frontStop(void* obj);
+	static void _backStop(void* obj);
 	
 
 	//플레이어 방향 접근자,설정자
