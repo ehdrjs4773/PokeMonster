@@ -34,5 +34,7 @@ void  item::render(HDC hdc)
 
 void  item::render(HDC hdc, int destX, int destY)
 {
+	SetBkMode(hdc, TRANSPARENT);
 	TextOut(hdc, destX, destY, "사 러 간 다", strlen("사 러 간 다"));
 }
+

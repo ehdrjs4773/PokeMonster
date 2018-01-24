@@ -14,9 +14,9 @@ worldMapScene::~worldMapScene()
 
 HRESULT worldMapScene::init()
 {
-	IMAGEMANAGER->addImage("배경", "worldmap1.bmp", WINSIZEX, WINSIZEY, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("표시", "select.bmp", 50, 78, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("clear", "clear.bmp", 101, 42, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("배경", ".\\bmps\\worldMapScene\\worldmap1.bmp", WINSIZEX, WINSIZEY, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("표시", ".\\bmps\\worldMapScene\\select.bmp", 50, 78, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("clear", ".\\bmps\\worldMapScene\\clear.bmp", 101, 42, true, true, RGB(255, 0, 255));
 
 	//체육관 좌표 초기화
 	_select[GYM_0].pt.x = 70;

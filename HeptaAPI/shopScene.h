@@ -9,9 +9,16 @@ enum CHOICEBUTTON
 	BUTTON_SELL,
 	BUTTON_CANCEL,
 	BUTTON_END
-
 };
 
+enum INDEXBUTTON
+{
+	INDEX_BUTTON_0, INDEX_BUTTON_1,
+	INDEX_BUTTON_2, INDEX_BUTTON_3,
+	INDEX_BUTTON_4, INDEX_BUTTON_5,
+	INDEX_BUTTON_END
+
+};
 
 struct SelectButton
 {
@@ -26,15 +33,19 @@ class shopScene : public gameNode
 private:
 
 	SelectButton _selectMenu[BUTTON_END];
-	//SelectButton _selectItem[ITEM_END];
-	int SelectNum;
-	//bool _isClear[ITEM_END];
+	SelectButton _selectItem[INDEX_BUTTON_END]; //아이템구매창
+	int SelectNum; //mainmenu selectNum
+	int IndexSelectNum; //아이템구매창
+
 
 public:
 	HRESULT init();
 	void release();
 	void update();
 	void render();
+
+	void shopMainMenuDraw();
+	void shopBuyMenuDraw();
 	void MenuSelectMove(); //메뉴
 	void ShopelectMove();
 
