@@ -144,6 +144,7 @@
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="dialogue.cpp" />
+    <ClCompile Include="drHouseScene.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="Ending.cpp" />
@@ -155,10 +156,13 @@
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="Opening.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="pokemon.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="SelectScene.cpp" />
+    <ClCompile Include="shopScene.cpp" />
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -181,6 +185,7 @@
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="dialogue.h" />
+    <ClInclude Include="drHouseScene.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="Ending.h" />
@@ -192,12 +197,15 @@
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="Opening.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="pokemon.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="SelectScene.h" />
+    <ClInclude Include="shopScene.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="skill.h" />
     <ClInclude Include="soundManager.h" />

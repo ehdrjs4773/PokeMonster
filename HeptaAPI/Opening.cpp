@@ -27,9 +27,11 @@ HRESULT Opening::init(void)
 	IMAGEMANAGER->addImage("openingBackGround3Grass", ".\\bmps\\opening\\openingBackGroundPlayerSin.bmp", 480, 35, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("openingBackGroundPlayer1", ".\\bmps\\opening\\openingBackGroundPlayerM.bmp", 57, 135, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("openingBackGroundPlayer2", ".\\bmps\\opening\\openingBackGroundPlayerF.bmp", 62, 140, false, true, MAGENTA);
-	IMAGEMANAGER->addImage("openingBakcGroundSin1", ".\\bmps\\opening\\openingBackGroundSin1.bmp", 480, 120, false, true, MAGENTA);
-	IMAGEMANAGER->addImage("openingBakcGroundSin2", ".\\bmps\\opening\\openingBackGroundSin2.bmp", 480, 120, false, true, MAGENTA);
-	IMAGEMANAGER->addImage("openingBakcGroundSin3", ".\\bmps\\opening\\openingBackGroundSin3.bmp", 480, 120, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("openingBackGroundSin1", ".\\bmps\\opening\\openingBackGroundSin1.bmp", 480, 120, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("openingBackGroundSin2", ".\\bmps\\opening\\openingBackGroundSin2.bmp", 480, 120, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("openingBackGroundSin3", ".\\bmps\\opening\\openingBackGroundSin3.bmp", 480, 120, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("openingStart", ".\\bmps\\opening\\openingStart.bmp", WINSIZEX, WINSIZEY, false, false, MAGENTA);
+	IMAGEMANAGER->addImage("openingStartButten", ".\\bmps\\opening\\touchToStart.bmp", 228, 49, true, true, MAGENTA);
 	
 
 
@@ -40,7 +42,7 @@ HRESULT Opening::init(void)
 
 
 	SOUNDMANAGER->play("오프닝 사운드", 1.0F);
-
+	//=================================================//
 
 	_x = WINSIZEX / 2 - 32;
 	_y = WINSIZEY / 2 + 50;
@@ -62,6 +64,8 @@ HRESULT Opening::init(void)
 	_sin3x = -480;
 	_sin3y = 240;
 
+	_alpha = 0;
+
 
 	_opening = Opening_One;
 
@@ -76,32 +80,23 @@ void Opening::release(void)
 
 void Opening::update(void) 
 {
-	if (_opening == Opening_One)
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
+		_opening = Opening_Five;
+	}
+
+	switch (_opening)
+	{
+	case Opening_One:
 		_y -= 1;
-	}
-
-	if (_y == WINSIZEY / 2 - 100)
-	{
+		break;
+	case Opening_Two:
 		_y = 0;
-		_opening = Opening_Two;
-	}
-
-
-	if (_opening == Opening_Two)
-	{
 		_loopy -= 10;
-	}
-
-	if (_loopy == -2000)
-	{
+		break;
+	case Opening_Three:
 		_loopy = 0;
-		_opening = Opening_Three;
-	}
 
-
-	if (_opening == Opening_Three)
-	{
 		if (_p1x < 100)
 		{
 			_p1x += Opening_Speed;
@@ -113,38 +108,69 @@ void Opening::update(void)
 		}
 
 		else _opening = Opening_Four;
-	}
+		break;
+	case Opening_Four:
 
-	if (_opening == Opening_Four)
-	{
 		if (_sin1x <= 0)
 		{
 			_sin1x += Opening_Speed;
 		}
 
 		if (_sin2x >= 0 && _sin1x >= 0)
-		{	
+		{
 			_sin1x = 0;
 			_sin2x -= Opening_Speed;
 
 		}
 
-		if (_sin2x <= 0 && _sin3x <=0)
-		{	
-			_sin2x = 0;
+		if (_sin2x <= 0 && _sin3x <= 0)
+		{
+			_sin2x = 0;//
 			_sin3x += Opening_Speed;
 		}
 
-		if(_sin3x >= 0)
+		if (_sin3x >= 0)
 		{
 			_sin1x = 0;
 			_sin2x = 0;
 			_sin3x = 0;
+			_opening = Opening_Five;
 		}
+		break;
+
+	case Opening_Five :
+
+		if (_alpha >= 255)
+		{
+			_alpha = 0;
+		}
+
+		_alpha += 5;
+		break;
+
+	default:
+		break;
 	}
 
 
+	if (_y == WINSIZEY / 2 - 100)
+	{
+		_opening = Opening_Two;
+	}
 
+	if (_loopy == -2000)
+	{
+		_opening = Opening_Three;
+	}
+
+
+	if (_opening == Opening_Five)
+	{
+		if (KEYMANAGER->isOnceKeyDown('X'))
+		{
+			SCENEMANAGER->changeScene("SelectScene");
+		}
+	}
 
 
 	render();
@@ -172,9 +198,15 @@ void Opening::render(void)
 		IMAGEMANAGER->findImage("openingBackGroundPlayer2")->render(getMemDC(), _p2x, _p2y);
 		IMAGEMANAGER->findImage("openingBackGround3Grass")->render(getMemDC(), 0, WINSIZEY - 35);
 
-		IMAGEMANAGER->findImage("openingBakcGroundSin1")->render(getMemDC(), _sin1x, _sin1y);
-		IMAGEMANAGER->findImage("openingBakcGroundSin2")->render(getMemDC(), _sin2x, _sin2y);
-		IMAGEMANAGER->findImage("openingBakcGroundSin3")->render(getMemDC(), _sin3x, _sin3y);
+		IMAGEMANAGER->findImage("openingBackGroundSin1")->render(getMemDC(), _sin1x, _sin1y);
+		IMAGEMANAGER->findImage("openingBackGroundSin2")->render(getMemDC(), _sin2x, _sin2y);
+		IMAGEMANAGER->findImage("openingBackGroundSin3")->render(getMemDC(), _sin3x, _sin3y);
+	}
+
+	if (_opening == Opening_Five)
+	{
+		IMAGEMANAGER->findImage("openingStart")->render(getMemDC());
+		IMAGEMANAGER->findImage("openingStartButten")->alphaRender(getMemDC(), WINSIZEX / 2 - 114, WINSIZEY - 96, _alpha);
 	}
 
 

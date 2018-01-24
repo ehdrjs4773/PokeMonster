@@ -22,6 +22,8 @@ HRESULT drHouseScene::init()
 
 	_drRc = RectMakeCenter(_x, _y, _drO->getFrameWidth(), _drO->getFrameHeight());
 
+	_player = new player;
+	_player->init();
 	return S_OK;
 }
 void drHouseScene::release()
@@ -30,10 +32,11 @@ void drHouseScene::release()
 }
 void drHouseScene::update()
 {
-
+	_player->update();
 }
 void drHouseScene::render()
 {
 	IMAGEMANAGER->findImage("오박사하우스")->render(getMemDC());
 	IMAGEMANAGER->findImage("오박사")->frameRender(getMemDC(), _x, _y);
+	_player->render();
 }
