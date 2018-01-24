@@ -2,10 +2,10 @@
 #include "gameNode.h"
 enum playerDirection
 {
-	GOLD_RIGHT_IDLE,
-	GOLD_LEFT_IDLE,
-	GOLD_FRONT_IDLE,
-	GOLD_BACK_IDLE,
+	GOLD_RIGHT_STOP = 1,
+	GOLD_LEFT_STOP,
+	GOLD_FRONT_STOP,
+	GOLD_BACK_STOP,
 	GOLD_RIGHT_MOVE,
 	GOLD_LEFT_MOVE,
 	GOLD_FRONT_MOVE,
@@ -33,6 +33,12 @@ public:
 	void release();
 	void update();
 	void render();
+
+	static void rightStop(void* obj);
+	static void leftStop(void* obj);
+	static void frontStop(void* obj);
+	static void backStop(void* obj);
+	
 
 	//플레이어 방향 접근자,설정자
 	playerDirection getPlayerDirection(void) { return _playerDirection; }
