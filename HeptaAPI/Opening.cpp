@@ -38,7 +38,7 @@ HRESULT Opening::init(void)
 	//==================================================================================================================================//
 
 	//============== 사운드 초기화======================//
-	SOUNDMANAGER->addSound("오프닝 사운드", ".\\sounds\\pokemonBGM\\opening.mp3", true, true);
+	SOUNDMANAGER->addSound("오프닝 사운드", ".\\sounds\\pokemonBGM\\opening.mp3", false, true);
 
 
 	SOUNDMANAGER->play("오프닝 사운드", 1.0F);
@@ -89,10 +89,24 @@ void Opening::update(void)
 	{
 	case Opening_One:
 		_y -= 1;
+
+
+
+		if (_y == WINSIZEY / 2 - 100)
+		{
+			_opening = Opening_Two;
+		}
+
 		break;
 	case Opening_Two:
 		_y = 0;
 		_loopy -= 10;
+
+		if (_loopy == -2000)
+		{
+			_opening = Opening_Three;
+		}
+
 		break;
 	case Opening_Three:
 		_loopy = 0;
@@ -153,21 +167,12 @@ void Opening::update(void)
 	}
 
 
-	if (_y == WINSIZEY / 2 - 100)
-	{
-		_opening = Opening_Two;
-	}
-
-	if (_loopy == -2000)
-	{
-		_opening = Opening_Three;
-	}
-
 
 	if (_opening == Opening_Five)
 	{
 		if (KEYMANAGER->isOnceKeyDown('X'))
-		{
+		{	
+			SOUNDMANAGER->stop("오프닝 사운드");
 			SCENEMANAGER->changeScene("SelectScene");
 		}
 	}
