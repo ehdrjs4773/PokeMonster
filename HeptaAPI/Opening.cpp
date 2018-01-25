@@ -173,6 +173,8 @@ void Opening::update(void)
 		if (KEYMANAGER->isOnceKeyDown('X'))
 		{	
 			SOUNDMANAGER->stop("오프닝 사운드");
+			DIALOGUE->loadingTextFile(".\\textData\\opening_sin.txt");
+			DIALOGUE->setPoint(PointMake(100, WINSIZEY - 50));
 			SCENEMANAGER->changeScene("SelectScene");
 		}
 	}
@@ -184,20 +186,16 @@ void Opening::update(void)
 
 void Opening::render(void)
 {
-	if(_opening == Opening_One)
+	switch (_opening)
 	{
+	case Opening_One:
 		IMAGEMANAGER->findImage("openingBackGround")->render(getMemDC());
 		IMAGEMANAGER->findImage("openingBackGroundSun")->render(getMemDC(), _x, _y);
-
-	}
-
-	if (_opening == Opening_Two)
-	{
-		IMAGEMANAGER->findImage("openingBackGround2")->loopRender(getMemDC(), &RectMake(0,0, WINSIZEX, WINSIZEY), _loopx, _loopy);
-	}
-
-	if (_opening == Opening_Three || _opening == Opening_Four)
-	{
+		break;
+	case Opening_Two:
+		IMAGEMANAGER->findImage("openingBackGround2")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopx, _loopy);
+		break;
+	case Opening_Three: case Opening_Four:
 		IMAGEMANAGER->findImage("openingBackGround3")->render(getMemDC());
 		IMAGEMANAGER->findImage("openingBackGroundPlayer1")->render(getMemDC(), _p1x, _p1y);
 		IMAGEMANAGER->findImage("openingBackGroundPlayer2")->render(getMemDC(), _p2x, _p2y);
@@ -206,12 +204,15 @@ void Opening::render(void)
 		IMAGEMANAGER->findImage("openingBackGroundSin1")->render(getMemDC(), _sin1x, _sin1y);
 		IMAGEMANAGER->findImage("openingBackGroundSin2")->render(getMemDC(), _sin2x, _sin2y);
 		IMAGEMANAGER->findImage("openingBackGroundSin3")->render(getMemDC(), _sin3x, _sin3y);
-	}
-
-	if (_opening == Opening_Five)
-	{
+		break;
+	case Opening_Five:
 		IMAGEMANAGER->findImage("openingStart")->render(getMemDC());
 		IMAGEMANAGER->findImage("openingStartButten")->alphaRender(getMemDC(), WINSIZEX / 2 - 114, WINSIZEY - 96, _alpha);
+		break;
+	case Opening_END:
+		break;
+	default:
+		break;
 	}
 
 

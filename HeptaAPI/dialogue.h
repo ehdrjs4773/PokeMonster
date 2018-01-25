@@ -42,6 +42,9 @@ public:
 		_currentLine = line;
 		if (_currentLine > _vString.size() - (_printLinesNum - 1))
 			_currentLine = _vString.size() - (_printLinesNum - 1);
+
+		for (int i = 0; i < _printLinesNum; ++i)
+			_length[i] = 0;
 	}
 
 	inline POINT getPoint() { return PointMake(_startX, _startY); }

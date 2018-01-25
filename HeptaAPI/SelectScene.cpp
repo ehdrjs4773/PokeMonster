@@ -52,66 +52,90 @@ void SelectScene::release(void)
 
 void SelectScene::update(void) 
 {
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		if(DIALOGUE->getCurrentLine() <= 34) DIALOGUE->setCurrentLine(DIALOGUE->getCurrentLine() + 2);
+	}
+
+
+
 	switch (_SelectScene)
 	{
 	case SelectScene_one :
-		if (_alpha <= 254) _alpha += 1;
-		
-		else _SelectScene = SelectScene_Two;
+		if(DIALOGUE->getCurrentLine() >= 3)
+		{
+			if (_alpha <= 254) _alpha += 1;
+			
+			else
+			{
+				_SelectScene = SelectScene_Two;
+
+			}
+		}
 		break;
 
 	case SelectScene_Two :
-		
-		if (_dr5x <= WINSIZEX - 180) _dr5x += 3;
+		if(DIALOGUE->getCurrentLine() >= 14)
+		{
+			if (_dr5x <= WINSIZEX - 180) _dr5x += 3;
 
-		else if( _alphaBall <= 254) _alphaBall += 5;
+			else if( _alphaBall <= 254) _alphaBall += 5;
 
-		else _SelectScene = SelectScene_Three;
-
+			else _SelectScene = SelectScene_Three;
+		}
 		break;
 
 
 	case SelectScene_Three:
-		
-		_alphaBall = 0;
-		_npcAlpha = 255;
-
-		if (_npcAlpha == 255)
+		if (DIALOGUE->getCurrentLine() >= 26)
 		{
-			_count++;
-			if (_count % 50 == 0)
+			_alphaBall = 0;
+			_npcAlpha = 255;
+
+			if (_npcAlpha == 255)
 			{
-				_currentFrameX++;
-				if (_currentFrameX >= 2)
+				_count++;
+				if (_count % 50 == 0)
 				{
-					_currentFrameX = 0;
-					_SelectScene = SelectScene_Four;
+					_currentFrameX++;
+					if (_currentFrameX >= 2)
+					{
+						_currentFrameX = 0;
+						if(DIALOGUE->getCurrentLine() >= 34)
+						{
+						 	_SelectScene = SelectScene_Four;
+						}
+					}
+					_count = 0;
 				}
-				_count = 0;
 			}
 		}
 		break;
 
 	case SelectScene_Four:
 
-	
-		_count++;
-		if (_count % 50 == 0)
-		{
-			_currentFrameX++;
-			if (_currentFrameX >= 5) SCENEMANAGER->changeScene("DR5");
-			_count = 0;
-		}
+			_count++;
+			if (_count % 50 == 0)
+			{
+				_currentFrameX++;
+				if (_currentFrameX >= 5) SCENEMANAGER->changeScene("DR5");
+				_count = 0;
+			}
+
 		break;
 
 
 	}
+
+	DIALOGUE->update();
 }
 
 
 
 void SelectScene::render(void)
 {
+
+
 	switch (_SelectScene)
 	{
 	case SelectScene_one : 	case SelectScene_Two:	case SelectScene_Three:
@@ -122,6 +146,7 @@ void SelectScene::render(void)
 		IMAGEMANAGER->findImage("openingPokeBall")->alphaRender(getMemDC(), WINSIZEX - 180, WINSIZEY / 2- 15, _alphaBall);
 		IMAGEMANAGER->findImage("openingNpc")->alphaFrameRender(getMemDC(), WINSIZEX / 2, WINSIZEY / 2 + 37, _currentFrameX, 0,  _npcAlpha);
 		IMAGEMANAGER->findImage("openingRect")->render(getMemDC(), WINSIZEX / 2 - 160, WINSIZEY - 58);
+		DIALOGUE->render(getMemDC());
 		break;
 
 	case SelectScene_Four :
@@ -135,7 +160,7 @@ void SelectScene::render(void)
 
 	}
 
-	
+
 
 
 }
