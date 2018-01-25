@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "shopScene.h"
+#include "itemManager.h"
 
 
 shopScene::shopScene()
@@ -13,6 +14,12 @@ shopScene::~shopScene()
 
 HRESULT shopScene::init()
 {
+	_item = new itemManager;
+
+	_item->addItem("몬스터볼", 1, ITEM_WEAPON, "몬스터볼", "몬스터볼입니다", 50, 500);
+	_item->addItem("가가",2, ITEM_ACCESORY, "회복약", "회복약입니다", 150, 500);
+	_item->addItem("아무거나", 3, ITEM_NORMAL, "아무거나", "아무거나입니다", 200, 1000);
+
 	//상점입장시메인메뉴 이미지 등록
 	IMAGEMANAGER->addImage("상점오픈", ".\\bmps\\shopScene\\shop_open.bmp", WINSIZEX, WINSIZEY, false, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점오픈버튼_BUY", ".\\bmps\\shopScene\\shop_button_buy.bmp", 252, 46, false, true, RGB(255, 0, 255));
@@ -23,7 +30,8 @@ HRESULT shopScene::init()
 	//사러가기 선택시 이미지등록
 	IMAGEMANAGER->addImage("상점메인", ".\\bmps\\shopScene\\shop_main.bmp", WINSIZEX, WINSIZEY, false, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점사러가기선택", ".\\bmps\\shopScene\\shop_main_select.bmp", 232, 69, false, true, RGB(255, 0, 255));
-	ITEMMANAGER->addItem("몬스터볼");
+
+
 
 	//MENU BUTTON 좌표
 	_selectMenu[BUTTON_BUY].pt.x = 110;
@@ -39,20 +47,20 @@ HRESULT shopScene::init()
 	_selectItem[INDEX_BUTTON_0].pt.x = 5;
 	_selectItem[INDEX_BUTTON_0].pt.y = 75;
 
-	_selectItem[INDEX_BUTTON_1].pt.x = 45;
-	_selectItem[INDEX_BUTTON_1].pt.y = 90;
+	_selectItem[INDEX_BUTTON_1].pt.x = 245;
+	_selectItem[INDEX_BUTTON_1].pt.y = 75;
 
 	_selectItem[INDEX_BUTTON_2].pt.x = 5;
 	_selectItem[INDEX_BUTTON_2].pt.y = 150;
 
-	_selectItem[INDEX_BUTTON_3].pt.x = 330;
-	_selectItem[INDEX_BUTTON_3].pt.y = 250;
+	_selectItem[INDEX_BUTTON_3].pt.x = 245;
+	_selectItem[INDEX_BUTTON_3].pt.y = 150;
 
 	_selectItem[INDEX_BUTTON_4].pt.x = 5;
 	_selectItem[INDEX_BUTTON_4].pt.y = 225;
 
-	_selectItem[INDEX_BUTTON_5].pt.x = 600;
-	_selectItem[INDEX_BUTTON_5].pt.y = 230;
+	_selectItem[INDEX_BUTTON_5].pt.x = 245;
+	_selectItem[INDEX_BUTTON_5].pt.y = 225;
 
 	for (int i = 0; i < BUTTON_END; i++)
 	{
@@ -90,7 +98,7 @@ void shopScene::render()
 	
 	shopMainMenuDraw(); //상점입장메인메뉴
 	//shopBuyMenuDraw();
-	ITEMMANAGER->findItem("몬스터볼")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), 100, 100);
+	
 
 }
 
@@ -104,7 +112,9 @@ void shopScene::shopMainMenuDraw() //상점 입장시 Main Menu 그려주는 함수
 	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_BUY")->getMemDC(), 80, 15, "사 러 간 다", strlen("사 러 간 다"));
 	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_SELL")->getMemDC(), 80, 15, "팔 러 간 다", strlen("팔 러 간 다"));
 	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_CANCEL")->getMemDC(), 100, 15, "취 소", strlen("취 소"));
-	
+	_item->findItem("몬스터볼")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), 10, 10, 1);
+	_item->findItem("가가")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), 200, 10, 2);
+	_item->findItem("아무거나")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), 10, 300, 3);
 	for (int i = 0; i <BUTTON_END; i++)
 	{
 		if (_selectMenu[i].isSelect == true)
@@ -217,7 +227,7 @@ void shopScene::MenuSelectMove()
 
 void shopScene::ShopelectMove()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
 		IndexSelectNum = (IndexSelectNum + (INDEX_BUTTON_END - 1)) % INDEX_BUTTON_END;
 		for (int i = 0; i < INDEX_BUTTON_END; i++)
@@ -225,7 +235,6 @@ void shopScene::ShopelectMove()
 			if (IndexSelectNum == i)
 			{
 				_selectItem[i].isSelect = true;
-
 			}
 			else
 			{
@@ -236,7 +245,7 @@ void shopScene::ShopelectMove()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		IndexSelectNum = (IndexSelectNum + 1) % INDEX_BUTTON_END;
 		for (int i = 0; i < INDEX_BUTTON_END; i++)
@@ -248,7 +257,7 @@ void shopScene::ShopelectMove()
 			}
 			else
 			{
-				_selectMenu[i].isSelect = false;
+				_selectItem[i].isSelect = false;
 
 			}
 		}

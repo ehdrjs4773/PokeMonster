@@ -23,14 +23,14 @@ void itemManager::release(void)
 	deleteAll();
 }
 
-item* itemManager::addItem(string strKey)
+item* itemManager::addItem(string strKey, int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price)
 {
 	item* itm = findItem(strKey);
 
 	if (itm) return itm;
 	itm = new item;
 
-	if (FAILED(itm->init()))
+	if (FAILED(itm->init(itemNum, type, name, ds, ability, price)))
 	{
 		SAFE_DELETE(itm);
 
@@ -92,8 +92,8 @@ void itemManager::render(string strKey, HDC hdc)
 	if (itm) itm->render(hdc);
 }
 
-void itemManager::render(string strKey, HDC hdc, int destX, int destY)
+void itemManager::render(string strKey, HDC hdc, int destX, int destY, int itemNum)
 {
 	item* itm = findItem(strKey);
-	if (itm) itm->render(hdc, destX, destY);
+	if (itm) itm->render(hdc, destX, destY, itemNum);
 }

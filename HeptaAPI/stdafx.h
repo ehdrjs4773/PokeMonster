@@ -32,7 +32,7 @@
 #include "groundDestroyManager.h"
 #include "cameraManager.h"
 #include "dialogue.h"
-#include "itemManager.h"
+
 
 using namespace std;
 using namespace HEPTA_UTIL;
@@ -64,7 +64,7 @@ using namespace HEPTA_UTIL;
 #define DESTROY			groundDestroyManager::getSingleton()
 #define CAMERAMANAGER	cameraManager::getSingleton()
 #define DIALOGUE		dialogue::getSingleton()
-#define ITEMMANAGER itemManager::getSingleton()
+
 
 #define BLACK		RGB(0, 0, 0)
 #define RED			RGB(255, 0, 0)

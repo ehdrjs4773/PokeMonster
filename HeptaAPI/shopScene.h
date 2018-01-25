@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "itemManager.h"
 
 #define ITEM_MAX 6
 
@@ -37,6 +38,7 @@ private:
 	int SelectNum; //mainmenu selectNum
 	int IndexSelectNum; //아이템구매창
 
+	itemManager* _item;
 
 public:
 	HRESULT init();
