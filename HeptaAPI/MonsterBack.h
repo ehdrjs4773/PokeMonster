@@ -13,6 +13,8 @@ struct PokeInfo
 	int Level;
 	bool Catch; 
 	string strKey;
+	int count;
+	int currentFrameX;
 };
 
 

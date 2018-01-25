@@ -20,7 +20,7 @@ MonsterBack::~MonsterBack()
 	 IMAGEMANAGER->addImage("cancle", ".\\bmps\\PokeBack\\cancle.bmp", 104, 45, false, true, MAGENTA);
 	 IMAGEMANAGER->addImage("PokeSelect", ".\\bmps\\PokeBack\\DogamSelect.bmp", 239, 92, false, true, MAGENTA);
 	 IMAGEMANAGER->addImage("PokeMonCatch", ".\\bmps\\PokeBack\\DogamMonsterIn.bmp", 239, 92, false, true, MAGENTA);
-
+	 IMAGEMANAGER->addFrameImage("이상해씨", ".\\bmps\\MonsterBag\\이상해씨s.bmp", 80, 40, 2, 1, false, true, MAGENTA);
 
 	 for (int i = 0; i < 6; i++)
 	 {
@@ -41,9 +41,9 @@ MonsterBack::~MonsterBack()
 		 _PokeInfo[3].PokeImageRc = RectMake(_PokeInfo[3].rc.left + 40, _PokeInfo[3].rc.top + 20, 40, 40);
 		 _PokeInfo[4].PokeImageRc = RectMake(_PokeInfo[4].rc.left + 40, _PokeInfo[4].rc.top + 20, 40, 40);
 		 _PokeInfo[5].PokeImageRc = RectMake(_PokeInfo[5].rc.left + 40, _PokeInfo[5].rc.top + 20, 40, 40);
+		 _PokeInfo[i].currentFrameX = 0;
+		 _PokeInfo[i].count = 0;
 	 }
-
-	
 
 	 _CancleRc = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 25, 104, 45);
 	 return S_OK;
@@ -59,6 +59,25 @@ MonsterBack::~MonsterBack()
 
  void MonsterBack::update(void)	
 {
+	 for(int i = 0 ; i < 6; i++)
+	 { 
+		 if (_PokeInfo[i].Catch == true)
+		 {
+			 _PokeInfo[i].count++;
+			 
+			 if (_PokeInfo[i].count % 50 == 0)
+			 {
+				 _PokeInfo[i].currentFrameX++;
+
+				 if (_PokeInfo[i].currentFrameX >= 2) _PokeInfo[i].currentFrameX = 0;
+				 _PokeInfo[i].count = 0;
+			 }
+		 }
+
+	 }
+
+
+
 	 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	 {
 		 if (PtInRect(&_CancleRc, _ptMouse))
@@ -96,10 +115,11 @@ MonsterBack::~MonsterBack()
 		 if (_PokeInfo[i].Catch) // ==== 포켓몬 잡혔을때 출력!===//
 		 {//Rectangle(getMemDC(), _PokeInfo[i].rc.left, _PokeInfo[i].rc.top, _PokeInfo[i].rc.right, _PokeInfo[i].rc.bottom);
 			 IMAGEMANAGER->findImage("PokeSelect")->render(getMemDC(), _PokeInfo[i].rc.left, _PokeInfo[i].rc.top);
+			 IMAGEMANAGER->findImage("이상해씨")->frameRender(getMemDC(), _PokeInfo[0].PokeImageRc.left, _PokeInfo[0].PokeImageRc.top, _PokeInfo[0].currentFrameX, 0);
+			 
 		 }
 		 //==== 포켓몬 조그만한 이미지 출력 박스===///
 		 //Rectangle(getMemDC(), _PokeInfo[0].PokeImageRc.left, _PokeInfo[0].PokeImageRc.top, _PokeInfo[0].PokeImageRc.right, _PokeInfo[0].PokeImageRc.bottom);
 	 }
 
-	
  }

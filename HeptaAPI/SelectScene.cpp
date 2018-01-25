@@ -54,7 +54,7 @@ void SelectScene::update(void)
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
-		if(DIALOGUE->getCurrentLine() <= 34) DIALOGUE->setCurrentLine(DIALOGUE->getCurrentLine() + 2);
+		if(DIALOGUE->getCurrentLine() <= 32) DIALOGUE->setCurrentLine(DIALOGUE->getCurrentLine() + 2);
 	}
 
 
