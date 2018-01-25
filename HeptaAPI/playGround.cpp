@@ -62,6 +62,10 @@ void playGround::update(void)
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
 	}
+	if (KEYMANAGER->isOnceKeyDown(VK_F4))
+	{
+		SCENEMANAGER->changeScene("DR5");
+	}
 }
 
 //±×¸®´Â°Å.......

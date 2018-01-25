@@ -38,6 +38,8 @@ public:
 	static void _leftStop(void* obj);
 	static void _frontStop(void* obj);
 	static void _backStop(void* obj);
+
+	inline RECT getPlayerRc() { return _playerRc; }
 	
 
 	//플레이어 방향 접근자,설정자

@@ -13,6 +13,7 @@ player::~player()
 HRESULT player::init()
 {
 	_player = IMAGEMANAGER->addFrameImage("°ñµå", ".\\bmps\\player\\°ñµå.bmp", 105, 104, 5, 4, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹", ".\\bmps\\drHouseScene\\drOHousePixel.bmp", 480, 360, false, true, RGB(255, 0, 255));
 
 	_x = 265;
 	_y = 330;
@@ -56,14 +57,15 @@ void player::release()
 {
 }
 void player::update()
-{
+{		
+	
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		_playerDirection = GOLD_RIGHT_MOVE;
 		_playerMotion = KEYANIMANAGER->findAnimation("¿À¸¥ÂÊ¹«ºê");
 		_playerMotion->start();
 	}
-	else if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
+	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
 	{
 		_playerDirection = GOLD_RIGHT_STOP;
 		_playerMotion = KEYANIMANAGER->findAnimation("¿À¸¥ÂÊ");
@@ -75,7 +77,7 @@ void player::update()
 		_playerMotion = KEYANIMANAGER->findAnimation("¿ÞÂÊ¹«ºê");
 		_playerMotion->start();
 	}
-	else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
 	{
 		_playerDirection = GOLD_LEFT_STOP;
 		_playerMotion = KEYANIMANAGER->findAnimation("¿ÞÂÊ");
@@ -87,7 +89,7 @@ void player::update()
 		_playerMotion = KEYANIMANAGER->findAnimation("µÚ¹«ºê");
 		_playerMotion->start();
 	}
-	else if (KEYMANAGER->isOnceKeyUp(VK_UP))
+	if (KEYMANAGER->isOnceKeyUp(VK_UP))
 	{
 		_playerDirection = GOLD_BACK_STOP;
 		_playerMotion = KEYANIMANAGER->findAnimation("µÚ");
@@ -99,13 +101,109 @@ void player::update()
 		_playerMotion = KEYANIMANAGER->findAnimation("¾Õ¹«ºê");
 		_playerMotion->start();
 	}
-	else if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
+	if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
 	{
 		_playerDirection = GOLD_FRONT_STOP;
 		_playerMotion = KEYANIMANAGER->findAnimation("¾Õ");
 		_playerMotion->start();
 	}
 
+	//--------------------------------------------------------
+	//ÇÈ¼¿Ãæµ¹
+	//--------------------------------------------------------
+
+	_speed = 1.5f;
+
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+	{
+		bool isProbe = false;
+		//ÇÈ¼¿ ¿À¸¥ÂÊ Å½»ö
+		for (int i = _playerRc.top; i < _playerRc.bottom && !isProbe; i += _player->getFrameHeight() / 3)
+		{
+			for (int j = _playerRc.right - 3; j <= _playerRc.right + 3; ++j)
+			{
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), j, i);
+
+				if (GetRValue(color) == 255 &&
+					GetGValue(color) == 0 &&
+					GetBValue(color) == 0)
+				{
+					_speed = 0.0f;
+					_playerRc.right = j - _player->getFrameWidth() / 2;
+					isProbe = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+	{
+		bool isProbe = false;
+		//ÇÈ¼¿ ¿ÞÂÊ Å½»ö
+		for (int i = _playerRc.top; i < _playerRc.bottom && !isProbe; i += _player->getFrameHeight() / 2)
+		{
+			for (int j = _playerRc.left - 3; j <= _playerRc.left ; j++)
+			{
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), j, i);
+
+				if (GetRValue(color) == 255 &&
+					GetGValue(color) == 0 &&
+					GetBValue(color) == 0)
+				{
+					_speed = 0.0f;
+					_playerRc.left = j + _player->getFrameWidth() / 2 ;
+					isProbe = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_UP))
+	{
+		bool isProbe = false;
+		//ÇÈ¼¿ À§ÂÊ Å½»ö
+		for (int i = _playerRc.left; i < _playerRc.right && !isProbe; i += _player->getFrameWidth() / 2)
+		{
+			for (int j = _playerRc.top - 3; j <= _playerRc.top; j++)
+			{
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), i, j);
+
+				if (GetRValue(color) == 255 &&
+					GetGValue(color) == 0 &&
+					GetBValue(color) == 0)
+				{
+					_speed = 0.0f;
+					_playerRc.top = i + _player->getFrameHeight() / 2;
+					isProbe = true;
+					break;
+				}
+			}
+		}
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+	{
+		bool isProbe = false;
+		//ÇÈ¼¿ ¾Æ·¡ÂÊ Å½»ö
+		for (int i = _playerRc.left; i < _playerRc.right && !isProbe; i += _player->getFrameWidth() / 2)
+		{
+			for (int j = _playerRc.bottom - 3; j <= _playerRc.bottom; j++)
+			{
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), i, j);
+
+				if (GetRValue(color) == 255 &&
+					GetGValue(color) == 0 &&
+					GetBValue(color) == 0)
+				{
+					_speed = 0.0f;
+					_playerRc.bottom = i - _player->getFrameHeight() / 2;
+					isProbe = true;
+					break;
+				}
+			}
+		}
+	}
 
 	switch(_playerDirection)
 	{
