@@ -21,7 +21,7 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->addScene("ø¿«¡¥◊æ¿", new Opening);
 	SCENEMANAGER->addScene("SelectScene", new SelectScene);
-	SCENEMANAGER->addScene("DR5", new drHouseScene);
+	SCENEMANAGER->addScene("DR5", new stageScene);
 	SCENEMANAGER->addScene("ªÛ¡°æ¿", new shopScene);
 
 	return S_OK;
