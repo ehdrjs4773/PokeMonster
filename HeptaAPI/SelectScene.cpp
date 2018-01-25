@@ -46,7 +46,7 @@ HRESULT SelectScene::init(void)
 }
 void SelectScene::release(void)
 {
-
+		
 }
 
 
@@ -87,7 +87,7 @@ void SelectScene::update(void)
 
 
 	case SelectScene_Three:
-		if (DIALOGUE->getCurrentLine() >= 26)
+		if (DIALOGUE->getCurrentLine() >= 16)
 		{
 			_alphaBall = 0;
 			_npcAlpha = 255;
