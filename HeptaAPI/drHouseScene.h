@@ -7,6 +7,7 @@ class drHouseScene : public gameNode
 private:
 	image* _background;
 	image* _drO;
+	image* _pixel;
 	float _x, _y;
 	RECT _drRc;
 
