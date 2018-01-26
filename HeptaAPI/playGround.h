@@ -6,6 +6,7 @@
 #include "SelectScene.h"
 #include "stageScene.h"
 #include "shopScene.h"
+#include "inventory.h"
 
 class playGround : public gameNode
 {

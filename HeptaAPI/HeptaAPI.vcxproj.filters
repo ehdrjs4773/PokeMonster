@@ -234,6 +234,9 @@
     <ClInclude Include="stageScene.h">
       <Filter>playGround\박근화</Filter>
     </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -367,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="stageScene.cpp">
       <Filter>playGround\박근화</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

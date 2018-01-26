@@ -40,6 +40,25 @@ item* itemManager::addItem(string strKey, int itemNum, ITEM_TYPE type, string na
 	_mItemList.insert(make_pair(strKey, itm));
 	return itm;
 }
+
+item* itemManager::addItem(string strKey, image* img, int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price)
+{
+	item* itm = findItem(strKey);
+
+	if (itm) return itm;
+	itm = new item;
+
+	if (FAILED(itm->init(itemNum, img, type, name, ds, ability, price)))
+	{
+		SAFE_DELETE(itm);
+
+		return NULL;
+	}
+
+	_mItemList.insert(make_pair(strKey, itm));
+	return itm;
+}
+
 item* itemManager::findItem(string strKey)
 {
 	mapItemIter key = _mItemList.find(strKey);
@@ -96,4 +115,10 @@ void itemManager::render(string strKey, HDC hdc, int destX, int destY, int itemN
 {
 	item* itm = findItem(strKey);
 	if (itm) itm->render(hdc, destX, destY, itemNum);
+}
+
+void itemManager::render(string strKey, image* img, HDC hdc, int destX, int destY, int itemNum)
+{
+	item* itm = findItem(strKey);
+	if (itm) itm->render(hdc, img, destX, destY, itemNum);
 }

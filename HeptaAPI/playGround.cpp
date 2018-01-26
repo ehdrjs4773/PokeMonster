@@ -23,6 +23,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("SelectScene", new SelectScene);
 	SCENEMANAGER->addScene("DR5", new stageScene);
 	SCENEMANAGER->addScene("상점씬", new shopScene);
+	SCENEMANAGER->addScene("인벤토리씬", new inventory);
 
 	// 배틀씬 테스트용
 	vector<pokemon*>* vPokemon = new vector<pokemon*>;

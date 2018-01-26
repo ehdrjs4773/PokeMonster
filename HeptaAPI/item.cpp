@@ -7,7 +7,7 @@ item::item()
 {
 	_image = NULL;
 	_rc = { 0,0,0,0 };
-	_itemKind = ITEM_NORMAL;		//아이템 종류
+	_itemKind = ITEM_NULL;		//아이템 종류
 	_name = { 0 };			//아이템 이름
 	_description = { 0 };	//아이템 설명
 	_ability=0;		//아이템 능력
@@ -22,6 +22,20 @@ item::~item()
 
 HRESULT item::init(int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price)
 {	
+	_item_no = itemNum;
+	_itemKind = type;
+	_name = name;
+	_description = ds;
+	_ability = ability;
+	_price = price;
+
+	return S_OK;
+}
+
+
+HRESULT item::init(int itemNum, image* img, ITEM_TYPE type, string name, string ds, int ability, int price)
+{
+	_image = img;
 	_item_no = itemNum;
 	_itemKind = type;
 	_name = name;
@@ -47,23 +61,29 @@ void  item::render(HDC hdc)
 
 void  item::render(HDC hdc, int destX, int destY, int itemNum)
 {
+
+	
+	SetBkMode(hdc, TRANSPARENT); //글씨배경투명화
+	TextOut(hdc, destX, destY, _name.c_str(), strlen(_name.c_str()));
+	TextOut(hdc, destX, destY+20, _description.c_str(), strlen(_description.c_str()));
+
 	char temp[128];
 	sprintf(temp, "%d", _ability);
-	SetBkMode(hdc, TRANSPARENT); //글씨배경투명화
-	TextOut(hdc, destX, destY, _description.c_str(), strlen(_description.c_str()));
-	TextOut(hdc, destX, destY+50, _name.c_str(), strlen(_name.c_str()));
-	TextOut(hdc, destX, destY+100, temp, strlen(temp));
-	//TextOut(hdc, destX, destY, "몬스터볼", strlen("몬스터볼"));
+	TextOut(hdc, destX, destY+40, temp, strlen(temp));
+	
 }
 
-void item::itemSetup(int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price)
+void  item::render(HDC hdc, image* img,  int destX, int destY, int itemNum)
 {
 
-	_item_no = itemNum;
-	_itemKind = type;
-	_name = name;
-	_description = ds;
-	_ability = ability;
-	_price = price;
+	_image->render(hdc, destX-50, destY);
+
+	SetBkMode(hdc, TRANSPARENT); //글씨배경투명화
+	TextOut(hdc, destX, destY, _name.c_str(), strlen(_name.c_str()));
+	TextOut(hdc, destX, destY + 20, _description.c_str(), strlen(_description.c_str()));
+
+	char temp[128];
+	sprintf(temp, "%d", _ability);
+	TextOut(hdc, destX, destY + 40, temp, strlen(temp));
 
 }

@@ -20,6 +20,7 @@ public:
 	void release(void);
 
 	item* addItem(string strKey, int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price);
+	item* addItem(string strKey, image* img, int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price);
 	item* findItem(string strKey);
 
 	BOOL deleteItem(string strKey);
@@ -27,6 +28,7 @@ public:
 
 	void render(string strKey, HDC hdc);
 	void render(string strKey, HDC hdc, int destX, int destY, int itemNum);
+	void render(string strKey, image* img, HDC hdc, int destX, int destY, int itemNum);
 
 
 	itemManager();
