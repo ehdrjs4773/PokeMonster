@@ -24,6 +24,25 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("DR5", new stageScene);
 	SCENEMANAGER->addScene("상점씬", new shopScene);
 
+	// 배틀씬 테스트용
+	vector<pokemon*>* vPokemon = new vector<pokemon*>;
+	vector<pokemon*>* vPokemon2 = new vector<pokemon*>;
+
+	skill* _temp = new bodyAttack;
+	_temp->init();
+	skill* _temp2 = new electricShork;
+	_temp2->init();
+
+	pokemon* pika = new pikachu;
+	pika->init(24);
+	pika->addSkill(_temp);
+	pika->addSkill(_temp2);
+	vPokemon->push_back(pika);
+	vPokemon2->push_back(pika);
+
+	DATABASE->setVPlayerPokemon(vPokemon);
+	DATABASE->setVEnemyPokemon(vPokemon2);
+
 	return S_OK;
 }
 
@@ -45,16 +64,6 @@ void playGround::update(void)
 	// 배틀씬 테스트
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
-		vector<pokemon*> vPokemon;
-		vector<pokemon*> vPokemon2;
-
-		pokemon* pika = new pokemon;
-		vPokemon.push_back(pika);
-		vPokemon2.push_back(pika);
-
-		DATABASE->setVPlayerPokemon(&vPokemon);
-		DATABASE->setVEnemyPokemon(&vPokemon2);
-
 		SCENEMANAGER->changeScene("battleScene");
 	}
 

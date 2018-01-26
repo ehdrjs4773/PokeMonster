@@ -43,12 +43,9 @@ HRESULT battleScene::init()
 
 	// 적은 반드시 맨 처음 몬스터부터 꺼냄(체육관 관장들은 플레이어가 이기지 못한 채로 전투가 끝나면 모든 포켓몬 체력이 초기화되므로)
 	_enemyCurrentPokemon = 0;
-
-	// 만약 민첩이 플레이어 현재 포켓몬이 더 크면 플레이어부터 선공
-	if ((*_playerPokemon)[_playerCurrentPokemon]->getAgi() >= (*_enemyPokemon)[_enemyCurrentPokemon]->getAgi())
-		_isPlayerTurn = true;
-	else
-		_isPlayerTurn = false;
+	
+	// 이 bool값은 실제 포켓몬들이 공격을 주고 받을 때 결정됨 -> 누가 선공인지 결정
+	_isPlayerTurn = false;
 
 	_sequence = BATTLE_INTRO;
 
@@ -56,22 +53,27 @@ HRESULT battleScene::init()
 	if (_UI == NULL)
 		_UI = new battleSceneUI;
 	_UI->init();
+	_UI->setMemoryAddressLink(this);
 
 	// 사용할 이미지 등록
-	IMAGEMANAGER->addFrameImage("battle_player", ".\\bmps\\battleScene\\battle_player.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("battle_player_back", ".\\bmps\\battleScene\\battle_player.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addFrameImage("battle_player_ball", ".\\bmps\\battleScene\\battle_player_ball.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 
 	// 테스트용
-	IMAGEMANAGER->addFrameImage("pikachu_back", ".\\bmps\\battleScene\\pikachu_back.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
-	IMAGEMANAGER->addFrameImage("pikachu_front", ".\\bmps\\battleScene\\pikachu_front.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("피카츄_back", ".\\bmps\\battleScene\\pokemon_back\\피카츄_back.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("피카츄_front", ".\\bmps\\battleScene\\pokemon_front\\피카츄_front.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
 	_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 	_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 
 	_currentPlayerKey = "battle_player";
-	_currentEnemyKey = "pikachu_front";
+	_currentEnemyKey = (*_enemyPokemon)[_enemyCurrentPokemon]->getName();
 
+	_introTime = 0;
 	_frameTime = 0;
 	_frameX = 0;
+
+	DIALOGUE->loadingTextFile(".\\textData\\battleScene_intro.txt");
+	DIALOGUE->setPoint(PointMake(LIMIT_X_LEFT + 22, LIMIT_Y_BOTTOM + 5));
 
 	return S_OK;
 }
@@ -97,8 +99,14 @@ void battleScene::update()
 				_enemyImageRect.right--;
 			}
 			else
-				_sequence = BATTLE_BALLTHROW;
-
+			{
+				_introTime++;
+				if (_introTime % 70 == 0)
+				{
+					_sequence = BATTLE_BALLTHROW;
+					DIALOGUE->setCurrentLine(DIALOGUE->getCurrentLine() + 2);
+				}
+			}
 		break;
 		
 		case BATTLE_BALLTHROW:
@@ -122,23 +130,40 @@ void battleScene::update()
 		case BATTLE_FIGHT:
 		break;
 	}
+	DIALOGUE->update();
 	_UI->update();
 }
 
 void battleScene::render()
 {
-	// 테스트용
-	//Rectangle(getMemDC(), _playerImageRect.left, _playerImageRect.top, _playerImageRect.right, _playerImageRect.bottom);
-	//Rectangle(getMemDC(), _enemyImageRect.left, _enemyImageRect.top, _enemyImageRect.right, _enemyImageRect.bottom);
-	if (_sequence == BATTLE_BALLTHROW)
-		IMAGEMANAGER->findImage("battle_player_ball")->frameRender(getMemDC(), LIMIT_X_LEFT, LIMIT_Y_BOTTOM - POKEMON_HEIGHT, _frameX, 0);
+	switch (_sequence)
+	{
+		case BATTLE_INTRO:
+			DIALOGUE->render(getMemDC());
+		break;
+		
+		case BATTLE_BALLTHROW:
+			DIALOGUE->render(getMemDC());
+			IMAGEMANAGER->findImage("battle_player_ball")->frameRender(getMemDC(), LIMIT_X_LEFT, LIMIT_Y_BOTTOM - POKEMON_HEIGHT, _frameX, 0);
+		break;
+		
+		case BATTLE_SELECT:
+		break;
+		
+		case BATTLE_FIGHT:
+		break;
+		
+		case BATTLE_END:
+		break;
+		
+		case BATTLE_FINAL:
+		break;
+	}
 
-	IMAGEMANAGER->findImage(_currentPlayerKey)->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
-	IMAGEMANAGER->findImage(_currentEnemyKey)->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+	IMAGEMANAGER->findImage(_currentPlayerKey + "_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
+	IMAGEMANAGER->findImage(_currentEnemyKey + "_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+
 	_UI->render();
-
-	if (_sequence == BATTLE_FIGHT)
-		DIALOGUE->render(getMemDC());
 }
 
 void battleScene::frameUpdate()
@@ -150,13 +175,13 @@ void battleScene::frameUpdate()
 			if (_frameTime % 12 == 0)
 			{
 				_frameX++;
-				if (_frameX > IMAGEMANAGER->findImage(_currentPlayerKey)->getMaxFrameX())
+				if (_frameX > IMAGEMANAGER->findImage(_currentPlayerKey + "_back")->getMaxFrameX())
 				{
 					_frameX = 0;
 					_frameTime = 0;
 
-					_sequence = BATTLE_FIGHT;
-					_currentPlayerKey = "pikachu_back";
+					_sequence = BATTLE_SELECT;
+					_currentPlayerKey = (*_playerPokemon)[_playerCurrentPokemon]->getName();
 
 					_playerImageRect.left = LIMIT_X_LEFT;
 					_playerImageRect.right = _playerImageRect.left + POKEMON_WIDTH;

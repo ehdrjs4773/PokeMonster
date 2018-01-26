@@ -76,6 +76,12 @@
     <Filter Include="2DGameFramework\Manager">
       <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\정동윤\pokemon">
+      <UniqueIdentifier>{b62071dd-77e3-4114-af89-3e1dd6591c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\정동윤\skill">
+      <UniqueIdentifier>{93fac9c4-8ae7-40b0-aa29-d9abf304eb68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -210,6 +216,24 @@
     <ClInclude Include="itemManager.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
+    <ClInclude Include="pikachu.h">
+      <Filter>playGround\정동윤\pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="bodyAttack.h">
+      <Filter>playGround\정동윤\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="includeSkill.h">
+      <Filter>playGround\정동윤</Filter>
+    </ClInclude>
+    <ClInclude Include="electricShork.h">
+      <Filter>playGround\정동윤\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="includePokemon.h">
+      <Filter>playGround\정동윤</Filter>
+    </ClInclude>
+    <ClInclude Include="stageScene.h">
+      <Filter>playGround\박근화</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -305,9 +329,6 @@
     <ClCompile Include="Opening.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>헤더 파일</Filter>
-    </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
@@ -331,6 +352,21 @@
     </ClCompile>
     <ClCompile Include="itemManager.cpp">
       <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="pikachu.cpp">
+      <Filter>playGround\정동윤\pokemon</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="bodyAttack.cpp">
+      <Filter>playGround\정동윤\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="electricShork.cpp">
+      <Filter>playGround\정동윤\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="stageScene.cpp">
+      <Filter>playGround\박근화</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

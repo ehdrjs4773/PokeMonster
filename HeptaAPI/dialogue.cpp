@@ -37,7 +37,7 @@ void dialogue::update()
 		for (int i = 0; i < _printLinesNum; ++i)
 		{
 			if (i >= _vString.size()) break;
-
+			if (_currentLine + i >= _vString.size()) break;
 			if (_length[i] >= strlen(_vString[_currentLine + i])) continue;
 
 			_length[i] += _language;
@@ -54,6 +54,7 @@ void dialogue::render(HDC hdc)
 	for (int i = 0; i < _printLinesNum; ++i)
 	{
 		if (i >= _vString.size()) break;
+		if (_currentLine + i >= _vString.size()) break;
 
 		TextOut(hdc, _startX, _startY + 20 * i, _vString[_currentLine + i], _length[i]);
 	}

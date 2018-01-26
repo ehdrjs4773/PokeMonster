@@ -24,12 +24,22 @@ enum ELEMENT
 	ELEMENT_END
 };
 
+enum SKILL_TYPE
+{
+	SKILL_PHYSIC,
+	SKILL_SPECIAL,
+	SKILL_CHANGE,
+	SKILL_TYPE_END
+};
+
 class skill
 {
-private:
+protected:
 	string _skillName;
 	ELEMENT _element;
-	int _damage;
+	SKILL_TYPE _type;
+	int _power;
+	int _acc;
 	int _maxPP;
 	int _currentPP;
 
@@ -37,7 +47,14 @@ public:
 	skill();
 	~skill();
 
+	virtual HRESULT init() = 0;
+
 	inline ELEMENT getElement() { return _element; }
-	inline int getDamage() { return _damage; }
+	inline int getCurrentPP() { return _currentPP; }
+	inline void setCurrentPP(int pp) { _currentPP = pp; }
+	inline int getMaxPP() { return _maxPP; }
+	inline int getPower() { return _power; }
+	inline int getAcc() { return _acc; }
+	inline string getName() { return _skillName; }
 };
 

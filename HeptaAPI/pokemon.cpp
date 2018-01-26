@@ -5,10 +5,21 @@
 
 pokemon::pokemon()
 {
-	_currentHP = 100;
 }
 
 
 pokemon::~pokemon()
 {
+}
+
+
+bool pokemon::addSkill(skill* sk)
+{
+	if (_vSkills.size() >= 4)
+		return false;
+	else
+	{
+		_vSkills.push_back(sk);
+		return true;
+	}
 }
