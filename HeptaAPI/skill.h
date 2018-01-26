@@ -56,5 +56,6 @@ public:
 	inline int getPower() { return _power; }
 	inline int getAcc() { return _acc; }
 	inline string getName() { return _skillName; }
+	inline SKILL_TYPE getType() { return _type; }
 };
 

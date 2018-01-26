@@ -37,16 +37,24 @@ public:
 	progressBar();
 	~progressBar();
 
-	HRESULT init(string strKey, int x, int y, int width, int height);
+	HRESULT progressBar::init(string strKey, int x, int y, int width, int height);
+	HRESULT init(string strKey, int x, int y, int width, int height, int currentGauge, int maxGauge);
 	void release();
 	void update();
 	void render();
 
-	void setGauge(float currentGauge, float maxGauge);
+	void setGauge(float currentGauge, float maxGauge, bool isHP);
 
 	void setX(int x) { _x = x; }
 	void setY(int y) { _y = y; }
 
 	inline RECT getRect() { return _rcProgress; }
+
+	inline bool isChangeDone(float currentGauge, float maxGauge)
+	{
+		float width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();
+
+		return (_width == width);
+	}
 };
 

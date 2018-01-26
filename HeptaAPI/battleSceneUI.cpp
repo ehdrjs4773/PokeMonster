@@ -65,78 +65,7 @@ void battleSceneUI::update()
 		break;
 		
 		case BATTLE_SELECT:
-			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-			{
-				if (!_isFightSelect &&
-					!_isPokemonSelect &&
-					!_isBagSelect &&
-					!_isRunAwaySelect)
-					_selectArrowPoint.x = (1 - _selectArrowPoint.x) % 2;
-			}
-			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-			{
-				if (!_isFightSelect &&
-					!_isPokemonSelect &&
-					!_isBagSelect &&
-					!_isRunAwaySelect)
-					_selectArrowPoint.x = (1 + _selectArrowPoint.x) % 2;
-			}
-			if (KEYMANAGER->isOnceKeyDown(VK_UP))
-			{
-				if (!_isFightSelect &&
-					!_isPokemonSelect &&
-					!_isBagSelect &&
-					!_isRunAwaySelect)
-					_selectArrowPoint.y = (1 - _selectArrowPoint.y) % 2;
-				else if (_isFightSelect)
-				{
-					_skillSelectNum--;
-					if (_skillSelectNum < 0)
-						_skillSelectNum = _battleScene->getCurrentPlayerPokemon()->getVSkill().size() - 1;
-				}
-			}
-			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-			{
-				if (!_isFightSelect &&
-					!_isPokemonSelect &&
-					!_isBagSelect &&
-					!_isRunAwaySelect)
-					_selectArrowPoint.y = (1 + _selectArrowPoint.y) % 2;
-				else if (_isFightSelect)
-				{
-					_skillSelectNum++;
-					if (_skillSelectNum > _battleScene->getCurrentPlayerPokemon()->getVSkill().size() - 1)
-						_skillSelectNum = 0;
-				}
-			}
-
-			if (KEYMANAGER->isOnceKeyDown('X'))
-			{
-
-				if (!_isFightSelect &&
-					!_isPokemonSelect &&
-					!_isBagSelect &&
-					!_isRunAwaySelect)
-				{
-					if (_selectArrowPoint.x == 0 && _selectArrowPoint.y == 0)
-					{
-						_isFightSelect = true;
-						_skillSelectNum = 0;
-					}
-					else if (_selectArrowPoint.x == 0 && _selectArrowPoint.y == 1)
-					{
-						_isPokemonSelect = true;
-					}
-					else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 0)
-					{
-						_isBagSelect = true;
-					}
-					else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 1)
-					{
-						_isRunAwaySelect = true;
-					}
-				}
-			}
+			this->keyControl();
 		break;
 		
 		case BATTLE_FIGHT:
@@ -163,7 +92,6 @@ void battleSceneUI::render()
 		break;
 		
 		case BATTLE_SELECT:
-
 			if (!_isFightSelect &&
 				!_isPokemonSelect &&
 				!_isBagSelect &&
@@ -191,7 +119,6 @@ void battleSceneUI::render()
 						TextOut(getMemDC(), _skillPrintRect[i].left, _skillPrintRect[i].top, "---------------", strlen("---------------"));
 				}
 
-
 				this->printElement(_battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getElement());
 			}
 		break;
@@ -205,6 +132,108 @@ void battleSceneUI::render()
 		case BATTLE_FINAL:
 		break;
 	}
+}
+
+void battleSceneUI::keyControl()
+{
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	{
+		if (!_isFightSelect &&
+			!_isPokemonSelect &&
+			!_isBagSelect &&
+			!_isRunAwaySelect)
+			_selectArrowPoint.x = (1 - _selectArrowPoint.x) % 2;
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	{
+		if (!_isFightSelect &&
+			!_isPokemonSelect &&
+			!_isBagSelect &&
+			!_isRunAwaySelect)
+			_selectArrowPoint.x = (1 + _selectArrowPoint.x) % 2;
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_UP))
+	{
+		if (!_isFightSelect &&
+			!_isPokemonSelect &&
+			!_isBagSelect &&
+			!_isRunAwaySelect)
+			_selectArrowPoint.y = (1 - _selectArrowPoint.y) % 2;
+		else if (_isFightSelect)
+		{
+			_skillSelectNum--;
+			if (_skillSelectNum < 0)
+				_skillSelectNum = _battleScene->getCurrentPlayerPokemon()->getVSkill().size() - 1;
+		}
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+	{
+		if (!_isFightSelect &&
+			!_isPokemonSelect &&
+			!_isBagSelect &&
+			!_isRunAwaySelect)
+			_selectArrowPoint.y = (1 + _selectArrowPoint.y) % 2;
+		else if (_isFightSelect)
+		{
+			_skillSelectNum++;
+			if (_skillSelectNum > _battleScene->getCurrentPlayerPokemon()->getVSkill().size() - 1)
+				_skillSelectNum = 0;
+		}
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('X'))
+	{
+		if (!_isFightSelect &&
+			!_isPokemonSelect &&
+			!_isBagSelect &&
+			!_isRunAwaySelect)
+		{
+			if (_selectArrowPoint.x == 0 && _selectArrowPoint.y == 0)
+			{
+				_isFightSelect = true;
+				_skillSelectNum = 0;
+			}
+			else if (_selectArrowPoint.x == 0 && _selectArrowPoint.y == 1)
+			{
+				_isPokemonSelect = true;
+			}
+			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 0)
+			{
+				_isBagSelect = true;
+			}
+			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 1)
+			{
+				_isRunAwaySelect = true;
+			}
+		}
+		else if (_isFightSelect)
+		{
+			_enemySkillNum = RND->getInt(_battleScene->getCurrentEnemyPokemon()->getVSkill().size());
+			// test
+			_enemySkillNum = 0;
+			_battleScene->setSequence(BATTLE_FIGHT);
+			DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
+			DIALOGUE->replaceAll("@", _battleScene->getCurrentPlayerPokemon()->getName());
+			DIALOGUE->replaceAll("#", _battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getName());
+		}
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('C'))
+	{
+		if (_isFightSelect ||
+			_isPokemonSelect ||
+			_isBagSelect ||
+			_isRunAwaySelect)
+			this->selectReset();
+	}
+}
+
+void battleSceneUI::selectReset()
+{
+	_isFightSelect = false;
+	_isPokemonSelect = false;
+	_isBagSelect = false;
+	_isRunAwaySelect = false;
 }
 
 void battleSceneUI::printElement(ELEMENT el)

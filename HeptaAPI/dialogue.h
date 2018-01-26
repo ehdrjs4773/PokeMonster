@@ -12,8 +12,8 @@ enum LANGUAGE
 class dialogue : public singletonBase<dialogue>
 {
 private:
-	vector<char*>			_vString;
-	vector<char*>::iterator _vStringIter;
+	vector<string>			 _vString;
+	vector<string>::iterator _vStringIter;
 
 	int _dialogueTime;
 	int _elapsedTime;
@@ -35,6 +35,9 @@ public:
 	void render(HDC hdc);
 
 	void loadingTextFile(const char* fileName);
+
+	//							sour∏¶				dest∑Œ πŸ≤„¡‹
+	void replaceAll(const string sour, const string dest);
 
 	inline int getCurrentLine() { return _currentLine; }
 	inline void setCurrentLine(int line)

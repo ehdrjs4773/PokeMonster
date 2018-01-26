@@ -23,3 +23,11 @@ bool pokemon::addSkill(skill* sk)
 		return true;
 	}
 }
+
+void pokemon::hitDamager(int damage)
+{
+	_currentHP -= damage;
+
+	if (_currentHP < 0)
+		_currentHP = 0;
+}

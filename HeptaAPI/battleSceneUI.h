@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "progressBar.h"
 
 // 전방선언
 class battleScene;
@@ -14,6 +15,7 @@ private:
 	RECT _skillPrintRect[4];
 	POINT _selectArrowPoint;
 	int _skillSelectNum;
+	int _enemySkillNum;
 
 	// BATTLE_SELECT 시퀀스에 사용될 변수들
 	bool _isFightSelect;
@@ -30,8 +32,14 @@ public:
 	void update();
 	void render();
 
+	void keyControl();
+	void selectReset();
+
 	void printElement(ELEMENT el);
 
 	inline void setMemoryAddressLink(battleScene* battle) { _battleScene = battle; }
+
+	inline int getCurrentPlayerSkill() { return _skillSelectNum; }
+	inline int getCurrentEnemySkill() { return _enemySkillNum; }
 };
 

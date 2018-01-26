@@ -83,6 +83,8 @@ public:
 
 	virtual bool addSkill(skill* sk);
 
+	virtual void hitDamager(int damage);
+
 	inline int getSpeed() { return _speed; }
 	inline int getCurrentHP() { return _currentHP; }
 	inline int getMaxHP() { return _maxHP; }
@@ -90,5 +92,11 @@ public:
 	inline int getMaxEXP() { return _maxEXP; }
 	inline string getName() { return _pokemonName; }
 	inline vector<skill*> getVSkill() { return _vSkills; }
+
+	inline int getAtk() { return _atk; }
+	inline int getDef() { return _def; }
+	inline int getSpecial() { return _special; }
+	inline int getLevel() { return _level; }
+	inline ELEMENT getElement() { return _element; }
 };
 

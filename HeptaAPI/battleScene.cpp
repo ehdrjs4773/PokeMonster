@@ -48,15 +48,16 @@ HRESULT battleScene::init()
 	_isPlayerTurn = false;
 
 	_sequence = BATTLE_INTRO;
+	_fight = PLAYER_ATTACK;
 
 	// UI 초기화
 	if (_UI == NULL)
 		_UI = new battleSceneUI;
-	_UI->init();
 	_UI->setMemoryAddressLink(this);
+	_UI->init();
 
 	// 사용할 이미지 등록
-	IMAGEMANAGER->addFrameImage("battle_player_back", ".\\bmps\\battleScene\\battle_player.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("battle_player", ".\\bmps\\battleScene\\battle_player.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addFrameImage("battle_player_ball", ".\\bmps\\battleScene\\battle_player_ball.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 
 	// 테스트용
@@ -65,15 +66,27 @@ HRESULT battleScene::init()
 	_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 	_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 
-	_currentPlayerKey = "battle_player";
-	_currentEnemyKey = (*_enemyPokemon)[_enemyCurrentPokemon]->getName();
-
 	_introTime = 0;
 	_frameTime = 0;
 	_frameX = 0;
 
 	DIALOGUE->loadingTextFile(".\\textData\\battleScene_intro.txt");
 	DIALOGUE->setPoint(PointMake(LIMIT_X_LEFT + 22, LIMIT_Y_BOTTOM + 5));
+
+	if (_enemyType == ENEMY_WILD)
+		DIALOGUE->replaceAll("@", "야생의 " + (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+	else if (_enemyType == ENEMY_TRAINNER)
+		;
+
+	DIALOGUE->replaceAll("#", (*_playerPokemon)[_playerCurrentPokemon]->getName());
+
+	// 프로그레스바
+	_enemyHPBar = new progressBar;
+	_enemyHPBar->init("hpBar", 155, 129, 72, 4, (*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP());
+	_playerHPBar = new progressBar;
+	_playerHPBar->init("hpBar", 316, 225, 72, 4, (*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP());
+	_playerEXPBar = new progressBar;
+	_playerEXPBar->init("expBar", 244, 250, 144, 3);
 
 	return S_OK;
 }
@@ -127,11 +140,89 @@ void battleScene::update()
 			this->frameUpdate();
 		break;
 
+		case BATTLE_SELECT:
+			_frameTime = 0;
+		break;
+
 		case BATTLE_FIGHT:
+			_frameTime++;
+			switch (_fight)
+			{
+				case PLAYER_ATTACK:
+					if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getName() == "몸통박치기")
+					{
+						if (_frameTime <= 20)
+						{
+							_playerImageRect.left += 2;
+							_playerImageRect.right += 2;
+							_playerImageRect.top--;
+							_playerImageRect.bottom--;
+
+							if (_frameTime == 20)
+								(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
+						}
+						else if (_frameTime <= 40)
+						{
+							_playerImageRect.left -= 2;
+							_playerImageRect.right -= 2;
+							_playerImageRect.top++;
+							_playerImageRect.bottom++;
+						}
+						else
+						{
+							if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
+							{
+								_fight = ENEMY_ATTACK;
+								DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
+								DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+								DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
+								_frameTime = 0;
+
+								_UI->selectReset();
+							}
+						}
+					}
+				break;
+					
+				case ENEMY_ATTACK:
+					if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName() == "몸통박치기")
+					{
+						if (_frameTime <= 20)
+						{
+							_enemyImageRect.left -= 2;
+							_enemyImageRect.right -= 2;
+							_enemyImageRect.top++;
+							_enemyImageRect.bottom++;
+
+							if (_frameTime == 20)
+								(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
+						}
+						else if (_frameTime <= 40)
+						{
+							_enemyImageRect.left += 2;
+							_enemyImageRect.right += 2;
+							_enemyImageRect.top--;
+							_enemyImageRect.bottom--;
+						}
+						else
+						{
+							if (_playerHPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP()))
+							{
+								_sequence = BATTLE_SELECT;
+								_fight = PLAYER_ATTACK;
+							}
+						}
+					}
+				break;
+			}
 		break;
 	}
 	DIALOGUE->update();
 	_UI->update();
+
+	_enemyHPBar->setGauge((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP(), true);
+	_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP(), true);
+	_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP(), false);
 }
 
 void battleScene::render()
@@ -140,17 +231,20 @@ void battleScene::render()
 	{
 		case BATTLE_INTRO:
 			DIALOGUE->render(getMemDC());
+			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
 		break;
 		
 		case BATTLE_BALLTHROW:
 			DIALOGUE->render(getMemDC());
 			IMAGEMANAGER->findImage("battle_player_ball")->frameRender(getMemDC(), LIMIT_X_LEFT, LIMIT_Y_BOTTOM - POKEMON_HEIGHT, _frameX, 0);
+			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
 		break;
 		
 		case BATTLE_SELECT:
 		break;
 		
 		case BATTLE_FIGHT:
+			DIALOGUE->render(getMemDC());
 		break;
 		
 		case BATTLE_END:
@@ -160,10 +254,16 @@ void battleScene::render()
 		break;
 	}
 
-	IMAGEMANAGER->findImage(_currentPlayerKey + "_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
-	IMAGEMANAGER->findImage(_currentEnemyKey + "_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+	if (_sequence != BATTLE_INTRO &&
+		_sequence != BATTLE_BALLTHROW)
+		IMAGEMANAGER->findImage((*_playerPokemon)[_playerCurrentPokemon]->getName() + "_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
+	IMAGEMANAGER->findImage((*_enemyPokemon)[_enemyCurrentPokemon]->getName() + "_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 
 	_UI->render();
+
+	_enemyHPBar->render();
+	_playerHPBar->render();
+	_playerEXPBar->render();
 }
 
 void battleScene::frameUpdate()
@@ -175,13 +275,12 @@ void battleScene::frameUpdate()
 			if (_frameTime % 12 == 0)
 			{
 				_frameX++;
-				if (_frameX > IMAGEMANAGER->findImage(_currentPlayerKey + "_back")->getMaxFrameX())
+				if (_frameX > IMAGEMANAGER->findImage("battle_player")->getMaxFrameX())
 				{
 					_frameX = 0;
 					_frameTime = 0;
 
 					_sequence = BATTLE_SELECT;
-					_currentPlayerKey = (*_playerPokemon)[_playerCurrentPokemon]->getName();
 
 					_playerImageRect.left = LIMIT_X_LEFT;
 					_playerImageRect.right = _playerImageRect.left + POKEMON_WIDTH;
@@ -437,4 +536,54 @@ DAMAGE_JUDGEMENT battleScene::judgement(ELEMENT attackerSkill, ELEMENT defencer)
 	// 위 스위치문의 경우 특수한 경우(데미지 없음, 데미지 절반, 데미지 두 배)만 처리
 	// 나머지는 전부 일반 데미지
 	return DAMAGE_NORMAL;
+}
+
+int battleScene::calcDamage(pokemon* a, skill* s, pokemon* d)
+{
+	// 자속보정 == 공격하는 포켓몬과 사용하는 스킬의 속성이 일치하는지 여부
+	int flux;
+	if (a->getElement() == s->getElement())
+		flux = 1.5;
+	else
+		flux = 1;
+
+	// 속성 보정
+	float jud;
+	if (this->judgement(s->getElement(), d->getElement()) == DAMAGE_NONE)
+		jud = 0;
+	else if (this->judgement(s->getElement(), d->getElement()) == DAMAGE_HALF)
+		jud = 0.5;
+	else if (this->judgement(s->getElement(), d->getElement()) == DAMAGE_NORMAL)
+		jud = 1;
+	else if (this->judgement(s->getElement(), d->getElement()) == DAMAGE_DOUBLE)
+		jud = 2;
+
+	// 랜덤수 (85~100)
+	// 0~9999숫자 뽑기
+	int rnd;
+	int percent = RND->getInt(10000);
+	if (percent < 6152)
+	{
+		int arr[] = { 85, 87, 89, 90, 92, 94, 96, 98 };
+		rnd = arr[RND->getInt(8)];
+	}
+	else if (percent < 9743)
+	{
+		int arr[] = { 86, 88, 91, 93, 95, 97, 99 };
+		rnd = arr[RND->getInt(7)];
+	}
+	else
+		rnd = 100;
+
+	int damage;
+	if (s->getType() == SKILL_PHYSIC)
+	{
+		damage = (s->getPower() * a->getAtk() * (a->getLevel() * 2 / 5 + 2) / d->getDef() / 50 + 2) * flux * jud * jud * rnd / 255;
+	}
+	else if (s->getType() == SKILL_SPECIAL)
+	{
+		damage = (s->getPower() * a->getSpecial() * (a->getLevel() * 2 / 5 + 2) / d->getDef() / 50 + 2) * flux * jud * jud * rnd / 255;
+	}
+
+	return damage;
 }

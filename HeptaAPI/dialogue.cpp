@@ -38,11 +38,11 @@ void dialogue::update()
 		{
 			if (i >= _vString.size()) break;
 			if (_currentLine + i >= _vString.size()) break;
-			if (_length[i] >= strlen(_vString[_currentLine + i])) continue;
+			if (_length[i] >= strlen(_vString[_currentLine + i].c_str())) continue;
 
 			_length[i] += _language;
-			if (_length[i] > strlen(_vString[_currentLine + i]))
-				_length[i] = strlen(_vString[_currentLine + i]);
+			if (_length[i] > strlen(_vString[_currentLine + i].c_str()))
+				_length[i] = strlen(_vString[_currentLine + i].c_str());
 
 			break;
 		}
@@ -56,7 +56,7 @@ void dialogue::render(HDC hdc)
 		if (i >= _vString.size()) break;
 		if (_currentLine + i >= _vString.size()) break;
 
-		TextOut(hdc, _startX, _startY + 20 * i, _vString[_currentLine + i], _length[i]);
+		TextOut(hdc, _startX, _startY + 20 * i, _vString[_currentLine + i].c_str(), _length[i]);
 	}
 }
 
@@ -71,15 +71,21 @@ void dialogue::loadingTextFile(const char* fileName)
 	for (int i = 0; i < _printLinesNum; ++i)
 		_length[i] = 0;
 
-	// Text파일을 읽어와서
-	vector<string> temp = TXTDATA->txtLoad(fileName);
+	// Text파일을 읽어와서 벡터에 넣어줌
+	_vString = TXTDATA->txtLoad(fileName);
+}
 
-	// 벡터에 차곡차곡 담아쥼
-
-	for (int i = 0; i < temp.size(); ++i)
+//								  	    from을	    		to로 바꿔줌
+void dialogue::replaceAll(const string from, const string to)
+{
+	for (int i = 0; i < _vString.size(); ++i)
 	{
-		char* tempStr = new char[strlen(temp[i].c_str()) + 1];
-		strcpy(tempStr, temp[i].c_str());
-		_vString.push_back(tempStr);
+		size_t start_pos = 0; //string처음부터 검사
+
+		while ((start_pos = _vString[i].find(from, start_pos)) != std::string::npos)  //from을 찾을 수 없을 때까지
+		{
+			_vString[i].replace(start_pos, from.length(), to);
+			start_pos += to.length(); // 중복검사를 피하고 from.length() > to.length()인 경우를 위해서
+		}
 	}
 }

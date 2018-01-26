@@ -39,6 +39,13 @@ enum BATTLE_SEQUENCE
 	BATTLE_FINAL		// 모든 적을 죽인 시퀀스
 };
 
+enum FIGHT_SEQUENCE
+{
+	PLAYER_ATTACK,
+	ENEMY_ATTACK,
+	FIGHT_END
+};
+
 // 배틀 씬 시퀀스 진행
 // 인트로(적, 플레이어 각각 오른쪽, 왼쪽에서 등장)
 // 볼 스로우(적이 트레이너일 경우와 야생의 경우 다른데, 플레이어는 볼 던지고 적은 타입에따라 던지거나 말거나)
@@ -54,6 +61,7 @@ private:
 	vector<pokemon*>* _enemyPokemon;
 
 	BATTLE_SEQUENCE _sequence;
+	FIGHT_SEQUENCE _fight;
 
 	RECT _playerImageRect;
 	RECT _enemyImageRect;
@@ -65,14 +73,16 @@ private:
 
 	battleSceneUI* _UI;
 
-	string _currentPlayerKey;
-	string _currentEnemyKey;
-
 	ENEMY_TYPE _enemyType;
 
 	int _introTime;
 	int _frameTime;
 	int _frameX;
+
+	// 프로그레스바
+	progressBar* _enemyHPBar;
+	progressBar* _playerHPBar;
+	progressBar* _playerEXPBar;
 
 public:
 	battleScene();
@@ -87,9 +97,11 @@ public:
 
 	// 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수
 	DAMAGE_JUDGEMENT judgement(ELEMENT attackerSkill, ELEMENT defencer);
+	int calcDamage(pokemon* p, skill* s, pokemon* d);
 
 	inline BATTLE_SEQUENCE getSequence() { return _sequence; }
 	inline void setSequence(BATTLE_SEQUENCE se) { _sequence = se; }
 	inline pokemon* getCurrentPlayerPokemon() { return (*_playerPokemon)[_playerCurrentPokemon]; }
+	inline pokemon* getCurrentEnemyPokemon() { return (*_enemyPokemon)[_enemyCurrentPokemon]; }
 };
 

@@ -38,8 +38,12 @@ HRESULT playGround::init()
 	pika->init(24);
 	pika->addSkill(_temp);
 	pika->addSkill(_temp2);
+	pokemon* pika2 = new pikachu;
+	pika2->init(20);
+	pika2->addSkill(_temp);
+	pika2->addSkill(_temp2);
 	vPokemon->push_back(pika);
-	vPokemon2->push_back(pika);
+	vPokemon2->push_back(pika2);
 
 	DATABASE->setVPlayerPokemon(vPokemon);
 	DATABASE->setVEnemyPokemon(vPokemon2);
