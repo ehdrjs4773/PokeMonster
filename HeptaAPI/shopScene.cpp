@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "shopScene.h"
+#include "inventory.h"
 
 
 
@@ -15,13 +16,12 @@ shopScene::~shopScene()
 HRESULT shopScene::init()
 {
 	_item = new itemManager;
-	_inven = new inventory;
 
 	_item->addItem("몬스터볼", 1, ITEM_BALL, "몬스터볼", "몬스터볼입니다", 50, 500);
 	_item->addItem("가가",2, ITEM_POTION, "회복약", "회복약입니다", 150, 500);
 	_item->addItem("아무거나", 3, ITEM_UTILS, "아무거나", "아무거나입니다", 200, 1000);
 
-	IMAGEMANAGER->addImage("아이템", ".\\bmps\\shopScene\\item_kind_1.bmp", 50, 100, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("아이템", ".\\bmps\\shopScene\\item_masterball.bmp", 20, 20, false, true, MAGENTA);
 
 	_item->addItem("마스터볼", IMAGEMANAGER->findImage("아이템"), 4, ITEM_BALL, "마스터볼", "마스터볼입니다", 100, 5000);
 
@@ -113,10 +113,11 @@ void shopScene::render()
 			shopBuyMenuDraw();
 		break;
 	case WS_SELL:
+			shopBuyMenuDraw();
 		break;
 	case WS_CANCEL:
 		break;
-		//상점입장메인메뉴
+
 	}
 	
 
@@ -135,8 +136,8 @@ void shopScene::shopMainMenuDraw() //상점 입장시 Main Menu 그려주는 함수
 
 
 	//_item->findItem("몬스터볼")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 1);
-	_item->findItem("가가")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), 200, 10, 2);
-	_item->findItem("아무거나")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), 10, 300, 3);
+	_item->findItem("가가")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY, 2);
+	_item->findItem("아무거나")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY, 3);
 	_item->findItem("마스터볼")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("아이템"), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 3);
 
 	for (int i = 0; i <BUTTON_END; i++)
@@ -189,33 +190,35 @@ void shopScene::shopBuyMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEX_BUTTON_0].Selected) //1번째 아이템 
 	{
-		vItem temp;
-		temp.push_back(_item->findItem("몬스터볼"));
-		_inven->buyItem(temp.end());
+		//vItem temp;
+		//temp.push_back(_item->findItem("몬스터볼"));
+		//_inven->buyItem(temp.begin());
+
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_1].Selected) //2번째 아이템 
 	{
-		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_2].Selected) //3번째 아이템 
 	{
-		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_3].Selected) //4번째 아이템 
 	{
-		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_4].Selected) //5번째 아이템 
 	{
-		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_5].Selected) //6번째 아이템 
 	{
-		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("인벤토리씬");
 	}
 	//}
 }

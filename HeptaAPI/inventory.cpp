@@ -34,14 +34,17 @@ HRESULT inventory::init()
 	IMAGEMANAGER->addImage("아이콘선택", ".\\bmps\\inventoryScene\\select_item_kind_box.bmp", 50, 50, false, true, MAGENTA);
 
 	////MENU BUTTON 좌표
-	//_selectMenu[BUTTONS_BUY].pt.x = 110;
-	//_selectMenu[BUTTONS_BUY].pt.y = 100;
+	_selectMenu[BUTTONS_UTIL].pt.x = 80;
+	_selectMenu[BUTTONS_UTIL].pt.y = 0;
 
-	//_selectMenu[BUTTONS_SELL].pt.x = 110;
-	//_selectMenu[BUTTONS_SELL].pt.y = 180;
+	_selectMenu[BUTTONS_POTION].pt.x = 170;
+	_selectMenu[BUTTONS_POTION].pt.y = 0;
 
-	//_selectMenu[BUTTONS_CANCEL].pt.x = 110;
-	//_selectMenu[BUTTONS_CANCEL].pt.y = 260;
+	_selectMenu[BUTTONS_BALL].pt.x = 260;
+	_selectMenu[BUTTONS_BALL].pt.y = 0;
+
+	_selectMenu[BUTTONS_MACHINE].pt.x = 350;
+	_selectMenu[BUTTONS_MACHINE].pt.y = 0;
 
 	//ITEM INDEX BUTTON 좌표
 	_selectItem[INDEXS_BUTTON_0].pt.x = 5;
@@ -120,52 +123,49 @@ void inventory::buyItem(vector<item*>::iterator buyingItem)
 	_vInventory.push_back(*buyingItem);
 }
 
-//void inventory::shopMainMenuDraw() //상점 입장시 Main Menu 그려주는 함수
-//{
-//	IMAGEMANAGER->findImage("상점오픈")->render(getMemDC(), 0, 0);
-//	IMAGEMANAGER->findImage("상점오픈버튼_BUY")->render(getMemDC(), _selectMenu[BUTTONS_BUY].pt.x, _selectMenu[BUTTONS_BUY].pt.y);
-//	IMAGEMANAGER->findImage("상점오픈버튼_SELL")->render(getMemDC(), _selectMenu[BUTTONS_SELL].pt.x, _selectMenu[BUTTONS_SELL].pt.y);
-//	IMAGEMANAGER->findImage("상점오픈버튼_CANCEL")->render(getMemDC(), _selectMenu[BUTTONS_CANCEL].pt.x, _selectMenu[BUTTONS_CANCEL].pt.y);
-//
-//	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_BUY")->getMemDC(), 80, 15, "사 러 간 다", strlen("사 러 간 다"));
-//	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_SELL")->getMemDC(), 80, 15, "팔 러 간 다", strlen("팔 러 간 다"));
-//	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_CANCEL")->getMemDC(), 100, 15, "취 소", strlen("취 소"));
-//
-//
-//
-//
-//	for (int i = 0; i <BUTTONS_END; i++)
-//	{
-//		if (_selectMenu[i].isSelect == true)
-//		{
-//			IMAGEMANAGER->findImage("상점선택")->render(getMemDC(), _selectMenu[i].pt.x, _selectMenu[i].pt.y);
-//		}
-//	}
-//
-//	if (_selectMenu[BUTTONS_BUY].Selected) //사러가기 버튼 선택시 
-//	{
-//		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
-//		shopBuyMenuDraw();
-//		_WS = WSS_BUY;
-//	}
-//
-//	if (_selectMenu[BUTTONS_SELL].Selected) //팔러가기 버튼 선택시
-//	{
-//		IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
-//		shopBuyMenuDraw();
-//		_WS = WSS_SELL;
-//	}
-//
-//	if (_selectMenu[BUTTONS_CANCEL].Selected) //취소버튼 선택시
-//	{
-//		SCENEMANAGER->changeScene("오프닝씬");
-//	}
-//}
+void inventory::buyItems(string strKey, item* itm)
+{
+	mapItemIter key = _mInvenList.find(strKey);
+
+	if (key != _mInvenList.end()) //key값이 있으면
+	{
+		TextOut(getMemDC(), 100, 100, "gkgk", strlen("gkgk")); //tagItem구조체 만들어서->item*랑 개수변수 담아서 
+	}
+	else //없으면 insert해라
+	{
+		_mInvenList.insert(make_pair(strKey, itm));
+	}
+}
+
+void inventory::renderItem(string strKey)
+{
+	mapItemIter key = _mInvenList.find(strKey);
+
+	if (key != _mInvenList.end()) //key값이 있으면
+	{
+		key->second->render(getMemDC(), 100, 100, 1);
+	}
+	else //없으면
+	{
+		TextOut(getMemDC(), 100, 100, "gkgk2", strlen("gkgk2"));
+	}
+
+}
+
 
 void inventory::UtilMenuDraw() //상점 사러가기 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_유틸")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
+
+	IMAGEMANAGER->findImage("아이콘_유틸")->frameRender(getMemDC(), _selectMenu[BUTTONS_UTIL].pt.x, _selectMenu[BUTTONS_UTIL].pt.y, 0, 1);
+	IMAGEMANAGER->findImage("아이콘선택")->render(getMemDC(), _selectMenu[BUTTONS_UTIL].pt.x, _selectMenu[BUTTONS_UTIL].pt.y);
+
+	IMAGEMANAGER->findImage("아이콘_포션")->frameRender(getMemDC(), _selectMenu[BUTTONS_POTION].pt.x, _selectMenu[BUTTONS_POTION].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘_볼")->frameRender(getMemDC(), _selectMenu[BUTTONS_BALL].pt.x, _selectMenu[BUTTONS_BALL].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘_머신")->frameRender(getMemDC(), _selectMenu[BUTTONS_MACHINE].pt.x, _selectMenu[BUTTONS_MACHINE].pt.y, 0, 0);
+
+
 
 	//상점BUY 선택 이동 렌더 부분
 	for (int i = 0; i <6; i++)
@@ -180,6 +180,17 @@ void inventory::UtilMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	{
 		IMAGEMANAGER->findImage("인벤토리취소선택")->render(getMemDC(), _selectItem[6].pt.x, _selectItem[6].pt.y);
 	}
+
+	//for (int i = 0; i < _vInventory.size(); ++i)
+	//{
+	//	(*_viInventory)->render(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), 100, 100, 1);
+	//}
+	
+	
+		//_mItemList["몬스터볼"]->render(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), 100, 100, 1);
+	
+	renderItem("몬스터볼");
+
 
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
@@ -216,6 +227,14 @@ void inventory::PotionMenuDraw() //상점 사러가기 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_포션")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
+
+	IMAGEMANAGER->findImage("아이콘_유틸")->frameRender(getMemDC(), _selectMenu[BUTTONS_UTIL].pt.x, _selectMenu[BUTTONS_UTIL].pt.y, 0, 0);
+	
+
+	IMAGEMANAGER->findImage("아이콘_포션")->frameRender(getMemDC(), _selectMenu[BUTTONS_POTION].pt.x, _selectMenu[BUTTONS_POTION].pt.y, 0, 1);
+	IMAGEMANAGER->findImage("아이콘_볼")->frameRender(getMemDC(), _selectMenu[BUTTONS_BALL].pt.x, _selectMenu[BUTTONS_BALL].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘_머신")->frameRender(getMemDC(), _selectMenu[BUTTONS_MACHINE].pt.x, _selectMenu[BUTTONS_MACHINE].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘선택")->render(getMemDC(), _selectMenu[BUTTONS_POTION].pt.x, _selectMenu[BUTTONS_POTION].pt.y);
 	//상점BUY 선택 이동 렌더 부분
 	for (int i = 0; i <6; i++)
 	{
@@ -265,6 +284,14 @@ void inventory::BallMenuDraw() //상점 사러가기 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_볼")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
+
+	IMAGEMANAGER->findImage("아이콘_유틸")->frameRender(getMemDC(), _selectMenu[BUTTONS_UTIL].pt.x, _selectMenu[BUTTONS_UTIL].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘_포션")->frameRender(getMemDC(), _selectMenu[BUTTONS_POTION].pt.x, _selectMenu[BUTTONS_POTION].pt.y, 0, 0);
+
+	IMAGEMANAGER->findImage("아이콘_볼")->frameRender(getMemDC(), _selectMenu[BUTTONS_BALL].pt.x, _selectMenu[BUTTONS_BALL].pt.y, 0, 1);
+	IMAGEMANAGER->findImage("아이콘선택")->render(getMemDC(), _selectMenu[BUTTONS_BALL].pt.x, _selectMenu[BUTTONS_BALL].pt.y);
+
+	IMAGEMANAGER->findImage("아이콘_머신")->frameRender(getMemDC(), _selectMenu[BUTTONS_MACHINE].pt.x, _selectMenu[BUTTONS_MACHINE].pt.y, 0, 0);
 
 	//상점BUY 선택 이동 렌더 부분
 	for (int i = 0; i <6; i++)
@@ -317,6 +344,12 @@ void inventory::MachineMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	IMAGEMANAGER->findImage("인벤토리_머신")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
 
+	IMAGEMANAGER->findImage("아이콘_유틸")->frameRender(getMemDC(), _selectMenu[BUTTONS_UTIL].pt.x, _selectMenu[BUTTONS_UTIL].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘_포션")->frameRender(getMemDC(), _selectMenu[BUTTONS_POTION].pt.x, _selectMenu[BUTTONS_POTION].pt.y, 0, 0);
+	IMAGEMANAGER->findImage("아이콘_볼")->frameRender(getMemDC(), _selectMenu[BUTTONS_BALL].pt.x, _selectMenu[BUTTONS_BALL].pt.y, 0, 0);
+
+	IMAGEMANAGER->findImage("아이콘_머신")->frameRender(getMemDC(), _selectMenu[BUTTONS_MACHINE].pt.x, _selectMenu[BUTTONS_MACHINE].pt.y, 0, 1);
+	IMAGEMANAGER->findImage("아이콘선택")->render(getMemDC(), _selectMenu[BUTTONS_MACHINE].pt.x, _selectMenu[BUTTONS_MACHINE].pt.y);
 	//상점BUY 선택 이동 렌더 부분
 	for (int i = 0; i <6; i++)
 	{
@@ -365,6 +398,44 @@ void inventory::MachineMenuDraw() //상점 사러가기 Menu 그려주는 함수
 
 void inventory::KeyControl()
 {
+
+	if (KEYMANAGER->isOnceKeyDown(VK_UP))
+	{
+		switch (_WS)
+		{	
+			case WSS_UTIL: 
+				changeWS(WSS_MACHINE);
+				break;
+			case WSS_POTION:
+				changeWS(WSS_UTIL);
+				break;
+			case WSS_BALL: 
+				changeWS(WSS_POTION);
+				break;
+			case WSS_MACHINE:
+				changeWS(WSS_BALL);
+				break;
+		}
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+	{
+		switch (_WS)
+		{
+		case WSS_UTIL:
+			changeWS(WSS_POTION);
+			break;
+		case WSS_POTION:
+			changeWS(WSS_BALL);
+			break;
+		case WSS_BALL:
+			changeWS(WSS_MACHINE);
+			break;
+		case WSS_MACHINE:
+			changeWS(WSS_UTIL);
+			break;
+		}
+	}
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
@@ -437,12 +508,12 @@ void inventory::KeyControl()
 
 }
 
-void inventory::itemPrint()
-{
-	for (_viInventory = _vInventory.begin(); _viInventory != _vInventory.end(); ++_viInventory)
-	{
-		cout << *_viInventory << endl;
-	}
-
-}
+//void inventory::itemPrint(string strKey, image* img, HDC hdc, int destX, int destY, int itemNum)
+//{
+//	for (_viInventory = _vInventory.begin(); _viInventory != _vInventory.end(); ++_viInventory)
+//	{
+//		(*_viInventory)->render(hdc, img, destX, destY, itemNum);
+//	}
+//
+//}
 

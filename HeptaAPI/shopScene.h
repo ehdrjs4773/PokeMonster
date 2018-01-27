@@ -3,9 +3,22 @@
 #include "itemManager.h"
 #include "inventory.h"
 
+class inventory;
+
 #define ITEM_MAX 6
-#define ITEMSLOT_FIRSTX 60
-#define ITEMSLOT_FIRSTY 80
+
+#define ITEMSLOT_FIRSTX 5
+#define ITEMSLOT_FIRSTY 75
+#define ITEMSLOT_SECONDX 245
+#define ITEMSLOT_SECONDY 75
+#define ITEMSLOT_THIRDX  5
+#define ITEMSLOT_THIRDY 150
+#define ITEMSLOT_FORTHX 245
+#define ITEMSLOT_FORTHY 150
+#define ITEMSLOT_FIFTHX 5
+#define ITEMSLOT_FIFITHY 225
+#define ITEMSLOT_SIXTHX 245
+#define ITEMSLOT_SIXTHY 225
 
 
 enum WINDOWSTATUS //현재화면의 상태값
@@ -50,9 +63,16 @@ private:
 	typedef vector<item*> vItem;
 	typedef vector<item*>::iterator viItem;
 
+	typedef map<string, item*> mapItemList;
+	typedef map<string, item*>::iterator mapItemIter;
+
+
 private:
+	mapItemList _mItemList;
+
 	vItem _vInventory;
 	viItem _viInventory;
+
 	SelectButton _selectMenu[BUTTON_END];
 	SelectButton _selectItem[INDEX_BUTTON_END]; //아이템구매창
 
@@ -74,6 +94,7 @@ public:
 	void shopBuyMenuDraw();
 	void KeyControl();
 
+	inline void invenMemoryAdressLink(inventory* i) { _inven = i; }
 	inline void changeWS(int WS) { _WS = WS; }
 
 	shopScene();

@@ -169,3 +169,16 @@ HRESULT sceneManager::changeScene(string sceneName, string loadingSceneName)
 	return E_FAIL;
 }
 
+
+gameNode* sceneManager::findScene(string strKey)
+{
+	mapSceneIter key = _mSceneList.find(strKey);
+
+	//Ã£¾Ò´Ù
+	if (key != _mSceneList.end())
+	{
+		return key->second;
+	}
+
+	return NULL;
+}

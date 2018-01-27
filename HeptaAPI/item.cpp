@@ -64,26 +64,26 @@ void  item::render(HDC hdc, int destX, int destY, int itemNum)
 
 	
 	SetBkMode(hdc, TRANSPARENT); //글씨배경투명화
-	TextOut(hdc, destX, destY, _name.c_str(), strlen(_name.c_str()));
-	TextOut(hdc, destX, destY+20, _description.c_str(), strlen(_description.c_str()));
+	TextOut(hdc, destX+60, destY+5, _name.c_str(), strlen(_name.c_str()));
+	TextOut(hdc, destX+60, destY+25, _description.c_str(), strlen(_description.c_str()));
 
 	char temp[128];
 	sprintf(temp, "%d", _ability);
-	TextOut(hdc, destX, destY+40, temp, strlen(temp));
+	TextOut(hdc, destX+60, destY+45, temp, strlen(temp));
 	
 }
 
 void  item::render(HDC hdc, image* img,  int destX, int destY, int itemNum)
 {
 
-	_image->render(hdc, destX-50, destY);
+	_image->render(hdc, destX+20, destY+20);
 
 	SetBkMode(hdc, TRANSPARENT); //글씨배경투명화
-	TextOut(hdc, destX, destY, _name.c_str(), strlen(_name.c_str()));
-	TextOut(hdc, destX, destY + 20, _description.c_str(), strlen(_description.c_str()));
+	TextOut(hdc, destX+60, destY+5, _name.c_str(), strlen(_name.c_str()));
+	TextOut(hdc, destX+60, destY + 25, _description.c_str(), strlen(_description.c_str()));
 
 	char temp[128];
 	sprintf(temp, "%d", _ability);
-	TextOut(hdc, destX, destY + 40, temp, strlen(temp));
+	TextOut(hdc, destX+60, destY + 45, temp, strlen(temp));
 
 }

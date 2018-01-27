@@ -1,9 +1,13 @@
 #pragma once
 #include "gameNode.h"
+#include "itemManager.h"
 #include "item.h"
 #include <vector>
+#include <map>
 
 #define ITEM_MAX 6
+class item;
+class itemManager;
 
 enum WINDOWSTATUSS //현재화면의 상태값
 {
@@ -50,11 +54,21 @@ private:
 	typedef vector<item*> vItem;
 	typedef vector<item*>::iterator viItem;
 
+	typedef map<string, item*> mapItemList;
+	typedef map<string, item*>::iterator mapItemIter;
+
+
 private:
+	mapItemList _mInvenList;	
+	mapItemIter _mInvenIter;
+	itemManager* _item;
+
 	vItem _vInventory;
 	viItem _viInventory;
 	SelectButtonS _selectMenu[BUTTONS_END];
 	SelectButtonS _selectItem[INDEXS_BUTTON_END]; //아이템구매창
+
+
 
 	int _WS; //스위치용 상태 값
 
@@ -77,12 +91,12 @@ public:
 	void MachineMenuDraw();
 
 	void buyItem(vector<item*>::iterator buyingItem);
-	void itemPrint();
-
+	void buyItems(string strKey, item* itm);
+	void renderItem(string strKey);
 
 	vItem& getCurrentItem() { return _vInventory; }
 	viItem& getCurrentItemIter() { return _viInventory; }
 
-
+	inline void changeWS(int WS) { _WS = WS; }
 };
 

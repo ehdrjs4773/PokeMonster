@@ -31,6 +31,8 @@ public:
 	void update(void);
 	void render(void);
 
+	gameNode* findScene(string key);
+
 	//¾À Ãß°¡ ÇÔ¼ö
 	gameNode* addScene(string sceneName, gameNode* scene);
 	gameNode* addLoadingScene(string loadingSceneName, gameNode* scene);
