@@ -129,7 +129,7 @@ void inventory::buyItems(string strKey, item* itm)
 
 	if (key != _mInvenList.end()) //key값이 있으면
 	{
-		TextOut(getMemDC(), 100, 100, "gkgk", strlen("gkgk")); //tagItem구조체 만들어서->item*랑 개수변수 담아서 
+		//TextOut(getMemDC(), 100, 100, "gkgk", strlen("gkgk")); //tagItem구조체 만들어서->item*랑 개수변수 담아서 
 	}
 	else //없으면 insert해라
 	{
@@ -143,11 +143,11 @@ void inventory::renderItem(string strKey)
 
 	if (key != _mInvenList.end()) //key값이 있으면
 	{
-		key->second->render(getMemDC(), 100, 100, 1);
+		key->second->render(getMemDC(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 1);
 	}
 	else //없으면
 	{
-		TextOut(getMemDC(), 100, 100, "gkgk2", strlen("gkgk2"));
+		//TextOut(getMemDC(), 100, 100, "gkgk2", strlen("gkgk2"));
 	}
 
 }

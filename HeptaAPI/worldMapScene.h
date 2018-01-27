@@ -22,6 +22,7 @@ struct select
 	RECT rc;
 	POINT pt;
 	bool isSelect;
+	bool Selected;
 };
 
 class worldMapScene : public gameNode

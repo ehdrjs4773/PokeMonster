@@ -66,7 +66,7 @@ void playGround::update(void)
 	gameNode::update();
 
 	SCENEMANAGER->update();
-	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("»óÁ¡¾À");
+	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
 
 	// ¹èÆ²¾À Å×½ºÆ®
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))

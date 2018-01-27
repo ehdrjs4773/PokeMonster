@@ -198,7 +198,7 @@ void shopScene::shopBuyMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEX_BUTTON_1].Selected) //2번째 아이템 
 	{
-		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_inven->buyItems("마스터볼", _item->findItem("마스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_2].Selected) //3번째 아이템 
 	{
@@ -220,7 +220,7 @@ void shopScene::shopBuyMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	{
 		SCENEMANAGER->changeScene("인벤토리씬");
 	}
-	//}
+	
 }
 
 void shopScene::KeyControl()

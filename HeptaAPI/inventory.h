@@ -5,7 +5,20 @@
 #include <vector>
 #include <map>
 
+#define ITEMSLOT_FIRSTX 5
+#define ITEMSLOT_FIRSTY 75
+#define ITEMSLOT_SECONDX 245
+#define ITEMSLOT_SECONDY 75
+#define ITEMSLOT_THIRDX  5
+#define ITEMSLOT_THIRDY 150
+#define ITEMSLOT_FORTHX 245
+#define ITEMSLOT_FORTHY 150
+#define ITEMSLOT_FIFTHX 5
+#define ITEMSLOT_FIFITHY 225
+#define ITEMSLOT_SIXTHX 245
+#define ITEMSLOT_SIXTHY 225
 #define ITEM_MAX 6
+
 class item;
 class itemManager;
 

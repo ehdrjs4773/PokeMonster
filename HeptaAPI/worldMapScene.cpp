@@ -50,6 +50,11 @@ HRESULT worldMapScene::init()
 	//Ã³À½Ã¼À°°ü ÃÊ±âÈ­
 	SelectNum = 0;
 	_select[0].isSelect = true;
+	
+	for (int i = 0; i < GYM_END; i++)
+	{
+		_select[i].Selected = false;
+	}
 
 	return S_OK;
 }
@@ -60,6 +65,46 @@ void worldMapScene::release()
 void worldMapScene::update()	 
 {
 	selectMove();
+
+	if (_select[GYM_0].Selected) //1¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+	}
+	if (_select[GYM_1].Selected) //2¹øÂ° Ã¼À°°ü
+	{
+		SCENEMANAGER->changeScene("»óÁ¡¾À");
+	}
+	if (_select[GYM_2].Selected) //3¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+	if (_select[GYM_3].Selected) //4¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+	if (_select[GYM_4].Selected) //5¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+	if (_select[GYM_5].Selected) //6¹øÂ° Ã¼À°°ü
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+	if (_select[GYM_6].Selected) //7¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+	if (_select[GYM_7].Selected) //8¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+	if (_select[GYM_8].Selected) //9¹øÂ° Ã¼À°°ü 
+	{
+		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	}
+
+
+
 }
 void worldMapScene::render()	
 {
@@ -110,7 +155,7 @@ void worldMapScene::selectMove()
 			if (SelectNum == i)
 			{
 				_select[i].isSelect = true;
-				_isClear[i] = true;
+			
 
 			}
 			else
@@ -120,4 +165,10 @@ void worldMapScene::selectMove()
 			}
 		}
 	}
+
+	if (KEYMANAGER->isOnceKeyDown('A'))
+	{
+		_select[SelectNum].Selected = true;
+	}
+
 }
