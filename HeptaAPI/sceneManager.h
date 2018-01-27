@@ -22,16 +22,20 @@ private:
 
 	DWORD _loadingThreadID;			//혹시 몰라 넣어놓는 쓰레드용 ID
 
+	// 바로 직전 씬 이름
+	string _lastSceneName;
+
 public:
 	sceneManager();
 	~sceneManager();
 
 	HRESULT init(void);
+	HRESULT init(string strKey);
 	void release(void);
 	void update(void);
 	void render(void);
 
-	gameNode* findScene(string key);
+	gameNode* findScene(string sceneName);
 
 	//씬 추가 함수
 	gameNode* addScene(string sceneName, gameNode* scene);
@@ -45,5 +49,6 @@ public:
 	//남발하면 안되는데, 구조상 왠지 1~2개정도는 해두면 좋을 것 같으면 해도됨
 	friend DWORD CALLBACK loadingThread(LPVOID prc);
 
+	inline string getLastSceneName() { return _lastSceneName; }
 };
 

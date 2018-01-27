@@ -67,21 +67,33 @@ void playGround::update(void)
 	gameNode::update();
 
 	SCENEMANAGER->update();
-	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+	if (KEYMANAGER->isOnceKeyDown(VK_F2))
+	{
+		SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+		SCENEMANAGER->init("¿ùµå¸Ê¾À");
+	}
 
 	// ¹èÆ²¾À Å×½ºÆ®
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
 		SCENEMANAGER->changeScene("battleScene");
+		SCENEMANAGER->init("battleScene");
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_F3))
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		SCENEMANAGER->init("¿ÀÇÁ´×¾À");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F4))
 	{
 		SCENEMANAGER->changeScene("DR5");
+		SCENEMANAGER->init("DR5");
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_F12))
+	{
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 	}
 }
 

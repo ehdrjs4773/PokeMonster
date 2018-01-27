@@ -47,6 +47,30 @@ HRESULT sceneManager::init(void)
 	return S_OK;
 }
 
+HRESULT sceneManager::init(string sceneName)
+{
+	//이터레이터에 찾고자하는 씬의 키 값을 대입
+	mapSceneIter find = _mSceneList.find(sceneName);
+
+	//이터레이터가 맵의 끝까지 갔다 == 찾고자하는게 없다 실패 반환
+	if (find == _mSceneList.end()) return E_FAIL;
+	else
+	{
+		// 찾고자 하는 씬이 제대로 있으면
+		if (find->second)
+		{
+			find->second->init();
+			return S_OK;
+		}
+		// 없으면 오류!
+		else
+			return E_FAIL;
+	}
+
+	// 뭔가 이상한 상황에 의해 여기까지 온거면 버그닷
+	return E_FAIL;
+}
+
 void sceneManager::release(void)
 {
 	mapSceneIter miSceneList = _mSceneList.begin();
@@ -108,28 +132,54 @@ HRESULT sceneManager::changeScene(string sceneName)
 
 	//이터레이터가 맵의 끝까지 갔다 == 찾고자하는게 없다 실패 반환
 	if (find == _mSceneList.end()) return E_FAIL;
+	else
+	{
+		//만약 바꾸려는 씬이 현재 씬이면 그냥 둔다
+		if (find->second == _currentScene) return S_OK;
+		else
+		{
+			// 여기까지 왔다는 것은 바꾸려는 씬이 존재하며, 그게 현재씬이 아니라는 소리 따라서
+			// 만약 현재씬에 다른 씬이 있다면
+			if (_currentScene)
+			{
+				// 일단 가장 최근 씬의 정보를 저장
+				mapSceneIter iter = _mSceneList.begin();
+				for (; iter != _mSceneList.end(); ++iter)
+				{
+					if (_currentScene == iter->second)
+					{
+						_lastSceneName = iter->first;
+						break;
+					}
+				}
 
-	//만약 바꾸려는 씬이 현재 씬이면 그냥 둔다
-	if (find->second == _currentScene) return S_OK;
+				// 그리고 현재 씬 해제
+				_currentScene->release();
+			}
+			
+			// 바꾸려는 씬으로 체인지
+			_currentScene = find->second;
+		}
+	}
 
 	//성공적으로 씬이 바뀐다면 init함수 실행 
-	if (SUCCEEDED(find->second->init()))
-	{
-		//만약 현재씬에 다른 씬이 있다면 해제 해주고
-		if (_currentScene) _currentScene->release();
-
-		//바꾸려는 씬으로 체인지 한다
-		_currentScene = find->second;
-
-		//지금 씬 변환하는 이 구조는 여러분이 입맛에 따라 바꿔도 된다
-		//디폴트로 만들어 놨지만 위에 구조의 단점이 딱 하나 있는데
-		//스테이지1 -> 스테이지2로 씬이 바뀌었을때 스테이지1의 데이터를
-		//넘기려고 할때 릴리즈가 먼저 호출이 되서 조금 신경을 써줘야한다
-
-		//뭐 그렇다고.. ㅎ _ㅎ)
-
-		return S_OK;
-	}
+	//if (SUCCEEDED(find->second->init()))
+	//{
+	//	//만약 현재씬에 다른 씬이 있다면 해제 해주고
+	//	if (_currentScene) _currentScene->release();
+	//
+	//	//바꾸려는 씬으로 체인지 한다
+	//	_currentScene = find->second;
+	//
+	//	//지금 씬 변환하는 이 구조는 여러분이 입맛에 따라 바꿔도 된다
+	//	//디폴트로 만들어 놨지만 위에 구조의 단점이 딱 하나 있는데
+	//	//스테이지1 -> 스테이지2로 씬이 바뀌었을때 스테이지1의 데이터를
+	//	//넘기려고 할때 릴리즈가 먼저 호출이 되서 조금 신경을 써줘야한다
+	//
+	//	//뭐 그렇다고.. ㅎ _ㅎ)
+	//
+	//	return S_OK;
+	//}
 
 	return E_FAIL;
 }
