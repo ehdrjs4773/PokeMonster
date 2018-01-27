@@ -36,16 +36,16 @@ HRESULT playGround::init()
 	skill* _temp2 = new electricShork;
 	_temp2->init();
 
-	pokemon* pika = new pikachu;
-	pika->init(24);
-	pika->addSkill(_temp);
-	pika->addSkill(_temp2);
-	pokemon* pika2 = new pikachu;
-	pika2->init(20);
-	pika2->addSkill(_temp);
-	pika2->addSkill(_temp2);
-	vPokemon->push_back(pika);
-	vPokemon2->push_back(pika2);
+	pokemon* isang = new pokemon;
+	isang->init("°ÅºÏ¿Õ", 24);
+	isang->addSkill(_temp);
+	isang->addSkill(_temp2);
+	pokemon* dandaegi = new pokemon;
+	dandaegi->init("²¿ºÎ±â", 20);
+	dandaegi->addSkill(_temp);
+	dandaegi->addSkill(_temp2);
+	vPokemon->push_back(isang);
+	vPokemon2->push_back(dandaegi);
 
 	DATABASE->setVPlayerPokemon(vPokemon);
 	DATABASE->setVEnemyPokemon(vPokemon2);

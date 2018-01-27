@@ -9,6 +9,7 @@ class elements
 {
 public:
 	string name;
+	int element;
 	int hp;
 	int atk;
 	int def;

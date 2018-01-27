@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-#include "includePokemon.h"
+#include "pokemon.h"
 #include "battleSceneUI.h"
 
 #define LIMIT_X_LEFT		80

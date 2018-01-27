@@ -36,6 +36,7 @@ HRESULT gameNode::init(bool managerInit)
 		SCENEMANAGER->init();
 		KEYANIMANAGER->init();
 		INIDATA->init();
+		DATABASE->init();
 		DIALOGUE->init(1, 2, LANGUAGE_KOREAN);
 	}
 

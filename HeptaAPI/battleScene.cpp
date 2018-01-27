@@ -61,8 +61,6 @@ HRESULT battleScene::init()
 	IMAGEMANAGER->addFrameImage("battle_player_ball", ".\\bmps\\battleScene\\battle_player_ball.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 
 	// Å×½ºÆ®¿ë
-	IMAGEMANAGER->addFrameImage("ÇÇÄ«Ãò_back", ".\\bmps\\battleScene\\pokemon_back\\ÇÇÄ«Ãò_back.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
-	IMAGEMANAGER->addFrameImage("ÇÇÄ«Ãò_front", ".\\bmps\\battleScene\\pokemon_front\\ÇÇÄ«Ãò_front.bmp", POKEMON_WIDTH * 2, POKEMON_HEIGHT, 2, 1, false, true, MAGENTA);
 	_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 	_enemyImageRect = RectMakeCenter(LIMIT_X_RIGHT + POKEMON_WIDTH / 2, LIMIT_Y_TOP + POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
 

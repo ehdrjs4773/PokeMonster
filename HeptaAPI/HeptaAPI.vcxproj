@@ -161,7 +161,6 @@
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="Opening.cpp" />
-    <ClCompile Include="pikachu.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="pokemon.cpp" />
@@ -210,7 +209,6 @@
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="Opening.h" />
-    <ClInclude Include="pikachu.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="pokemon.h" />

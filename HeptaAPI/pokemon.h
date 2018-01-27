@@ -79,7 +79,7 @@ public:
 	pokemon();
 	~pokemon();
 
-	virtual HRESULT init(int level) = 0;
+	virtual HRESULT init(string name, int level);
 
 	virtual bool addSkill(skill* sk);
 

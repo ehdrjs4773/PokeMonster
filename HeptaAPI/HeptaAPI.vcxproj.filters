@@ -76,9 +76,6 @@
     <Filter Include="2DGameFramework\Manager">
       <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\정동윤\pokemon">
-      <UniqueIdentifier>{b62071dd-77e3-4114-af89-3e1dd6591c3e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\정동윤\skill">
       <UniqueIdentifier>{93fac9c4-8ae7-40b0-aa29-d9abf304eb68}</UniqueIdentifier>
     </Filter>
@@ -216,9 +213,6 @@
     <ClInclude Include="itemManager.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
-    <ClInclude Include="pikachu.h">
-      <Filter>playGround\정동윤\pokemon</Filter>
-    </ClInclude>
     <ClInclude Include="bodyAttack.h">
       <Filter>playGround\정동윤\skill</Filter>
     </ClInclude>
@@ -355,9 +349,6 @@
     </ClCompile>
     <ClCompile Include="itemManager.cpp">
       <Filter>playGround\한재윤</Filter>
-    </ClCompile>
-    <ClCompile Include="pikachu.cpp">
-      <Filter>playGround\정동윤\pokemon</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>

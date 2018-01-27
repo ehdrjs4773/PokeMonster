@@ -15,6 +15,7 @@ database::~database()
 
 HRESULT database::init()
 {
+	this->loadDatabase(".\\textData\\pokemonTest.txt");
 
 	return S_OK;
 }
@@ -43,7 +44,7 @@ void database::loadDatabase(string name)
 	
 			_mTotalElement.insert(pair<string, elements*>(vTemp[i + 1], em));
 	
-			if (i != 0) count += 7;
+			if (i != 0) count += 8;
 			continue;
 		}
 	
@@ -55,6 +56,7 @@ void database::loadDatabase(string name)
 		else if (i == count + 4) mIter->second->def = atoi(vTemp[i].c_str());
 		else if (i == count + 5) mIter->second->speed = atoi(vTemp[i].c_str());
 		else if (i == count + 6) mIter->second->special = atoi(vTemp[i].c_str());
+		else if (i == count + 7) mIter->second->element = atoi(vTemp[i].c_str());
 	}
 	
 	vTemp.clear();
