@@ -107,10 +107,14 @@ void UI::render(void)
 	IMAGEMANAGER->findImage("PlayerUiBak")->render(getMemDC(), _Info[4].rc.left, _Info[4].rc.top);
 
 	if (_isName)
-
 	{
+		SetBkMode(getMemDC(), TRANSPARENT);
 		IMAGEMANAGER->findImage("PlayerMedalUi")->render(getMemDC(), 0, 0);
 		IMAGEMANAGER->findImage("PlayerMedalUi2")->render(getMemDC(), 0, 100);
+		
+		char currentMoney[32];
+		sprintf(currentMoney, "%d", 1000);
+		TextOut(getMemDC(), 220, 180, currentMoney, strlen(currentMoney));
 	}
 
 }

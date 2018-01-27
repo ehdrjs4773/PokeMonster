@@ -24,7 +24,6 @@ MonsterBack::~MonsterBack()
 
 	 for (int i = 0; i < 6; i++)
 	 {
-		 _PokeInfo[i].HP = 0;
 		 _PokeInfo[i].Level = 0;
 		 _PokeInfo[i].RectImage = IMAGEMANAGER->findImage("PokeSelect");
 		 _PokeInfo[i].Catch = false;
@@ -40,13 +39,22 @@ MonsterBack::~MonsterBack()
 		 _PokeInfo[i].count = 0;
 		 _PokeInfo[i].HpTxt.x = _PokeInfo[i].rc.left + 130;
 		 _PokeInfo[i].HpTxt.y = _PokeInfo[i].rc.top + 20;
+		
+
+
+		 if (i < (*DATABASE->getVPlayerPokemon()).size())
+		 {
+			 _PokeInfo[i]._playerHpBar = new progressBar;
+			 _PokeInfo[i]._playerHpBar->init("hpBar", _PokeInfo[i].rc.left + 118, _PokeInfo[i].rc.top + 47, 95, 8, ((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()) , ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()));
+		 }
+
 	 }
 
 	 _CancleRc = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 25, 104, 45);
 
-
-
 	 return S_OK;
+
+
 
 }
  void MonsterBack::release(void)
@@ -64,18 +72,39 @@ MonsterBack::~MonsterBack()
 
 			 _PokeInfo[i].count++;
 			 
-			 if (_PokeInfo[i].count % 50 == 0)
+			 if (_PokeInfo[i].count % 10 == 0)
 			 {
 				 _PokeInfo[i].currentFrameX++;
-
+				 
 				 if (_PokeInfo[i].currentFrameX >= 2) _PokeInfo[i].currentFrameX = 0;
 				 _PokeInfo[i].count = 0;
 			 }
 
 
+			 _PokeInfo[i]._playerHpBar->setGauge(((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()), ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()));
+
 	 }
 
 
+	 for (int i = 0; i < DATABASE->getVPlayerPokemon()->size(); i++)
+	 {
+
+		if(PtInRect(&_PokeInfo[i].rc, _ptMouse))
+		{
+				if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+				{
+					if (_PokeInfo[0].Catch == true) _PokeInfo[0].Catch = false;
+					else if (_PokeInfo[1].Catch == true) _PokeInfo[1].Catch = false;
+					else if (_PokeInfo[2].Catch == true) _PokeInfo[2].Catch = false;
+					else if (_PokeInfo[3].Catch == true) _PokeInfo[3].Catch = false;
+					else if (_PokeInfo[4].Catch == true) _PokeInfo[4].Catch = false;
+					else if (_PokeInfo[5].Catch == true) _PokeInfo[5].Catch = false;
+					_PokeInfo[i].Catch = true;
+				}
+
+		 }
+
+	 }
 
 	 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	 {
@@ -91,14 +120,7 @@ MonsterBack::~MonsterBack()
 	 }
 
 
-	 if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-	 {
-		 if (_PokeInfo[0].Catch)
-		 {
-			 _PokeInfo[0].Catch = false;
-		 }
-		 else _PokeInfo[0].Catch = true;
-	 }
+
 
 }
 
@@ -116,20 +138,37 @@ MonsterBack::~MonsterBack()
 	 
 	 for (int i = 0; i < DATABASE->getVPlayerPokemon()->size(); i++)
 	 {
-		
+		 if (!_PokeInfo[i].Catch)
+		 {
 			 IMAGEMANAGER->findImage("PokeMonCatch")->render(getMemDC(), _PokeInfo[i].rc.left, _PokeInfo[i].rc.top);
-			 IMAGEMANAGER->findImage((*DATABASE->getVPlayerPokemon())[i]->getName() + "s")->frameRender(getMemDC(), _PokeInfo[i].PokeImageRc.left, _PokeInfo[i].PokeImageRc.top, _PokeInfo[i].currentFrameX, 0);
+		 }
+		 if (_PokeInfo[i].Catch)
+		 {
+			 IMAGEMANAGER->findImage("PokeSelect")->render(getMemDC(), _PokeInfo[i].rc.left, _PokeInfo[i].rc.top);
+		 }
 
-		 //==== 포켓몬 조그만한 이미지 출력 박스===///
+		 
+
+			 IMAGEMANAGER->findImage((*DATABASE->getVPlayerPokemon())[i]->getName() + "s")->frameRender(getMemDC(), _PokeInfo[i].PokeImageRc.left, _PokeInfo[i].PokeImageRc.top, _PokeInfo[i].currentFrameX, 0);
+			 SetBkMode(getMemDC(), TRANSPARENT);
+			 TextOut(getMemDC(), _PokeInfo[i].HpTxt.x, _PokeInfo[i].HpTxt.y, (*DATABASE->getVPlayerPokemon())[i]->getName().c_str(), strlen((*DATABASE->getVPlayerPokemon())[i]->getName().c_str()));
+			 _PokeInfo[i]._playerHpBar->render();
+			 
+			 char temp[32];
+			 sprintf(temp, "%d", (*DATABASE->getVPlayerPokemon())[i]->getLevel());
+			 TextOut(getMemDC(), _PokeInfo[i].rc.left + 40, _PokeInfo[i].rc.top + 65, temp, strlen(temp));
+			 
+			 char currentHP[32];
+			 sprintf(currentHP, "%d", (*DATABASE->getVPlayerPokemon())[i]->getCurrentHP());
+			 
+			 char maxHP[32];
+			 sprintf(maxHP, "%d", (*DATABASE->getVPlayerPokemon())[i]->getMaxHP());
+			 TextOut(getMemDC(), _PokeInfo[i].rc.left + 180, _PokeInfo[i].rc.top + 65, maxHP, strlen(maxHP));
+			 
+	     //==== 포켓몬 조그만한 이미지 출력 박스===///
 		 //Rectangle(getMemDC(), _PokeInfo[0].PokeImageRc.left, _PokeInfo[0].PokeImageRc.top, _PokeInfo[0].PokeImageRc.right, _PokeInfo[0].PokeImageRc.bottom);
 	 }
 
-
-	 for (int i = 0; i < DATABASE->getVPlayerPokemon()->size(); i++)
-	 {
-		 SetBkMode(getMemDC(), TRANSPARENT);
-		 TextOut(getMemDC(), _PokeInfo[i].HpTxt.x, _PokeInfo[i].HpTxt.y, (*DATABASE->getVPlayerPokemon())[i]->getName().c_str(), strlen((*DATABASE->getVPlayerPokemon())[i]->getName().c_str()));
-	 }
 
 
  }

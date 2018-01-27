@@ -43,6 +43,7 @@ public:
 	void update();
 	void render();
 
+	void setGauge(float currentGauge, float maxGauge);
 	void setGauge(float currentGauge, float maxGauge, bool isHP);
 
 	void setX(int x) { _x = x; }

@@ -108,6 +108,11 @@ void progressBar::render()
 
 }
 
+void progressBar::setGauge(float currentGauge, float maxGauge)
+{
+	_width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();
+}
+
 void progressBar::setGauge(float currentGauge, float maxGauge, bool isHP)
 {
 	float width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();

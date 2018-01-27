@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-
+#include "progressBar.h"
 
 struct PokeInfo
 {
@@ -10,12 +10,13 @@ struct PokeInfo
 	POINT HpTxt;
 	image* RectImage;
 	image* PoketImage;
-	int HP;
 	int Level;
 	bool Catch; 
 	string strKey;
 	int count;
 	int currentFrameX;
+	progressBar* _playerHpBar;
+	
 };
 
 
@@ -25,10 +26,11 @@ class MonsterBack : public gameNode
 private :
 	RECT _CancleRc;
 
-
 	
 
 	PokeInfo _PokeInfo[6];
+
+
 
 
 public:
@@ -40,9 +42,7 @@ public:
 	virtual void update(void);
 	virtual void release(void);
 
-	int getPokeMonHp(int Num) { return _PokeInfo[Num].HP; }
-	int getPokeMonLevel(int Num) { return _PokeInfo[Num].Level; }
-	
+
 
 };
 
