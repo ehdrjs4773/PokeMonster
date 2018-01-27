@@ -50,7 +50,13 @@ void database::loadDatabase(string name)
 	
 		iterElement mIter = _mTotalElement.find(str);
 	
-		if (i == count + 1) mIter->second->name = vTemp[i].c_str();
+		if (i == count + 1)
+		{
+			mIter->second->name = vTemp[i].c_str();
+			string temp = mIter->second->name + "s";
+			string filePath = ".\\bmps\\MonsterBag\\" + temp + ".bmp";
+			IMAGEMANAGER->addFrameImage(temp, filePath.c_str(), 40 * 2, 40, 2, 1, false, true, MAGENTA);
+		}
 		else if (i == count + 2) mIter->second->hp = atoi(vTemp[i].c_str());
 		else if (i == count + 3) mIter->second->atk = atoi(vTemp[i].c_str());
 		else if (i == count + 4) mIter->second->def = atoi(vTemp[i].c_str());

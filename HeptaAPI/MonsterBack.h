@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
+
 struct PokeInfo
 {
 	RECT rc;
@@ -24,6 +25,8 @@ class MonsterBack : public gameNode
 private :
 	RECT _CancleRc;
 
+
+	
 
 	PokeInfo _PokeInfo[6];
 

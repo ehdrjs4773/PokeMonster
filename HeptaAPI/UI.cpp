@@ -54,7 +54,7 @@ void UI::update(void)
 	{
 		if (PtInRect(&_Info[0].rc, _ptMouse))
 		{
-			SCENEMANAGER->changeScene("PokeMonsterBag");
+			if (!_isName) SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
 		}
 	
 		else if (PtInRect(&_Info[1].rc, _ptMouse))
@@ -64,7 +64,7 @@ void UI::update(void)
 	
 		else if (PtInRect(&_Info[2].rc, _ptMouse))
 		{
-				
+			if (!_isName) SCENEMANAGER->changeScene("PokeInfo");
 		}
 		else if (PtInRect(&_Info[3].rc, _ptMouse))
 		{
