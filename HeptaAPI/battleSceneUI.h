@@ -36,6 +36,8 @@ public:
 	void selectReset();
 
 	void printElement(ELEMENT el);
+	void printPP(int current, int max);
+	void printHP(int current, int max);
 
 	inline void setMemoryAddressLink(battleScene* battle) { _battleScene = battle; }
 

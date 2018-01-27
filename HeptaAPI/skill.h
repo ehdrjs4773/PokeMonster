@@ -47,7 +47,9 @@ public:
 	skill();
 	~skill();
 
-	virtual HRESULT init() = 0;
+	virtual HRESULT init(string name);
+
+	inline void useSkill() { _currentPP--; }
 
 	inline ELEMENT getElement() { return _element; }
 	inline int getCurrentPP() { return _currentPP; }

@@ -31,10 +31,12 @@ HRESULT playGround::init()
 	vector<pokemon*>* vPokemon = new vector<pokemon*>;
 	vector<pokemon*>* vPokemon2 = new vector<pokemon*>;
 
-	skill* _temp = new bodyAttack;
-	_temp->init();
-	skill* _temp2 = new electricShork;
-	_temp2->init();
+	skill* _temp = new skill;
+	_temp->init("몸통박치기");
+	skill* _temp2 = new skill;
+	_temp2->init("물대포");
+	skill* _temp3 = new skill;
+	_temp3->init("몸통박치기");
 
 	pokemon* isang = new pokemon;
 	isang->init("거북왕", 24);
@@ -42,8 +44,7 @@ HRESULT playGround::init()
 	isang->addSkill(_temp2);
 	pokemon* dandaegi = new pokemon;
 	dandaegi->init("꼬부기", 20);
-	dandaegi->addSkill(_temp);
-	dandaegi->addSkill(_temp2);
+	dandaegi->addSkill(_temp3);
 	vPokemon->push_back(isang);
 	vPokemon2->push_back(dandaegi);
 
@@ -90,6 +91,7 @@ void playGround::render(void)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================== 이 위는 손대지 마시오 =========================
 
+	SetBkMode(getMemDC(), TRANSPARENT);
 	SCENEMANAGER->render();
 
 	//================== 이 아래는 손대지 마시오 ========================

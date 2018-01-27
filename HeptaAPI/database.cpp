@@ -15,7 +15,8 @@ database::~database()
 
 HRESULT database::init()
 {
-	this->loadDatabase(".\\textData\\pokemonTest.txt");
+	this->loadDatabasePokemon(".\\textData\\pokemonFinish.txt");
+	this->loadDatabaseSkill(".\\textData\\pokemon_skill.txt");
 
 	return S_OK;
 }
@@ -26,7 +27,7 @@ void database::release()
 }
 
 
-void database::loadDatabase(string name)
+void database::loadDatabasePokemon(string name)
 {
 	arrElements vTemp;
 	vTemp = TXTDATA->txtLoad(name.c_str());
@@ -65,5 +66,40 @@ void database::loadDatabase(string name)
 		else if (i == count + 7) mIter->second->element = atoi(vTemp[i].c_str());
 	}
 	
+	vTemp.clear();
+}
+
+void database::loadDatabaseSkill(string name)
+{
+	arrElements vTemp;
+	vTemp = TXTDATA->txtLoad(name.c_str());
+
+	string str;
+	int count = 0;
+
+	for (int i = 0; i < vTemp.size(); ++i)
+	{
+		//칸막이를 찾았으면
+		if (vTemp[i] == "|")
+		{
+			skills* em = new skills;
+			str = vTemp[i + 1];
+
+			_mTotalSkill.insert(pair<string, skills*>(vTemp[i + 1], em));
+
+			if (i != 0) count += 7;
+			continue;
+		}
+
+		map<string, skills*>::iterator mIter = _mTotalSkill.find(str);
+
+		if (i == count + 1) mIter->second->name = vTemp[i].c_str();
+		else if (i == count + 2) mIter->second->element = atoi(vTemp[i].c_str());
+		else if (i == count + 3) mIter->second->type = atoi(vTemp[i].c_str());
+		else if (i == count + 4) mIter->second->power = atoi(vTemp[i].c_str());
+		else if (i == count + 5) mIter->second->acc = atoi(vTemp[i].c_str());
+		else if (i == count + 6) mIter->second->pp = atoi(vTemp[i].c_str());
+	}
+
 	vTemp.clear();
 }

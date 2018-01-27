@@ -170,6 +170,8 @@ void battleScene::update()
 						{
 							if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
 							{
+								(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
+
 								_fight = ENEMY_ATTACK;
 								DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
 								DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
@@ -206,6 +208,8 @@ void battleScene::update()
 						{
 							if (_playerHPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP()))
 							{
+								(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
+
 								_sequence = BATTLE_SELECT;
 								_fight = PLAYER_ATTACK;
 							}

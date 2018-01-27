@@ -76,9 +76,6 @@
     <Filter Include="2DGameFramework\Manager">
       <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\정동윤\skill">
-      <UniqueIdentifier>{93fac9c4-8ae7-40b0-aa29-d9abf304eb68}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -195,9 +192,6 @@
     <ClInclude Include="dialogue.h">
       <Filter>2DGameFramework\dialogue</Filter>
     </ClInclude>
-    <ClInclude Include="drHouseScene.h">
-      <Filter>playGround\박근화</Filter>
-    </ClInclude>
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
@@ -212,18 +206,6 @@
     </ClInclude>
     <ClInclude Include="itemManager.h">
       <Filter>playGround\한재윤</Filter>
-    </ClInclude>
-    <ClInclude Include="bodyAttack.h">
-      <Filter>playGround\정동윤\skill</Filter>
-    </ClInclude>
-    <ClInclude Include="includeSkill.h">
-      <Filter>playGround\정동윤</Filter>
-    </ClInclude>
-    <ClInclude Include="electricShork.h">
-      <Filter>playGround\정동윤\skill</Filter>
-    </ClInclude>
-    <ClInclude Include="includePokemon.h">
-      <Filter>playGround\정동윤</Filter>
     </ClInclude>
     <ClInclude Include="stageScene.h">
       <Filter>playGround\박근화</Filter>
@@ -332,9 +314,6 @@
     <ClCompile Include="dialogue.cpp">
       <Filter>2DGameFramework\dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="drHouseScene.cpp">
-      <Filter>playGround\박근화</Filter>
-    </ClCompile>
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
@@ -352,12 +331,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="bodyAttack.cpp">
-      <Filter>playGround\정동윤\skill</Filter>
-    </ClCompile>
-    <ClCompile Include="electricShork.cpp">
-      <Filter>playGround\정동윤\skill</Filter>
     </ClCompile>
     <ClCompile Include="stageScene.cpp">
       <Filter>playGround\박근화</Filter>

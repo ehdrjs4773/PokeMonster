@@ -120,6 +120,7 @@ void battleSceneUI::render()
 				}
 
 				this->printElement(_battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getElement());
+				this->printPP(_battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getCurrentPP(), _battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getMaxPP());
 			}
 		break;
 		
@@ -132,6 +133,8 @@ void battleSceneUI::render()
 		case BATTLE_FINAL:
 		break;
 	}
+
+	this->printHP(_battleScene->getCurrentPlayerPokemon()->getCurrentHP(), _battleScene->getCurrentPlayerPokemon()->getMaxHP());
 }
 
 void battleSceneUI::keyControl()
@@ -311,4 +314,22 @@ void battleSceneUI::printElement(ELEMENT el)
 	}
 
 	TextOut(getMemDC(), 327, 300, temp.c_str(), strlen(temp.c_str()));
+}
+
+void battleSceneUI::printPP(int current, int max)
+{
+	char temp[32];
+	sprintf(temp, "%d", current);
+	TextOut(getMemDC(), 325, 256, temp, strlen(temp));
+	sprintf(temp, "%d", max);
+	TextOut(getMemDC(), 360, 256, temp, strlen(temp));
+}
+
+void battleSceneUI::printHP(int current, int max)
+{
+	char temp[32];
+	sprintf(temp, "%d", current);
+	TextOut(getMemDC(), 308, 232, temp, strlen(temp));
+	sprintf(temp, "%d", max);
+	TextOut(getMemDC(), 352, 232, temp, strlen(temp));
 }

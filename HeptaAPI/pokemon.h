@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-#include "includeSkill.h"
+#include "skill.h"
 #include <vector>
 #include <math.h>
 
