@@ -47,15 +47,21 @@ HRESULT playGround::init()
 	_temp2->init("¹°´ëÆ÷");
 	skill* _temp3 = new skill;
 	_temp3->init("¸öÅë¹ÚÄ¡±â");
+	skill* _temp4 = new skill;
+	_temp4->init("¸öÅë¹ÚÄ¡±â");
 
 	pokemon* isang = new pokemon;
-	isang->init("°ÅºÏ¿Õ", 24);
+	isang->init("ÀÌ»óÇØ¾¾", 24);
 	isang->addSkill(_temp);
 	isang->addSkill(_temp2);
+	pokemon* tuttleKing = new pokemon;
+	tuttleKing->init("°ÅºÏ¿Õ", 36);
+	tuttleKing->addSkill(_temp4);
 	pokemon* dandaegi = new pokemon;
 	dandaegi->init("²¿ºÎ±â", 20);
 	dandaegi->addSkill(_temp3);
 	vPokemon->push_back(isang);
+	vPokemon->push_back(tuttleKing);
 	vPokemon2->push_back(dandaegi);
 
 	DATABASE->setVPlayerPokemon(vPokemon);

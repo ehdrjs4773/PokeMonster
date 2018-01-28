@@ -213,6 +213,18 @@
     <ClInclude Include="inventory.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterBack.h">
+      <Filter>playGround\최동건</Filter>
+    </ClInclude>
+    <ClInclude Include="fighterMap.h">
+      <Filter>playGround\배건하</Filter>
+    </ClInclude>
+    <ClInclude Include="flyMap.h">
+      <Filter>playGround\배건하</Filter>
+    </ClInclude>
+    <ClInclude Include="stageManager.h">
+      <Filter>playGround\배건하</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -337,6 +349,18 @@
     </ClCompile>
     <ClCompile Include="inventory.cpp">
       <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBack.cpp">
+      <Filter>playGround\최동건</Filter>
+    </ClCompile>
+    <ClCompile Include="fighterMap.cpp">
+      <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="flyMap.cpp">
+      <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="stageManager.cpp">
+      <Filter>playGround\배건하</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
