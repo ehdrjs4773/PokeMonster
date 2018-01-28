@@ -75,6 +75,9 @@ using namespace HEPTA_UTIL;
 #define YELLOW		RGB(255, 255, 0)
 #define WHITE		RGB(255, 255, 255)
 
+#define PLAYER_SELECT_KEY	'X'
+#define PLAYER_CANCLE_KEY	'C'
+
 //=======================================================
 // ## ∏≈≈©∑Œ ## 2017.11.15 ##
 //=======================================================
