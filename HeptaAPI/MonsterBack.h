@@ -31,7 +31,6 @@ struct PokeChange
 
 
 
-
 class MonsterBack : public gameNode
 {
 private :

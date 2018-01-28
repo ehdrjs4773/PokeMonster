@@ -55,6 +55,8 @@ MonsterBack::~MonsterBack()
 			 _PokeInfo[i]._playerHpBar = new progressBar;
 			 _PokeInfo[i]._playerHpBar->init("hpBar", _PokeInfo[i].rc.left + 118, _PokeInfo[i].rc.top + 47, 95, 8, ((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()) , ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()));
 		 }
+		
+
 
 	 }
 
@@ -118,11 +120,7 @@ MonsterBack::~MonsterBack()
 							else if (_PokeInfo[5].Catch == true) _PokeInfo[5].Catch = false;
 							_PokeInfo[i].Catch = true;
 						}
-
-						
-
 				 }
-
 			 }
 		 }
 	 // 마지막 신이 배틀 씬 일때 ~~
@@ -191,11 +189,9 @@ MonsterBack::~MonsterBack()
 
 
 
-	 // 마지막 씬이 UI였을때~
+	// ================= 인벤토리에서 회복약 사용했을때! ===============================//
 	 if (SCENEMANAGER->getLastSceneName() == "인벤토리씬")
 	 {
-	
-
 		 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		 {		 //마우스로 취소 키를 눌렀을 경우~
 			 if (PtInRect(&_CancleRc, _ptMouse))
@@ -206,9 +202,12 @@ MonsterBack::~MonsterBack()
 			 //아이템 사용~ 하는거
 			 for (int i = 0; i < DATABASE->getVPlayerPokemon()->size(); i++)
 			 {
-				 if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
+				 if(KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 				 {
-					 (*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
+					if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
+					{
+						 (*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
+					}
 				 }
 			 }
 		 }
@@ -237,11 +236,7 @@ MonsterBack::~MonsterBack()
 			 SCENEMANAGER->changeScene("UI");
 
 		 }
-
 	 }
-
-
-
 }
 
 
@@ -270,7 +265,7 @@ MonsterBack::~MonsterBack()
 					 IMAGEMANAGER->findImage("PokeSelect")->render(getMemDC(), _PokeInfo[i].rc.left, _PokeInfo[i].rc.top);
 				 }
 
-		 
+	
 		
 					 IMAGEMANAGER->findImage((*DATABASE->getVPlayerPokemon())[i]->getName() + "s")->frameRender(getMemDC(), _PokeInfo[i].PokeImageRc.left, _PokeInfo[i].PokeImageRc.top, _PokeInfo[i].currentFrameX, 0);
 					 SetBkMode(getMemDC(), TRANSPARENT);
