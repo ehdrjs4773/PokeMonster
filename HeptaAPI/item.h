@@ -24,7 +24,7 @@ private:
 	string	_description;	//아이템 설명
 	int		_ability;		//아이템 능력
 	int		_price;			//아이템 가격
-	int		_item_no;		//아이템 고유번호
+	int		_itemNum;		//아이템 개수
 
 
 
@@ -42,8 +42,15 @@ public:
 	void render(HDC hdc, image* img, int destX, int destY, int itemNum);
 	void InvenRender(HDC hdc, image* img, int destX, int destY);
 
-	image* getImg() { return _image; }
-	ITEM_TYPE getType() { return _itemKind; }
+
+	//item's getter setter
+	int getItemNum() { return _itemNum; } // 아이템 개수 가져가는 함수
+	void setItemNum(int num) { _itemNum = num; } // 아이템 개수 설정하는 함수
+
+	image* getImg() { return _image; } // 이미지 가져가는 함수
+
+	int getItemAbility() { return _ability; } // 아이템 능력치 가져가는 함수
+	ITEM_TYPE getType() { return _itemKind; } //아이템 종류 가져가는 함수
 
 
 };

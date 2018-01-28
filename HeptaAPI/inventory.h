@@ -124,7 +124,15 @@ public:
 	vItem& getCurrentItem() { return _vInventory; }
 	viItem& getCurrentItemIter() { return _viInventory; }
 
-
 	inline void changeWS(int WS) { _WS = WS; }
+
+	//item »ç¿ë¿ë getter
+	item* getUTIL_SLOT_0() { return _invenSlot_UTIL[0].itm; }
+	item* getUTIL_SLOT_1() { return _invenSlot_UTIL[1].itm; }
+	item* getUTIL_SLOT_2() { return _invenSlot_UTIL[2].itm; }
+	item* getUTIL_SLOT_3() { return _invenSlot_UTIL[3].itm; }
+	item* getUTIL_SLOT_4() { return _invenSlot_UTIL[4].itm; }
+	item* getUTIL_SLOT_5() { return _invenSlot_UTIL[5].itm; }
+
 };
 

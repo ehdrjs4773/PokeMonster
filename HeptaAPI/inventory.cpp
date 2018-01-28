@@ -131,66 +131,13 @@ void inventory::buyItems(string strKey, item* itm)
 
 	if (key != _mInvenList.end()) //key값이 있으면
 	{
-		//TextOut(getMemDC(), 100, 100, "gkgk", strlen("gkgk")); //tagItem구조체 만들어서->item*랑 개수변수 담아서 
+		int i = key->second->getItemNum();
+		key->second->setItemNum(i + 1);
 	}
 	else //없으면 insert해라
 	{
-		if (itm->getType() == ITEM_UTILS)
-		{
 			_mInvenList.insert(make_pair(strKey, itm));
-
-			//if (!_invenSlot_UTIL[0].slotUse)
-			//{
-			//	_invenSlot_UTIL[0].key = strKey;
-			//	_invenSlot_UTIL[0].number = 1;
-			//	//_invenSlot_UTIL[0].slotUse = true;
-			//}
-			//else 	if (_invenSlot_UTIL[0].slotUse)
-			//{
-			//	_invenSlot_UTIL[1].key = strKey;
-			//	_invenSlot_UTIL[1].number = 1;
-			//	//_invenSlot_UTIL[1].slotUse = true;
-			//}else if (_invenSlot_UTIL[1].slotUse)
-			//{
-			//	_invenSlot_UTIL[2].key = strKey;
-			//	_invenSlot_UTIL[2].number = 1;
-			//	//_invenSlot_UTIL[2].slotUse = true;
-			//}else if (_invenSlot_UTIL[2].slotUse)
-			//{
-			//	_invenSlot_UTIL[3].key = strKey;
-			//	_invenSlot_UTIL[3].number = 1;
-			//	//_invenSlot_UTIL[3].slotUse = true;
-			//}else if (_invenSlot_UTIL[3].slotUse)
-			//{
-			//	_invenSlot_UTIL[4].key = strKey;
-			//	_invenSlot_UTIL[4].number = 1;
-			//	//_invenSlot_UTIL[4].slotUse = true;
-			//}else if (_invenSlot_UTIL[4].slotUse)
-			//{
-			//	_invenSlot_UTIL[5].key = strKey;
-			//	_invenSlot_UTIL[5].number = 1;
-			//	//_invenSlot_UTIL[5].slotUse = true;
-			//}
-			//else if (_invenSlot_UTIL[0].slotUse &&_invenSlot_UTIL[1].slotUse &&_invenSlot_UTIL[2].slotUse &&_invenSlot_UTIL[3].slotUse &&_invenSlot_UTIL[4].slotUse &&_invenSlot_UTIL[5].slotUse)
-			//{
-			//	TextOut(getMemDC(), 200, 200, "아이템 슬롯이 꽉 찼습니다.", strlen("아이템 슬롯이 꽉 찼습니다."));
-			//}
-			
-		
-		}
-		else if (itm->getType() == ITEM_POTION)
-		{
-			_mInvenList.insert(make_pair(strKey, itm));
-		}
-		else if (itm->getType() == ITEM_BALL)
-		{
-			_mInvenList.insert(make_pair(strKey, itm));
-		}
-		else if (itm->getType() == ITEM_MACHINE)
-		{
-			_mInvenList.insert(make_pair(strKey, itm));
-		}
-		
+			itm->setItemNum(1);
 	}
 }
 
@@ -211,26 +158,32 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			_invenSlot_UTIL[num].slotUse = true;
 			if (_invenSlot_UTIL[0].slotUse)
 			{
+				_invenSlot_UTIL[0].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_UTIL[1].slotUse)
 			{
+				_invenSlot_UTIL[1].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_UTIL[2].slotUse)
 			{
+				_invenSlot_UTIL[2].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_UTIL[3].slotUse)
 			{
+				_invenSlot_UTIL[3].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_UTIL[4].slotUse)
 			{
+				_invenSlot_UTIL[4].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_UTIL[5].slotUse)
 			{
+				_invenSlot_UTIL[5].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_UTIL[1].slotUse &&_invenSlot_UTIL[2].slotUse &&_invenSlot_UTIL[3].slotUse &&_invenSlot_UTIL[4].slotUse &&_invenSlot_UTIL[5].slotUse &&_invenSlot_UTIL[6].slotUse)

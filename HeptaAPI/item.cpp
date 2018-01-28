@@ -12,7 +12,7 @@ item::item()
 	_description = { 0 };	//아이템 설명
 	_ability=0;		//아이템 능력
 	_price=0;			//아이템 가격
-	_item_no=0;		//아이템 고유번호
+	_itemNum=0;		//아이템 개수
 }
 
 
@@ -22,7 +22,7 @@ item::~item()
 
 HRESULT item::init(int itemNum, ITEM_TYPE type, string name, string ds, int ability, int price)
 {	
-	_item_no = itemNum;
+	_itemNum = itemNum;
 	_itemKind = type;
 	_name = name;
 	_description = ds;
@@ -36,7 +36,7 @@ HRESULT item::init(int itemNum, ITEM_TYPE type, string name, string ds, int abil
 HRESULT item::init(int itemNum, image* img, ITEM_TYPE type, string name, string ds, int ability, int price)
 {
 	_image = img;
-	_item_no = itemNum;
+	_itemNum = itemNum;
 	_itemKind = type;
 	_name = name;
 	_description = ds;
@@ -97,8 +97,13 @@ void item::InvenRender(HDC hdc, image* img, int destX, int destY) //Inventory re
 	TextOut(hdc, destX + 60, destY + 5, _name.c_str(), strlen(_name.c_str()));
 	TextOut(hdc, destX + 60, destY + 25, _description.c_str(), strlen(_description.c_str()));
 
-	TextOut(hdc, destX + 60, destY+45, "능력치:", strlen("능력치:"));
+	/*TextOut(hdc, destX + 60, destY+45, "능력치:", strlen("능력치:"));
 	char temp[128];
 	sprintf(temp, "%d", _ability);
+	TextOut(hdc, destX + 130, destY + 45, temp, strlen(temp));*/
+
+	TextOut(hdc, destX + 60, destY + 45, "소유개수:", strlen("소유개수:"));
+	char temp[128];
+	sprintf(temp, "%d", _itemNum);
 	TextOut(hdc, destX + 130, destY + 45, temp, strlen(temp));
 }
