@@ -28,6 +28,9 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->addScene("PokeInfo", new MonsterBack);
 	SCENEMANAGER->addScene("UI", new UI);
+	//--------수테이지 테스트----------
+	SCENEMANAGER->addScene("flyMap", new flyMap);
+	SCENEMANAGER->addScene("fighterMap", new fighterMap);
 
 
 
@@ -109,7 +112,17 @@ void playGround::update(void)
 		SCENEMANAGER->changeScene("UI");
 		SCENEMANAGER->init("UI");
 	}
-
+	//--------수테이지 테스트----------
+	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))
+	{
+		SCENEMANAGER->changeScene("flyMap");
+		SCENEMANAGER->init("flyMap");
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD1))
+	{
+		SCENEMANAGER->changeScene("fighterMap");
+		SCENEMANAGER->init("fighterMap");
+	}
 
 }
 

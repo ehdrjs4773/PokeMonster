@@ -9,6 +9,9 @@
 #include "inventory.h"
 #include "UI.h"
 #include "MonsterBack.h"
+//--------수테이지------
+#include "flyMap.h"
+#include "fighterMap.h"
 
 
 
