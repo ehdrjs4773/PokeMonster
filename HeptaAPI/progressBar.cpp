@@ -54,20 +54,24 @@ HRESULT progressBar::init(string strKey, int x, int y, int width, int height, in
 
 	_strKey = strKey;
 	string tempFilePath = ".\\bmps\\battleScene\\UI\\" + strKey + "frontBar";
-	IMAGEMANAGER->addImage(strKey + "frontBar_high", (tempFilePath + "_high.bmp").c_str(), x, y, width, height, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage(strKey + "frontBar_middle", (tempFilePath + "_middle.bmp").c_str(), x, y, width, height, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage(strKey + "frontBar_low", (tempFilePath + "_low.bmp").c_str(), x, y, width, height, false, true, RGB(255, 0, 255));
+	_high = new image;
+	_high->init((tempFilePath + "_high.bmp").c_str(), (float)x, (float)y, width, height, false, true, RGB(255, 0, 255));
+	_middle = new image;
+	_middle->init((tempFilePath + "_middle.bmp").c_str(), (float)x, (float)y, width, height, false, true, RGB(255, 0, 255));
+	_low = new image;
+	_low->init((tempFilePath + "_low.bmp").c_str(), (float)x, (float)y, width, height, false, true, RGB(255, 0, 255));
 
 	int percent = (currentGauge / maxGauge) * 100;
 	if (percent > 50)
-		_progressBarTop = IMAGEMANAGER->findImage(strKey + "frontBar_high");
+		_progressBarTop = _high;
 	else if (percent > 30)
-		_progressBarTop = IMAGEMANAGER->findImage(strKey + "frontBar_middle");
+		_progressBarTop = _middle;
 	else
-		_progressBarTop = IMAGEMANAGER->findImage(strKey + "frontBar_low");
+		_progressBarTop = _low;
 
 	tempFilePath = ".\\bmps\\battleScene\\UI\\" + strKey + "backBar.bmp";
-	_progressBarBottom = IMAGEMANAGER->addImage(strKey + "backBar", tempFilePath.c_str(), x, y, width, height, false, true, RGB(255, 0, 255));
+	_progressBarBottom = new image;
+	_progressBarBottom->init(tempFilePath.c_str(), (float)x, (float)y, width, height, false, true, RGB(255, 0, 255));
 
 	//설정된 가로크기로!
 	_width = _progressBarTop->getWidth();
@@ -128,11 +132,11 @@ void progressBar::setGauge(float currentGauge, float maxGauge, bool isHP)
 
 		int percent = (currentGauge / maxGauge) * 100;
 		if (percent > 50)
-			_progressBarTop = IMAGEMANAGER->findImage(_strKey + "frontBar_high");
+			_progressBarTop = _high;
 		else if (percent > 30)
-			_progressBarTop = IMAGEMANAGER->findImage(_strKey + "frontBar_middle");
+			_progressBarTop = _middle;
 		else
-			_progressBarTop = IMAGEMANAGER->findImage(_strKey + "frontBar_low");
+			_progressBarTop = _low;
 	}
 	// exp가 천천히 오르게
 	else

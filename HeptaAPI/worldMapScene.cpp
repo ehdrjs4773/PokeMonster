@@ -4,9 +4,6 @@
 
 worldMapScene::worldMapScene()
 {
-	//처음체육관 초기화
-	SelectNum = 0;
-	_select[0].isSelect = true;
 }
 
 
@@ -56,6 +53,10 @@ HRESULT worldMapScene::init()
 	{
 		_select[i].Selected = false;
 	}
+
+	//처음체육관 초기화
+	SelectNum = 0;
+	_select[0].isSelect = true;
 
 	return S_OK;
 }

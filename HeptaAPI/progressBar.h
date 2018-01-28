@@ -31,6 +31,9 @@ private:
 
 	string _strKey;
 	image* _progressBarTop;
+	image* _high;
+	image* _middle;
+	image* _low;
 	image* _progressBarBottom;
 
 public:

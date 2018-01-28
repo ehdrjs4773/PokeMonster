@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "battleSceneUI.h"
 #include "battleScene.h"
+#include "MonsterBack.h"
 
 
 
@@ -41,10 +42,13 @@ HRESULT battleSceneUI::init()
 	_selectArrowPoint.y = 0;
 	_skillSelectNum = 0;
 
-	_isFightSelect = false;
-	_isBagSelect = false;
-	_isPokemonSelect = false;
-	_isRunAwaySelect = false;
+	this->selectReset();
+
+
+	// 몬스터백
+	_msb = (MonsterBack*)SCENEMANAGER->findScene("PokeInfo");
+	_msb->battleSceneUIMemoruAddressLink(this);
+
 
 	return S_OK;
 }
@@ -184,7 +188,7 @@ void battleSceneUI::keyControl()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('X'))
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 	{
 		if (!_isFightSelect &&
 			!_isPokemonSelect &&
@@ -199,6 +203,7 @@ void battleSceneUI::keyControl()
 			else if (_selectArrowPoint.x == 0 && _selectArrowPoint.y == 1)
 			{
 				_isPokemonSelect = true;
+				SCENEMANAGER->changeScene("PokeInfo");
 			}
 			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 0)
 			{
@@ -214,6 +219,7 @@ void battleSceneUI::keyControl()
 			_enemySkillNum = RND->getInt(_battleScene->getCurrentEnemyPokemon()->getVSkill().size());
 			// test
 			_enemySkillNum = 0;
+
 			_battleScene->setSequence(BATTLE_FIGHT);
 			DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
 			DIALOGUE->replaceAll("@", _battleScene->getCurrentPlayerPokemon()->getName());
@@ -221,7 +227,7 @@ void battleSceneUI::keyControl()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('C'))
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
 		if (_isFightSelect ||
 			_isPokemonSelect ||

@@ -4,6 +4,7 @@
 
 // 전방선언
 class battleScene;
+class MonsterBack;
 enum ELEMENT;
 
 class battleSceneUI : public gameNode
@@ -22,6 +23,9 @@ private:
 	bool _isBagSelect;
 	bool _isPokemonSelect;
 	bool _isRunAwaySelect;
+
+	// 몬스터 백
+	MonsterBack* _msb;
 
 public:
 	battleSceneUI();

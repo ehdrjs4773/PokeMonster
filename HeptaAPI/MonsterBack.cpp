@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MonsterBack.h"
 #include "pokemon.h"
+#include "battleSceneUI.h"
 
 
 MonsterBack::MonsterBack()
@@ -111,17 +112,15 @@ MonsterBack::~MonsterBack()
 		 if (PtInRect(&_CancleRc, _ptMouse))
 		 {
 			 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+			 _battleSceneUI->selectReset();
 		 }
 	 }
 
 	 if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	 {
 		 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		 _battleSceneUI->selectReset();
 	 }
-
-
-
-
 }
 
 

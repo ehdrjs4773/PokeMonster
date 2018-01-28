@@ -2,6 +2,8 @@
 #include "gameNode.h"
 #include "progressBar.h"
 
+class battleSceneUI;
+
 struct PokeInfo
 {
 	RECT rc;
@@ -26,6 +28,8 @@ class MonsterBack : public gameNode
 private :
 	RECT _CancleRc;
 
+	battleSceneUI* _battleSceneUI;
+
 	
 
 	PokeInfo _PokeInfo[6];
@@ -42,7 +46,7 @@ public:
 	virtual void update(void);
 	virtual void release(void);
 
-
+	inline void battleSceneUIMemoruAddressLink(battleSceneUI* ui) { _battleSceneUI = ui; }
 
 };
 
