@@ -61,6 +61,9 @@ HRESULT playGround::init()
 	DATABASE->setVPlayerPokemon(vPokemon);
 	DATABASE->setVEnemyPokemon(vPokemon2);
 
+	SCENEMANAGER->init("PokeInfo");
+	SCENEMANAGER->init("UI");
+
 	return S_OK;
 }
 
@@ -108,9 +111,7 @@ void playGround::update(void)
 
 	if (KEYMANAGER->isOnceKeyDown(VK_F5))
 	{
-		SCENEMANAGER->init("PokeInfo");
 		SCENEMANAGER->changeScene("UI");
-		SCENEMANAGER->init("UI");
 	}
 	//--------수테이지 테스트----------
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))
