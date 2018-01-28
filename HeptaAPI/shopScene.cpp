@@ -17,13 +17,27 @@ HRESULT shopScene::init()
 {
 	_item = new itemManager;
 
-	_item->addItem("몬스터볼", 1, ITEM_BALL, "몬스터볼", "몬스터볼입니다", 50, 500);
-	_item->addItem("가가",2, ITEM_POTION, "회복약", "회복약입니다", 150, 500);
-	_item->addItem("아무거나", 3, ITEM_UTILS, "아무거나", "아무거나입니다", 200, 1000);
+	//ITEM IMAGE ADD
+	IMAGEMANAGER->addImage("마스터볼", ".\\bmps\\shopScene\\item_masterball.bmp", 20, 20, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("몬스터볼", ".\\bmps\\shopScene\\item_monsterball.bmp", 20, 20, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("하이퍼볼", ".\\bmps\\shopScene\\item_hyperball.bmp", 20, 20, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("슈퍼볼", ".\\bmps\\shopScene\\item_superball.bmp", 20, 20, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("hp포션", ".\\bmps\\shopScene\\item_potion1.bmp", 16, 28, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("pp포션", ".\\bmps\\shopScene\\item_potion2.bmp", 16, 28, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("자전거", ".\\bmps\\shopScene\\item_util_bicycle.bmp", 30, 30, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("낚시대", ".\\bmps\\shopScene\\item_util_fishinglod.bmp", 30, 30, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("머신1", ".\\bmps\\shopScene\\item_machine1.bmp", 17, 27, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("머신2", ".\\bmps\\shopScene\\item_machine2.bmp", 17, 27, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("머신3", ".\\bmps\\shopScene\\item_machine3.bmp", 17, 27, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("머신4", ".\\bmps\\shopScene\\item_machine4.bmp", 17, 27, false, true, MAGENTA);
 
-	IMAGEMANAGER->addImage("아이템", ".\\bmps\\shopScene\\item_masterball.bmp", 20, 20, false, true, MAGENTA);
-
-	_item->addItem("마스터볼", IMAGEMANAGER->findImage("아이템"), 4, ITEM_BALL, "마스터볼", "마스터볼입니다", 100, 5000);
+	//ITEM ADD
+	_item->addItem("몬스터볼", IMAGEMANAGER->findImage("몬스터볼"),1, ITEM_BALL, "몬스터볼", "몬스터볼입니다", 50, 500);
+	_item->addItem("머신2", IMAGEMANAGER->findImage("머신2") ,2, ITEM_UTILS, "머신2", "머신2입니다", 150, 5000);
+	_item->addItem("머신3", IMAGEMANAGER->findImage("머신3"), 2, ITEM_UTILS, "머신3", "머신3입니다", 150, 5000);
+	_item->addItem("머신4", IMAGEMANAGER->findImage("머신4"), 2, ITEM_UTILS, "머신4", "머신4입니다", 150, 5000);
+	_item->addItem("아무거나", IMAGEMANAGER->findImage("머신1"), 3, ITEM_UTILS, "아무거나", "아무거나입니다", 200, 1000);
+	_item->addItem("마스터볼", IMAGEMANAGER->findImage("마스터볼"), 4, ITEM_BALL, "마스터볼", "마스터볼입니다", 100, 5000);
 
 	//상점입장시메인메뉴 이미지 등록
 	IMAGEMANAGER->addImage("상점오픈", ".\\bmps\\shopScene\\shop_open.bmp", WINSIZEX, WINSIZEY, false, true, RGB(255, 0, 255));
@@ -134,11 +148,12 @@ void shopScene::shopMainMenuDraw() //상점 입장시 Main Menu 그려주는 함수
 	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_SELL")->getMemDC(), 80, 15, "팔 러 간 다", strlen("팔 러 간 다"));
 	TextOut(IMAGEMANAGER->findImage("상점오픈버튼_CANCEL")->getMemDC(), 100, 15, "취 소", strlen("취 소"));
 
-
-	//_item->findItem("몬스터볼")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 1);
-	_item->findItem("가가")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY, 2);
-	_item->findItem("아무거나")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY, 3);
-	_item->findItem("마스터볼")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("아이템"), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 3);
+	_item->findItem("머신2")->render( IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("머신2"), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY, 2);
+	_item->findItem("머신3")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("머신3"), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY, 2);
+	_item->findItem("머신4")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("머신4"), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY, 2);
+	_item->findItem("아무거나")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("머신1"), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY, 3);
+	_item->findItem("마스터볼")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("마스터볼"), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 3);
+	_item->findItem("몬스터볼")->render(IMAGEMANAGER->findImage("상점메인")->getMemDC(), IMAGEMANAGER->findImage("몬스터볼"), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY, 3);
 
 	for (int i = 0; i <BUTTON_END; i++)
 	{
@@ -190,35 +205,32 @@ void shopScene::shopBuyMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEX_BUTTON_0].Selected) //1번째 아이템 
 	{
-		//vItem temp;
-		//temp.push_back(_item->findItem("몬스터볼"));
-		//_inven->buyItem(temp.begin());
-
-		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_inven->buyItems("마스터볼", _item->findItem("마스터볼"));	
 	}
 	if (_selectItem[INDEX_BUTTON_1].Selected) //2번째 아이템 
 	{
-		_inven->buyItems("마스터볼", _item->findItem("마스터볼"));
+		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
 	}
 	if (_selectItem[INDEX_BUTTON_2].Selected) //3번째 아이템 
 	{
-		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_inven->buyItems("아무거나", _item->findItem("아무거나"));
 	}
 	if (_selectItem[INDEX_BUTTON_3].Selected) //4번째 아이템 
 	{
-		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_inven->buyItems("머신2", _item->findItem("머신2"));
 	}
 	if (_selectItem[INDEX_BUTTON_4].Selected) //5번째 아이템 
 	{
-		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_inven->buyItems("머신3", _item->findItem("머신3"));
 	}
 	if (_selectItem[INDEX_BUTTON_5].Selected) //6번째 아이템 
 	{
-		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_inven->buyItems("머신4", _item->findItem("머신4"));
 	}
 	if (_selectItem[INDEX_BUTTON_CANCEL].Selected) //취소 버튼
 	{
 		SCENEMANAGER->changeScene("인벤토리씬");
+		SCENEMANAGER->init("인벤토리씬");
 	}
 	
 }

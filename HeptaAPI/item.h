@@ -40,6 +40,10 @@ public:
 	void render(HDC hdc);
 	void render(HDC hdc, int destX, int destY, int itemNum);
 	void render(HDC hdc, image* img, int destX, int destY, int itemNum);
+	void InvenRender(HDC hdc, image* img, int destX, int destY);
+
+	image* getImg() { return _image; }
+	ITEM_TYPE getType() { return _itemKind; }
 
 
 };

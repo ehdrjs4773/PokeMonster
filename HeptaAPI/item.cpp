@@ -59,7 +59,7 @@ void  item::render(HDC hdc)
 
 }
 
-void  item::render(HDC hdc, int destX, int destY, int itemNum)
+void  item::render(HDC hdc, int destX, int destY, int itemNum)	//shop render image empty
 {
 
 	
@@ -68,12 +68,12 @@ void  item::render(HDC hdc, int destX, int destY, int itemNum)
 	TextOut(hdc, destX+60, destY+25, _description.c_str(), strlen(_description.c_str()));
 
 	char temp[128];
-	sprintf(temp, "%d", _ability);
+	sprintf(temp, "%d", _price);
 	TextOut(hdc, destX+60, destY+45, temp, strlen(temp));
 	
 }
 
-void  item::render(HDC hdc, image* img,  int destX, int destY, int itemNum)
+void  item::render(HDC hdc, image* img,  int destX, int destY, int itemNum) // shop render image present
 {
 
 	_image->render(hdc, destX+20, destY+20);
@@ -82,8 +82,23 @@ void  item::render(HDC hdc, image* img,  int destX, int destY, int itemNum)
 	TextOut(hdc, destX+60, destY+5, _name.c_str(), strlen(_name.c_str()));
 	TextOut(hdc, destX+60, destY + 25, _description.c_str(), strlen(_description.c_str()));
 
+	TextOut(hdc, destX + 60, destY + 45, "가격:", strlen("가격:"));
+	char temp[128];
+	sprintf(temp, "%d", _price);
+	TextOut(hdc, destX+120, destY + 45, temp, strlen(temp));
+
+}
+
+void item::InvenRender(HDC hdc, image* img, int destX, int destY) //Inventory render 
+{
+	_image->render(hdc, destX + 20, destY + 20);
+
+	SetBkMode(hdc, TRANSPARENT); //글씨배경투명화
+	TextOut(hdc, destX + 60, destY + 5, _name.c_str(), strlen(_name.c_str()));
+	TextOut(hdc, destX + 60, destY + 25, _description.c_str(), strlen(_description.c_str()));
+
+	TextOut(hdc, destX + 60, destY+45, "능력치:", strlen("능력치:"));
 	char temp[128];
 	sprintf(temp, "%d", _ability);
-	TextOut(hdc, destX+60, destY + 45, temp, strlen(temp));
-
+	TextOut(hdc, destX + 130, destY + 45, temp, strlen(temp));
 }

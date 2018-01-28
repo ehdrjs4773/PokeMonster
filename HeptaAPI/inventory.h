@@ -14,10 +14,10 @@
 #define ITEMSLOT_FORTHX 245
 #define ITEMSLOT_FORTHY 150
 #define ITEMSLOT_FIFTHX 5
-#define ITEMSLOT_FIFITHY 225
+#define ITEMSLOT_FIFTHY 225
 #define ITEMSLOT_SIXTHX 245
 #define ITEMSLOT_SIXTHY 225
-#define ITEM_MAX 6
+#define SLOT_MAX 6
 
 class item;
 class itemManager;
@@ -61,6 +61,17 @@ struct SelectButtonS
 	bool Selected; // 선택된 것
 };
 
+struct InvenSlot
+{
+	string key;
+	item* itm;
+	int number;
+	POINT pt;
+	bool slotUse;
+
+};
+
+
 class inventory : public gameNode
 {
 private:
@@ -81,7 +92,10 @@ private:
 	SelectButtonS _selectMenu[BUTTONS_END];
 	SelectButtonS _selectItem[INDEXS_BUTTON_END]; //아이템구매창
 
-
+	InvenSlot _invenSlot_UTIL[SLOT_MAX];
+	InvenSlot _invenSlot_BALL[SLOT_MAX];
+	InvenSlot _invenSlot_POTION[SLOT_MAX];
+	InvenSlot _invenSlot_MACHINE[SLOT_MAX];
 
 	int _WS; //스위치용 상태 값
 
@@ -103,9 +117,8 @@ public:
 	void BallMenuDraw();
 	void MachineMenuDraw();
 
-	void buyItem(vector<item*>::iterator buyingItem);
-	void buyItems(string strKey, item* itm);
-	void renderItem(string strKey);
+	void buyItems(string strKey, item* itm);	//아이템 사오는 함수
+	void renderItem(string strKey, WINDOWSTATUSS ws);					//가져와서 인벤토리에 그려주는 함수
 
 	vItem& getCurrentItem() { return _vInventory; }
 	viItem& getCurrentItemIter() { return _viInventory; }

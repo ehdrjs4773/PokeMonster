@@ -5,6 +5,13 @@
 
 inventory::inventory()
 {
+	for (int i = 0; i < SLOT_MAX; i++)
+	{
+		_invenSlot_UTIL[i].slotUse = false;
+		_invenSlot_POTION[i].slotUse = false;
+		_invenSlot_BALL[i].slotUse = false;
+		_invenSlot_MACHINE[i].slotUse = false;
+	}
 }
 
 
@@ -80,8 +87,14 @@ HRESULT inventory::init()
 
 	_WS = WSS_UTIL;
 
-
-
+	//for (int i = 0; i < SLOT_MAX; i++)
+	//{
+	//	_invenSlot_UTIL[i].slotUse = false;
+	//	_invenSlot_POTION[i].slotUse = false;
+	//	_invenSlot_BALL[i].slotUse = false;
+	//	_invenSlot_MACHINE[i].slotUse = false;
+	//}
+		
 	IndexSelectNum = 0;
 	_selectItem[0].isSelect = true;
 
@@ -114,14 +127,10 @@ void inventory::render()
 	case WSS_MACHINE:
 		MachineMenuDraw();
 		break;
-		//상점입장메인메뉴
+		
 	}
 }
 
-void inventory::buyItem(vector<item*>::iterator buyingItem)
-{
-	_vInventory.push_back(*buyingItem);
-}
 
 void inventory::buyItems(string strKey, item* itm)
 {
@@ -133,17 +142,162 @@ void inventory::buyItems(string strKey, item* itm)
 	}
 	else //없으면 insert해라
 	{
-		_mInvenList.insert(make_pair(strKey, itm));
+		if (itm->getType() == ITEM_UTILS)
+		{
+			_mInvenList.insert(make_pair(strKey, itm));
+
+			//if (!_invenSlot_UTIL[0].slotUse)
+			//{
+			//	_invenSlot_UTIL[0].key = strKey;
+			//	_invenSlot_UTIL[0].number = 1;
+			//	//_invenSlot_UTIL[0].slotUse = true;
+			//}
+			//else 	if (_invenSlot_UTIL[0].slotUse)
+			//{
+			//	_invenSlot_UTIL[1].key = strKey;
+			//	_invenSlot_UTIL[1].number = 1;
+			//	//_invenSlot_UTIL[1].slotUse = true;
+			//}else if (_invenSlot_UTIL[1].slotUse)
+			//{
+			//	_invenSlot_UTIL[2].key = strKey;
+			//	_invenSlot_UTIL[2].number = 1;
+			//	//_invenSlot_UTIL[2].slotUse = true;
+			//}else if (_invenSlot_UTIL[2].slotUse)
+			//{
+			//	_invenSlot_UTIL[3].key = strKey;
+			//	_invenSlot_UTIL[3].number = 1;
+			//	//_invenSlot_UTIL[3].slotUse = true;
+			//}else if (_invenSlot_UTIL[3].slotUse)
+			//{
+			//	_invenSlot_UTIL[4].key = strKey;
+			//	_invenSlot_UTIL[4].number = 1;
+			//	//_invenSlot_UTIL[4].slotUse = true;
+			//}else if (_invenSlot_UTIL[4].slotUse)
+			//{
+			//	_invenSlot_UTIL[5].key = strKey;
+			//	_invenSlot_UTIL[5].number = 1;
+			//	//_invenSlot_UTIL[5].slotUse = true;
+			//}
+			//else if (_invenSlot_UTIL[0].slotUse &&_invenSlot_UTIL[1].slotUse &&_invenSlot_UTIL[2].slotUse &&_invenSlot_UTIL[3].slotUse &&_invenSlot_UTIL[4].slotUse &&_invenSlot_UTIL[5].slotUse)
+			//{
+			//	TextOut(getMemDC(), 200, 200, "아이템 슬롯이 꽉 찼습니다.", strlen("아이템 슬롯이 꽉 찼습니다."));
+			//}
+			
+		
+		}
+		else if (itm->getType() == ITEM_POTION)
+		{
+			_mInvenList.insert(make_pair(strKey, itm));
+		}
+		else if (itm->getType() == ITEM_BALL)
+		{
+			_mInvenList.insert(make_pair(strKey, itm));
+		}
+		else if (itm->getType() == ITEM_MACHINE)
+		{
+			_mInvenList.insert(make_pair(strKey, itm));
+		}
+		
 	}
 }
 
-void inventory::renderItem(string strKey)
+void inventory::renderItem(string strKey, WINDOWSTATUSS ws)
 {
 	mapItemIter key = _mInvenList.find(strKey);
 
 	if (key != _mInvenList.end()) //key값이 있으면
 	{
-		key->second->render(getMemDC(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY, 1);
+		if (ws == WSS_UTIL)
+		{
+			if(_mInvenList.size()==1) key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+			if (_mInvenList.size() == 2)
+			{
+				if (key != _mInvenList.end()) return;
+				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
+			}
+			if (_mInvenList.size() ==3)key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
+			//if (!_invenSlot_UTIL[0].slotUse)
+			//{
+			//	key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+			//	_invenSlot_UTIL[0].slotUse = true;
+			///*	_invenSlot_UTIL[1].slotUse = false;
+			//	_invenSlot_UTIL[2].slotUse = false;
+			//	_invenSlot_UTIL[3].slotUse = false;
+			//	_invenSlot_UTIL[4].slotUse = false;
+			//	_invenSlot_UTIL[5].slotUse = false;*/
+			//}
+			//else 	if (_invenSlot_UTIL[0].slotUse && !_invenSlot_UTIL[1].slotUse && !_invenSlot_UTIL[2].slotUse && !_invenSlot_UTIL[3].slotUse && !_invenSlot_UTIL[4].slotUse && !_invenSlot_UTIL[5].slotUse )
+			//{
+			//	
+			//	key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
+			////	_invenSlot_UTIL[0].slotUse = true;
+			//	_invenSlot_UTIL[1].slotUse = true;
+			///*	_invenSlot_UTIL[2].slotUse = false;
+			//	_invenSlot_UTIL[3].slotUse = false;
+			//	_invenSlot_UTIL[4].slotUse = false;
+			//	_invenSlot_UTIL[5].slotUse = false;*/
+			//}
+			//else if (_invenSlot_UTIL[1].slotUse && !_invenSlot_UTIL[2].slotUse)
+			//{
+			//	if (key != _mInvenList.end()) return;
+			//	key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
+			//	/*_invenSlot_UTIL[0].slotUse = true;
+			//	_invenSlot_UTIL[1].slotUse = true;*/
+			//	_invenSlot_UTIL[2].slotUse = true;
+			//	/*_invenSlot_UTIL[3].slotUse = false;
+			//	_invenSlot_UTIL[4].slotUse = false;
+			//	_invenSlot_UTIL[5].slotUse = false;*/
+			//}
+			//else if (_invenSlot_UTIL[2].slotUse &&!_invenSlot_UTIL[3].slotUse)
+			//{
+			//	if (key != _mInvenList.end()) return;
+			//	key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
+			///*	_invenSlot_UTIL[0].slotUse = true;
+			//	_invenSlot_UTIL[1].slotUse = true;
+			//	_invenSlot_UTIL[2].slotUse = true;*/
+			//	_invenSlot_UTIL[3].slotUse = true;
+			///*	_invenSlot_UTIL[4].slotUse = false;
+			//	_invenSlot_UTIL[5].slotUse = false;*/
+			//}
+			//else if (_invenSlot_UTIL[3].slotUse &&!_invenSlot_UTIL[4].slotUse)
+			//{
+			//	if (key != _mInvenList.end()) return;
+			//	key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
+			//	/*_invenSlot_UTIL[0].slotUse = true;
+			//	_invenSlot_UTIL[1].slotUse = true;
+			//	_invenSlot_UTIL[2].slotUse = true;*/
+			//	//_invenSlot_UTIL[3].slotUse = true;
+			//	_invenSlot_UTIL[4].slotUse = true;
+			//	//_invenSlot_UTIL[5].slotUse = false;
+			//}
+			//else if (_invenSlot_UTIL[4].slotUse && !_invenSlot_UTIL[5].slotUse)
+			//{
+			//	if (key != _mInvenList.end()) return;
+			//	key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
+			//	/*_invenSlot_UTIL[0].slotUse = true;
+			//	_invenSlot_UTIL[1].slotUse = true;
+			//	_invenSlot_UTIL[2].slotUse = true;
+			//	_invenSlot_UTIL[3].slotUse = true;
+			//	_invenSlot_UTIL[4].slotUse = true;*/
+			//	_invenSlot_UTIL[5].slotUse = true;
+			//}
+			//else if (_invenSlot_UTIL[0].slotUse &&_invenSlot_UTIL[1].slotUse &&_invenSlot_UTIL[2].slotUse &&_invenSlot_UTIL[3].slotUse &&_invenSlot_UTIL[4].slotUse &&_invenSlot_UTIL[5].slotUse)
+			//{
+			//	//TextOut(getMemDC(), 200, 200, "아이템 슬롯이 꽉 찼습니다.", strlen("아이템 슬롯이 꽉 찼습니다."));
+			//}
+		}
+		else if (ws == WSS_POTION)
+		{
+			key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+		}
+		else if (ws == WSS_BALL)
+		{
+			key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+		}
+		else if(ws == WSS_MACHINE)
+		{
+			key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+		}
 	}
 	else //없으면
 	{
@@ -153,7 +307,7 @@ void inventory::renderItem(string strKey)
 }
 
 
-void inventory::UtilMenuDraw() //상점 사러가기 Menu 그려주는 함수
+void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_유틸")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
@@ -181,16 +335,11 @@ void inventory::UtilMenuDraw() //상점 사러가기 Menu 그려주는 함수
 		IMAGEMANAGER->findImage("인벤토리취소선택")->render(getMemDC(), _selectItem[6].pt.x, _selectItem[6].pt.y);
 	}
 
-	//for (int i = 0; i < _vInventory.size(); ++i)
-	//{
-	//	(*_viInventory)->render(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), 100, 100, 1);
-	//}
-	
-	
-		//_mItemList["몬스터볼"]->render(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), 100, 100, 1);
-	
-	renderItem("몬스터볼");
 
+	renderItem("아무거나", WSS_UTIL);
+	renderItem("머신2", WSS_UTIL);
+	renderItem("머신3", WSS_UTIL);
+	renderItem("머신4", WSS_UTIL);
 
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
@@ -223,7 +372,7 @@ void inventory::UtilMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	}
 }
 
-void inventory::PotionMenuDraw() //상점 사러가기 Menu 그려주는 함수
+void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_포션")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
@@ -280,7 +429,7 @@ void inventory::PotionMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	}
 }
 
-void inventory::BallMenuDraw() //상점 사러가기 Menu 그려주는 함수
+void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_볼")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
@@ -306,6 +455,12 @@ void inventory::BallMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	{
 		IMAGEMANAGER->findImage("인벤토리취소선택")->render(getMemDC(), _selectItem[6].pt.x, _selectItem[6].pt.y);
 	}
+
+	//볼 아이템 렌더
+	renderItem("몬스터볼", WSS_BALL);
+	renderItem("마스터볼", WSS_BALL);
+
+
 
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
@@ -339,7 +494,7 @@ void inventory::BallMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	
 }
 
-void inventory::MachineMenuDraw() //상점 사러가기 Menu 그려주는 함수
+void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
 {
 	IMAGEMANAGER->findImage("인벤토리_머신")->render(getMemDC(), 0, 0);
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);

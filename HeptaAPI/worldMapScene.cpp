@@ -4,6 +4,9 @@
 
 worldMapScene::worldMapScene()
 {
+	//Ã³À½Ã¼À°°ü ÃÊ±âÈ­
+	SelectNum = 0;
+	_select[0].isSelect = true;
 }
 
 
@@ -47,9 +50,7 @@ HRESULT worldMapScene::init()
 	_select[GYM_8].pt.x = 230;
 	_select[GYM_8].pt.y = 90;
 
-	//Ã³À½Ã¼À°°ü ÃÊ±âÈ­
-	SelectNum = 0;
-	_select[0].isSelect = true;
+
 	
 	for (int i = 0; i < GYM_END; i++)
 	{
@@ -69,10 +70,12 @@ void worldMapScene::update()
 	if (_select[GYM_0].Selected) //1¹øÂ° Ã¼À°°ü 
 	{
 		SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+		SCENEMANAGER->init("ÀÎº¥Åä¸®¾À");
 	}
 	if (_select[GYM_1].Selected) //2¹øÂ° Ã¼À°°ü
 	{
 		SCENEMANAGER->changeScene("»óÁ¡¾À");
+		SCENEMANAGER->init("»óÁ¡¾À");
 	}
 	if (_select[GYM_2].Selected) //3¹øÂ° Ã¼À°°ü 
 	{
