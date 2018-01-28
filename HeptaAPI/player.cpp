@@ -29,10 +29,10 @@ HRESULT player::init()
 	IMAGEMANAGER->addImage("픽셀충돌12", ".\\bmps\\map\\픽셀충돌12.bmp", 480, 360, false, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("픽셀충돌13", ".\\bmps\\map\\픽셀충돌13.bmp", 480, 360, false, true, RGB(255, 0, 255));
 
-	_currentStage = 0;
+	_currentStage = 0;	//맨처음은 오박사집 픽셀이미지로 해둘게요 아마 이건 상관없을거에요
 
-	_x = 265;
-	_y = 330;
+	_x = 265;		//플레이어 맨처음 있는 좌표
+	_y = 330;		//플레이어 맨처음 있는 좌표
 
 	_playerRc = RectMakeCenter(_x, _y, _player->getFrameWidth(), _player->getFrameHeight());
 
@@ -71,9 +71,11 @@ HRESULT player::init()
 	SCENEMANAGER->init("PokeInfo");
 	return S_OK;
 }
+
 void player::release()
 {
 }
+
 void player::update()
 {		
 	
@@ -270,12 +272,15 @@ void player::update()
 	KEYANIMANAGER->update();
 	//_playerRc = RectMakeCenter(_x, _y, _player->getFrameWidth(), _player->getFrameHeight());
 
+	//-------------------- 이거 UI에요 ---------------------------
 	if (KEYMANAGER->isOnceKeyDown('P'))
 	{
 		SCENEMANAGER->changeScene("UI");
 	}
+
 }
 
+//그리는거......
 void player::render()
 {
 	_player->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerMotion);

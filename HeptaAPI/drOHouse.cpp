@@ -27,6 +27,8 @@ HRESULT drOHouse::init()
 
 	_isWin = false;
 
+	SCENEMANAGER->init("¿ùµå¸Ê¾À");
+
 	return S_OK;
 }
 void drOHouse::release()
@@ -37,6 +39,12 @@ void drOHouse::update()
 {
 	stageManager::update();
 	_gymLeaderRc = RectMakeCenter(_x, _y, 25, 28);
+	
+
+	if (_player->getPlayerRc().top >= WINSIZEY)
+	{
+		SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+	}
 
 }
 void drOHouse::render()
