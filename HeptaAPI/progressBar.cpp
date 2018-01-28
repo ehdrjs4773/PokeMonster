@@ -119,6 +119,9 @@ void progressBar::setGauge(float currentGauge, float maxGauge)
 
 void progressBar::setGauge(float currentGauge, float maxGauge, bool isHP)
 {
+	if (currentGauge > maxGauge)
+		currentGauge = maxGauge;
+
 	float width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();
 	// hp가 천천히 줄어들게
 	if (isHP)

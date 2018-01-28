@@ -16,8 +16,15 @@ battleScene::~battleScene()
 HRESULT battleScene::init()
 {
 	// 적 타입 가져오기 (나중에 DATABASE 이용해서 가져올 생각)
+	//if (_enemyType == ENEMY_WILD)
+	//	;
+	//else if (_enemyType == ENEMY_TRAINNER)
+	//{
+	//	string tempPath = ".\\bmps\\battleScene\\" + _destScene + "_enemy.bmp";
+	//	IMAGEMANAGER->addImage(_destScene + "_enemy", tempPath.c_str(), POKEMON_WIDTH, POKEMON_HEIGHT, false, true, MAGENTA);
+	//}
 	_enemyType = ENEMY_WILD;
-
+	
 	// 내부저장소(메모리)에서 포켓몬 가져오기
 	if (DATABASE->getVPlayerPokemon()->size() == 0) return E_FAIL;
 
@@ -44,8 +51,8 @@ HRESULT battleScene::init()
 	// 적은 반드시 맨 처음 몬스터부터 꺼냄(체육관 관장들은 플레이어가 이기지 못한 채로 전투가 끝나면 모든 포켓몬 체력이 초기화되므로)
 	_enemyCurrentPokemon = 0;
 	
-	// 이 bool값은 실제 포켓몬들이 공격을 주고 받을 때 결정됨 -> 누가 선공인지 결정
-	_isPlayerTurn = false;
+	// 플레이어가 경험치를 획득하였는가?
+	_isGetEXP = false;
 
 	_sequence = BATTLE_INTRO;
 	_fight = PLAYER_ATTACK;
@@ -148,6 +155,7 @@ void battleScene::update()
 
 		case BATTLE_SELECT:
 			_frameTime = 0;
+			_isGetEXP = false;
 		break;
 
 		case BATTLE_FIGHT:
@@ -188,11 +196,88 @@ void battleScene::update()
 
 								if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
 								{
-									_sequence = BATTLE_END;
-									_end = ENEMY_DIE;
-									_fight = PLAYER_ATTACK;
-									DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
-									DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+									if (!_isGetEXP)
+									{
+										float type;
+										if (_enemyType == ENEMY_WILD)
+											type = 1;
+										else if (_enemyType == ENEMY_TRAINNER)
+											type = 1.5;
+
+										(*_playerPokemon)[_playerCurrentPokemon]->expPlus(type * 144 * (*_enemyPokemon)[_enemyCurrentPokemon]->getLevel() / 7);
+
+										_isGetEXP = true;
+									}
+
+									if (_playerEXPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP()))
+									{
+										if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP() >= (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP())
+										{
+											(*_playerPokemon)[_playerCurrentPokemon]->levelUp();
+											_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP());
+										}
+
+										_sequence = BATTLE_END;
+										_end = ENEMY_DIE;
+										_fight = PLAYER_ATTACK;
+										DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
+										DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+									}
+								}
+								else
+								{
+									_fight = ENEMY_ATTACK;
+									DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
+									DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+									DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
+									_frameTime = 0;
+
+									_UI->selectReset();
+								}
+							}
+						}
+					}
+					else if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getType() == SKILL_SPECIAL)
+					{
+						ELEMENT tempEl = (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getElement();
+						if (_frameTime == 1)
+							EFFECTMANAGER->play(this->elementString(tempEl) + "_player", WINSIZEX / 2, WINSIZEY / 2);
+						else
+						{
+							if (EFFECTMANAGER->isEffectEnd(this->elementString(tempEl) + "_player"))
+							{
+								(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
+								(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
+
+								if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
+								{
+									if (!_isGetEXP)
+									{
+										float type;
+										if (_enemyType == ENEMY_WILD)
+											type = 1;
+										else if (_enemyType == ENEMY_TRAINNER)
+											type = 1.5;
+
+										(*_playerPokemon)[_playerCurrentPokemon]->expPlus(type * 144 * (*_enemyPokemon)[_enemyCurrentPokemon]->getLevel() / 7);
+
+										_isGetEXP = true;
+									}
+
+									if (_playerEXPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP()))
+									{
+										if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP() >= (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP())
+										{
+											(*_playerPokemon)[_playerCurrentPokemon]->levelUp();
+											_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP());
+										}
+
+										_sequence = BATTLE_END;
+										_end = ENEMY_DIE;
+										_fight = PLAYER_ATTACK;
+										DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
+										DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+									}
 								}
 								else
 								{
@@ -231,7 +316,7 @@ void battleScene::update()
 						if (_playerImageRect.left > LIMIT_X_LEFT)
 						{
 							_fight = ENEMY_ATTACK;
-							_UI->setCurrentEnemySkill((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill().size());
+							_UI->setCurrentEnemySkill(RND->getInt((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill().size()));
 							// test
 							_UI->setCurrentEnemySkill(0);
 							DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
@@ -276,8 +361,50 @@ void battleScene::update()
 							{
 								(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
 
-								_sequence = BATTLE_SELECT;
-								_fight = PLAYER_ATTACK;
+								if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP() <= 0)
+								{
+									_sequence = BATTLE_END;
+									_end = PLAYER_DIE;
+									_fight = PLAYER_ATTACK;
+									DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
+									DIALOGUE->replaceAll("#", (*_playerPokemon)[_playerCurrentPokemon]->getName());
+								}
+								else
+								{
+									_sequence = BATTLE_SELECT;
+									_fight = PLAYER_ATTACK;
+								}
+							}
+						}
+					}
+					else if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getType() == SKILL_SPECIAL)
+					{
+						ELEMENT tempEl = (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getElement();
+						if (_frameTime == 1)
+							EFFECTMANAGER->play(this->elementString(tempEl) + "_enemy", WINSIZEX / 2, WINSIZEY / 2);
+						else
+						{
+							if (EFFECTMANAGER->isEffectEnd(this->elementString(tempEl) + "_enemy"))
+							{
+								if (_playerHPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP()))
+								{
+									(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
+									(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
+
+									if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP() <= 0)
+									{
+										_sequence = BATTLE_END;
+										_end = PLAYER_DIE;
+										_fight = PLAYER_ATTACK;
+										DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
+										DIALOGUE->replaceAll("#", (*_playerPokemon)[_playerCurrentPokemon]->getName());
+									}
+									else
+									{
+										_sequence = BATTLE_SELECT;
+										_fight = PLAYER_ATTACK;
+									}
+								}
 							}
 						}
 					}
@@ -286,6 +413,7 @@ void battleScene::update()
 		break;
 
 		case BATTLE_END:
+			_UI->selectReset();
 			switch (_end)
 			{
 				case ENEMY_DIE:
@@ -315,6 +443,34 @@ void battleScene::update()
 						}
 					}
 				break;
+
+				case PLAYER_DIE:
+					if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP() <= 0)
+					{
+						_playerImageRect.left -= 3;
+						_playerImageRect.right -= 3;
+
+						if (_playerImageRect.right < LIMIT_X_LEFT)
+						{
+							_playerCurrentPokemon++;
+							if (_playerCurrentPokemon >= _playerPokemon->size())
+							{
+								_playerCurrentPokemon--;
+								_sequence = BATTLE_FINAL;
+								DIALOGUE->loadingTextFile(".\\textData\\battleScene_final_lose.txt");
+								_frameTime = 0;
+							}
+							else
+							{
+								_end = END_CHANGE;
+								DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_change.txt");
+								DIALOGUE->replaceAll("#", "나");
+								DIALOGUE->replaceAll("@", (*_playerPokemon)[_playerCurrentPokemon]->getName());
+								_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP());
+							}
+						}
+					}
+					break;
 
 				case END_CHANGE:
 					if (_playerImageRect.left < LIMIT_X_LEFT)
@@ -352,6 +508,8 @@ void battleScene::update()
 	_enemyHPBar->setGauge((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP(), true);
 	_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP(), true);
 	_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP(), false);
+
+	EFFECTMANAGER->update();
 }
 
 void battleScene::render()
@@ -395,6 +553,8 @@ void battleScene::render()
 	_enemyHPBar->render();
 	_playerHPBar->render();
 	_playerEXPBar->render();
+
+	EFFECTMANAGER->render(getMemDC());
 }
 
 void battleScene::frameUpdate()
@@ -426,6 +586,83 @@ void battleScene::frameUpdate()
 			}
 		break;
 	}
+}
+
+string battleScene::elementString(ELEMENT el)
+{
+	string temp;
+	switch (el)
+	{
+	case ELEMENT_NORMAL:
+		temp = "노말";
+		break;
+
+	case ELEMENT_FIRE:
+		temp = "불";
+		break;
+
+	case ELEMENT_WATER:
+		temp = "물";
+		break;
+
+	case ELEMENT_ELECTRIC:
+		temp = "전기";
+		break;
+
+	case ELEMENT_PLANT:
+		temp = "풀";
+		break;
+
+	case ELEMENT_ICE:
+		temp = "얼음";
+		break;
+
+	case ELEMENT_FIGHT:
+		temp = "격투";
+		break;
+
+	case ELEMENT_POISON:
+		temp = "독";
+		break;
+
+	case ELEMENT_EARTH:
+		temp = "땅";
+		break;
+
+	case ELEMENT_WING:
+		temp = "비행";
+		break;
+
+	case ELEMENT_ESPER:
+		temp = "에스퍼";
+		break;
+
+	case ELEMENT_INSECT:
+		temp = "벌레";
+		break;
+
+	case ELEMENT_ROCK:
+		temp = "바위";
+		break;
+
+	case ELEMENT_GHOST:
+		temp = "유령";
+		break;
+
+	case ELEMENT_DRAGON:
+		temp = "용";
+		break;
+
+	case ELEMENT_DARK:
+		temp = "악";
+		break;
+
+	case ELEMENT_STEEL:
+		temp = "강철";
+		break;
+	}
+
+	return temp;
 }
 
 // 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수

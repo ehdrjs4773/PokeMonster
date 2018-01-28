@@ -80,8 +80,6 @@ private:
 	int _playerCurrentPokemon;
 	int _enemyCurrentPokemon;
 
-	bool _isPlayerTurn;
-
 	battleSceneUI* _UI;
 
 	ENEMY_TYPE _enemyType;
@@ -89,6 +87,8 @@ private:
 	int _introTime;
 	int _frameTime;
 	int _frameX;
+
+	bool _isGetEXP;
 
 	// 체인지 할 경우, 체인지 할 포켓몬 번호
 	int _playerChangePokemonNum;
@@ -113,6 +113,7 @@ public:
 	void render();
 
 	void frameUpdate();
+	string elementString(ELEMENT el);
 
 	// 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수
 	DAMAGE_JUDGEMENT judgement(ELEMENT attackerSkill, ELEMENT defencer);
@@ -126,5 +127,7 @@ public:
 
 	inline void setPlayerChangeNum(int num) { _playerChangePokemonNum = num; }
 	inline void setEnemyChangeNum(int num) { _enemyChangePokemonNum = num; }
+
+	inline void setEnemyType(ENEMY_TYPE type) { _enemyType = type; }
 };
 

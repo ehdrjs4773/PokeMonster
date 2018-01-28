@@ -56,6 +56,9 @@ public:
 
 	inline bool isChangeDone(float currentGauge, float maxGauge)
 	{
+		if (currentGauge > maxGauge)
+			currentGauge = maxGauge;
+
 		float width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();
 
 		return (_width == width);

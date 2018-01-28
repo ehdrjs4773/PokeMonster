@@ -79,11 +79,14 @@ public:
 	pokemon();
 	~pokemon();
 
-	virtual HRESULT init(string name, int level);
+	HRESULT init(string name, int level);
 
-	virtual bool addSkill(skill* sk);
+	bool addSkill(skill* sk);
 
-	virtual void hitDamager(int damage);
+	void hitDamager(int damage);
+	void expPlus(int exp);
+	void levelUp();
+
 
 	inline int getSpeed() { return _speed; }
 	inline int getCurrentHP() { return _currentHP; }
@@ -95,6 +98,7 @@ public:
 	}
 	inline int getMaxHP() { return _maxHP; }
 	inline int getCurrentEXP() { return _currentEXP; }
+	inline int setCurrentEXP(int exp) { _currentEXP = exp; }
 	inline int getMaxEXP() { return _maxEXP; }
 	inline string getName() { return _pokemonName; }
 	inline vector<skill*> getVSkill() { return _vSkills; }

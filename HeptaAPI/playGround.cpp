@@ -16,6 +16,8 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 
+	this->imageInit();
+
 	SCENEMANAGER->addScene("岿靛甘纠", new worldMapScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 
@@ -72,7 +74,7 @@ HRESULT playGround::init()
 	dandaegi->init("窜单扁", 20);
 	dandaegi->addSkill(_temp3);
 	pokemon* ggorat = new pokemon;
-	ggorat->init("部房", 1);
+	ggorat->init("部房", 30);
 	ggorat->addSkill(_temp5);
 	vPokemon->push_back(isang);
 	vPokemon->push_back(tuttleKing);

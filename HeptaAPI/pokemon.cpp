@@ -105,3 +105,21 @@ void pokemon::hitDamager(int damage)
 	else
 		_currentHP -= damage;
 }
+
+void pokemon::expPlus(int exp)
+{
+	_currentEXP += exp;
+}
+
+void pokemon::levelUp()
+{
+	_level++;
+	_maxHP = _level * ((_racialHP + _individualHP + 50 + (_evsExpHP * pow((float)2, -11))) / 50);
+	_currentHP = _maxHP;
+	_atk = _level * ((_racialATK + _individualATK + 50 + (_evsExpATK * pow((float)2, -11))) / 50) + 5;
+	_def = _level * ((_racialDEF + _individualDEF + 50 + (_evsExpDEF * pow((float)2, -11))) / 50) + 5;
+	_special = _level * ((_racialSPECIAL + _individualSPECIAL + 50 + (_evsExpSPECIAL * pow((float)2, -11))) / 50) + 5;
+	_speed = _level * ((_racialSPEED + _individualSPEED + 50 + (_evsExpSPEED * pow((float)2, -11))) / 50) + 5;
+	_maxEXP = pow(_level + 1, (float)3) - pow(_level, (float)3);
+	_currentEXP = 0;
+}
