@@ -18,7 +18,7 @@ struct PokeInfo
 	int count;
 	int currentFrameX;
 	progressBar* _playerHpBar;
-	
+
 };
 
 
@@ -30,6 +30,7 @@ private :
 
 	battleSceneUI* _battleSceneUI;
 
+	bool _isChange;
 	
 
 	PokeInfo _PokeInfo[6];
