@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+
 enum playerDirection
 {
 	GOLD_RIGHT_STOP = 1,

@@ -51,6 +51,8 @@ HRESULT player::init()
 	//화면 처음 모션은 뒤돌아보고있는 IDLE상태
 	_playerMotion = KEYANIMANAGER->findAnimation("뒤");
 
+	SCENEMANAGER->init("UI");
+	SCENEMANAGER->init("PokeInfo");
 	return S_OK;
 }
 void player::release()
@@ -248,42 +250,50 @@ void player::update()
 	}
 	KEYANIMANAGER->update();
 	//_playerRc = RectMakeCenter(_x, _y, _player->getFrameWidth(), _player->getFrameHeight());
+
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		
+		SCENEMANAGER->changeScene("UI");
+		
+	}
 }
 
 void player::render()
 {
 	_player->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerMotion);
+	
 }
 
-void player::_rightStop(void* obj)
-{
-	player* k = (player*)obj;
-
-	k->setPlayerDirection(GOLD_RIGHT_STOP);
-	k->setPlayerMotion(KEYANIMANAGER->findAnimation("오른쪽"));
-	k->getPlayerMotion()->start();
-}
-void player::_leftStop(void* obj)
-{
-	player* k = (player*)obj;
-
-	k->setPlayerDirection(GOLD_LEFT_STOP);
-	k->setPlayerMotion(KEYANIMANAGER->findAnimation("왼쪽"));
-	k->getPlayerMotion()->start();
-}
-void player::_frontStop(void* obj)
-{
-	player* k = (player*)obj;
-
-	k->setPlayerDirection(GOLD_FRONT_STOP);
-	k->setPlayerMotion(KEYANIMANAGER->findAnimation("앞"));
-	k->getPlayerMotion()->start();
-}
-void player::_backStop(void* obj)
-{
-	player* k = (player*)obj;
-
-	k->setPlayerDirection(GOLD_BACK_STOP);
-	k->setPlayerMotion(KEYANIMANAGER->findAnimation("뒤"));
-	k->getPlayerMotion()->start();
-}
+//void player::_rightStop(void* obj)
+//{
+//	player* k = (player*)obj;
+//
+//	k->setPlayerDirection(GOLD_RIGHT_STOP);
+//	k->setPlayerMotion(KEYANIMANAGER->findAnimation("오른쪽"));
+//	k->getPlayerMotion()->start();
+//}
+//void player::_leftStop(void* obj)
+//{
+//	player* k = (player*)obj;
+//
+//	k->setPlayerDirection(GOLD_LEFT_STOP);
+//	k->setPlayerMotion(KEYANIMANAGER->findAnimation("왼쪽"));
+//	k->getPlayerMotion()->start();
+//}
+//void player::_frontStop(void* obj)
+//{
+//	player* k = (player*)obj;
+//
+//	k->setPlayerDirection(GOLD_FRONT_STOP);
+//	k->setPlayerMotion(KEYANIMANAGER->findAnimation("앞"));
+//	k->getPlayerMotion()->start();
+//}
+//void player::_backStop(void* obj)
+//{
+//	player* k = (player*)obj;
+//
+//	k->setPlayerDirection(GOLD_BACK_STOP);
+//	k->setPlayerMotion(KEYANIMANAGER->findAnimation("뒤"));
+//	k->getPlayerMotion()->start();
+//}
