@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "fighterMap.h"
-
 fighterMap::fighterMap()
+
 {
 }
 fighterMap::~fighterMap()
@@ -12,7 +12,9 @@ HRESULT fighterMap::init()
 {
 	stageManager::init();
 	_background = IMAGEMANAGER->addImage("°İÅõ¸Ê", ".\\bmps\\map\\°İÅõ¸Ê.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
-	//_pixel = IMAGEMANAGER->addImage("°İÅõ¸ÊÇÈ¼¿", ".\\bmps\\map\\°İÅõ¸ÊÇÈ¼¿Ãæµ¹.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
+	
+
+	_player->setCurrentStage(2);
 
 	_x = 240;
 	_y = 28;

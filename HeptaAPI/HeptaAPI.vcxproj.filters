@@ -76,6 +76,9 @@
     <Filter Include="2DGameFramework\Manager">
       <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\배건하\stage">
+      <UniqueIdentifier>{cffa375e-57ec-4396-8d27-29566f7b6d66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -216,14 +219,17 @@
     <ClInclude Include="MonsterBack.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
-    <ClInclude Include="fighterMap.h">
-      <Filter>playGround\배건하</Filter>
-    </ClInclude>
-    <ClInclude Include="flyMap.h">
-      <Filter>playGround\배건하</Filter>
-    </ClInclude>
     <ClInclude Include="stageManager.h">
       <Filter>playGround\배건하</Filter>
+    </ClInclude>
+    <ClInclude Include="fighterMap.h">
+      <Filter>playGround\배건하\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="flyMap.h">
+      <Filter>playGround\배건하\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="drOHouse.h">
+      <Filter>playGround\배건하\stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -353,14 +359,17 @@
     <ClCompile Include="MonsterBack.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
-    <ClCompile Include="fighterMap.cpp">
-      <Filter>playGround\배건하</Filter>
-    </ClCompile>
-    <ClCompile Include="flyMap.cpp">
-      <Filter>playGround\배건하</Filter>
-    </ClCompile>
     <ClCompile Include="stageManager.cpp">
       <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="fighterMap.cpp">
+      <Filter>playGround\배건하\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="flyMap.cpp">
+      <Filter>playGround\배건하\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="drOHouse.cpp">
+      <Filter>playGround\배건하\stage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

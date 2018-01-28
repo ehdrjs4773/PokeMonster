@@ -12,6 +12,8 @@
 //--------수테이지------
 #include "flyMap.h"
 #include "fighterMap.h"
+#include "drOHouse.h"
+
 
 
 

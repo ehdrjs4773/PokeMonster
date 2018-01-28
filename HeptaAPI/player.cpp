@@ -14,7 +14,22 @@ HRESULT player::init()
 {
 	_player = IMAGEMANAGER->addFrameImage("°ñµå", ".\\bmps\\player\\°ñµå.bmp", 105, 104, 5, 4, false, true, RGB(255, 0, 255));
 	//¼öÅ×ÀÌÁö ÇÈ¼¿Ãæµ¹ ÀÌ¹ÌÁö
-	IMAGEMANAGER->addImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹", ".\\bmps\\map\\¿À¹Ú»çÇÈ¼¿Ãæµ¹.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹0", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹0.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹1", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹1.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹2", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹2.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹3", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹3.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹4", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹4.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹5", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹5.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹6", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹6.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹7", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹7.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹8", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹8.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹9", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹9.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹10", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹10.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹11", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹11.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹12", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹12.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÈ¼¿Ãæµ¹13", ".\\bmps\\map\\ÇÈ¼¿Ãæµ¹13.bmp", 480, 360, false, true, RGB(255, 0, 255));
+
+	_currentStage = 0;
 
 	_x = 265;
 	_y = 330;
@@ -117,6 +132,9 @@ void player::update()
 
 	_speed = 1.5f;
 
+	char temp[32];
+	sprintf(temp, "ÇÈ¼¿Ãæµ¹%d", _currentStage);
+
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
 		bool isProbe = false;
@@ -125,7 +143,7 @@ void player::update()
 		{
 			for (int j = _playerRc.right - 3; j <= _playerRc.right + 3; ++j)
 			{
-				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), j, i);
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage(temp)->getMemDC(), j, i);
 
 				if (GetRValue(color) == 255 &&
 					GetGValue(color) == 0 &&
@@ -148,7 +166,7 @@ void player::update()
 		{
 			for (int j = _playerRc.left - 3; j <= _playerRc.left ; j++)
 			{
-				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), j, i);
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage(temp)->getMemDC(), j, i);
 
 				if (GetRValue(color) == 255 &&
 					GetGValue(color) == 0 &&
@@ -171,7 +189,7 @@ void player::update()
 		{
 			for (int j = _playerRc.top - 3; j <= _playerRc.top; j++)
 			{
-				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), i, j);
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage(temp)->getMemDC(), i, j);
 
 				if (GetRValue(color) == 255 &&
 					GetGValue(color) == 0 &&
@@ -193,7 +211,7 @@ void player::update()
 		{
 			for (int j = _playerRc.bottom - 3; j <= _playerRc.bottom; j++)
 			{
-				COLORREF color = GetPixel(IMAGEMANAGER->findImage("°ø¹Ú»çÇÈ¼¿Ãæµ¹")->getMemDC(), i, j);
+				COLORREF color = GetPixel(IMAGEMANAGER->findImage(temp)->getMemDC(), i, j);
 
 				if (GetRValue(color) == 255 &&
 					GetGValue(color) == 0 &&

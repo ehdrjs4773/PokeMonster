@@ -6,7 +6,7 @@
 
 class stageManager : public gameNode
 {
-private:
+protected:
 	player* _player;
 	image* _gymLeader;		//체육관 관장
 

@@ -144,6 +144,7 @@
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="dialogue.cpp" />
+    <ClCompile Include="drOHouse.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="Ending.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="dialogue.h" />
+    <ClInclude Include="drOHouse.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="Ending.h" />

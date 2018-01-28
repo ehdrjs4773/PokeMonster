@@ -22,6 +22,7 @@ private:
 	RECT _playerRc;
 	float _speed;
 	playerDirection _playerDirection;
+	int _currentStage;
 
 	animation* _playerMotion;
 
@@ -41,6 +42,7 @@ public:
 	static void _backStop(void* obj);
 
 	inline RECT getPlayerRc() { return _playerRc; }
+	inline int  setCurrentStage(int x) {  return _currentStage = x; }
 	
 
 	//플레이어 방향 접근자,설정자

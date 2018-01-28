@@ -32,7 +32,7 @@ HRESULT playGround::init()
 	//--------수테이지 테스트----------
 	SCENEMANAGER->addScene("flyMap", new flyMap);
 	SCENEMANAGER->addScene("fighterMap", new fighterMap);
-
+	SCENEMANAGER->addScene("drOHouseMap", new drOHouse);
 
 
 	shop->invenMemoryAdressLink((inventory*)SCENEMANAGER->findScene("인벤토리씬"));
@@ -120,17 +120,22 @@ void playGround::update(void)
 	//	SCENEMANAGER->changeScene("UI");
 	//}
 	//--------수테이지 테스트----------
-	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))
+	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))	//오박사
+	{
+		SCENEMANAGER->changeScene("drOHouseMap");
+		SCENEMANAGER->init("drOHouseMap");
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD1))	//비행
 	{
 		SCENEMANAGER->changeScene("flyMap");
 		SCENEMANAGER->init("flyMap");
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD1))
+	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD2))	//격투
 	{
 		SCENEMANAGER->changeScene("fighterMap");
 		SCENEMANAGER->init("fighterMap");
 	}
-
+	
 }
 
 //그리는거.......

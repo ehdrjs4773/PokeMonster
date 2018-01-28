@@ -2,8 +2,9 @@
 #include "gameNode.h"
 #include "stageManager.h"
 
-class flyMap : public stageManager
+class drOHouse : public stageManager 
 {
+
 private:
 	image * _background;	//보이는 배경
 	
@@ -13,8 +14,8 @@ private:
 	bool _isWin;			//관장 이겼을때
 
 public:
-	flyMap();
-	~flyMap();
+	drOHouse();
+	~drOHouse();
 
 	HRESULT init();
 	void release();

@@ -13,8 +13,9 @@ HRESULT flyMap::init()
 {
 	stageManager::init();
 	_background = IMAGEMANAGER->addImage("비행맵", ".\\bmps\\map\\비행.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
-	_pixel = IMAGEMANAGER->addImage("비행맵픽셀", ".\\bmps\\map\\비행맵픽셀충돌.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
-	
+
+	_player->setCurrentStage(7); //현재 스테이지 정보 넘겨준다
+
 	_x = 240;
 	_y = 28;
 
