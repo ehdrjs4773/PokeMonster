@@ -5,7 +5,8 @@
 class flyMap : public stageManager
 {
 private:
-	image * _background;	//보이는 배경
+	image* _background;	//보이는 배경
+	image* _gymLeader;	//체육관 관장 이미지
 	
 
 	float _x, _y;			//체육관 관장 x,y
