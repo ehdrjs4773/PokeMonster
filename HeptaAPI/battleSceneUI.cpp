@@ -141,6 +141,8 @@ void battleSceneUI::render()
 	this->printHP(_battleScene->getCurrentPlayerPokemon()->getCurrentHP(), _battleScene->getCurrentPlayerPokemon()->getMaxHP());
 	this->printLevel(_battleScene->getCurrentPlayerPokemon()->getLevel(), 366, 201);
 	this->printLevel(_battleScene->getCurrentEnemyPokemon()->getLevel(), 205, 106);
+	this->printName(_battleScene->getCurrentPlayerPokemon()->getName(), 268, 200);
+	this->printName(_battleScene->getCurrentEnemyPokemon()->getName(), 107, 104);
 }
 
 void battleSceneUI::keyControl()
@@ -348,4 +350,9 @@ void battleSceneUI::printLevel(int current, int destX, int destY)
 	char temp[32];
 	sprintf(temp, "%d", current);
 	TextOut(getMemDC(), destX, destY, temp, strlen(temp));
+}
+
+void battleSceneUI::printName(string name, int destX, int destY)
+{
+	TextOut(getMemDC(), destX, destY, name.c_str(), strlen(name.c_str()));
 }

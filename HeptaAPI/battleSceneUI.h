@@ -43,6 +43,7 @@ public:
 	void printPP(int current, int max);
 	void printHP(int current, int max);
 	void printLevel(int current, int destX, int destY);
+	void printName(string name, int destX, int destY);
 
 	inline void setMemoryAddressLink(battleScene* battle) { _battleScene = battle; }
 
