@@ -110,13 +110,13 @@ MonsterBack::~MonsterBack()
 	 {
 		 if (PtInRect(&_CancleRc, _ptMouse))
 		 {
-			 SCENEMANAGER->changeScene("UI");
+			 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		 }
 	 }
 
-	 if (KEYMANAGER->isOnceKeyDown('C'))
+	 if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	 {
-		 SCENEMANAGER->changeScene("UI");
+		 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 	 }
 
 

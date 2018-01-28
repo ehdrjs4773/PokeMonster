@@ -7,6 +7,10 @@
 #include "stageScene.h"
 #include "shopScene.h"
 #include "inventory.h"
+#include "UI.h"
+#include "MonsterBack.h"
+
+
 
 class playGround : public gameNode
 {

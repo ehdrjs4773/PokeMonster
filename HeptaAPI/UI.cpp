@@ -88,6 +88,13 @@ void UI::update(void)
 		_isMonBak = false;
 	}
 
+	if (KEYMANAGER->isOnceKeyDown('X'))
+	{
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+	}
+
+
+
 }
 void UI::render(void) 
 {
@@ -105,9 +112,9 @@ void UI::render(void)
 	IMAGEMANAGER->findImage("PlayerPokeMon")->render(getMemDC(), _Info[2].rc.left, _Info[2].rc.top);
 	IMAGEMANAGER->findImage("PlayerSave")->render(getMemDC(), _Info[3].rc.left, _Info[3].rc.top);
 	IMAGEMANAGER->findImage("PlayerUiBak")->render(getMemDC(), _Info[4].rc.left, _Info[4].rc.top);
-
 	if (_isName)
 	{
+
 		SetBkMode(getMemDC(), TRANSPARENT);
 		IMAGEMANAGER->findImage("PlayerMedalUi")->render(getMemDC(), 0, 0);
 		IMAGEMANAGER->findImage("PlayerMedalUi2")->render(getMemDC(), 0, 100);
@@ -115,6 +122,8 @@ void UI::render(void)
 		char currentMoney[32];
 		sprintf(currentMoney, "%d", 1000);
 		TextOut(getMemDC(), 220, 180, currentMoney, strlen(currentMoney));
+
+
 	}
 
 }
