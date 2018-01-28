@@ -42,7 +42,9 @@ enum BATTLE_SEQUENCE
 enum FIGHT_SEQUENCE
 {
 	PLAYER_ATTACK,
+	PLAYER_CHANGE,
 	ENEMY_ATTACK,
+	ENEMY_CHANGE,
 	FIGHT_END
 };
 
@@ -79,6 +81,10 @@ private:
 	int _frameTime;
 	int _frameX;
 
+	// 체인지 할 경우, 체인지 할 포켓몬 번호
+	int _playerChangePokemonNum;
+	int _enemyChangePokemonNum;
+
 	// 프로그레스바
 	progressBar* _enemyHPBar;
 	progressBar* _playerHPBar;
@@ -103,5 +109,8 @@ public:
 	inline void setSequence(BATTLE_SEQUENCE se) { _sequence = se; }
 	inline pokemon* getCurrentPlayerPokemon() { return (*_playerPokemon)[_playerCurrentPokemon]; }
 	inline pokemon* getCurrentEnemyPokemon() { return (*_enemyPokemon)[_enemyCurrentPokemon]; }
+
+	inline void setPlayerChangeNum(int num) { _playerChangePokemonNum = num; }
+	inline void setEnemyChangeNum(int num) { _enemyChangePokemonNum = num; }
 };
 

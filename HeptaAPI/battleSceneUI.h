@@ -48,5 +48,6 @@ public:
 
 	inline int getCurrentPlayerSkill() { return _skillSelectNum; }
 	inline int getCurrentEnemySkill() { return _enemySkillNum; }
+	inline battleScene* getBattleScene() { return _battleScene; }
 };
 
