@@ -13,7 +13,8 @@ player::~player()
 HRESULT player::init()
 {
 	_player = IMAGEMANAGER->addFrameImage("골드", ".\\bmps\\player\\골드.bmp", 105, 104, 5, 4, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("공박사픽셀충돌", ".\\bmps\\drHouseScene\\drOHousePixel.bmp", 480, 360, false, true, RGB(255, 0, 255));
+	//수테이지 픽셀충돌 이미지
+	IMAGEMANAGER->addImage("공박사픽셀충돌", ".\\bmps\\map\\오박사픽셀충돌.bmp", 480, 360, false, true, RGB(255, 0, 255));
 
 	_x = 265;
 	_y = 330;
@@ -253,16 +254,13 @@ void player::update()
 
 	if (KEYMANAGER->isOnceKeyDown('P'))
 	{
-		
 		SCENEMANAGER->changeScene("UI");
-		
 	}
 }
 
 void player::render()
 {
 	_player->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerMotion);
-	
 }
 
 //void player::_rightStop(void* obj)
