@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "inventory.h"
-#include "MonsterBack.h"
 
 
 
@@ -88,31 +87,24 @@ HRESULT inventory::init()
 	//	_invenSlot_BALL[i].slotUse = false;
 	//	_invenSlot_MACHINE[i].slotUse = false;
 	//}
-		
+
 	IndexSelectNum = 0;
 	_selectItem[0].isSelect = true;
-
-
-
-	_MonsterBack = (MonsterBack*)SCENEMANAGER->findScene("PokeInfo");
-	_MonsterBack->inventoryMemoryAddressLink(this);
-
-
 
 	return S_OK;
 }
 
-void inventory::update()	 
+void inventory::update()
 {
 	KeyControl();
 }
 
-void inventory::release()	  
+void inventory::release()
 {
 
 }
 
-void inventory::render()	  
+void inventory::render()
 {
 	switch (_WS)
 	{
@@ -128,7 +120,7 @@ void inventory::render()
 	case WSS_MACHINE:
 		MachineMenuDraw();
 		break;
-		
+
 	}
 }
 
@@ -144,8 +136,8 @@ void inventory::buyItems(string strKey, item* itm)
 	}
 	else //없으면 insert해라
 	{
-			_mInvenList.insert(make_pair(strKey, itm));
-			itm->setItemNum(1);
+		_mInvenList.insert(make_pair(strKey, itm));
+		itm->setItemNum(1);
 	}
 }
 
@@ -375,38 +367,67 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		_currentItem = _invenSlot_UTIL[0].itm;
-		SCENEMANAGER->changeScene("PokeInfo");
+		if (_invenSlot_UTIL[0].slotUse == true)
+		{
+			_currentItem = _invenSlot_UTIL[0].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		_currentItem = _invenSlot_UTIL[1].itm;
+		if (_invenSlot_UTIL[1].slotUse == true)
+		{
+			_currentItem = _invenSlot_UTIL[1].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		_currentItem = _invenSlot_UTIL[2].itm;
+		if (_invenSlot_UTIL[2].slotUse == true)
+		{
+			_currentItem = _invenSlot_UTIL[2].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		_currentItem = _invenSlot_UTIL[3].itm;
+		if (_invenSlot_UTIL[3].slotUse == true)
+		{
+			_currentItem = _invenSlot_UTIL[3].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		_currentItem = _invenSlot_UTIL[4].itm;
+		if (_invenSlot_UTIL[4].slotUse == true)
+		{
+			_currentItem = _invenSlot_UTIL[4].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		_currentItem = _invenSlot_UTIL[5].itm;
+		if (_invenSlot_UTIL[5].slotUse == true)
+		{
+			_currentItem = _invenSlot_UTIL[5].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+	
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 }
@@ -417,7 +438,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	IMAGEMANAGER->findImage("인벤토리취소")->render(getMemDC(), 360, 310);
 
 	IMAGEMANAGER->findImage("아이콘_유틸")->frameRender(getMemDC(), _selectMenu[BUTTONS_UTIL].pt.x, _selectMenu[BUTTONS_UTIL].pt.y, 0, 0);
-	
+
 
 	IMAGEMANAGER->findImage("아이콘_포션")->frameRender(getMemDC(), _selectMenu[BUTTONS_POTION].pt.x, _selectMenu[BUTTONS_POTION].pt.y, 0, 1);
 	IMAGEMANAGER->findImage("아이콘_볼")->frameRender(getMemDC(), _selectMenu[BUTTONS_BALL].pt.x, _selectMenu[BUTTONS_BALL].pt.y, 0, 0);
@@ -451,37 +472,62 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		_currentItem = _invenSlot_POTION[0].itm;
+		if (_invenSlot_POTION[0].slotUse == true)
+		{
+			_currentItem = _invenSlot_POTION[0].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
+
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		_currentItem = _invenSlot_POTION[1].itm;
+		if (_invenSlot_POTION[1].slotUse == true)
+		{
+			_currentItem = _invenSlot_POTION[1].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		_currentItem = _invenSlot_POTION[2].itm;
+		if (_invenSlot_POTION[2].slotUse == true)
+		{
+			_currentItem = _invenSlot_POTION[2].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		_currentItem = _invenSlot_POTION[3].itm;
+		if (_invenSlot_POTION[3].slotUse == true)
+		{
+			_currentItem = _invenSlot_POTION[3].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		_currentItem = _invenSlot_POTION[4].itm;
+		if (_invenSlot_POTION[4].slotUse == true)
+		{
+			_currentItem = _invenSlot_POTION[4].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		_currentItem = _invenSlot_POTION[5].itm;
+		if (_invenSlot_POTION[5].slotUse == true)
+		{
+			_currentItem = _invenSlot_POTION[5].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 }
@@ -527,40 +573,64 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		_currentItem = _invenSlot_BALL[0].itm;
+		if (_invenSlot_BALL[0].slotUse == true)
+		{
+			_currentItem = _invenSlot_BALL[0].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		_currentItem = _invenSlot_BALL[1].itm;
+		if (_invenSlot_BALL[1].slotUse == true)
+		{
+			_currentItem = _invenSlot_BALL[1].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		_currentItem = _invenSlot_BALL[2].itm;
+		if (_invenSlot_BALL[2].slotUse == true)
+		{
+			_currentItem = _invenSlot_BALL[2].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		_currentItem = _invenSlot_BALL[3].itm;
+		if (_invenSlot_BALL[3].slotUse == true)
+		{
+			_currentItem = _invenSlot_BALL[3].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		_currentItem = _invenSlot_BALL[4].itm;
+		if (_invenSlot_BALL[4].slotUse == true)
+		{
+			_currentItem = _invenSlot_BALL[4].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		_currentItem = _invenSlot_BALL[5].itm;
+		if (_invenSlot_BALL[5].slotUse == true)
+		{
+			_currentItem = _invenSlot_BALL[5].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
-	
+
 }
 
 void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
@@ -602,40 +672,64 @@ void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		_currentItem = _invenSlot_MACHINE[0].itm;
+		if (_invenSlot_MACHINE[0].slotUse == true)
+		{
+			_currentItem = _invenSlot_MACHINE[0].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		_currentItem = _invenSlot_MACHINE[1].itm;
+		if (_invenSlot_MACHINE[1].slotUse == true)
+		{
+			_currentItem = _invenSlot_MACHINE[1].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		_currentItem = _invenSlot_MACHINE[2].itm;
+		if (_invenSlot_MACHINE[2].slotUse == true)
+		{
+			_currentItem = _invenSlot_MACHINE[2].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		_currentItem = _invenSlot_MACHINE[3].itm;
+		if (_invenSlot_MACHINE[3].slotUse == true)
+		{
+			_currentItem = _invenSlot_MACHINE[3].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		_currentItem = _invenSlot_MACHINE[4].itm;
+		if (_invenSlot_MACHINE[4].slotUse == true)
+		{
+			_currentItem = _invenSlot_MACHINE[4].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		_currentItem = _invenSlot_MACHINE[5].itm;
+		if (_invenSlot_MACHINE[5].slotUse == true)
+		{
+			_currentItem = _invenSlot_MACHINE[5].itm;
+			SCENEMANAGER->changeScene("PokeInfo");
+		}
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
-	
+
 }
 
 void inventory::KeyControl()
@@ -644,19 +738,19 @@ void inventory::KeyControl()
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
 		switch (_WS)
-		{	
-			case WSS_UTIL: 
-				changeWS(WSS_MACHINE);
-				break;
-			case WSS_POTION:
-				changeWS(WSS_UTIL);
-				break;
-			case WSS_BALL: 
-				changeWS(WSS_POTION);
-				break;
-			case WSS_MACHINE:
-				changeWS(WSS_BALL);
-				break;
+		{
+		case WSS_UTIL:
+			changeWS(WSS_MACHINE);
+			break;
+		case WSS_POTION:
+			changeWS(WSS_UTIL);
+			break;
+		case WSS_BALL:
+			changeWS(WSS_POTION);
+			break;
+		case WSS_MACHINE:
+			changeWS(WSS_BALL);
+			break;
 		}
 	}
 
@@ -678,7 +772,7 @@ void inventory::KeyControl()
 			break;
 		}
 	}
-	
+
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
 		switch (_WS)
@@ -725,7 +819,7 @@ void inventory::KeyControl()
 				}
 			}
 			break;
-	
+
 		case WSS_CANCEL:
 			break;
 
@@ -746,11 +840,11 @@ void inventory::KeyControl()
 		}
 	}
 
-	if(KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
 		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 	}
-	
+
 }
 
 //void inventory::itemPrint(string strKey, image* img, HDC hdc, int destX, int destY, int itemNum)
@@ -771,4 +865,5 @@ map<string, item*>::iterator inventory::findNum(int arrNum)
 
 	return iter;
 }
+
 
