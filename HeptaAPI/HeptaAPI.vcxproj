@@ -173,6 +173,7 @@
     <ClCompile Include="normalMap.cpp" />
     <ClCompile Include="Opening.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playGround + effects.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="pokemon.cpp" />
     <ClCompile Include="progressBar.cpp" />

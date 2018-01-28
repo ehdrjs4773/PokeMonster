@@ -431,5 +431,8 @@
     <ClCompile Include="normalMap.cpp">
       <Filter>playGround\건하,근화\stage</Filter>
     </ClCompile>
+    <ClCompile Include="playGround + effects.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
