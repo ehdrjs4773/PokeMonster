@@ -39,6 +39,7 @@ void flyMap::update()
 	if (_player->getPlayerRc().top >= WINSIZEY)
 	{
 		SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+		SCENEMANAGER->init("¿ùµå¸Ê¾À");
 	}
 
 }
