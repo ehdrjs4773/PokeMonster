@@ -210,6 +210,7 @@ void battleSceneUI::keyControl()
 			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 0)
 			{
 				_isBagSelect = true;
+				SCENEMANAGER->changeScene("인벤토리씬");
 			}
 			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 1)
 			{

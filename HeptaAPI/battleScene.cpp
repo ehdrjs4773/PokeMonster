@@ -86,6 +86,9 @@ HRESULT battleScene::init()
 	_playerEXPBar = new progressBar;
 	_playerEXPBar->init("expBar", 244, 250, 144, 3);
 
+	_playerChangePokemonNum = INT_MAX;
+	_enemyChangePokemonNum = INT_MAX;
+
 	return S_OK;
 }
 
@@ -147,6 +150,12 @@ void battleScene::update()
 			switch (_fight)
 			{
 				case PLAYER_ATTACK:
+					if (_playerChangePokemonNum != INT_MAX)
+					{
+						_fight = PLAYER_CHANGE;
+						return;
+					}
+
 					if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getName() == "몸통박치기")
 					{
 						if (_frameTime <= 20)
@@ -183,8 +192,49 @@ void battleScene::update()
 						}
 					}
 				break;
+				
+				case PLAYER_CHANGE:
+					if (_playerCurrentPokemon != _playerChangePokemonNum &&
+						_playerChangePokemonNum != INT_MAX)
+					{
+						_playerImageRect.left--;
+						_playerImageRect.right--;
+
+						if (_playerImageRect.right < LIMIT_X_LEFT)
+						{
+							_playerCurrentPokemon = _playerChangePokemonNum;
+							_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP());
+							_playerChangePokemonNum = INT_MAX;
+						}
+					}
+					else
+					{
+						_playerImageRect.left++;
+						_playerImageRect.right++;
+
+						if (_playerImageRect.left > LIMIT_X_LEFT)
+						{
+							_fight = ENEMY_ATTACK;
+							_UI->setCurrentEnemySkill((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill().size());
+							// test
+							_UI->setCurrentEnemySkill(0);
+							DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
+							DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+							DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
+							_frameTime = 0;
+
+							_UI->selectReset();
+						}
+					}
+				break;
 					
 				case ENEMY_ATTACK:
+					if (_enemyChangePokemonNum != INT_MAX)
+					{
+						_fight = ENEMY_CHANGE;
+						return;
+					}
+
 					if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName() == "몸통박치기")
 					{
 						if (_frameTime <= 20)

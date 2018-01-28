@@ -25,13 +25,13 @@ HRESULT playGround::init()
 	shopScene* shop = new shopScene;
 	SCENEMANAGER->addScene("상점씬", shop);
 	SCENEMANAGER->addScene("인벤토리씬", new inventory);
+	SCENEMANAGER->init("인벤토리씬");
 
 	SCENEMANAGER->addScene("PokeInfo", new MonsterBack);
 	SCENEMANAGER->addScene("UI", new UI);
 	//--------수테이지 테스트----------
 	SCENEMANAGER->addScene("flyMap", new flyMap);
 	SCENEMANAGER->addScene("fighterMap", new fighterMap);
-
 
 
 
@@ -115,10 +115,10 @@ void playGround::update(void)
 		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_F5))
-	{
-		SCENEMANAGER->changeScene("UI");
-	}
+	//if (KEYMANAGER->isOnceKeyDown(VK_F5))
+	//{
+	//	SCENEMANAGER->changeScene("UI");
+	//}
 	//--------수테이지 테스트----------
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))
 	{

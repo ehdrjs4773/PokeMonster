@@ -164,16 +164,20 @@ MonsterBack::~MonsterBack()
 	 {
 		 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		 {
-			 if (PtInRect(&_PokeChage.rc, _ptMouse))
+			 if (_battleSceneUI->getBattleScene()->getCurrentPlayerPokemon() != (*DATABASE->getVPlayerPokemon())[_SelectPokeMonNum])
 			 {
-				 _battleSceneUI->getBattleScene()->setPlayerChangeNum(_SelectPokeMonNum);
-				 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
-				 _battleSceneUI->selectReset();
+				 if (PtInRect(&_PokeChage.rc, _ptMouse))
+				 {
+					 _battleSceneUI->getBattleScene()->setPlayerChangeNum(_SelectPokeMonNum);
+					 _battleSceneUI->getBattleScene()->setSequence(BATTLE_FIGHT);
+					 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+					 _isChange = false;
+				 }
 			 }
-			 if (PtInRect(&_PokeChage.rc1, _ptMouse))
-			 {
-				 _isChange = false;
-			 }
+			if (PtInRect(&_PokeChage.rc1, _ptMouse))
+			{
+				_isChange = false;
+			}
 		 }
 	 }
 	 //====================================================//

@@ -108,6 +108,7 @@ public:
 	inline BATTLE_SEQUENCE getSequence() { return _sequence; }
 	inline void setSequence(BATTLE_SEQUENCE se) { _sequence = se; }
 	inline pokemon* getCurrentPlayerPokemon() { return (*_playerPokemon)[_playerCurrentPokemon]; }
+	inline int getCurrentPlayerNum() { return _playerCurrentPokemon; }
 	inline pokemon* getCurrentEnemyPokemon() { return (*_enemyPokemon)[_enemyCurrentPokemon]; }
 
 	inline void setPlayerChangeNum(int num) { _playerChangePokemonNum = num; }
