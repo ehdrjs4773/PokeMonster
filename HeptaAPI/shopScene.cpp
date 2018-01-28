@@ -206,31 +206,38 @@ void shopScene::shopBuyMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	if (_selectItem[INDEX_BUTTON_0].Selected) //1번째 아이템 
 	{
 		_inven->buyItems("마스터볼", _item->findItem("마스터볼"));	
+		_selectItem[INDEX_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEX_BUTTON_1].Selected) //2번째 아이템 
 	{
 		_inven->buyItems("몬스터볼", _item->findItem("몬스터볼"));
+		_selectItem[INDEX_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEX_BUTTON_2].Selected) //3번째 아이템 
 	{
 		_inven->buyItems("아무거나", _item->findItem("아무거나"));
+		_selectItem[INDEX_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEX_BUTTON_3].Selected) //4번째 아이템 
 	{
 		_inven->buyItems("머신2", _item->findItem("머신2"));
+		_selectItem[INDEX_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEX_BUTTON_4].Selected) //5번째 아이템 
 	{
 		_inven->buyItems("머신3", _item->findItem("머신3"));
+		_selectItem[INDEX_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEX_BUTTON_5].Selected) //6번째 아이템 
 	{
 		_inven->buyItems("머신4", _item->findItem("머신4"));
+		_selectItem[INDEX_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEX_BUTTON_CANCEL].Selected) //취소 버튼
 	{
 		SCENEMANAGER->changeScene("인벤토리씬");
 		SCENEMANAGER->init("인벤토리씬");
+		_selectItem[INDEX_BUTTON_CANCEL].Selected = false;
 	}
 	
 }
@@ -407,7 +414,7 @@ void shopScene::KeyControl()
 
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('A'))
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 	{
 
 		switch (_WS)
@@ -427,6 +434,12 @@ void shopScene::KeyControl()
 		}
 	
 	}
+
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
+	{
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+	}
+
 
 }
 

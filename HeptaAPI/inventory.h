@@ -118,10 +118,12 @@ public:
 	void MachineMenuDraw();
 
 	void buyItems(string strKey, item* itm);	//아이템 사오는 함수
-	void renderItem(string strKey, WINDOWSTATUSS ws);					//가져와서 인벤토리에 그려주는 함수
+	void renderItem(string strKey, WINDOWSTATUSS ws, int num);					//가져와서 인벤토리에 그려주는 함수
+	mapItemIter findNum(int arrNum);
 
 	vItem& getCurrentItem() { return _vInventory; }
 	viItem& getCurrentItemIter() { return _viInventory; }
+
 
 	inline void changeWS(int WS) { _WS = WS; }
 };

@@ -4,6 +4,7 @@
 
 worldMapScene::worldMapScene()
 {
+
 }
 
 
@@ -38,7 +39,7 @@ HRESULT worldMapScene::init()
 	_select[GYM_5].pt.y = 155;
 
 
-	_select[GYM_6].pt.x =400;
+	_select[GYM_6].pt.x = 400;
 	_select[GYM_6].pt.y = 250;
 
 	_select[GYM_7].pt.x = 300;
@@ -47,24 +48,22 @@ HRESULT worldMapScene::init()
 	_select[GYM_8].pt.x = 230;
 	_select[GYM_8].pt.y = 90;
 
+	//Ã³À½Ã¼À°°ü ÃÊ±âÈ­
+	SelectNum = 0;
+	_select[0].isSelect = true;
 
-	
 	for (int i = 0; i < GYM_END; i++)
 	{
 		_select[i].Selected = false;
 	}
 
-	//Ã³À½Ã¼À°°ü ÃÊ±âÈ­
-	SelectNum = 0;
-	_select[0].isSelect = true;
-
 	return S_OK;
 }
-void worldMapScene::release()	  
+void worldMapScene::release()
 {
 
 }
-void worldMapScene::update()	 
+void worldMapScene::update()
 {
 	selectMove();
 
@@ -72,45 +71,55 @@ void worldMapScene::update()
 	{
 		SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
 		SCENEMANAGER->init("ÀÎº¥Åä¸®¾À");
+		_select[GYM_0].Selected = false;
 	}
 	if (_select[GYM_1].Selected) //2¹øÂ° Ã¼À°°ü
 	{
 		SCENEMANAGER->changeScene("»óÁ¡¾À");
 		SCENEMANAGER->init("»óÁ¡¾À");
+		_select[GYM_1].Selected = false;
 	}
 	if (_select[GYM_2].Selected) //3¹øÂ° Ã¼À°°ü 
 	{
-		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		SCENEMANAGER->changeScene("flyMap");
+		SCENEMANAGER->init("flyMap");
+		_select[GYM_2].Selected = false;
 	}
 	if (_select[GYM_3].Selected) //4¹øÂ° Ã¼À°°ü 
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		_select[GYM_3].Selected = false;
 	}
 	if (_select[GYM_4].Selected) //5¹øÂ° Ã¼À°°ü 
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		_select[GYM_4].Selected = false;
 	}
 	if (_select[GYM_5].Selected) //6¹øÂ° Ã¼À°°ü
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		_select[GYM_5].Selected = false;
 	}
 	if (_select[GYM_6].Selected) //7¹øÂ° Ã¼À°°ü 
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		_select[GYM_6].Selected = false;
 	}
 	if (_select[GYM_7].Selected) //8¹øÂ° Ã¼À°°ü 
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		_select[GYM_7].Selected = false;
 	}
 	if (_select[GYM_8].Selected) //9¹øÂ° Ã¼À°°ü 
 	{
 		SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+		_select[GYM_8].Selected = false;
 	}
 
 
 
 }
-void worldMapScene::render()	
+void worldMapScene::render()
 {
 	IMAGEMANAGER->findImage("¹è°æ")->render(getMemDC(), 0, 0);
 
@@ -126,7 +135,7 @@ void worldMapScene::render()
 	{
 		if (_isClear[i] == true)
 		{
-			IMAGEMANAGER->findImage("clear")->render(getMemDC(), _select[i].pt.x, _select[i].pt.y+50);
+			IMAGEMANAGER->findImage("clear")->render(getMemDC(), _select[i].pt.x, _select[i].pt.y + 50);
 		}
 	}
 
@@ -137,16 +146,16 @@ void worldMapScene::selectMove()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
-		SelectNum = (SelectNum + (GYM_MAX-1)) % GYM_MAX;
+		SelectNum = (SelectNum + (GYM_MAX - 1)) % GYM_MAX;
 		for (int i = 0; i < GYM_MAX; i++)
 		{
 			if (SelectNum == i)
 			{
-				_select[i].isSelect = true;	
+				_select[i].isSelect = true;
 			}
 			else
 			{
-				_select[i].isSelect = false;			
+				_select[i].isSelect = false;
 			}
 		}
 	}
@@ -159,20 +168,25 @@ void worldMapScene::selectMove()
 			if (SelectNum == i)
 			{
 				_select[i].isSelect = true;
-			
+
 
 			}
 			else
 			{
 				_select[i].isSelect = false;
-	
+
 			}
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('A'))
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 	{
 		_select[SelectNum].Selected = true;
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
+	{
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 	}
 
 }
