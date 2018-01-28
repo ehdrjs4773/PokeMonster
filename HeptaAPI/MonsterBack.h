@@ -22,11 +22,26 @@ struct PokeInfo
 };
 
 
+struct PokeChange
+{
+	RECT rc;
+	RECT rc1;
+};
+
+
+
 
 class MonsterBack : public gameNode
 {
 private :
 	RECT _CancleRc;
+	
+	PokeChange _PokeChage;
+
+
+	int _SelectPokeMonNum;
+
+
 
 	battleSceneUI* _battleSceneUI;
 

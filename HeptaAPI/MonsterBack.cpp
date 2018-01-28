@@ -2,7 +2,7 @@
 #include "MonsterBack.h"
 #include "pokemon.h"
 #include "battleSceneUI.h"
-
+#include "battleScene.h"
 
 MonsterBack::MonsterBack()
 {
@@ -44,14 +44,20 @@ MonsterBack::~MonsterBack()
 	 
 		
 		 _isChange = false;
+		 _SelectPokeMonNum = 0;
 
 		 if (i < (*DATABASE->getVPlayerPokemon()).size())
 		 {
 			 _PokeInfo[i]._playerHpBar = new progressBar;
 			 _PokeInfo[i]._playerHpBar->init("hpBar", _PokeInfo[i].rc.left + 118, _PokeInfo[i].rc.top + 47, 95, 8, ((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()) , ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()));
+
 		 }
 
 	 }
+
+
+	 _PokeChage.rc = RectMakeCenter(WINSIZEX  / 2 , 208, 449, 118);
+	 _PokeChage.rc1 = RectMakeCenter(WINSIZEX - 38, WINSIZEY - 36, 71, 73);
 
 	 _CancleRc = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 25, 104, 45);
 
@@ -120,6 +126,8 @@ MonsterBack::~MonsterBack()
 		 if(SCENEMANAGER->getLastSceneName() == "battleScene")
 		 {
 
+			 if (_isChange == false)
+			 {
 				 //마우스로 키를 눌렀을 경우~
 				 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 				 {
@@ -133,11 +141,15 @@ MonsterBack::~MonsterBack()
 					 {
 						 if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
 						 {
+							 _SelectPokeMonNum = i;
 							 _isChange = true;
 						 }
 
 					 }
+				 }
 			 }
+
+
 			 //키로 취소를 눌렀을 경우
 			 if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 			 {
@@ -147,7 +159,24 @@ MonsterBack::~MonsterBack()
 		 }
 	 }
 
-
+	 //============배틀 쒼 전환 =======================//
+	 if (_isChange == true)
+	 {
+		 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		 {
+			 if (PtInRect(&_PokeChage.rc, _ptMouse))
+			 {
+				 _battleSceneUI->getBattleScene()->setPlayerChangeNum(_SelectPokeMonNum);
+				 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+				 _battleSceneUI->selectReset();
+			 }
+			 if (PtInRect(&_PokeChage.rc1, _ptMouse))
+			 {
+				 _isChange = false;
+			 }
+		 }
+	 }
+	 //====================================================//
 
 
 
@@ -228,11 +257,18 @@ MonsterBack::~MonsterBack()
 				 //==== 포켓몬 조그만한 이미지 출력 박스===///
 				 //Rectangle(getMemDC(), _PokeInfo[0].PokeImageRc.left, _PokeInfo[0].PokeImageRc.top, _PokeInfo[0].PokeImageRc.right, _PokeInfo[0].PokeImageRc.bottom);
 			}
-			 if (_isChange)
-	     	{
-				 IMAGEMANAGER->findImage("pokeChange")->render(getMemDC(), 0, 0);
-			}
-
 	 }
+		 if (_isChange)
+		 {
+			 IMAGEMANAGER->findImage("pokeChange")->render(getMemDC(), 0, 0);
+			// Rectangle(getMemDC(), _PokeChage.rc.left, _PokeChage.rc.top, _PokeChage.rc.right, _PokeChage.rc.bottom);
+			// Rectangle(getMemDC(), _PokeChage.rc1.left, _PokeChage.rc1.top, _PokeChage.rc1.right, _PokeChage.rc1.bottom);
+
+			 IMAGEMANAGER->findImage((*DATABASE->getVPlayerPokemon())[_SelectPokeMonNum]->getName() + "s")->frameRender(getMemDC(), WINSIZEX / 2 - 35, WINSIZEY / 2 - 80, _PokeInfo[_SelectPokeMonNum].currentFrameX, 0);
+			 
+			 SetBkMode(getMemDC(), TRANSPARENT);
+			 TextOut(getMemDC(),WINSIZEX / 2 - 40, 80, (*DATABASE->getVPlayerPokemon())[_SelectPokeMonNum]->getName().c_str(), strlen((*DATABASE->getVPlayerPokemon())[_SelectPokeMonNum]->getName().c_str()));
+		 }
+		// _battleSceneUI->getBattleScene()->setPlayerChangeNum(_SelectPokeMonNum);
 
  }
