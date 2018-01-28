@@ -67,16 +67,16 @@
     <Filter Include="playGround\이정민">
       <UniqueIdentifier>{a85a9058-757f-478f-92c4-0fc585867e62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\배건하">
-      <UniqueIdentifier>{d3880e20-cd71-4602-b012-2afbf83068d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2DGameFramework\dialogue">
       <UniqueIdentifier>{0da971c6-1a93-4451-b38d-0a6f89adefbd}</UniqueIdentifier>
     </Filter>
     <Filter Include="2DGameFramework\Manager">
       <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\배건하\stage">
+    <Filter Include="playGround\건하,근화">
+      <UniqueIdentifier>{d3880e20-cd71-4602-b012-2afbf83068d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\건하,근화\stage">
       <UniqueIdentifier>{cffa375e-57ec-4396-8d27-29566f7b6d66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -199,7 +199,7 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>playGround\배건하</Filter>
+      <Filter>playGround\건하,근화</Filter>
     </ClInclude>
     <ClInclude Include="shopScene.h">
       <Filter>playGround\한재윤</Filter>
@@ -220,16 +220,16 @@
       <Filter>playGround\최동건</Filter>
     </ClInclude>
     <ClInclude Include="stageManager.h">
-      <Filter>playGround\배건하</Filter>
+      <Filter>playGround\건하,근화</Filter>
     </ClInclude>
     <ClInclude Include="fighterMap.h">
-      <Filter>playGround\배건하\stage</Filter>
+      <Filter>playGround\건하,근화\stage</Filter>
     </ClInclude>
     <ClInclude Include="flyMap.h">
-      <Filter>playGround\배건하\stage</Filter>
+      <Filter>playGround\건하,근화\stage</Filter>
     </ClInclude>
     <ClInclude Include="drOHouse.h">
-      <Filter>playGround\배건하\stage</Filter>
+      <Filter>playGround\건하,근화\stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -336,7 +336,7 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>playGround\배건하</Filter>
+      <Filter>playGround\건하,근화</Filter>
     </ClCompile>
     <ClCompile Include="shopScene.cpp">
       <Filter>playGround\한재윤</Filter>
@@ -360,16 +360,16 @@
       <Filter>playGround\최동건</Filter>
     </ClCompile>
     <ClCompile Include="stageManager.cpp">
-      <Filter>playGround\배건하</Filter>
+      <Filter>playGround\건하,근화</Filter>
     </ClCompile>
     <ClCompile Include="fighterMap.cpp">
-      <Filter>playGround\배건하\stage</Filter>
+      <Filter>playGround\건하,근화\stage</Filter>
     </ClCompile>
     <ClCompile Include="flyMap.cpp">
-      <Filter>playGround\배건하\stage</Filter>
+      <Filter>playGround\건하,근화\stage</Filter>
     </ClCompile>
     <ClCompile Include="drOHouse.cpp">
-      <Filter>playGround\배건하\stage</Filter>
+      <Filter>playGround\건하,근화\stage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
