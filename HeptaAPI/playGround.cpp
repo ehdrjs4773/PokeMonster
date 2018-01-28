@@ -21,18 +21,27 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->addScene("오프닝씬", new Opening);
 	SCENEMANAGER->addScene("SelectScene", new SelectScene);
-	SCENEMANAGER->addScene("DR5", new stageScene);
 	shopScene* shop = new shopScene;
 	SCENEMANAGER->addScene("상점씬", shop);
 	SCENEMANAGER->addScene("인벤토리씬", new inventory);
-	SCENEMANAGER->init("인벤토리씬");
-
 	SCENEMANAGER->addScene("PokeInfo", new MonsterBack);
 	SCENEMANAGER->addScene("UI", new UI);
+	SCENEMANAGER->init("인벤토리씬");
+
 	//--------수테이지 테스트----------
-	SCENEMANAGER->addScene("flyMap", new flyMap);
-	SCENEMANAGER->addScene("fighterMap", new fighterMap);
-	SCENEMANAGER->addScene("drOHouseMap", new drOHouse);
+	SCENEMANAGER->addScene("스테이지0", new drOHouse);
+	SCENEMANAGER->addScene("스테이지1", new steelMap);
+	SCENEMANAGER->addScene("스테이지2", new fighterMap);
+	SCENEMANAGER->addScene("스테이지3", new ghostMap);
+	SCENEMANAGER->addScene("스테이지4", new normalMap);
+	SCENEMANAGER->addScene("스테이지5", new dragonMap);
+	SCENEMANAGER->addScene("스테이지6", new bugMap);
+	SCENEMANAGER->addScene("스테이지7", new flyMap);
+	SCENEMANAGER->addScene("스테이지8", new iceMap);
+	SCENEMANAGER->addScene("스테이지9", new guardian1);
+	SCENEMANAGER->addScene("스테이지10", new guardian2);
+	SCENEMANAGER->addScene("스테이지11", new guardian3);
+	SCENEMANAGER->addScene("스테이지12", new guardian4);
 
 
 	shop->invenMemoryAdressLink((inventory*)SCENEMANAGER->findScene("인벤토리씬"));
@@ -49,6 +58,8 @@ HRESULT playGround::init()
 	_temp3->init("몸통박치기");
 	skill* _temp4 = new skill;
 	_temp4->init("몸통박치기");
+	skill* _temp5 = new skill;
+	_temp5->init("몸통박치기");
 
 	pokemon* isang = new pokemon;
 	isang->init("이상해씨", 24);
@@ -58,17 +69,23 @@ HRESULT playGround::init()
 	tuttleKing->init("거북왕", 36);
 	tuttleKing->addSkill(_temp4);
 	pokemon* dandaegi = new pokemon;
-	dandaegi->init("꼬부기", 20);
+	dandaegi->init("단데기", 20);
 	dandaegi->addSkill(_temp3);
+	pokemon* ggorat = new pokemon;
+	ggorat->init("꼬렛", 1);
+	ggorat->addSkill(_temp5);
 	vPokemon->push_back(isang);
 	vPokemon->push_back(tuttleKing);
 	vPokemon2->push_back(dandaegi);
+	vPokemon2->push_back(ggorat);
 
 	DATABASE->setVPlayerPokemon(vPokemon);
 	DATABASE->setVEnemyPokemon(vPokemon2);
 
 	SCENEMANAGER->init("PokeInfo");
 	SCENEMANAGER->init("UI");
+
+	//SCENEMANAGER->changeScene("오프닝씬");
 
 	return S_OK;
 }
@@ -97,6 +114,7 @@ void playGround::update(void)
 	{
 		SCENEMANAGER->changeScene("battleScene");
 		SCENEMANAGER->init("battleScene");
+		SCENEMANAGER->findScene("battleScene")->setDestScene("월드맵씬");
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_F3))
@@ -122,18 +140,18 @@ void playGround::update(void)
 	//--------수테이지 테스트----------
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))	//오박사
 	{
-		SCENEMANAGER->changeScene("drOHouseMap");
-		SCENEMANAGER->init("drOHouseMap");
+		SCENEMANAGER->changeScene("스테이지9");
+		SCENEMANAGER->init("스테이지9");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD1))	//비행
 	{
-		SCENEMANAGER->changeScene("flyMap");
-		SCENEMANAGER->init("flyMap");
+		SCENEMANAGER->changeScene("스테이지7");
+		SCENEMANAGER->init("스테이지7");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD2))	//격투
 	{
-		SCENEMANAGER->changeScene("fighterMap");
-		SCENEMANAGER->init("fighterMap");
+		SCENEMANAGER->changeScene("스테이지2");
+		SCENEMANAGER->init("스테이지2");
 	}
 	
 }

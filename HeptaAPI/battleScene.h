@@ -48,6 +48,14 @@ enum FIGHT_SEQUENCE
 	FIGHT_END
 };
 
+enum END_SEQUENCE
+{
+	ENEMY_DIE,
+	PLAYER_DIE,
+	END_CHANGE,
+	END_END
+};
+
 // 배틀 씬 시퀀스 진행
 // 인트로(적, 플레이어 각각 오른쪽, 왼쪽에서 등장)
 // 볼 스로우(적이 트레이너일 경우와 야생의 경우 다른데, 플레이어는 볼 던지고 적은 타입에따라 던지거나 말거나)
@@ -64,6 +72,7 @@ private:
 
 	BATTLE_SEQUENCE _sequence;
 	FIGHT_SEQUENCE _fight;
+	END_SEQUENCE _end;
 
 	RECT _playerImageRect;
 	RECT _enemyImageRect;
@@ -89,6 +98,10 @@ private:
 	progressBar* _enemyHPBar;
 	progressBar* _playerHPBar;
 	progressBar* _playerEXPBar;
+
+	// 적이 다 죽었는지, 플레이어가 다 죽었는지
+	bool _enemyIsDie;
+	bool _playerIsDie;
 
 public:
 	battleScene();

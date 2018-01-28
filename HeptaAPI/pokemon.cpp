@@ -100,8 +100,8 @@ bool pokemon::addSkill(skill* sk)
 
 void pokemon::hitDamager(int damage)
 {
-	_currentHP -= damage;
-
-	if (_currentHP < 0)
+	if (damage > _currentHP)
 		_currentHP = 0;
+	else
+		_currentHP -= damage;
 }

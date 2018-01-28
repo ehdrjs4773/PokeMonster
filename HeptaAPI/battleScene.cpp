@@ -49,6 +49,7 @@ HRESULT battleScene::init()
 
 	_sequence = BATTLE_INTRO;
 	_fight = PLAYER_ATTACK;
+	_end = END_END;
 
 	// UI 초기화
 	if (_UI == NULL)
@@ -88,6 +89,10 @@ HRESULT battleScene::init()
 
 	_playerChangePokemonNum = INT_MAX;
 	_enemyChangePokemonNum = INT_MAX;
+
+	// 플레이어, 적 죽었는지 초기화 == 일단 둘 다 false
+	_enemyIsDie = false;
+	_playerIsDie = false;
 
 	return S_OK;
 }
@@ -156,7 +161,7 @@ void battleScene::update()
 						return;
 					}
 
-					if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getName() == "몸통박치기")
+					if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getType() == SKILL_PHYSIC)
 					{
 						if (_frameTime <= 20)
 						{
@@ -181,13 +186,24 @@ void battleScene::update()
 							{
 								(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
 
-								_fight = ENEMY_ATTACK;
-								DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
-								DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
-								DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
-								_frameTime = 0;
+								if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
+								{
+									_sequence = BATTLE_END;
+									_end = ENEMY_DIE;
+									_fight = PLAYER_ATTACK;
+									DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
+									DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+								}
+								else
+								{
+									_fight = ENEMY_ATTACK;
+									DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
+									DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+									DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
+									_frameTime = 0;
 
-								_UI->selectReset();
+									_UI->selectReset();
+								}
 							}
 						}
 					}
@@ -235,7 +251,7 @@ void battleScene::update()
 						return;
 					}
 
-					if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName() == "몸통박치기")
+					if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getType() == SKILL_PHYSIC)
 					{
 						if (_frameTime <= 20)
 						{
@@ -266,6 +282,67 @@ void battleScene::update()
 						}
 					}
 				break;
+			}
+		break;
+
+		case BATTLE_END:
+			switch (_end)
+			{
+				case ENEMY_DIE:
+					if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
+					{
+						_enemyImageRect.left += 3;
+						_enemyImageRect.right += 3;
+
+						if (_enemyImageRect.left > LIMIT_X_RIGHT)
+						{
+							_enemyCurrentPokemon++;
+							if (_enemyCurrentPokemon >= _enemyPokemon->size())
+							{
+								_enemyCurrentPokemon--;
+								_sequence = BATTLE_FINAL;
+								DIALOGUE->loadingTextFile(".\\textData\\battleScene_final_win.txt");
+								_frameTime = 0;
+							}
+							else
+							{
+								_end = END_CHANGE;
+								DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_change.txt");
+								DIALOGUE->replaceAll("#", "적");
+								DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+								_enemyHPBar->setGauge((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP());
+							}
+						}
+					}
+				break;
+
+				case END_CHANGE:
+					if (_playerImageRect.left < LIMIT_X_LEFT)
+					{
+						_playerImageRect.left++;
+						_playerImageRect.right++;
+					}
+					if (_enemyImageRect.right > LIMIT_X_RIGHT)
+					{
+						_enemyImageRect.left--;
+						_enemyImageRect.right--;
+					}
+
+					if (_playerImageRect.left >= LIMIT_X_LEFT &&
+						_enemyImageRect.right <= LIMIT_X_RIGHT)
+					{
+						_sequence = BATTLE_SELECT;
+					}
+				break;
+			}
+		break;
+
+		case BATTLE_FINAL:
+			_frameTime++;
+			if (_frameTime % 50 == 0)
+			{
+				SCENEMANAGER->init("월드맵씬");
+				SCENEMANAGER->changeScene(_destScene);
 			}
 		break;
 	}
@@ -300,9 +377,11 @@ void battleScene::render()
 		break;
 		
 		case BATTLE_END:
+			DIALOGUE->render(getMemDC());
 		break;
 		
 		case BATTLE_FINAL:
+			DIALOGUE->render(getMemDC());
 		break;
 	}
 

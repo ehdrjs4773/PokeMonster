@@ -4,15 +4,25 @@
 #include "battleScene.h"
 #include "Opening.h"
 #include "SelectScene.h"
-#include "stageScene.h"
 #include "shopScene.h"
 #include "inventory.h"
 #include "UI.h"
 #include "MonsterBack.h"
 //--------수테이지------
-#include "flyMap.h"
-#include "fighterMap.h"
-#include "drOHouse.h"
+
+#include "drOHouse.h"	// 정보번호 0
+#include "steelMap.h"	// 정보번호 1
+#include "fighterMap.h"	// 정보번호 2
+#include "ghostMap.h"	// 정보번호 3
+#include "normalMap.h"	// 정보번호 4
+#include "dragonMap.h"	// 정보번호 5
+#include "bugMap.h"		// 정보번호 6
+#include "flyMap.h"		// 정보번호 7
+#include "iceMap.h"		// 정보번호 8
+#include "guardian1.h"	// 정보번호 9
+#include "guardian2.h"	// 정보번호 10
+#include "guardian3.h"	// 정보번호 11
+#include "guardian4.h"	// 정보번호 12
 
 
 
@@ -28,6 +38,8 @@ public:
 	virtual void release(void);		//메모리 관련 해제
 	virtual void update(void);		//업데이트(연산)
 	virtual void render(void);		//그려주는 함수
+
+	void imageInit();
 
 	playGround();
 	~playGround();

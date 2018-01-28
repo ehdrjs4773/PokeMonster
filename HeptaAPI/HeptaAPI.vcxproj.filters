@@ -210,9 +210,6 @@
     <ClInclude Include="itemManager.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
-    <ClInclude Include="stageScene.h">
-      <Filter>playGround\박근화</Filter>
-    </ClInclude>
     <ClInclude Include="inventory.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
@@ -229,6 +226,39 @@
       <Filter>playGround\건하,근화\stage</Filter>
     </ClInclude>
     <ClInclude Include="drOHouse.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="steelMap.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="bugMap.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="champion.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="dragonMap.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="ghostMap.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="guardian1.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="guardian2.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="guardian3.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="guardian4.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="iceMap.h">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="normalMap.h">
       <Filter>playGround\건하,근화\stage</Filter>
     </ClInclude>
   </ItemGroup>
@@ -350,9 +380,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="stageScene.cpp">
-      <Filter>playGround\박근화</Filter>
-    </ClCompile>
     <ClCompile Include="inventory.cpp">
       <Filter>playGround\한재윤</Filter>
     </ClCompile>
@@ -369,6 +396,39 @@
       <Filter>playGround\건하,근화\stage</Filter>
     </ClCompile>
     <ClCompile Include="drOHouse.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="steelMap.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="bugMap.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="champion.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="dragonMap.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="ghostMap.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="guardian1.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="guardian2.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="guardian3.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="guardian4.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="iceMap.cpp">
+      <Filter>playGround\건하,근화\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="normalMap.cpp">
       <Filter>playGround\건하,근화\stage</Filter>
     </ClCompile>
   </ItemGroup>
