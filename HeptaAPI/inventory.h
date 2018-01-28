@@ -97,6 +97,8 @@ private:
 	InvenSlot _invenSlot_POTION[SLOT_MAX];
 	InvenSlot _invenSlot_MACHINE[SLOT_MAX];
 
+	item* _currentItem;
+
 	int _WS; //스위치용 상태 값
 
 	int SelectNum; //mainmenu selectNum
@@ -121,18 +123,11 @@ public:
 	void renderItem(string strKey, WINDOWSTATUSS ws, int num);					//가져와서 인벤토리에 그려주는 함수
 	mapItemIter findNum(int arrNum);
 
-	vItem& getCurrentItem() { return _vInventory; }
-	viItem& getCurrentItemIter() { return _viInventory; }
-
+	item* getCurrentItem() { return _currentItem; }
+	
 	inline void changeWS(int WS) { _WS = WS; }
 
-	//item 사용용 getter
-	item* getUTIL_SLOT_0() { return _invenSlot_UTIL[0].itm; }
-	item* getUTIL_SLOT_1() { return _invenSlot_UTIL[1].itm; }
-	item* getUTIL_SLOT_2() { return _invenSlot_UTIL[2].itm; }
-	item* getUTIL_SLOT_3() { return _invenSlot_UTIL[3].itm; }
-	item* getUTIL_SLOT_4() { return _invenSlot_UTIL[4].itm; }
-	item* getUTIL_SLOT_5() { return _invenSlot_UTIL[5].itm; }
+
 
 };
 

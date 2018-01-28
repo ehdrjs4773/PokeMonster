@@ -202,26 +202,32 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			_invenSlot_POTION[num].slotUse = true;
 			if (_invenSlot_POTION[0].slotUse)
 			{
+				_invenSlot_POTION[0].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_POTION[1].slotUse)
 			{
+				_invenSlot_POTION[1].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_POTION[2].slotUse)
 			{
+				_invenSlot_POTION[2].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_POTION[3].slotUse)
 			{
+				_invenSlot_POTION[3].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_POTION[4].slotUse)
 			{
+				_invenSlot_POTION[4].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_POTION[5].slotUse)
 			{
+				_invenSlot_POTION[5].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_POTION[0].slotUse &&_invenSlot_POTION[1].slotUse &&_invenSlot_POTION[2].slotUse &&_invenSlot_POTION[3].slotUse &&_invenSlot_POTION[4].slotUse &&_invenSlot_POTION[5].slotUse)
@@ -240,26 +246,32 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			_invenSlot_BALL[num].slotUse = true;
 			if (_invenSlot_BALL[0].slotUse)
 			{
+				_invenSlot_BALL[0].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_BALL[1].slotUse)
 			{
+				_invenSlot_BALL[1].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_BALL[2].slotUse)
 			{
+				_invenSlot_BALL[2].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_BALL[3].slotUse)
 			{
+				_invenSlot_BALL[3].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_BALL[4].slotUse)
 			{
+				_invenSlot_BALL[4].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_BALL[5].slotUse)
 			{
+				_invenSlot_BALL[5].itm = key->second;
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_BALL[0].slotUse &&_invenSlot_BALL[1].slotUse &&_invenSlot_BALL[2].slotUse &&_invenSlot_BALL[3].slotUse &&_invenSlot_BALL[4].slotUse &&_invenSlot_BALL[5].slotUse)
@@ -352,40 +364,35 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 			renderItem(iter->first, WSS_UTIL, i);
 	}
 
-	//renderItem("아무거나", WSS_UTIL);
-	//renderItem("머신2", WSS_UTIL);
-	//renderItem("머신3", WSS_UTIL);
-	//renderItem("머신4", WSS_UTIL);
-
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		//_inven->buyItem(_item->findItem("몬스터볼")->getItem());
+		_currentItem = _invenSlot_UTIL[0].itm;
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_UTIL[1].itm;
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_UTIL[2].itm;
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_UTIL[3].itm;
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_UTIL[4].itm;
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_UTIL[5].itm;
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
@@ -435,32 +442,32 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		//_inven->buyItem(_item->findItem("몬스터볼")->getItem());
+		_currentItem = _invenSlot_POTION[0].itm;
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_POTION[1].itm;
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_POTION[2].itm;
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_POTION[3].itm;
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_POTION[4].itm;
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_POTION[5].itm;
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
@@ -511,32 +518,32 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		//_inven->buyItem(_item->findItem("몬스터볼")->getItem());
+		_currentItem = _invenSlot_BALL[0].itm;
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_BALL[1].itm;
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_BALL[2].itm;
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_BALL[3].itm;
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_BALL[4].itm;
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_BALL[5].itm;
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
@@ -586,32 +593,32 @@ void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		//_inven->buyItem(_item->findItem("몬스터볼")->getItem());
+		_currentItem = _invenSlot_MACHINE[0].itm;
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_MACHINE[1].itm;
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_MACHINE[2].itm;
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_MACHINE[3].itm;
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_MACHINE[4].itm;
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		//IMAGEMANAGER->findImage("상점메인")->render(getMemDC(), 0, 0);
+		_currentItem = _invenSlot_MACHINE[5].itm;
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
@@ -755,3 +762,4 @@ map<string, item*>::iterator inventory::findNum(int arrNum)
 
 	return iter;
 }
+
