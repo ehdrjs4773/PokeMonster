@@ -87,11 +87,18 @@ public:
 
 	inline int getSpeed() { return _speed; }
 	inline int getCurrentHP() { return _currentHP; }
+	inline void setCurrentHP(int num)
+	{
+		_currentHP = num;
+		if (_currentHP > _maxHP)
+			_currentHP = _maxHP;
+	}
 	inline int getMaxHP() { return _maxHP; }
 	inline int getCurrentEXP() { return _currentEXP; }
 	inline int getMaxEXP() { return _maxEXP; }
 	inline string getName() { return _pokemonName; }
 	inline vector<skill*> getVSkill() { return _vSkills; }
+
 
 	inline int getAtk() { return _atk; }
 	inline int getDef() { return _def; }

@@ -81,8 +81,8 @@ void worldMapScene::update()
 	}
 	if (_select[GYM_2].Selected) //3번째 체육관 
 	{
-		SCENEMANAGER->changeScene("flyMap");
-		SCENEMANAGER->init("flyMap");
+		SCENEMANAGER->changeScene("스테이지7");
+		SCENEMANAGER->init("스테이지7");
 		_select[GYM_2].Selected = false;
 	}
 	if (_select[GYM_3].Selected) //4번째 체육관 

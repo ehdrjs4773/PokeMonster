@@ -10,6 +10,9 @@ private:
 	HDC _hdc;
 	bool _managerInit;		//매니저등을 초기화 할 것이냐
 
+protected:
+	string _destScene;
+
 public:
 	virtual HRESULT init(void);		//초기화 함수
 	virtual HRESULT init(bool managerInit);
@@ -27,5 +30,7 @@ public:
 
 	gameNode();
 	virtual ~gameNode();
+
+	inline void setDestScene(string dest) { _destScene = dest; }
 };
 

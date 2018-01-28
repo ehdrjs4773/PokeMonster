@@ -3,6 +3,7 @@
 #include "progressBar.h"
 
 class battleSceneUI;
+class inventory;
 
 struct PokeInfo
 {
@@ -42,10 +43,11 @@ private :
 	int _SelectPokeMonNum;
 
 
-
+	inventory* _inventory;
 	battleSceneUI* _battleSceneUI;
 
 	bool _isChange;
+	bool _isLife;
 	
 
 	PokeInfo _PokeInfo[6];
@@ -63,6 +65,6 @@ public:
 	virtual void release(void);
 
 	inline void battleSceneUIMemoruAddressLink(battleSceneUI* ui) { _battleSceneUI = ui; }
-
+	inline void inventoryMemoryAddressLink(inventory* ui) { _inventory = ui; }
 };
 

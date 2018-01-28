@@ -3,14 +3,16 @@
 #include "pokemon.h"
 #include "battleSceneUI.h"
 #include "battleScene.h"
+#include "inventory.h"
+#include "item.h"
 
 MonsterBack::MonsterBack()
-{
+{//생성맨~
 }
 
 
 MonsterBack::~MonsterBack()
-{
+{//소멸맨~
 }
 
 
@@ -23,6 +25,8 @@ MonsterBack::~MonsterBack()
 	 IMAGEMANAGER->addImage("PokeMonCatch", ".\\bmps\\PokeBack\\DogamMonsterIn.bmp", 239, 92, false, true, MAGENTA);
 	 IMAGEMANAGER->addFrameImage("이상해씨", ".\\bmps\\MonsterBag\\이상해씨s.bmp", 80, 40, 2, 1, false, true, MAGENTA);
 	 IMAGEMANAGER->addImage("pokeChange", ".\\bmps\\PokeBack\\pokeChange.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
+	
+
 
 	 for (int i = 0; i < 6; i++)
 	 {
@@ -50,7 +54,6 @@ MonsterBack::~MonsterBack()
 		 {
 			 _PokeInfo[i]._playerHpBar = new progressBar;
 			 _PokeInfo[i]._playerHpBar->init("hpBar", _PokeInfo[i].rc.left + 118, _PokeInfo[i].rc.top + 47, 95, 8, ((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()) , ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()));
-
 		 }
 
 	 }
@@ -125,7 +128,7 @@ MonsterBack::~MonsterBack()
 	 // 마지막 신이 배틀 씬 일때 ~~
 		 if(SCENEMANAGER->getLastSceneName() == "battleScene")
 		 {
-
+			 
 			 if (_isChange == false)
 			 {
 				 //마우스로 키를 눌렀을 경우~
@@ -189,6 +192,34 @@ MonsterBack::~MonsterBack()
 
 
 	 // 마지막 씬이 UI였을때~
+	 if (SCENEMANAGER->getLastSceneName() == "인벤토리씬")
+	 {
+	
+
+		 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		 {		 //마우스로 취소 키를 눌렀을 경우~
+			 if (PtInRect(&_CancleRc, _ptMouse))
+			 {
+				 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+			 }
+
+			 //아이템 사용~ 하는거
+			 for (int i = 0; i < DATABASE->getVPlayerPokemon()->size(); i++)
+			 {
+				 if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
+				 {
+					 (*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
+				 }
+			 }
+		 }
+		 //키로 취소를 눌렀을 경우
+		 if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
+		 {
+			 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		 }
+	 }
+
+
 	 if (SCENEMANAGER->getLastSceneName() == "UI")
 	 {
 		 //마우스로 취소 키를 눌렀을 경우~
@@ -196,18 +227,18 @@ MonsterBack::~MonsterBack()
 		 {
 			 if (PtInRect(&_CancleRc, _ptMouse))
 			 {
-				 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+				 SCENEMANAGER->changeScene("UI");
 			 }
 		 }
 
 		 //키로 취소를 눌렀을 경우
 		 if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 		 {
-			 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+			 SCENEMANAGER->changeScene("UI");
 
 		 }
-	 }
 
+	 }
 
 
 

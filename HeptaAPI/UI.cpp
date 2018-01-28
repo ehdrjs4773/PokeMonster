@@ -90,7 +90,7 @@ void UI::update(void)
 
 	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
-		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		SCENEMANAGER->changeScene(_destScene);
 	}
 
 

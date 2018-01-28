@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "inventory.h"
+#include "MonsterBack.h"
 
 
 
@@ -90,6 +91,13 @@ HRESULT inventory::init()
 		
 	IndexSelectNum = 0;
 	_selectItem[0].isSelect = true;
+
+
+
+	_MonsterBack = (MonsterBack*)SCENEMANAGER->findScene("PokeInfo");
+	_MonsterBack->inventoryMemoryAddressLink(this);
+
+
 
 	return S_OK;
 }
@@ -368,6 +376,7 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
 		_currentItem = _invenSlot_UTIL[0].itm;
+		SCENEMANAGER->changeScene("PokeInfo");
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 

@@ -21,6 +21,7 @@
 
 class item;
 class itemManager;
+class MonsterBack;
 
 enum WINDOWSTATUSS //현재화면의 상태값
 {
@@ -103,6 +104,12 @@ private:
 
 	int SelectNum; //mainmenu selectNum
 	int IndexSelectNum; //아이템구매창
+
+
+	MonsterBack* _MonsterBack;
+
+
+
 
 public:
 	inventory();

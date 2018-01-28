@@ -276,6 +276,9 @@ void player::update()
 	if (KEYMANAGER->isOnceKeyDown('P'))
 	{
 		SCENEMANAGER->changeScene("UI");
+		char tempStage[32];
+		sprintf(tempStage, "스테이지%d", _currentStage);
+		SCENEMANAGER->findScene("UI")->setDestScene(tempStage);
 	}
 
 }

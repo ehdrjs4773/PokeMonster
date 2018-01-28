@@ -118,7 +118,7 @@ void SelectScene::update(void)
 			if (_count % 50 == 0)
 			{
 				_currentFrameX++;
-				if (_currentFrameX >= 5) SCENEMANAGER->changeScene("DR5");
+				if (_currentFrameX >= 5) SCENEMANAGER->changeScene("스테이지0");
 				_count = 0;
 			}
 

@@ -170,7 +170,7 @@ void Opening::update(void)
 
 	if (_opening == Opening_Five)
 	{
-		if (KEYMANAGER->isOnceKeyDown('X'))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{	
 			SOUNDMANAGER->stop("오프닝 사운드");
 			DIALOGUE->loadingTextFile(".\\textData\\opening_sin.txt");
