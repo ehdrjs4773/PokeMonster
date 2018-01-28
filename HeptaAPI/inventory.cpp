@@ -196,62 +196,42 @@ void inventory::buyItems(string strKey, item* itm)
 
 void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 {
-	for (int i = 0; i < SLOT_MAX; ++i)
-	{
-			_invenSlot_UTIL[i].slotUse = false;
-			_invenSlot_UTIL[num].slotUse = true;
-	}
-
-
-	for (int i = 0; i < SLOT_MAX; ++i)
-	{
-		_invenSlot_POTION[i].slotUse = false;
-		_invenSlot_POTION[num].slotUse = true;
-	}
-
-
-	for (int i = 0; i < SLOT_MAX; ++i)
-	{
-		_invenSlot_BALL[i].slotUse = false;
-		_invenSlot_BALL[num].slotUse = true;
-	}
-
-
-	for (int i = 0; i < SLOT_MAX; ++i)
-	{
-		_invenSlot_MACHINE[i].slotUse = false;
-		_invenSlot_MACHINE[num].slotUse = true;
-	}
-
 	mapItemIter key = _mInvenList.find(strKey);
 
 	if (key != _mInvenList.end()) //key값이 있으면
 	{
 		if (ws == WSS_UTIL)
 		{
+			if (_mInvenList.find(strKey)->second->getType() != ITEM_UTILS) return;
+
+			for (int i = 0; i < SLOT_MAX; ++i)
+			{
+				_invenSlot_UTIL[i].slotUse = false;
+			}
+			_invenSlot_UTIL[num].slotUse = true;
 			if (_invenSlot_UTIL[0].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_UTIL[1].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_UTIL[2].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_UTIL[3].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_UTIL[4].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_UTIL[5].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_유틸")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_UTIL[1].slotUse &&_invenSlot_UTIL[2].slotUse &&_invenSlot_UTIL[3].slotUse &&_invenSlot_UTIL[4].slotUse &&_invenSlot_UTIL[5].slotUse &&_invenSlot_UTIL[6].slotUse)
 			{
@@ -260,29 +240,36 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 		}
 		else if (ws == WSS_POTION)
 		{
+			if (_mInvenList.find(strKey)->second->getType() != ITEM_POTION) return;
+
+			for (int i = 0; i < SLOT_MAX; ++i)
+			{
+				_invenSlot_POTION[i].slotUse = false;
+			}
+			_invenSlot_POTION[num].slotUse = true;
 			if (_invenSlot_POTION[0].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_POTION[1].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_POTION[2].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_POTION[3].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_POTION[4].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_POTION[5].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_포션")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_POTION[0].slotUse &&_invenSlot_POTION[1].slotUse &&_invenSlot_POTION[2].slotUse &&_invenSlot_POTION[3].slotUse &&_invenSlot_POTION[4].slotUse &&_invenSlot_POTION[5].slotUse)
 			{
@@ -291,29 +278,36 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 		}
 		else if (ws == WSS_BALL)
 		{
+			if (_mInvenList.find(strKey)->second->getType() != ITEM_BALL) return;
+
+			for (int i = 0; i < SLOT_MAX; ++i)
+			{
+				_invenSlot_BALL[i].slotUse = false;
+			}
+			_invenSlot_BALL[num].slotUse = true;
 			if (_invenSlot_BALL[0].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_BALL[1].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_BALL[2].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_BALL[3].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_BALL[4].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_BALL[5].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_볼")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_BALL[0].slotUse &&_invenSlot_BALL[1].slotUse &&_invenSlot_BALL[2].slotUse &&_invenSlot_BALL[3].slotUse &&_invenSlot_BALL[4].slotUse &&_invenSlot_BALL[5].slotUse)
 			{
@@ -322,29 +316,36 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 		}
 		else if (ws == WSS_MACHINE)
 		{
+			if (_mInvenList.find(strKey)->second->getType() != ITEM_MACHINE) return;
+
+			for (int i = 0; i < SLOT_MAX; ++i)
+			{
+				_invenSlot_MACHINE[i].slotUse = false;
+			}
+			_invenSlot_MACHINE[num].slotUse = true;
 			if (_invenSlot_MACHINE[0].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_MACHINE[1].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_MACHINE[2].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_MACHINE[3].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_MACHINE[4].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_MACHINE[5].slotUse)
 			{
-				key->second->InvenRender(IMAGEMANAGER->findImage("인벤토리_머신")->getMemDC(), _mInvenList[strKey]->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
+				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_MACHINE[0].slotUse &&_invenSlot_MACHINE[1].slotUse &&_invenSlot_MACHINE[2].slotUse &&_invenSlot_MACHINE[3].slotUse &&_invenSlot_MACHINE[4].slotUse &&_invenSlot_MACHINE[5].slotUse)
 			{
