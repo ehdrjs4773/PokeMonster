@@ -45,6 +45,7 @@ HRESULT UI::init()
 	_Info[4].rc = RectMakeCenter(120, 270, 90, 90);
 
 	_NameExit = RectMakeCenter(403, 325, 116, 43);
+	_UiExit = RectMakeCenter(403, 318, 116, 43);
 
 	_PlayerBage.rc1 = RectMakeCenter(200, 30, 35, 35);
 	_PlayerBage.rc2 = RectMakeCenter(290, 30, 35, 35);
@@ -107,15 +108,15 @@ void UI::update(void)
 			{
 				
 			}
+
+			else if (PtInRect(&_UiExit, _ptMouse))
+			{
+				SCENEMANAGER->changeScene(_destScene);
+			}
 		
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('X'))
-	{
-		SCENEMANAGER->changeScene(_destScene);
-	}
-	
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
 		if(PtInRect(&_NameExit, _ptMouse))
@@ -144,6 +145,7 @@ void UI::render(void)
 	IMAGEMANAGER->findImage("PlayerPokeMon")->render(getMemDC(), _Info[2].rc.left, _Info[2].rc.top);
 	IMAGEMANAGER->findImage("PlayerSave")->render(getMemDC(), _Info[3].rc.left, _Info[3].rc.top);
 	IMAGEMANAGER->findImage("PlayerUiBak")->render(getMemDC(), _Info[4].rc.left, _Info[4].rc.top);
+	//Rectangle(getMemDC(), _UiExit.left, _UiExit.top, _UiExit.right, _UiExit.bottom);
 	if (_isName)
 	{
 
@@ -155,7 +157,7 @@ void UI::render(void)
 		sprintf(currentMoney, "%d", 1000);
 		TextOut(getMemDC(), 220, 180, currentMoney, strlen(currentMoney));
 		//Retanle(getMemDC(),_NameExit.left, _NameExit.top, _NameExit.right, _NameExit.bottom);
-
+		
 		if (_PlayerBage.bage1) IMAGEMANAGER->findImage("bage1")->render(getMemDC(),_PlayerBage.rc1.left, _PlayerBage.rc1.top);
 		if (_PlayerBage.bage2) IMAGEMANAGER->findImage("bage2")->render(getMemDC(), _PlayerBage.rc2.left, _PlayerBage.rc2.top);
 		if (_PlayerBage.bage3) IMAGEMANAGER->findImage("bage3")->render(getMemDC(), _PlayerBage.rc3.left, _PlayerBage.rc3.top);

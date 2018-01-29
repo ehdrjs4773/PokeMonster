@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "database.h"
 #include "pokemon.h"
+#include "stageManager.h"
 
 
 database::database()
@@ -18,7 +19,20 @@ HRESULT database::init()
 	this->loadDatabasePokemon(".\\textData\\pokemonFinish.txt");
 	this->loadDatabaseSkill(".\\textData\\pokemon_skill.txt");
 
+	for (int i = 0; i < 8; ++i)
+		_isStageClear[i] = false;
+
 	return S_OK;
+}
+
+void database::update()
+{
+	for (int i = 0; i < 8; ++i)
+	{
+		string temp = "스테이지" + (i + 1);
+		stageManager* tempScene = (stageManager*)SCENEMANAGER->findScene(temp);
+		_isStageClear[i] = tempScene->getIsWin();
+	}
 }
 
 void database::release()

@@ -56,8 +56,11 @@ private:
 	arrElement _mTotalElement;
 	map<string, skills*> _mTotalSkill;
 
+	bool _isStageClear[8];
+
 public:
 	HRESULT init();
+	void update();
 	void release();
 
 	void loadDatabasePokemon(string name);
@@ -74,5 +77,7 @@ public:
 	inline vPokemon* getVEnemyPokemon() { return _vEnemyPokemon; }
 	inline void setVPlayerPokemon(vPokemon* poke) { _vPlayerPokemon = poke; }
 	inline void setVEnemyPokemon(vPokemon* poke) { _vEnemyPokemon = poke; }
+
+	inline bool getIsStageClear(int num) { return _isStageClear[num - 1]; }
 };
 

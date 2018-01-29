@@ -176,6 +176,7 @@ void Opening::update(void)
 			DIALOGUE->loadingTextFile(".\\textData\\opening_sin.txt");
 			DIALOGUE->setPoint(PointMake(100, WINSIZEY - 50));
 			SCENEMANAGER->changeScene("SelectScene");
+			SCENEMANAGER->init("SelectScene");
 		}
 	}
 

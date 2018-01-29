@@ -77,7 +77,7 @@ void gameNode::release(void)
 
 void gameNode::update(void)	  
 {
-	
+	DATABASE->update();
 }
 
 void gameNode::render(void)
