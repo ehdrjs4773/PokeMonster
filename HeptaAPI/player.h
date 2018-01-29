@@ -44,9 +44,10 @@ public:
 
 	inline void setPlayerPt(POINT pt) { _x = pt.x; _y = pt.y; }
 
-
 	inline RECT getPlayerRc() { return _playerRc; }
 	inline int  setCurrentStage(int x) {  return _currentStage = x; }
+
+
 	
 
 	//플레이어 방향 접근자,설정자

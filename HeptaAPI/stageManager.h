@@ -10,7 +10,7 @@ protected:
 	player* _player;
 	image* _gymLeader;		//Ã¼À°°ü °üÀå
 
-	
+	bool _isWin;
 
 public:
 	stageManager();
@@ -20,5 +20,7 @@ public:
 	void release();
 	void update();
 	void render();
+
+	inline bool getIsWin() { return _isWin; }
 };
 
