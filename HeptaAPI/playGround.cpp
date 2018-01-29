@@ -53,29 +53,58 @@ HRESULT playGround::init()
 	vector<pokemon*>* vPokemon = new vector<pokemon*>;
 	vector<pokemon*>* vPokemon2 = new vector<pokemon*>;
 
+	// ## ½ºÅ³ TEST ##
+	//³ë¸»
 	skill* _temp = new skill;
-	_temp->init("¸öÅë¹ÚÄ¡±â");
+	_temp->init("°í¹«°í¹«³­Å¸");
+	//¹°
 	skill* _temp2 = new skill;
 	_temp2->init("¹°´ëÆ÷");
+	//ºÒ
+	skill* _temp6 = new skill;
+	_temp6->init("ºÒ²É¼¼·Ê");
+	//¹ÙÀ§
+	skill* _temp7 = new skill;
+	_temp7->init("¿ø½ÃÀÇÈû");
+	//µ¶
+	skill* _temp8 = new skill;
+	_temp8->init("¿ëÇØ¾×");
+	//°ÝÅõ
+	skill* _temp9 = new skill;
+	_temp9->init("ÆÄµ¿Åº");
+	//¾óÀ½
+	skill* _temp10 = new skill;
+	_temp10->init("³Ãµ¿ºö");
+	//Àü±â
+	skill* _temp11 = new skill;
+	_temp11->init("¹ø°³");
+	//Ç®
+	skill* _temp12 = new skill;
+	_temp12->init("Ç®ÀÌ³ª¿Â´ÙÇÏÁK");
+
+
+	// =======
 	skill* _temp3 = new skill;
 	_temp3->init("¸öÅë¹ÚÄ¡±â");
 	skill* _temp4 = new skill;
 	_temp4->init("¸öÅë¹ÚÄ¡±â");
 	skill* _temp5 = new skill;
 	_temp5->init("¸öÅë¹ÚÄ¡±â");
+	// =========
 
 	pokemon* isang = new pokemon;
-	isang->init("ÀÌ»óÇØ¾¾", 24);
+	isang->init("ÀÌ»óÇØ¾¾", 500);
 	isang->addSkill(_temp);
-	isang->addSkill(_temp2);
+	isang->addSkill(_temp12);
 	pokemon* tuttleKing = new pokemon;
 	tuttleKing->init("°ÅºÏ¿Õ", 36);
-	tuttleKing->addSkill(_temp4);
+	tuttleKing->addSkill(_temp11);
 	pokemon* dandaegi = new pokemon;
-	dandaegi->init("´Üµ¥±â", 20);
-	dandaegi->addSkill(_temp3);
+	dandaegi->init("´Üµ¥±â", 99);
+	dandaegi->addSkill(_temp12);
+
 	pokemon* ggorat = new pokemon;
-	ggorat->init("²¿·¿", 30);
+	ggorat->init("²¿·¿", INT_MAX);
 	ggorat->addSkill(_temp5);
 	vPokemon->push_back(isang);
 	vPokemon->push_back(tuttleKing);
