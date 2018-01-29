@@ -26,6 +26,8 @@ class UI : public gameNode
 
 private:
 
+	RECT _NameExit;
+
 
 	InfoRect _Info[5];
 	PlayerBage _PlayerBage;

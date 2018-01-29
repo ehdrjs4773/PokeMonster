@@ -34,6 +34,7 @@ HRESULT UI::init()
 	IMAGEMANAGER->addImage("bage6", ".\\bmps\\UI\\bage6.bmp", 35, 35, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("bage7", ".\\bmps\\UI\\bage7.bmp", 35, 35, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("bage8", ".\\bmps\\UI\\bage8.bmp", 35, 35, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("kingbage", ".\\bmps\\UI\\´ë¿Õ¹îÁö.bmp", 92, 50, false, true, MAGENTA);
 
 
 	//==============UI ±¸Á¶Ã¼ ÃÊ±âÈ­======================//
@@ -42,7 +43,8 @@ HRESULT UI::init()
 	_Info[2].rc = RectMakeCenter(120, 180, 90, 90);
 	_Info[3].rc = RectMakeCenter(360, 180, 90, 90);
 	_Info[4].rc = RectMakeCenter(120, 270, 90, 90);
-		
+
+	_NameExit = RectMakeCenter(403, 325, 116, 43);
 
 	_PlayerBage.rc1 = RectMakeCenter(200, 30, 35, 35);
 	_PlayerBage.rc2 = RectMakeCenter(290, 30, 35, 35);
@@ -61,6 +63,8 @@ HRESULT UI::init()
 	_PlayerBage.bage6 = false;
 	_PlayerBage.bage7 = false;
 	_PlayerBage.bage8 = false;
+
+
 	//======= ºÒ°ª~========
 	_isName = false;
 
@@ -73,48 +77,52 @@ void UI::release(void)
 }
 void UI::update(void) 
 {
-
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	if(!_isName)
 	{
-		if (PtInRect(&_Info[0].rc, _ptMouse))
+		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
-			if (!_isName) SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+			if (PtInRect(&_Info[0].rc, _ptMouse))
+			{
+				if (!_isName) SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+			}
+		
+			else if (PtInRect(&_Info[1].rc, _ptMouse))
+			{
+				_isName = true;
+			}
+		
+			else if (PtInRect(&_Info[2].rc, _ptMouse))
+			{
+				if (!_isName) SCENEMANAGER->changeScene("PokeInfo");
+			}
+			else if (PtInRect(&_Info[3].rc, _ptMouse))
+			{
+				
+			}	
+			else if (PtInRect(&_Info[4].rc, _ptMouse))
+			{
+				
+			}
+			else if (PtInRect(&_Info[5].rc, _ptMouse))
+			{
+				
+			}
+		
 		}
-	
-		else if (PtInRect(&_Info[1].rc, _ptMouse))
-		{
-			_isName = true;
-		}
-	
-		else if (PtInRect(&_Info[2].rc, _ptMouse))
-		{
-			if (!_isName) SCENEMANAGER->changeScene("PokeInfo");
-		}
-		else if (PtInRect(&_Info[3].rc, _ptMouse))
-		{
-			
-		}	
-		else if (PtInRect(&_Info[4].rc, _ptMouse))
-		{
-			
-		}
-		else if (PtInRect(&_Info[5].rc, _ptMouse))
-		{
-			
-		}
-	
-	}
-
-	// Ãë¼Ú! //
-	if (KEYMANAGER->isOnceKeyDown('C'))
-	{
-		_isName = false;
-		_isMonBak = false;
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
 		SCENEMANAGER->changeScene(_destScene);
+	}
+	
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if(PtInRect(&_NameExit, _ptMouse))
+		{
+			_isName = false;
+			_isMonBak = false;
+		}
 	}
 
 
@@ -146,7 +154,7 @@ void UI::render(void)
 		char currentMoney[32];
 		sprintf(currentMoney, "%d", 1000);
 		TextOut(getMemDC(), 220, 180, currentMoney, strlen(currentMoney));
-
+		//Retanle(getMemDC(),_NameExit.left, _NameExit.top, _NameExit.right, _NameExit.bottom);
 
 		if (_PlayerBage.bage1) IMAGEMANAGER->findImage("bage1")->render(getMemDC(),_PlayerBage.rc1.left, _PlayerBage.rc1.top);
 		if (_PlayerBage.bage2) IMAGEMANAGER->findImage("bage2")->render(getMemDC(), _PlayerBage.rc2.left, _PlayerBage.rc2.top);
@@ -157,6 +165,10 @@ void UI::render(void)
 		if (_PlayerBage.bage7) IMAGEMANAGER->findImage("bage7")->render(getMemDC(), _PlayerBage.rc7.left, _PlayerBage.rc7.top);
 		if (_PlayerBage.bage8) IMAGEMANAGER->findImage("bage8")->render(getMemDC(), _PlayerBage.rc8.left, _PlayerBage.rc8.top);
 
+		if (_PlayerBage.bage1, _PlayerBage.bage2, _PlayerBage.bage3, _PlayerBage.bage4, _PlayerBage.bage5, _PlayerBage.bage6, _PlayerBage.bage7, _PlayerBage.bage8)
+		{
+			IMAGEMANAGER->findImage("kingbage")->render(getMemDC(), 15, 25);
+		}
 	}
 
 }

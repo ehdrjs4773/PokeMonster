@@ -13,3 +13,31 @@ Ending::~Ending()
 {
 
 }
+
+
+HRESULT Ending::init()
+{
+
+
+
+	return S_OK;
+}
+
+
+void Ending::release(void)
+{
+
+}
+
+
+void Ending::update(void) 
+{
+
+}
+
+
+void Ending::render(void) 
+{
+
+}
+
