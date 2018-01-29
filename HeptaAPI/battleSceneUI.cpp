@@ -143,6 +143,9 @@ void battleSceneUI::render()
 	this->printLevel(_battleScene->getCurrentEnemyPokemon()->getLevel(), 205, 106);
 	this->printName(_battleScene->getCurrentPlayerPokemon()->getName(), 268, 200);
 	this->printName(_battleScene->getCurrentEnemyPokemon()->getName(), 107, 104);
+	char temp[32];
+	sprintf(temp, "%d", _battleScene->getCurrentEnemyPokemon()->getMaxHP());
+	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, temp, strlen(temp));
 }
 
 void battleSceneUI::keyControl()
@@ -208,6 +211,7 @@ void battleSceneUI::keyControl()
 			{
 				_isPokemonSelect = true;
 				SCENEMANAGER->changeScene("PokeInfo");
+				SCENEMANAGER->init("PokeInfo");
 			}
 			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 0)
 			{

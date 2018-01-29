@@ -47,7 +47,8 @@ public:
 	skill();
 	~skill();
 
-	virtual HRESULT init(string name);
+	HRESULT init(string name);
+	void setSkill(string name, int cp);
 
 	inline void useSkill() { _currentPP--; }
 

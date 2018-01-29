@@ -87,6 +87,7 @@ private:
 
 	int _introTime;
 	int _frameTime;
+	int _attackTime;
 	int _frameX;
 
 	bool _isGetEXP;
@@ -99,6 +100,10 @@ private:
 	progressBar* _enemyHPBar;
 	progressBar* _playerHPBar;
 	progressBar* _playerEXPBar;
+
+	// 포켓몬 잡을 때 몬스터볼 그려질 렉트
+	RECT _monsterBall;
+	bool _isMonsterCatch;
 
 	// 적이 다 죽었는지, 플레이어가 다 죽었는지
 	bool _enemyIsDie;

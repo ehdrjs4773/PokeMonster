@@ -126,3 +126,32 @@ void pokemon::levelUp()
 	_maxEXP = pow(_level + 1, (float)3) - pow(_level, (float)3);
 	_currentEXP = 0;
 }
+
+void pokemon::setStatus(string name, int lv, int iH, int iA, int iD, int iSpec, int iS, int cH)
+{
+	_pokemonName = name;
+	_element = (ELEMENT)DATABASE->getElementData(name)->element;
+	_level = lv;
+
+	_racialHP = DATABASE->getElementData(name)->hp;
+	_racialATK = DATABASE->getElementData(name)->atk;
+	_racialDEF = DATABASE->getElementData(name)->def;
+	_racialSPECIAL = DATABASE->getElementData(name)->special;
+	_racialSPEED = DATABASE->getElementData(name)->speed;
+
+	_individualATK = iA;
+	_individualDEF = iD;
+	_individualSPECIAL = iSpec;
+	_individualSPEED = iS;
+	_individualHP = iH;
+
+	_maxHP = _level * ((_racialHP + _individualHP + 50 + (0 * pow((float)2, -11))) / 50);
+	_currentHP = cH;
+	_atk = _level * ((_racialATK + _individualATK + 50 + (0 * pow((float)2, -11))) / 50) + 5;
+	_def = _level * ((_racialDEF + _individualDEF + 50 + (0 * pow((float)2, -11))) / 50) + 5;
+	_special = _level * ((_racialSPECIAL + _individualSPECIAL + 50 + (0 * pow((float)2, -11))) / 50) + 5;
+	_speed = _level * ((_racialSPEED + _individualSPEED + 50 + (0 * pow((float)2, -11))) / 50) + 5;
+
+	_currentEXP = 0;
+	_maxEXP = pow(_level + 1, (float)3) - pow(_level, (float)3);
+}

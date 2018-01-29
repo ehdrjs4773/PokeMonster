@@ -67,6 +67,7 @@ HRESULT battleScene::init()
 	// 사용할 이미지 등록
 	IMAGEMANAGER->addFrameImage("battle_player", ".\\bmps\\battleScene\\battle_player.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addFrameImage("battle_player_ball", ".\\bmps\\battleScene\\battle_player_ball.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("pokeball_shake", ".\\bmps\\battleScene\\pokeball_shake.bmp", 70 * 3, 60, 3, 1, false, true, MAGENTA);
 
 	// 테스트용
 	_playerImageRect = RectMakeCenter(LIMIT_X_LEFT - POKEMON_WIDTH / 2, LIMIT_Y_BOTTOM - POKEMON_HEIGHT / 2, POKEMON_WIDTH, POKEMON_HEIGHT);
@@ -74,6 +75,7 @@ HRESULT battleScene::init()
 
 	_introTime = 0;
 	_frameTime = 0;
+	_attackTime = 0;
 	_frameX = 0;
 
 	DIALOGUE->loadingTextFile(".\\textData\\battleScene_intro.txt");
@@ -154,16 +156,37 @@ void battleScene::update()
 		break;
 
 		case BATTLE_SELECT:
-			_frameTime = 0;
+			_attackTime = 0;
 			_isGetEXP = false;
+			_monsterBall = RectMake(LIMIT_X_LEFT - 70, LIMIT_Y_BOTTOM - 120, 70, 60);
+			_isMonsterCatch = false;
 		break;
 
 		case BATTLE_FIGHT:
-			_frameTime++;
+			_attackTime++;
 			switch (_fight)
 			{
 				case PLAYER_CATCH:
+					if (!_isMonsterCatch)
+					{
+						_frameX = 2;
 
+						_monsterBall.left += 2;
+						_monsterBall.right += 2;
+						_monsterBall.top--;
+						_monsterBall.bottom--;
+
+						RECT temp;
+						if (IntersectRect(&temp, &_monsterBall, &_enemyImageRect))
+						{
+							_isMonsterCatch = true;
+							_monsterBall = RectMakeCenter(LIMIT_X_RIGHT - 60, _enemyImageRect.bottom - 30, 70, 60);
+						}
+					}
+					else
+					{
+						this->frameUpdate();
+					}
 				break;
 
 				case PLAYER_ATTACK:
@@ -175,17 +198,17 @@ void battleScene::update()
 
 					if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getType() == SKILL_PHYSIC)
 					{
-						if (_frameTime <= 20)
+						if (_attackTime <= 20)
 						{
 							_playerImageRect.left += 2;
 							_playerImageRect.right += 2;
 							_playerImageRect.top--;
 							_playerImageRect.bottom--;
 
-							if (_frameTime == 20)
+							if (_attackTime == 20)
 								(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
 						}
-						else if (_frameTime <= 40)
+						else if (_attackTime <= 40)
 						{
 							_playerImageRect.left -= 2;
 							_playerImageRect.right -= 2;
@@ -234,7 +257,7 @@ void battleScene::update()
 									DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
 									DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
 									DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
-									_frameTime = 0;
+									_attackTime = 0;
 
 									_UI->selectReset();
 								}
@@ -249,7 +272,7 @@ void battleScene::update()
 							skillKey = "고무고무난타";
 						else
 							skillKey = this->elementString(tempEl) + "_player";
-						if (_frameTime == 1)
+						if (_attackTime == 1)
 							EFFECTMANAGER->play(skillKey, WINSIZEX / 2, WINSIZEY / 2);
 						else
 						{
@@ -296,7 +319,7 @@ void battleScene::update()
 										DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
 										DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
 										DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
-										_frameTime = 0;
+										_attackTime = 0;
 
 										_UI->selectReset();
 									}
@@ -335,7 +358,7 @@ void battleScene::update()
 							DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
 							DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
 							DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
-							_frameTime = 0;
+							_attackTime = 0;
 
 							_UI->selectReset();
 						}
@@ -351,17 +374,17 @@ void battleScene::update()
 
 					if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getType() == SKILL_PHYSIC)
 					{
-						if (_frameTime <= 20)
+						if (_attackTime <= 20)
 						{
 							_enemyImageRect.left -= 2;
 							_enemyImageRect.right -= 2;
 							_enemyImageRect.top++;
 							_enemyImageRect.bottom++;
 
-							if (_frameTime == 20)
+							if (_attackTime == 20)
 								(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
 						}
-						else if (_frameTime <= 40)
+						else if (_attackTime <= 40)
 						{
 							_enemyImageRect.left += 2;
 							_enemyImageRect.right += 2;
@@ -393,7 +416,7 @@ void battleScene::update()
 					else if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getType() == SKILL_SPECIAL)
 					{
 						ELEMENT tempEl = (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getElement();
-						if (_frameTime == 1)
+						if (_attackTime == 1)
 							EFFECTMANAGER->play(this->elementString(tempEl) + "_enemy", WINSIZEX / 2, WINSIZEY / 2);
 						else
 						{
@@ -443,7 +466,7 @@ void battleScene::update()
 								_enemyCurrentPokemon--;
 								_sequence = BATTLE_FINAL;
 								DIALOGUE->loadingTextFile(".\\textData\\battleScene_final_win.txt");
-								_frameTime = 0;
+								_attackTime = 0;
 							}
 							else
 							{
@@ -471,7 +494,7 @@ void battleScene::update()
 								_playerCurrentPokemon--;
 								_sequence = BATTLE_FINAL;
 								DIALOGUE->loadingTextFile(".\\textData\\battleScene_final_lose.txt");
-								_frameTime = 0;
+								_attackTime = 0;
 							}
 							else
 							{
@@ -525,8 +548,8 @@ void battleScene::update()
 			}
 			else
 			{
-				_frameTime++;
-				if (_frameTime % 50 == 0)
+				_attackTime++;
+				if (_attackTime % 50 == 0)
 				{
 					// test
 					SCENEMANAGER->init("월드맵씬");
@@ -578,8 +601,18 @@ void battleScene::render()
 
 	if (_sequence != BATTLE_INTRO &&
 		_sequence != BATTLE_BALLTHROW)
-		IMAGEMANAGER->findImage((*_playerPokemon)[_playerCurrentPokemon]->getName() + "_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
-	IMAGEMANAGER->findImage((*_enemyPokemon)[_enemyCurrentPokemon]->getName() + "_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+	{
+		if (_fight == PLAYER_CATCH)
+		{
+			IMAGEMANAGER->findImage("pokeball_shake")->frameRender(getMemDC(), _monsterBall.left, _monsterBall.top, _frameX, 0);
+			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, 0, 0);
+		}
+		else
+			IMAGEMANAGER->findImage((*_playerPokemon)[_playerCurrentPokemon]->getName() + "_back")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
+	}
+	if (!(_isMonsterCatch &&
+		_fight == PLAYER_CATCH))
+		IMAGEMANAGER->findImage((*_enemyPokemon)[_enemyCurrentPokemon]->getName() + "_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 
 	_UI->render();
 
@@ -622,7 +655,58 @@ void battleScene::frameUpdate()
 		case BATTLE_FIGHT:
 			if (_fight == PLAYER_CATCH)
 			{
+				if (_frameTime < 100)
+				{
+					if (_frameTime < 25)
+						_frameX = 0;
+					else if (_frameTime < 50)
+						_frameX = 2;
+					else
+						_frameX = 1;
+				}
+				else if (_frameTime < 200)
+				{
+					if (_frameTime < 125)
+						_frameX = 0;
+					else if (_frameTime < 150)
+						_frameX = 2;
+					else
+						_frameX = 1;
+				}
+				else if (_frameTime < 300)
+				{
+					if (_frameTime < 225)
+						_frameX = 0;
+					else if (_frameTime < 250)
+						_frameX = 2;
+					else
+						_frameX = 1;
+				}
+				else
+				{
+					_sequence = BATTLE_FINAL;
+					DIALOGUE->loadingTextFile(".\\textData\\battleScene_catch.txt");
+					DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+					pokemon* tempPokemon = new pokemon;
+					tempPokemon->setStatus((*_enemyPokemon)[_enemyCurrentPokemon]->getName(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getLevel(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getIHP(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getIATK(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getIDEF(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getISPECIAL(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getISPEED(),
+						(*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP());
 
+					for (int i = 0; i < (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill().size(); ++i)
+					{
+						skill* tempSkill = new skill;
+						tempSkill->setSkill((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[i]->getName(),
+							(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[i]->getCurrentPP());
+						tempPokemon->addSkill(tempSkill);
+					}
+
+					_playerPokemon->push_back(tempPokemon);
+				}
 			}
 		break;
 	}

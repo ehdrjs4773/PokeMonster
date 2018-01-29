@@ -103,11 +103,18 @@ public:
 	inline string getName() { return _pokemonName; }
 	inline vector<skill*> getVSkill() { return _vSkills; }
 
+	inline int getIHP() { return _individualHP; }
+	inline int getIATK() { return _individualATK; }
+	inline int getIDEF() { return _individualDEF; }
+	inline int getISPECIAL() { return _individualSPECIAL; }
+	inline int getISPEED() { return _individualSPEED; }
 
 	inline int getAtk() { return _atk; }
 	inline int getDef() { return _def; }
 	inline int getSpecial() { return _special; }
 	inline int getLevel() { return _level; }
 	inline ELEMENT getElement() { return _element; }
+
+	void setStatus(string name, int lv, int iH, int iA, int iD, int iSpec, int iS, int cH);
 };
 
