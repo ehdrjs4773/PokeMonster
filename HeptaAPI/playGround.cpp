@@ -82,6 +82,32 @@ HRESULT playGround::init()
 	skill* _temp12 = new skill;
 	_temp12->init("Ç®ÀÌ³ª¿Â´ÙÇÏÁK");
 
+	//°í½ºÆ®
+	skill* _temp13 = new skill;
+	_temp13->init("µµ±úºñºÒ");
+	//µå·¡°ï
+	skill* _temp14 = new skill;
+	_temp14->init("µå·¡°ïÅ©·ç");
+	//°­Ã¶
+	skill* _temp15 = new skill;
+	_temp15->init("·¯½ºÅÍÄ³³í");
+	//¿¡½ºÆÛ
+	skill* _temp16 = new skill;
+	_temp16->init("¼ù°¡¶ôÈÖ±â");
+	//¹ú·¹
+	skill* _temp17 = new skill;
+	_temp17->init("½Ã±×³Îºö");
+	//¾Ç
+	skill* _temp18 = new skill;
+	_temp18->init("¾ÇÀÇÆÄµ¿");
+	//ºñÇà
+	skill* _temp19 = new skill;
+	_temp19->init("¿¡¾î½½·¡½¬");
+	//ÁöÁø
+	skill* _temp20 = new skill;
+	_temp20->init("ÁöÁø");
+
+
 
 	// =======
 	skill* _temp3 = new skill;
@@ -94,8 +120,8 @@ HRESULT playGround::init()
 
 	pokemon* isang = new pokemon;
 	isang->init("ÀÌ»óÇØ¾¾", 500);
-	isang->addSkill(_temp);
-	isang->addSkill(_temp2);
+	isang->addSkill(_temp15);
+	isang->addSkill(_temp17);
 	pokemon* tuttleKing = new pokemon;
 	tuttleKing->init("°ÅºÏ¿Õ", 36);
 	tuttleKing->addSkill(_temp11);
