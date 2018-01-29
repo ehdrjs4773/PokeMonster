@@ -14,6 +14,9 @@ pokemon::~pokemon()
 
 HRESULT pokemon::init(string name, int level)
 {
+	if (level > LEVEL_MAX)
+		level = LEVEL_MAX;
+
 	string tempName = name + "_back";
 	string filePath = ".\\bmps\\battleScene\\pokemon_back\\" + name + "_back.bmp";
 	IMAGEMANAGER->addFrameImage(tempName, filePath.c_str(), 120 * 2, 120, 2, 1, false, true, MAGENTA);

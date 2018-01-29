@@ -246,48 +246,51 @@ void battleScene::update()
 						{
 							if (EFFECTMANAGER->isEffectEnd(this->elementString(tempEl) + "_player"))
 							{
-								(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
-								(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
-
-								if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
+								if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
 								{
-									if (!_isGetEXP)
+									(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
+									(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
+
+									if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
 									{
-										float type;
-										if (_enemyType == ENEMY_WILD)
-											type = 1;
-										else if (_enemyType == ENEMY_TRAINNER)
-											type = 1.5;
-
-										(*_playerPokemon)[_playerCurrentPokemon]->expPlus(type * 144 * (*_enemyPokemon)[_enemyCurrentPokemon]->getLevel() / 7);
-
-										_isGetEXP = true;
-									}
-
-									if (_playerEXPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP()))
-									{
-										if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP() >= (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP())
+										if (!_isGetEXP)
 										{
-											(*_playerPokemon)[_playerCurrentPokemon]->levelUp();
-											_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP());
+											float type;
+											if (_enemyType == ENEMY_WILD)
+												type = 1;
+											else if (_enemyType == ENEMY_TRAINNER)
+												type = 1.5;
+
+											(*_playerPokemon)[_playerCurrentPokemon]->expPlus(type * 144 * (*_enemyPokemon)[_enemyCurrentPokemon]->getLevel() / 7);
+
+											_isGetEXP = true;
 										}
 
-										_sequence = BATTLE_END;
-										_end = ENEMY_DIE;
-										_fight = PLAYER_ATTACK;
-										DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
-										DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
-									}
-								}
-								else
-								{
-									_fight = ENEMY_ATTACK;
-									DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
-									DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
-									DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
-									_frameTime = 0;
+										if (_playerEXPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP()))
+										{
+											if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP() >= (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP())
+											{
+												(*_playerPokemon)[_playerCurrentPokemon]->levelUp();
+												_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP());
+											}
 
-									_UI->selectReset();
+											_sequence = BATTLE_END;
+											_end = ENEMY_DIE;
+											_fight = PLAYER_ATTACK;
+											DIALOGUE->loadingTextFile(".\\textData\\battleScene_end_die.txt");
+											DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+										}
+									}
+									else
+									{
+										_fight = ENEMY_ATTACK;
+										DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
+										DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
+										DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());
+										_frameTime = 0;
+
+										_UI->selectReset();
+									}
 								}
 							}
 						}
@@ -305,6 +308,7 @@ void battleScene::update()
 						{
 							_playerCurrentPokemon = _playerChangePokemonNum;
 							_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP());
+							_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP());
 							_playerChangePokemonNum = INT_MAX;
 						}
 					}
@@ -467,6 +471,7 @@ void battleScene::update()
 								DIALOGUE->replaceAll("#", "³ª");
 								DIALOGUE->replaceAll("@", (*_playerPokemon)[_playerCurrentPokemon]->getName());
 								_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP());
+								_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP());
 							}
 						}
 					}
@@ -494,11 +499,30 @@ void battleScene::update()
 		break;
 
 		case BATTLE_FINAL:
-			_frameTime++;
-			if (_frameTime % 50 == 0)
+			if (_UI->isRunAway())
 			{
-				SCENEMANAGER->init("¿ùµå¸Ê¾À");
-				SCENEMANAGER->changeScene(_destScene);
+				if (_playerImageRect.right > LIMIT_X_LEFT)
+				{
+					_playerImageRect.left -= 2;
+					_playerImageRect.right -= 2;
+
+				}
+				else
+				{
+					// test
+					SCENEMANAGER->init("¿ùµå¸Ê¾À");
+					SCENEMANAGER->changeScene(_destScene);
+				}
+			}
+			else
+			{
+				_frameTime++;
+				if (_frameTime % 50 == 0)
+				{
+					// test
+					SCENEMANAGER->init("¿ùµå¸Ê¾À");
+					SCENEMANAGER->changeScene(_destScene);
+				}
 			}
 		break;
 	}

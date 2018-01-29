@@ -217,9 +217,12 @@ void battleSceneUI::keyControl()
 			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 1)
 			{
 				_isRunAwaySelect = true;
+				DIALOGUE->loadingTextFile(".\\textData\\battleScene_runaway.txt");
+				_battleScene->setSequence(BATTLE_FINAL);
 			}
 		}
-		else if (_isFightSelect)
+		else if (_isFightSelect &&
+				_battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getCurrentPP() != 0)
 		{
 			_enemySkillNum = RND->getInt(_battleScene->getCurrentEnemyPokemon()->getVSkill().size());
 			// test

@@ -51,5 +51,6 @@ public:
 	inline int getCurrentEnemySkill() { return _enemySkillNum; }
 	inline void setCurrentEnemySkill(int skill) { _enemySkillNum = skill; }
 	inline battleScene* getBattleScene() { return _battleScene; }
+	inline bool isRunAway() { return _isRunAwaySelect; }
 };
 
