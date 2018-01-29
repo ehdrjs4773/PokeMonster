@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "inventory.h"
-
+#include "battleScene.h"
 
 
 inventory::inventory()
@@ -570,13 +570,19 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 		renderItem(iter->first, WSS_BALL, i);
 	}
 
+	_battleScene = (battleScene*)SCENEMANAGER->findScene("battleScene");
+
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
 		if (_invenSlot_BALL[0].slotUse == true)
 		{
-			_currentItem = _invenSlot_BALL[0].itm;
-			SCENEMANAGER->changeScene("PokeInfo");
+			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			{
+				_currentItem = _invenSlot_BALL[0].itm;
+				_battleScene->setSequenceCatch();
+				SCENEMANAGER->changeScene("battleScene");
+			}
 		}
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
@@ -584,8 +590,12 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[1].slotUse == true)
 		{
-			_currentItem = _invenSlot_BALL[1].itm;
-			SCENEMANAGER->changeScene("PokeInfo");
+			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			{
+				_currentItem = _invenSlot_BALL[1].itm;
+				_battleScene->setSequenceCatch();
+				SCENEMANAGER->changeScene("battleScene");
+			}
 		}
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
@@ -593,8 +603,12 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[2].slotUse == true)
 		{
-			_currentItem = _invenSlot_BALL[2].itm;
-			SCENEMANAGER->changeScene("PokeInfo");
+			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			{
+				_currentItem = _invenSlot_BALL[2].itm;
+				_battleScene->setSequenceCatch();
+				SCENEMANAGER->changeScene("battleScene");
+			}
 		}
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
@@ -602,8 +616,12 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[3].slotUse == true)
 		{
-			_currentItem = _invenSlot_BALL[3].itm;
-			SCENEMANAGER->changeScene("PokeInfo");
+			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			{
+				_currentItem = _invenSlot_BALL[3].itm;
+				_battleScene->setSequenceCatch();
+				SCENEMANAGER->changeScene("battleScene");
+			}
 		}
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
@@ -611,8 +629,12 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[4].slotUse == true)
 		{
-			_currentItem = _invenSlot_BALL[4].itm;
-			SCENEMANAGER->changeScene("PokeInfo");
+			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			{
+				_currentItem = _invenSlot_BALL[4].itm;
+				_battleScene->setSequenceCatch();
+				SCENEMANAGER->changeScene("battleScene");
+			}
 		}
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
@@ -620,8 +642,12 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[5].slotUse == true)
 		{
-			_currentItem = _invenSlot_BALL[5].itm;
-			SCENEMANAGER->changeScene("PokeInfo");
+			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			{
+				_currentItem = _invenSlot_BALL[5].itm;
+				_battleScene->setSequenceCatch();
+				SCENEMANAGER->changeScene("battleScene");
+			}
 		}
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
