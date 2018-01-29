@@ -29,7 +29,8 @@ void database::update()
 {
 	for (int i = 0; i < 8; ++i)
 	{
-		string temp = "스테이지" + (i + 1);
+		char temp[32];
+		sprintf(temp, "스테이지%d", (i + 1));
 		stageManager* tempScene = (stageManager*)SCENEMANAGER->findScene(temp);
 		_isStageClear[i] = tempScene->getIsWin();
 	}

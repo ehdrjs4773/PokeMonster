@@ -46,7 +46,6 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("스테이지12", new guardian4);
 	SCENEMANAGER->addScene("스테이지13", new champion);
 
-
 	shop->invenMemoryAdressLink((inventory*)SCENEMANAGER->findScene("인벤토리씬"));
 
 	// 배틀씬 테스트용
@@ -80,7 +79,7 @@ HRESULT playGround::init()
 	_temp11->init("번개");
 	//풀
 	skill* _temp12 = new skill;
-	_temp12->init("풀이나온다하핳");
+	_temp12->init("하드플랜트");
 
 	//고스트
 	skill* _temp13 = new skill;
