@@ -52,17 +52,8 @@
     <Filter Include="2DGameFramework\DB">
       <UniqueIdentifier>{a19bc8ae-54d9-4a2a-a988-88e3ecfadd86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\한재윤">
-      <UniqueIdentifier>{188ef26d-5d76-4dc4-9155-a0490bebf93c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\최동건">
       <UniqueIdentifier>{6213c533-de1d-4efe-b50a-eb07b213ad0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\박근화">
-      <UniqueIdentifier>{489828b6-ce22-47e3-b2be-c570fbb7422a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\이정민">
-      <UniqueIdentifier>{a85a9058-757f-478f-92c4-0fc585867e62}</UniqueIdentifier>
     </Filter>
     <Filter Include="2DGameFramework\dialogue">
       <UniqueIdentifier>{0da971c6-1a93-4451-b38d-0a6f89adefbd}</UniqueIdentifier>
@@ -76,8 +67,11 @@
     <Filter Include="playGround\건하,근화\stage">
       <UniqueIdentifier>{cffa375e-57ec-4396-8d27-29566f7b6d66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\이정민\정동윤">
+    <Filter Include="playGround\정동윤">
       <UniqueIdentifier>{368b1062-408f-478b-9142-749fa6d257c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\한재윤, 이정민">
+      <UniqueIdentifier>{188ef26d-5d76-4dc4-9155-a0490bebf93c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -166,19 +160,19 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="battleScene.h">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClInclude>
     <ClInclude Include="pokemon.h">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClInclude>
     <ClInclude Include="skill.h">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClInclude>
     <ClInclude Include="worldMapScene.h">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClInclude>
     <ClInclude Include="battleSceneUI.h">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>playGround\최동건</Filter>
@@ -202,16 +196,16 @@
       <Filter>playGround\건하,근화</Filter>
     </ClInclude>
     <ClInclude Include="shopScene.h">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClInclude>
     <ClInclude Include="item.h">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClInclude>
     <ClInclude Include="itemManager.h">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClInclude>
     <ClInclude Include="inventory.h">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClInclude>
     <ClInclude Include="MonsterBack.h">
       <Filter>playGround\최동건</Filter>
@@ -333,19 +327,19 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="battleScene.cpp">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClCompile>
     <ClCompile Include="pokemon.cpp">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClCompile>
     <ClCompile Include="skill.cpp">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClCompile>
     <ClCompile Include="worldMapScene.cpp">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClCompile>
     <ClCompile Include="battleSceneUI.cpp">
-      <Filter>playGround\이정민\정동윤</Filter>
+      <Filter>playGround\정동윤</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>playGround\최동건</Filter>
@@ -369,19 +363,19 @@
       <Filter>playGround\건하,근화</Filter>
     </ClCompile>
     <ClCompile Include="shopScene.cpp">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClCompile>
     <ClCompile Include="item.cpp">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClCompile>
     <ClCompile Include="itemManager.cpp">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="inventory.cpp">
-      <Filter>playGround\한재윤</Filter>
+      <Filter>playGround\한재윤, 이정민</Filter>
     </ClCompile>
     <ClCompile Include="MonsterBack.cpp">
       <Filter>playGround\최동건</Filter>
