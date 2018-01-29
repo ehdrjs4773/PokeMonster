@@ -59,7 +59,7 @@ HRESULT playGround::init()
 	_temp->init("°í¹«°í¹«³­Å¸");
 	//¹°
 	skill* _temp2 = new skill;
-	_temp2->init("¹°´ëÆ÷");
+	_temp2->init("Ä®¹Ù¶÷");
 	//ºÒ
 	skill* _temp6 = new skill;
 	_temp6->init("ºÒ²É¼¼·Ê");
@@ -95,7 +95,7 @@ HRESULT playGround::init()
 	pokemon* isang = new pokemon;
 	isang->init("ÀÌ»óÇØ¾¾", 500);
 	isang->addSkill(_temp);
-	isang->addSkill(_temp12);
+	isang->addSkill(_temp2);
 	pokemon* tuttleKing = new pokemon;
 	tuttleKing->init("°ÅºÏ¿Õ", 36);
 	tuttleKing->addSkill(_temp11);

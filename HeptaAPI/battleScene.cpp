@@ -240,11 +240,16 @@ void battleScene::update()
 					else if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getType() == SKILL_SPECIAL)
 					{
 						ELEMENT tempEl = (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getElement();
+						string skillKey;
+						if ((*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getName() == "고무고무난타")
+							skillKey = "고무고무난타";
+						else
+							skillKey = this->elementString(tempEl) + "_player";
 						if (_frameTime == 1)
-							EFFECTMANAGER->play(this->elementString(tempEl) + "_player", WINSIZEX / 2, WINSIZEY / 2);
+							EFFECTMANAGER->play(skillKey, WINSIZEX / 2, WINSIZEY / 2);
 						else
 						{
-							if (EFFECTMANAGER->isEffectEnd(this->elementString(tempEl) + "_player"))
+							if (EFFECTMANAGER->isEffectEnd(skillKey))
 							{
 								if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
 								{
