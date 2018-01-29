@@ -577,7 +577,7 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[0].slotUse == true)
 		{
-			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			if (_battleScene->getCurrentEnemyType() == ENEMY_WILD)
 			{
 				_currentItem = _invenSlot_BALL[0].itm;
 				_battleScene->setSequenceCatch();
@@ -590,7 +590,7 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[1].slotUse == true)
 		{
-			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			if (_battleScene->getCurrentEnemyType() == ENEMY_WILD)
 			{
 				_currentItem = _invenSlot_BALL[1].itm;
 				_battleScene->setSequenceCatch();
@@ -603,7 +603,7 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[2].slotUse == true)
 		{
-			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			if (_battleScene->getCurrentEnemyType() == ENEMY_WILD)
 			{
 				_currentItem = _invenSlot_BALL[2].itm;
 				_battleScene->setSequenceCatch();
@@ -616,7 +616,7 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[3].slotUse == true)
 		{
-			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			if (_battleScene->getCurrentEnemyType() == ENEMY_WILD)
 			{
 				_currentItem = _invenSlot_BALL[3].itm;
 				_battleScene->setSequenceCatch();
@@ -629,7 +629,7 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[4].slotUse == true)
 		{
-			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			if (_battleScene->getCurrentEnemyType() == ENEMY_WILD)
 			{
 				_currentItem = _invenSlot_BALL[4].itm;
 				_battleScene->setSequenceCatch();
@@ -642,7 +642,7 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	{
 		if (_invenSlot_BALL[5].slotUse == true)
 		{
-			if (_battleScene->getCurrentEnemyType() != ENEMY_WILD)
+			if (_battleScene->getCurrentEnemyType() == ENEMY_WILD)
 			{
 				_currentItem = _invenSlot_BALL[5].itm;
 				_battleScene->setSequenceCatch();

@@ -162,6 +162,10 @@ void battleScene::update()
 			_frameTime++;
 			switch (_fight)
 			{
+				case PLAYER_CATCH:
+
+				break;
+
 				case PLAYER_ATTACK:
 					if (_playerChangePokemonNum != INT_MAX)
 					{
@@ -612,6 +616,13 @@ void battleScene::frameUpdate()
 						_enemyImageRect.left = _enemyImageRect.right - POKEMON_WIDTH;
 					}
 				}
+			}
+		break;
+		
+		case BATTLE_FIGHT:
+			if (_fight == PLAYER_CATCH)
+			{
+
 			}
 		break;
 	}

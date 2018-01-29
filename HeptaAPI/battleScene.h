@@ -43,6 +43,7 @@ enum FIGHT_SEQUENCE
 {
 	PLAYER_ATTACK,
 	PLAYER_CHANGE,
+	PLAYER_CATCH,
 	ENEMY_ATTACK,
 	ENEMY_CHANGE,
 	FIGHT_END
@@ -124,10 +125,16 @@ public:
 	inline pokemon* getCurrentPlayerPokemon() { return (*_playerPokemon)[_playerCurrentPokemon]; }
 	inline int getCurrentPlayerNum() { return _playerCurrentPokemon; }
 	inline pokemon* getCurrentEnemyPokemon() { return (*_enemyPokemon)[_enemyCurrentPokemon]; }
+	inline ENEMY_TYPE getCurrentEnemyType() { return _enemyType; }
 
 	inline void setPlayerChangeNum(int num) { _playerChangePokemonNum = num; }
 	inline void setEnemyChangeNum(int num) { _enemyChangePokemonNum = num; }
 
 	inline void setEnemyType(ENEMY_TYPE type) { _enemyType = type; }
+	inline void setSequenceCatch()
+	{
+		_sequence = BATTLE_FIGHT;
+		_fight = PLAYER_CATCH;
+	}
 };
 
