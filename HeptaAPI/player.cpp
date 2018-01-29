@@ -31,10 +31,13 @@ HRESULT player::init()
 
 	_currentStage = 0;	//맨처음은 오박사집 픽셀이미지로 해둘게요 아마 이건 상관없을거에요
 
-	_x = 265;		//플레이어 맨처음 있는 좌표
-	_y = 330;		//플레이어 맨처음 있는 좌표
+	_x = 240;		//플레이어 맨처음 있는 좌표
+	_y = 340;		//플레이어 맨처음 있는 좌표
+	
 
 	_playerRc = RectMakeCenter(_x, _y, _player->getFrameWidth(), _player->getFrameHeight());
+
+	
 
 	_speed = 1.5f;
 
@@ -78,6 +81,7 @@ void player::release()
 
 void player::update()
 {		
+	
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{

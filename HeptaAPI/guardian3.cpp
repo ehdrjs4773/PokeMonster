@@ -19,12 +19,19 @@ HRESULT guardian3::init()
 	_gymLeader = IMAGEMANAGER->addImage("사천왕3_에스퍼NPC", ".\\bmps\\map\\사천왕3_에스퍼NPC.bmp", 25, 28, false, true, MAGENTA);
 	_player->setCurrentStage(11); //현재 스테이지 정보 넘겨준다
 
-	_x = WINSIZEX / 2 - 17;
-	_y = 60;
+	_x = WINSIZEX / 2 - 12;
+	_y = 25;
 
 	_gymLeaderRc = RectMakeCenter(_x, _y, _gymLeader->getFrameWidth(), _gymLeader->getFrameHeight());
 
-
+	if (SCENEMANAGER->getLastSceneName() == "스테이지12")
+	{
+		_player->setPlayerPt(PointMake(240, 0));
+	}
+	else
+	{
+		_player->setPlayerPt(PointMake(240, 340));
+	}
 	_isWin = false;
 	return S_OK;
 }

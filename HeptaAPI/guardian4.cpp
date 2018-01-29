@@ -19,11 +19,20 @@ HRESULT guardian4::init()
 	_gymLeader = IMAGEMANAGER->addImage("»çÃµ¿Õ4_¾ÇNPC", ".\\bmps\\map\\»çÃµ¿Õ4_¾ÇNPC.bmp", 25, 28, false, true, MAGENTA);
 	_player->setCurrentStage(12); //ÇöÀç ½ºÅ×ÀÌÁö Á¤º¸ ³Ñ°ÜÁØ´Ù
 
-	_x = WINSIZEX / 2 - 17;
-	_y = 60;
+	_x = 227;
+	_y = 90;
 
 	_gymLeaderRc = RectMakeCenter(_x, _y, _gymLeader->getFrameWidth(), _gymLeader->getFrameHeight());
 
+
+	if (SCENEMANAGER->getLastSceneName() == "½ºÅ×ÀÌÁö13")
+	{
+		_player->setPlayerPt(PointMake(240, 0));
+	}
+	else
+	{
+		_player->setPlayerPt(PointMake(240, 340));
+	}
 
 	_isWin = false;
 	return S_OK;
@@ -45,15 +54,15 @@ void guardian4::update()
 	}
 	if (_player->getPlayerRc().bottom <= 0)
 	{
-		SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
-		SCENEMANAGER->init("¿ùµå¸Ê¾À");
+		SCENEMANAGER->changeScene("½ºÅ×ÀÌÁö13");
+		SCENEMANAGER->init("½ºÅ×ÀÌÁö13");
 	}
 }
 
 void guardian4::render()
 {
 	IMAGEMANAGER->findImage("»çÃµ¿Õ4¸Ê")->render(getMemDC());
-	IMAGEMANAGER->findImage("»çÃµ¿Õ4_NPC")->render(getMemDC(), _x, _y);
+	IMAGEMANAGER->findImage("»çÃµ¿Õ4_¾ÇNPC")->render(getMemDC(), _x, _y);
 	stageManager::render();
 
 }

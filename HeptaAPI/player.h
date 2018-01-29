@@ -19,6 +19,7 @@ private:
 	image* _player;
 	float _x;
 	float _y;
+	
 	RECT _playerRc;
 	float _speed;
 	playerDirection _playerDirection;
@@ -36,10 +37,13 @@ public:
 	void update();
 	void render();
 
-	static void _rightStop(void* obj);
-	static void _leftStop(void* obj);
-	static void _frontStop(void* obj);
-	static void _backStop(void* obj);
+	//static void _rightStop(void* obj);
+	//static void _leftStop(void* obj);
+	//static void _frontStop(void* obj);
+	//static void _backStop(void* obj);
+
+	inline void setPlayerPt(POINT pt) { _x = pt.x; _y = pt.y; }
+
 
 	inline RECT getPlayerRc() { return _playerRc; }
 	inline int  setCurrentStage(int x) {  return _currentStage = x; }

@@ -26,8 +26,24 @@ HRESULT guardian1::init()
 	_gymLeaderRc = RectMakeCenter(_x, _y, _gymLeader->getFrameWidth(), _gymLeader->getFrameHeight());
 
 
+	if (SCENEMANAGER->getLastSceneName() == "스테이지10")
+	{
+		_player->setPlayerPt(PointMake(240, 0));
+	}
+	else
+	{
+		_player->setPlayerPt(PointMake(240, 340));
+	}
+
+	
 	_isWin = false;
+	
+
+
+	
 	return S_OK;
+
+
 }
 
 void guardian1::release()
@@ -46,11 +62,11 @@ void guardian1::update()
 		SCENEMANAGER->init("월드맵씬");
 	}
 
-	if (_player->getPlayerRc().bottom <= 0)
+	if (_player->getPlayerRc().bottom < -10)
 	{
 		SCENEMANAGER->changeScene("스테이지10");
 		SCENEMANAGER->init("스테이지10");
-		
+	
 	}
 }
 

@@ -44,6 +44,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("스테이지10", new guardian2);
 	SCENEMANAGER->addScene("스테이지11", new guardian3);
 	SCENEMANAGER->addScene("스테이지12", new guardian4);
+	SCENEMANAGER->addScene("스테이지13", new champion);
 
 
 	shop->invenMemoryAdressLink((inventory*)SCENEMANAGER->findScene("인벤토리씬"));
@@ -142,8 +143,8 @@ void playGround::update(void)
 	//--------수테이지 테스트----------
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))	//오박사
 	{
-		SCENEMANAGER->changeScene("스테이지9");
-		SCENEMANAGER->init("스테이지9");
+		SCENEMANAGER->changeScene("스테이지13");
+		SCENEMANAGER->init("스테이지13");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD1))	//비행
 	{

@@ -23,6 +23,7 @@
 #include "guardian2.h"	// 정보번호 10
 #include "guardian3.h"	// 정보번호 11
 #include "guardian4.h"	// 정보번호 12
+#include "champion.h"	// 정보번호 13
 
 
 

@@ -24,6 +24,14 @@ HRESULT guardian2::init()
 
 	_gymLeaderRc = RectMakeCenter(_x, _y, _gymLeader->getFrameWidth(), _gymLeader->getFrameHeight());
 
+	if (SCENEMANAGER->getLastSceneName() == "스테이지11")
+	{
+		_player->setPlayerPt(PointMake(240, 0));
+	}
+	else
+	{
+		_player->setPlayerPt(PointMake(240, 340));
+	}
 	
 	_isWin = false;
 	return S_OK;
