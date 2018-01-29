@@ -4,7 +4,13 @@
 
 worldMapScene::worldMapScene()
 {
-
+	//처음체육관 초기화
+	SelectNum = 0;
+	_select[0].isSelect = true;
+	for (int i = 0; i < GYM_END; i++)
+	{
+		_isClear[i] = false;
+	}
 }
 
 
@@ -48,9 +54,7 @@ HRESULT worldMapScene::init()
 	_select[GYM_8].pt.x = 230;
 	_select[GYM_8].pt.y = 90;
 
-	//처음체육관 초기화
-	SelectNum = 0;
-	_select[0].isSelect = true;
+
 
 	for (int i = 0; i < GYM_END; i++)
 	{
@@ -81,38 +85,44 @@ void worldMapScene::update()
 	}
 	if (_select[GYM_2].Selected) //3번째 체육관 
 	{
-		SCENEMANAGER->changeScene("스테이지7");
-		SCENEMANAGER->init("스테이지7");
+		SCENEMANAGER->changeScene("스테이지3");
+		SCENEMANAGER->init("스테이지3");
 		_select[GYM_2].Selected = false;
 	}
 	if (_select[GYM_3].Selected) //4번째 체육관 
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("스테이지4");
+		SCENEMANAGER->init("스테이지4");
 		_select[GYM_3].Selected = false;
 	}
 	if (_select[GYM_4].Selected) //5번째 체육관 
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("스테이지5");
+		SCENEMANAGER->init("스테이지5");
 		_select[GYM_4].Selected = false;
 	}
 	if (_select[GYM_5].Selected) //6번째 체육관
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("스테이지6");
+		SCENEMANAGER->init("스테이지6");
 		_select[GYM_5].Selected = false;
 	}
 	if (_select[GYM_6].Selected) //7번째 체육관 
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("스테이지7");
+		SCENEMANAGER->init("스테이지7");
 		_select[GYM_6].Selected = false;
 	}
 	if (_select[GYM_7].Selected) //8번째 체육관 
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("스테이지8");
+		SCENEMANAGER->init("스테이지8");
 		_select[GYM_7].Selected = false;
 	}
 	if (_select[GYM_8].Selected) //9번째 체육관 
 	{
-		SCENEMANAGER->changeScene("오프닝씬");
+		SCENEMANAGER->changeScene("스테이지9");
+		SCENEMANAGER->init("스테이지9");
 		_select[GYM_8].Selected = false;
 	}
 
@@ -135,6 +145,7 @@ void worldMapScene::render()
 	{
 		if (_isClear[i] == true)
 		{
+
 			IMAGEMANAGER->findImage("clear")->render(getMemDC(), _select[i].pt.x, _select[i].pt.y + 50);
 		}
 	}

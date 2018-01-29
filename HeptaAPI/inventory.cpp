@@ -159,31 +159,43 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			if (_invenSlot_UTIL[0].slotUse)
 			{
 				_invenSlot_UTIL[0].itm = key->second;
+				_invenSlot_UTIL[0].key = strKey;
+				_invenSlot_UTIL[0].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_UTIL[1].slotUse)
 			{
 				_invenSlot_UTIL[1].itm = key->second;
+				_invenSlot_UTIL[1].key = strKey;
+				_invenSlot_UTIL[1].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_UTIL[2].slotUse)
 			{
 				_invenSlot_UTIL[2].itm = key->second;
+				_invenSlot_UTIL[2].key = strKey;
+				_invenSlot_UTIL[2].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_UTIL[3].slotUse)
 			{
 				_invenSlot_UTIL[3].itm = key->second;
+				_invenSlot_UTIL[3].key = strKey;
+				_invenSlot_UTIL[3].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_UTIL[4].slotUse)
 			{
 				_invenSlot_UTIL[4].itm = key->second;
+				_invenSlot_UTIL[4].key = strKey;
+				_invenSlot_UTIL[4].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_UTIL[5].slotUse)
 			{
 				_invenSlot_UTIL[5].itm = key->second;
+				_invenSlot_UTIL[5].key = strKey;
+				_invenSlot_UTIL[5].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_UTIL[1].slotUse &&_invenSlot_UTIL[2].slotUse &&_invenSlot_UTIL[3].slotUse &&_invenSlot_UTIL[4].slotUse &&_invenSlot_UTIL[5].slotUse &&_invenSlot_UTIL[6].slotUse)
@@ -203,31 +215,43 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			if (_invenSlot_POTION[0].slotUse)
 			{
 				_invenSlot_POTION[0].itm = key->second;
+				_invenSlot_POTION[0].key = strKey;
+				_invenSlot_POTION[0].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_POTION[1].slotUse)
 			{
 				_invenSlot_POTION[1].itm = key->second;
+				_invenSlot_POTION[1].key = strKey;
+				_invenSlot_POTION[1].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_POTION[2].slotUse)
 			{
 				_invenSlot_POTION[2].itm = key->second;
+				_invenSlot_POTION[2].key = strKey;
+				_invenSlot_POTION[2].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_POTION[3].slotUse)
 			{
 				_invenSlot_POTION[3].itm = key->second;
+				_invenSlot_POTION[3].key = strKey;
+				_invenSlot_POTION[3].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_POTION[4].slotUse)
 			{
 				_invenSlot_POTION[4].itm = key->second;
+				_invenSlot_POTION[4].key = strKey;
+				_invenSlot_POTION[4].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_POTION[5].slotUse)
 			{
 				_invenSlot_POTION[5].itm = key->second;
+				_invenSlot_POTION[5].key = strKey;
+				_invenSlot_POTION[5].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_POTION[0].slotUse &&_invenSlot_POTION[1].slotUse &&_invenSlot_POTION[2].slotUse &&_invenSlot_POTION[3].slotUse &&_invenSlot_POTION[4].slotUse &&_invenSlot_POTION[5].slotUse)
@@ -247,31 +271,43 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			if (_invenSlot_BALL[0].slotUse)
 			{
 				_invenSlot_BALL[0].itm = key->second;
+				_invenSlot_BALL[0].key = strKey;
+				_invenSlot_BALL[0].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_BALL[1].slotUse)
 			{
 				_invenSlot_BALL[1].itm = key->second;
+				_invenSlot_BALL[1].key = strKey;
+				_invenSlot_BALL[1].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_BALL[2].slotUse)
 			{
 				_invenSlot_BALL[2].itm = key->second;
+				_invenSlot_BALL[2].key = strKey;
+				_invenSlot_BALL[2].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_BALL[3].slotUse)
 			{
 				_invenSlot_BALL[3].itm = key->second;
+				_invenSlot_BALL[3].key = strKey;
+				_invenSlot_BALL[3].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_BALL[4].slotUse)
 			{
 				_invenSlot_BALL[4].itm = key->second;
+				_invenSlot_BALL[4].key = strKey;
+				_invenSlot_BALL[4].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_BALL[5].slotUse)
 			{
 				_invenSlot_BALL[5].itm = key->second;
+				_invenSlot_BALL[5].key = strKey;
+				_invenSlot_BALL[5].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_BALL[0].slotUse &&_invenSlot_BALL[1].slotUse &&_invenSlot_BALL[2].slotUse &&_invenSlot_BALL[3].slotUse &&_invenSlot_BALL[4].slotUse &&_invenSlot_BALL[5].slotUse)
@@ -290,26 +326,44 @@ void inventory::renderItem(string strKey, WINDOWSTATUSS ws, int num)
 			_invenSlot_MACHINE[num].slotUse = true;
 			if (_invenSlot_MACHINE[0].slotUse)
 			{
+				_invenSlot_MACHINE[0].itm = key->second;
+				_invenSlot_MACHINE[0].key = strKey;
+				_invenSlot_MACHINE[0].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIRSTX, ITEMSLOT_FIRSTY);
 			}
 			else 	if (_invenSlot_MACHINE[1].slotUse)
 			{
+				_invenSlot_MACHINE[1].itm = key->second;
+				_invenSlot_MACHINE[1].key = strKey;
+				_invenSlot_MACHINE[1].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SECONDX, ITEMSLOT_SECONDY);
 			}
 			else if (_invenSlot_MACHINE[2].slotUse)
 			{
+				_invenSlot_MACHINE[2].itm = key->second;
+				_invenSlot_MACHINE[2].key = strKey;
+				_invenSlot_MACHINE[2].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_THIRDX, ITEMSLOT_THIRDY);
 			}
 			else if (_invenSlot_MACHINE[3].slotUse)
 			{
+				_invenSlot_MACHINE[3].itm = key->second;
+				_invenSlot_MACHINE[3].key = strKey;
+				_invenSlot_MACHINE[3].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FORTHX, ITEMSLOT_FORTHY);
 			}
 			else if (_invenSlot_MACHINE[4].slotUse)
 			{
+				_invenSlot_MACHINE[4].itm = key->second;
+				_invenSlot_MACHINE[4].key = strKey;
+				_invenSlot_MACHINE[4].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_FIFTHX, ITEMSLOT_FIFTHY);
 			}
 			else if (_invenSlot_MACHINE[5].slotUse)
 			{
+				_invenSlot_MACHINE[5].itm = key->second;
+				_invenSlot_MACHINE[5].key = strKey;
+				_invenSlot_MACHINE[5].number = key->second->getItemNum();
 				key->second->InvenRender(getMemDC(), _mInvenList.find(strKey)->second->getImg(), ITEMSLOT_SIXTHX, ITEMSLOT_SIXTHY);
 			}
 			else if (_invenSlot_MACHINE[0].slotUse &&_invenSlot_MACHINE[1].slotUse &&_invenSlot_MACHINE[2].slotUse &&_invenSlot_MACHINE[3].slotUse &&_invenSlot_MACHINE[4].slotUse &&_invenSlot_MACHINE[5].slotUse)
@@ -367,60 +421,72 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		if (_invenSlot_UTIL[0].slotUse == true)
+		if (_invenSlot_UTIL[0].number > 0)
 		{
 			_currentItem = _invenSlot_UTIL[0].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_UTIL[0].itm->setItemNum(_invenSlot_UTIL[0].itm->getItemNum() - 1);
+			if (_invenSlot_UTIL[0].itm->getItemNum() == 0)  deleteItem(_invenSlot_UTIL[0].key);
 		}
 
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		if (_invenSlot_UTIL[1].slotUse == true)
+		if (_invenSlot_UTIL[1].number > 0)
 		{
 			_currentItem = _invenSlot_UTIL[1].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_UTIL[1].itm->setItemNum(_invenSlot_UTIL[1].itm->getItemNum() - 1);
+			if (_invenSlot_UTIL[1].itm->getItemNum() == 0)  deleteItem(_invenSlot_UTIL[1].key);
 		}
 
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		if (_invenSlot_UTIL[2].slotUse == true)
+		if (_invenSlot_UTIL[2].number > 0)
 		{
 			_currentItem = _invenSlot_UTIL[2].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_UTIL[2].itm->setItemNum(_invenSlot_UTIL[2].itm->getItemNum() - 1);
+			if (_invenSlot_UTIL[2].itm->getItemNum() == 0)  deleteItem(_invenSlot_UTIL[0].key);
 		}
 
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		if (_invenSlot_UTIL[3].slotUse == true)
+		if (_invenSlot_UTIL[3].number > 0)
 		{
 			_currentItem = _invenSlot_UTIL[3].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_UTIL[3].itm->setItemNum(_invenSlot_UTIL[3].itm->getItemNum() - 1);
+			if (_invenSlot_UTIL[3].itm->getItemNum() == 0)  deleteItem(_invenSlot_UTIL[0].key);
 		}
 
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		if (_invenSlot_UTIL[4].slotUse == true)
+		if (_invenSlot_UTIL[4].number > 0)
 		{
 			_currentItem = _invenSlot_UTIL[4].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_UTIL[4].itm->setItemNum(_invenSlot_UTIL[4].itm->getItemNum() - 1);
+			if (_invenSlot_UTIL[4].itm->getItemNum() == 0)  deleteItem(_invenSlot_UTIL[0].key);
 		}
 
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		if (_invenSlot_UTIL[5].slotUse == true)
+		if (_invenSlot_UTIL[5].number > 0)
 		{
 			_currentItem = _invenSlot_UTIL[5].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_UTIL[5].itm->setItemNum(_invenSlot_UTIL[5].itm->getItemNum() - 1);
+			if (_invenSlot_UTIL[5].itm->getItemNum() == 0)  deleteItem(_invenSlot_UTIL[5].key);
 		}
 	
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
@@ -472,56 +538,68 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		if (_invenSlot_POTION[0].slotUse == true)
+		if (_invenSlot_POTION[0].number > 0)
 		{
 			_currentItem = _invenSlot_POTION[0].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_POTION[0].itm->setItemNum(_invenSlot_POTION[0].itm->getItemNum() - 1);
+			if (_invenSlot_POTION[0].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[0].key);
 		}
 
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		if (_invenSlot_POTION[1].slotUse == true)
+		if (_invenSlot_POTION[1].number > 0)
 		{
 			_currentItem = _invenSlot_POTION[1].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_POTION[1].itm->setItemNum(_invenSlot_POTION[1].itm->getItemNum() - 1);
+			if (_invenSlot_POTION[1].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[1].key);
 		}
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		if (_invenSlot_POTION[2].slotUse == true)
+		if (_invenSlot_POTION[2].number > 0)
 		{
 			_currentItem = _invenSlot_POTION[2].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_POTION[2].itm->setItemNum(_invenSlot_POTION[2].itm->getItemNum() - 1);
+			if (_invenSlot_POTION[2].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[2].key);
 		}
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		if (_invenSlot_POTION[3].slotUse == true)
+		if (_invenSlot_POTION[3].number > 0)
 		{
 			_currentItem = _invenSlot_POTION[3].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_POTION[3].itm->setItemNum(_invenSlot_POTION[3].itm->getItemNum() - 1);
+			if (_invenSlot_POTION[3].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[3].key);
 		}
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		if (_invenSlot_POTION[4].slotUse == true)
+		if (_invenSlot_POTION[4].number > 0)
 		{
 			_currentItem = _invenSlot_POTION[4].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_POTION[4].itm->setItemNum(_invenSlot_POTION[4].itm->getItemNum() - 1);
+			if (_invenSlot_POTION[4].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[4].key);
 		}
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		if (_invenSlot_POTION[5].slotUse == true)
+		if (_invenSlot_POTION[5].number > 0)
 		{
 			_currentItem = _invenSlot_POTION[5].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_POTION[5].itm->setItemNum(_invenSlot_POTION[5].itm->getItemNum() - 1);
+			if (_invenSlot_POTION[5].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[5].key);
 		}
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
@@ -698,55 +776,67 @@ void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
 	//각 부분 선택시 발생하는 이벤트 제어
 	if (_selectItem[INDEXS_BUTTON_0].Selected) //1번째 아이템 
 	{
-		if (_invenSlot_MACHINE[0].slotUse == true)
+		if (_invenSlot_MACHINE[0].number > 0)
 		{
 			_currentItem = _invenSlot_MACHINE[0].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_MACHINE[0].itm->setItemNum(_invenSlot_MACHINE[0].itm->getItemNum() - 1);
+			if (_invenSlot_MACHINE[0].itm->getItemNum() == 0)  deleteItem(_invenSlot_MACHINE[0].key);
 		}
 		_selectItem[INDEXS_BUTTON_0].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_1].Selected) //2번째 아이템 
 	{
-		if (_invenSlot_MACHINE[1].slotUse == true)
+		if (_invenSlot_MACHINE[1].number > 0)
 		{
 			_currentItem = _invenSlot_MACHINE[1].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_MACHINE[1].itm->setItemNum(_invenSlot_MACHINE[1].itm->getItemNum() - 1);
+			if (_invenSlot_MACHINE[1].itm->getItemNum() == 0)  deleteItem(_invenSlot_MACHINE[1].key);
 		}
 		_selectItem[INDEXS_BUTTON_1].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_2].Selected) //3번째 아이템 
 	{
-		if (_invenSlot_MACHINE[2].slotUse == true)
+		if (_invenSlot_MACHINE[2].number > 0)
 		{
 			_currentItem = _invenSlot_MACHINE[2].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_MACHINE[2].itm->setItemNum(_invenSlot_MACHINE[2].itm->getItemNum() - 1);
+			if (_invenSlot_MACHINE[2].itm->getItemNum() == 0)  deleteItem(_invenSlot_MACHINE[2].key);
 		}
 		_selectItem[INDEXS_BUTTON_2].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_3].Selected) //4번째 아이템 
 	{
-		if (_invenSlot_MACHINE[3].slotUse == true)
+		if (_invenSlot_MACHINE[3].number > 0)
 		{
 			_currentItem = _invenSlot_MACHINE[3].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_MACHINE[3].itm->setItemNum(_invenSlot_MACHINE[3].itm->getItemNum() - 1);
+			if (_invenSlot_MACHINE[3].itm->getItemNum() == 0)  deleteItem(_invenSlot_MACHINE[3].key);
 		}
 		_selectItem[INDEXS_BUTTON_3].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_4].Selected) //5번째 아이템 
 	{
-		if (_invenSlot_MACHINE[4].slotUse == true)
+		if (_invenSlot_MACHINE[4].number > 0)
 		{
 			_currentItem = _invenSlot_MACHINE[4].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_MACHINE[4].itm->setItemNum(_invenSlot_MACHINE[4].itm->getItemNum() - 1);
+			if (_invenSlot_MACHINE[4].itm->getItemNum() == 0)  deleteItem(_invenSlot_MACHINE[4].key);
 		}
 		_selectItem[INDEXS_BUTTON_4].Selected = false;
 	}
 	if (_selectItem[INDEXS_BUTTON_5].Selected) //6번째 아이템 
 	{
-		if (_invenSlot_MACHINE[5].slotUse == true)
+		if (_invenSlot_MACHINE[5].number > 0)
 		{
 			_currentItem = _invenSlot_MACHINE[5].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			_invenSlot_MACHINE[5].itm->setItemNum(_invenSlot_MACHINE[0].itm->getItemNum() - 1);
+			if (_invenSlot_MACHINE[5].itm->getItemNum() == 0)  deleteItem(_invenSlot_MACHINE[5].key);
 		}
 		_selectItem[INDEXS_BUTTON_5].Selected = false;
 	}
@@ -893,3 +983,17 @@ map<string, item*>::iterator inventory::findNum(int arrNum)
 }
 
 
+BOOL inventory::deleteItem(string strKey)
+{
+	mapItemIter key = _mInvenList.find(strKey);
+
+	if (key != _mInvenList.end())
+	{
+		key->second->release();
+		SAFE_DELETE(key->second);
+		_mInvenList.erase(key);
+
+		return true;
+	}
+	return false;
+}

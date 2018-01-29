@@ -85,6 +85,7 @@ BOOL itemManager::deleteItem(string strKey)
 	}
 	return false;
 }
+
 BOOL itemManager::deleteAll(void)
 {
 	mapItemIter iter = _mItemList.begin();

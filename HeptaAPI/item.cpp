@@ -48,7 +48,7 @@ HRESULT item::init(int itemNum, image* img, ITEM_TYPE type, string name, string 
 
 void  item::release(void)
 {
-	
+
 }
 void  item::update(void)
 {

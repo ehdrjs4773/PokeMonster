@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "ghostMap.h"
 
 #define GYM_MAX 9
 
@@ -38,6 +39,8 @@ public:
 	void update();
 	void render();
 	void selectMove();
+
+
 
 	worldMapScene();
 	~worldMapScene();

@@ -287,12 +287,10 @@ void shopScene::KeyControl()
 				if (SelectNum == i)
 				{
 					_selectMenu[i].isSelect = true;
-
 				}
 				else
 				{
 					_selectMenu[i].isSelect = false;
-
 				}
 			}
 			break;
