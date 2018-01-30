@@ -28,10 +28,10 @@ void stageManager::release()
 void stageManager::update()	
 {
 	_player->update();
-	if (_player->getCurrengStage() != 9 ||
-		_player->getCurrengStage() != 10 ||
-		_player->getCurrengStage() != 11 ||
-		_player->getCurrengStage() != 12 ||
+	if (_player->getCurrengStage() != 9 &&
+		_player->getCurrengStage() != 10 &&
+		_player->getCurrengStage() != 11 &&
+		_player->getCurrengStage() != 12 &&
 		_player->getCurrengStage() != 13)
 	{
 		if (_isWin)
