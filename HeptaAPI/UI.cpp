@@ -168,42 +168,42 @@ void UI::render(void)
 
 
 		
-			if (_PlayerBage.bage[7])
+			if (_PlayerBage.bage[6])
 			{
 				IMAGEMANAGER->findImage("bage1")->render(getMemDC(), _PlayerBage.rc1.left, _PlayerBage.rc1.top);
 			}
 
-			if (_PlayerBage.bage[6])
+			if (_PlayerBage.bage[5])
 			{
 			IMAGEMANAGER->findImage("bage2")->render(getMemDC(), _PlayerBage.rc2.left, _PlayerBage.rc2.top);
 			}
 
-			if (_PlayerBage.bage[4])
+			if (_PlayerBage.bage[3])
 			{
 			IMAGEMANAGER->findImage("bage3")->render(getMemDC(), _PlayerBage.rc3.left, _PlayerBage.rc3.top);
 			}
 
-			if (_PlayerBage.bage[3])
+			if (_PlayerBage.bage[2])
 			{
 			IMAGEMANAGER->findImage("bage4")->render(getMemDC(), _PlayerBage.rc4.left, _PlayerBage.rc4.top);
 			}
 
-			if (_PlayerBage.bage[2])
+			if (_PlayerBage.bage[1])
 			{
 			IMAGEMANAGER->findImage("bage5")->render(getMemDC(), _PlayerBage.rc5.left, _PlayerBage.rc5.top);
 			}
 
-			if (_PlayerBage.bage[1])
+			if (_PlayerBage.bage[0])
 			{
 			IMAGEMANAGER->findImage("bage6")->render(getMemDC(), _PlayerBage.rc6.left, _PlayerBage.rc6.top);
 			}
 
-			if (_PlayerBage.bage[8])
+			if (_PlayerBage.bage[7])
 			{
 			IMAGEMANAGER->findImage("bage7")->render(getMemDC(), _PlayerBage.rc7.left, _PlayerBage.rc7.top);
 			}
 
-			if (_PlayerBage.bage[5])
+			if (_PlayerBage.bage[4])
 			{
 		 	IMAGEMANAGER->findImage("bage8")->render(getMemDC(), _PlayerBage.rc8.left, _PlayerBage.rc8.top);
 			}
