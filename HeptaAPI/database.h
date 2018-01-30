@@ -69,7 +69,8 @@ public:
 	void loadDatabaseSkill(string name);
 
 	//속성에 대한 접근자
-	elements* getElementData(string str) { return _mTotalElement.find(str)->second; }
+	elements* getElementData(string str) {
+		return _mTotalElement.find(str)->second; }
 	skills* getSkillsData(string str) { return _mTotalSkill.find(str)->second; }
 
 	database();
