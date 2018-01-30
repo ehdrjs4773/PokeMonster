@@ -104,45 +104,45 @@ void drOHouse::update()
 					tempSkill->init("불대문자");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("드래곤크루");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("메가톤펀치");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("회오리불꽃");
 					temp->addSkill(tempSkill);
 				}
 				else if (_selectNum == 1)
 				{
 					temp->init("꼬부기", 5);
 					skill* tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("하이드로펌프");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("파도타기");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("힘껏치기");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("파동탄");
 					temp->addSkill(tempSkill);
 				}
 				else
 				{
 					temp->init("이상해씨", 5);
 					skill* tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("하드플랜트");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("풀베기");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("지진");
 					temp->addSkill(tempSkill);
 					tempSkill = new skill;
-					tempSkill->init("불대문자");
+					tempSkill->init("솔라빔");
 					temp->addSkill(tempSkill);
 				}
 
