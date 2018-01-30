@@ -214,6 +214,11 @@ MonsterBack::~MonsterBack()
 
 							if (_inventory->getCurrentItem()->getName() == "ppÆ÷¼Ç")
 							{
+								if (i > 4)
+								{
+									i = 4;
+								}
+
 								(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->getCurrentPP() + _inventory->getCurrentItem()->getItemAbility());
 							}
 
