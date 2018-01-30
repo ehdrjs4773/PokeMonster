@@ -212,6 +212,22 @@ void champion::update()
 		SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
 		SCENEMANAGER->init("¿ùµå¸Ê¾À");
 	}
+
+	if (_isWin)
+	{
+		//SOUNDMANAGER->addSound("¹èÆ²¾À Å×¸¶°î", "battleBgm.mp3", true, true);
+		//SOUNDMANAGER->addSound("·¹µåÀÇ Å×¸¶°î", ".//bossBgm.mp3", true, true);
+		//SOUNDMANAGER->addSound("¿À¹Ú»ç Å×¸¶°î", "drOBgm.mp3", true, true);
+		//SOUNDMANAGER->addSound("¿ùµå¸Ê Å×¸¶°î", "worldBgm.mp3", true, true);
+
+		SCENEMANAGER->changeScene("ending");
+		if (SOUNDMANAGER->isPlaySound("¹èÆ²¾À Å×¸¶°î")) SOUNDMANAGER->stop("¹èÆ²¾À Å×¸¶°î");
+		if (SOUNDMANAGER->isPlaySound("·¹µåÀÇ Å×¸¶°î")) SOUNDMANAGER->stop("·¹µåÀÇ Å×¸¶°î");
+		if (SOUNDMANAGER->isPlaySound("¿À¹Ú»ç Å×¸¶°î")) SOUNDMANAGER->stop("¿À¹Ú»ç Å×¸¶°î");
+		if (SOUNDMANAGER->isPlaySound("¿ùµå¸Ê Å×¸¶°î")) SOUNDMANAGER->stop("¿ùµå¸Ê Å×¸¶°î");
+
+		SOUNDMANAGER->play("¿£µù°î" , 1.0f);
+	}
 }
 
 void champion::render()

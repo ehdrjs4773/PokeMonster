@@ -35,11 +35,13 @@ void Ending::release(void)
 void Ending::update(void) 
 {
 	_y += 1;
+	if (_y > 2000 - WINSIZEY)
+		_y = 2000 - WINSIZEY;
 }
 
 
 void Ending::render(void) 
 {
-	IMAGEMANAGER->findImage("ending")->loopRender(getMemDC(), &RectMake(0,0,WINSIZEX, WINSIZEY), 0, _y);
+	IMAGEMANAGER->findImage("ending")->render(getMemDC(), 0, 0, _x, _y, WINSIZEX, WINSIZEY);
 }
 
