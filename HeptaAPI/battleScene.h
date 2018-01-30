@@ -142,5 +142,6 @@ public:
 		_sequence = BATTLE_FIGHT;
 		_fight = PLAYER_CATCH;
 	}
+	inline battleSceneUI* getBattleSceneUI() { return _UI; }
 };
 

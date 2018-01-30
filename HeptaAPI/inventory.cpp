@@ -15,8 +15,6 @@ inventory::~inventory()
 
 HRESULT inventory::init()
 {
-
-
 	//인벤토리 메뉴 이미지등록
 	IMAGEMANAGER->addImage("인벤토리_유틸", ".\\bmps\\inventoryScene\\inventory_1.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("인벤토리_포션", ".\\bmps\\inventoryScene\\inventory_2.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
@@ -90,6 +88,8 @@ HRESULT inventory::init()
 
 	IndexSelectNum = 0;
 	_selectItem[0].isSelect = true;
+
+	_battleScene = (battleScene*)SCENEMANAGER->findScene("battleScene");
 
 	return S_OK;
 }
@@ -500,10 +500,6 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 		else
 		{
 			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
-
-			if(SCENEMANAGER->getLastSceneName()=="battleSceneUI")
-			_battleSceneUI = (battleSceneUI*)SCENEMANAGER->findScene("battleScene");
-			_battleSceneUI->selectReset();
 		}
 		
 	
@@ -555,6 +551,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 		{
 			_currentItem = _invenSlot_POTION[0].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[0].itm->setItemNum(_invenSlot_POTION[0].itm->getItemNum() - 1);
 			if (_invenSlot_POTION[0].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[0].key);
 		}
@@ -567,6 +564,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 		{
 			_currentItem = _invenSlot_POTION[1].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[1].itm->setItemNum(_invenSlot_POTION[1].itm->getItemNum() - 1);
 			if (_invenSlot_POTION[1].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[1].key);
 		}
@@ -578,6 +576,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 		{
 			_currentItem = _invenSlot_POTION[2].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[2].itm->setItemNum(_invenSlot_POTION[2].itm->getItemNum() - 1);
 			if (_invenSlot_POTION[2].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[2].key);
 		}
@@ -589,6 +588,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 		{
 			_currentItem = _invenSlot_POTION[3].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[3].itm->setItemNum(_invenSlot_POTION[3].itm->getItemNum() - 1);
 			if (_invenSlot_POTION[3].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[3].key);
 		}
@@ -600,6 +600,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 		{
 			_currentItem = _invenSlot_POTION[4].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[4].itm->setItemNum(_invenSlot_POTION[4].itm->getItemNum() - 1);
 			if (_invenSlot_POTION[4].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[4].key);
 		}
@@ -611,6 +612,7 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 		{
 			_currentItem = _invenSlot_POTION[5].itm;
 			SCENEMANAGER->changeScene("PokeInfo");
+			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[5].itm->setItemNum(_invenSlot_POTION[5].itm->getItemNum() - 1);
 			if (_invenSlot_POTION[5].itm->getItemNum() == 0)  deleteItem(_invenSlot_POTION[5].key);
 		}
@@ -618,6 +620,8 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
+		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+			_battleScene->getBattleSceneUI()->selectReset();
 		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
@@ -971,6 +975,8 @@ void inventory::KeyControl()
 
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
+		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+			_battleScene->getBattleSceneUI()->selectReset();
 		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 	}
 

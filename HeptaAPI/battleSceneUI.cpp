@@ -44,7 +44,7 @@ HRESULT battleSceneUI::init()
 
 	this->selectReset();
 
-
+	
 	// 몬스터백
 	_msb = (MonsterBack*)SCENEMANAGER->findScene("PokeInfo");
 	_msb->battleSceneUIMemoruAddressLink(this);
