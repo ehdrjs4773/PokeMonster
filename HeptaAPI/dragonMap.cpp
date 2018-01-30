@@ -245,7 +245,8 @@ void dragonMap::collision()
 			}
 		}
 
-		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
+			!_player->isAllDie())
 		{
 			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");

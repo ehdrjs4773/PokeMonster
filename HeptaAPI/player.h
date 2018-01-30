@@ -31,6 +31,7 @@ private:
 	animation* _playerMotion;
 
 	vector<pokemon*> _vPokemon;
+	bool _isAllDie;
 
 
 public:
@@ -67,5 +68,6 @@ public:
 	void setPlayerMotion(animation* ani) { _playerMotion = ani; }
 
 	inline int getBadgeCount() { return _badgeCount; }
+	inline bool isAllDie() { return _isAllDie; }
 };
 

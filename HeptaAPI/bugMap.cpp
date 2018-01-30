@@ -243,7 +243,8 @@ void bugMap::collision()
 					temp.bottom + (_player->getPlayerRc().bottom - _player->getPlayerRc().top) / 2));
 			}
 		}
-		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
+			!_player->isAllDie())
 		{
 			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
