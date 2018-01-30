@@ -6,6 +6,12 @@
 
 shopScene::shopScene()
 {
+	//처음 초기화
+	SelectNum = 0;
+	_selectMenu[0].isSelect = true;
+
+	IndexSelectNum = 0;
+	_selectItem[0].isSelect = true;
 }
 
 
@@ -97,12 +103,12 @@ HRESULT shopScene::init()
 
 	_WS = WS_MAIN;
 
-	//처음 초기화
-	SelectNum = 0;
-	_selectMenu[0].isSelect = true;
+	////처음 초기화
+	//SelectNum = 0;
+	//_selectMenu[0].isSelect = true;
 
-	IndexSelectNum = 0;
-	_selectItem[0].isSelect = true;
+	//IndexSelectNum = 0;
+	//_selectItem[0].isSelect = true;
 
 
 	return S_OK;

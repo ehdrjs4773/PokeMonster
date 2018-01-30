@@ -493,7 +493,20 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		if (SCENEMANAGER->getLastSceneName() == "PokeInfo")
+		{
+			SCENEMANAGER->changeScene("UI");
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+
+			if(SCENEMANAGER->getLastSceneName()=="battleSceneUI")
+			_battleSceneUI = (battleSceneUI*)SCENEMANAGER->findScene("battleScene");
+			_battleSceneUI->selectReset();
+		}
+		
+	
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 }

@@ -23,6 +23,7 @@ class item;
 class itemManager;
 class MonsterBack;
 class battleScene;
+class battleSceneUI;
 
 enum WINDOWSTATUSS //현재화면의 상태값
 {
@@ -110,7 +111,7 @@ private:
 	MonsterBack* _MonsterBack;
 
 	battleScene* _battleScene;
-
+	battleSceneUI* _battleSceneUI;
 
 public:
 	inventory();
