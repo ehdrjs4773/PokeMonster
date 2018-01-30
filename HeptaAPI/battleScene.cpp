@@ -414,8 +414,6 @@ void battleScene::update()
 						{
 							_fight = ENEMY_ATTACK;
 							_UI->setCurrentEnemySkill(RND->getInt((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill().size()));
-							// test
-							_UI->setCurrentEnemySkill(0);
 							DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
 							DIALOGUE->replaceAll("@", (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
 							DIALOGUE->replaceAll("#", (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName());

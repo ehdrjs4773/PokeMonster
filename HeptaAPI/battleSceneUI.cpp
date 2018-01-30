@@ -226,8 +226,6 @@ void battleSceneUI::keyControl()
 				_battleScene->getCurrentPlayerPokemon()->getVSkill()[_skillSelectNum]->getCurrentPP() != 0)
 		{
 			_enemySkillNum = RND->getInt(_battleScene->getCurrentEnemyPokemon()->getVSkill().size());
-			// test
-			_enemySkillNum = 0;
 
 			_battleScene->setSequence(BATTLE_FIGHT);
 			DIALOGUE->loadingTextFile(".\\textData\\battleScene_fight.txt");
