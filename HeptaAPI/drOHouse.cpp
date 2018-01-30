@@ -18,6 +18,7 @@ HRESULT drOHouse::init()
 	stageManager::init();
 	_background = IMAGEMANAGER->addImage("오박사맵", ".\\bmps\\map\\오박사.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	_drO = IMAGEMANAGER->addFrameImage("drO", ".\\bmps\\drHouseScene\\drO.bmp", 68, 24, 4, 1, false, true, MAGENTA);
+	_shopNPC = IMAGEMANAGER->addImage("상점NPC", ".\\bmps\\map\\상점NPC.bmp", 17, 25, false, true, MAGENTA);
 
 	IMAGEMANAGER->addImage("selectIcon", ".\\bmps\\battleScene\\UI\\selectIcon.bmp", 7, 7, false, true, MAGENTA);
 
@@ -26,7 +27,11 @@ HRESULT drOHouse::init()
 	_x = 240;
 	_y = 115;
 
+	_x1 = 350;
+	_y1 = 250;
+
 	_gymLeaderRc = RectMake(_x, _y, _drO->getFrameWidth(), _drO->getFrameHeight());
+	_shopNPCRc = RectMake(_x1, _y1, _shopNPC->getWidth(), _shopNPC->getHeight());
 
 	_isMonsterSelect = false;
 
@@ -160,6 +165,7 @@ void drOHouse::render()
 {
 	IMAGEMANAGER->findImage("오박사맵")->render(getMemDC());
 	IMAGEMANAGER->findImage("drO")->frameRender(getMemDC(), _x, _y);
+	IMAGEMANAGER->findImage("상점NPC")->render(getMemDC(),_x1,_y1);
 	stageManager::render();
 
 	if (_isMonsterSelect)
@@ -183,7 +189,7 @@ void drOHouse::collision()
 	{
 		int tempWidth = temp.right - temp.left;
 		int tempHeight = temp.bottom - temp.top;
-	
+
 		// 가로충돌
 		if (tempHeight > tempWidth)
 		{
@@ -209,7 +215,7 @@ void drOHouse::collision()
 					temp.bottom + (_player->getPlayerRc().bottom - _player->getPlayerRc().top) / 2));
 			}
 		}
-	
+
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
 			if (!_isMonsterSelect)
@@ -228,5 +234,44 @@ void drOHouse::collision()
 				}
 			}
 		}
+	}
+			RECT temp1;
+			
+			if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) && IntersectRect(&temp1, &_shopNPCRc, &_player->getPlayerRc()))
+			{
+				SCENEMANAGER->changeScene("상점씬");
+				SCENEMANAGER->init("상점씬");
+			}
+			if (IntersectRect(&temp1, &_shopNPCRc, &_player->getPlayerRc()))
+			{
+				int tempWidth = temp1.right - temp1.left;
+				int tempHeight = temp1.bottom - temp1.top;
+
+				// 가로충돌
+				if (tempHeight > tempWidth)
+				{
+					//오른쪽 충돌
+					if (temp1.left == _player->getPlayerRc().left)
+					{
+						_player->setPlayerPt(PointMake(_shopNPCRc.right + (_player->getPlayerRc().right - _player->getPlayerRc().left) / 2,
+							(_player->getPlayerRc().bottom + _player->getPlayerRc().top) / 2));
+					}
+					//왼쪽충돌
+					if (temp1.right == _player->getPlayerRc().right)
+					{
+						_player->setPlayerPt(PointMake(_shopNPCRc.left - (_player->getPlayerRc().right - _player->getPlayerRc().left) / 2,
+							(_player->getPlayerRc().bottom + _player->getPlayerRc().top) / 2));
+					}
+				}
+				else
+				{
+					//아래충돌
+					if (temp1.top == _player->getPlayerRc().top)
+					{
+						_player->setPlayerPt(PointMake((_player->getPlayerRc().right + _player->getPlayerRc().left) / 2,
+							temp1.bottom + (_player->getPlayerRc().bottom - _player->getPlayerRc().top) / 2));
+					}
+				}
+		
 	}
 }
