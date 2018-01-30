@@ -12,7 +12,7 @@ player::~player()
 
 HRESULT player::init()
 {
-	IMAGEMANAGER->addImage("textBox", ".\\bmps\\map\\UI\\textBox.txt", 320, 66, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("textBox", ".\\bmps\\map\\UI\\textBox.bmp", 320, 66, false, true, MAGENTA);
 
 	_player = IMAGEMANAGER->addFrameImage("골드", ".\\bmps\\player\\골드.bmp", 105, 104, 5, 4, false, true, RGB(255, 0, 255));
 	//수테이지 픽셀충돌 이미지
@@ -73,9 +73,6 @@ HRESULT player::init()
 	_playerMotion = KEYANIMANAGER->findAnimation("뒤");
 
 	DATABASE->setVPlayerPokemon(&_vPokemon);
-
-	SCENEMANAGER->init("UI");
-	SCENEMANAGER->init("PokeInfo");
 
 	return S_OK;
 }
@@ -288,6 +285,8 @@ void player::update()
 		char tempStage[32];
 		sprintf(tempStage, "스테이지%d", _currentStage);
 		SCENEMANAGER->findScene("UI")->setDestScene(tempStage);
+		SCENEMANAGER->init("UI");
+		SCENEMANAGER->init("PokeInfo");
 	}
 
 }

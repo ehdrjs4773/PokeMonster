@@ -13,7 +13,10 @@ private:
 	RECT _gymLeaderRc;		//오박사 렉트
 	
 	bool _isMonsterSelect;
-	
+	string _startingMonster[3];
+	int _selectNum;
+
+	int _dialogueTime;
 
 public:
 	drOHouse();
