@@ -27,7 +27,7 @@ HRESULT champion::init()
 
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
-	int level = 5 + 5 * _player->getBadgeCount();
+	int level = 60;
 	_vPokemon.clear();
 	// 구구, 깨비참, 피존, 깨비드릴조, 피존투, 파오리
 	pokemon* temp[6];
@@ -259,7 +259,8 @@ void champion::collision()
 			}
 		}
 
-		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
+			!_player->isAllDie())
 		{
 			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");

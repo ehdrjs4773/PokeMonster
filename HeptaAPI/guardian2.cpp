@@ -36,7 +36,160 @@ HRESULT guardian2::init()
 		_player->setPlayerPt(PointMake(240, 340));
 	}
 	
-	
+	// 여기랑
+	int level = 50;
+	_vPokemon.clear();
+	// 구구, 깨비참, 피존, 깨비드릴조, 피존투, 파오리
+	pokemon* temp[6];
+	skill* tempSkill;
+	for (int i = 0; i < 6; ++i)
+	{
+		temp[i] = new pokemon;
+
+		if (i == 0)
+		{
+			temp[i]->init("덩쿠리", level);
+			tempSkill = new skill;
+			tempSkill->init("스모그");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("독침");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("맹독");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 1)
+		{
+			temp[i]->init("질뻐기", level);
+			tempSkill = new skill;
+			tempSkill->init("스모그");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("독침");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("맹독");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 2)
+		{
+			temp[i]->init("아보크", level);
+			tempSkill = new skill;
+			tempSkill->init("스모그");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("독침");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("맹독");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 3)
+		{
+			temp[i]->init("쥬벳", level);
+			tempSkill = new skill;
+			tempSkill->init("스모그");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("독침");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("맹독");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 4)
+		{
+			temp[i]->init("독파리", level);
+			tempSkill = new skill;
+			tempSkill->init("스모그");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("독침");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("맹독");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 5)
+		{
+			temp[i]->init("골벳", level);
+			tempSkill = new skill;
+			tempSkill->init("스모그");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("독침");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("맹독");
+			temp[i]->addSkill(tempSkill);
+		}
+		_vPokemon.push_back(temp[i]);
+	}
+
+	vector<pokemon*>* realPokemonVector = new vector<pokemon*>;
+	switch (_player->getBadgeCount())
+	{
+	case 0:
+		realPokemonVector->push_back(_vPokemon[0]);
+		break;
+
+	case 1:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		break;
+
+	case 2:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		break;
+
+	case 3:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		break;
+
+	case 4:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		realPokemonVector->push_back(_vPokemon[4]);
+		break;
+
+	default:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		realPokemonVector->push_back(_vPokemon[4]);
+		realPokemonVector->push_back(_vPokemon[5]);
+		break;
+	}
+	DATABASE->setVEnemyPokemon(realPokemonVector);
+
+
 	return S_OK;
 }
 
@@ -107,7 +260,8 @@ void guardian2::collision()
 			}
 		}
 
-		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
+			DATABASE->getPlayerMemory()->isAllDie())
 		{
 			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");

@@ -75,6 +75,8 @@ HRESULT player::init()
 	DATABASE->setVPlayerPokemon(&_vPokemon);
 	_badgeCount = 0;
 
+	_isAllDie = false;
+
 	return S_OK;
 }
 
@@ -83,7 +85,18 @@ void player::release()
 }
 
 void player::update()
-{		
+{	
+	for (int i = 0; i < _vPokemon.size(); ++i)
+	{
+		if (_vPokemon[i]->getCurrentHP() != 0)
+		{
+			_isAllDie = false;
+			break;
+		}
+
+		_isAllDie = true;
+	}
+
 	for (int i = 0; i < 8; ++i)
 		_badgeCount += (int)DATABASE->getIsStageClear(i);
 	

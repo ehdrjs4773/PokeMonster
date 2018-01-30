@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UI.h"
 
-
+#include "inventory.h"
 
 UI::UI()
 {
@@ -80,7 +80,13 @@ void UI::update(void)
 		{
 			if (PtInRect(&_Info[0].rc, _ptMouse))
 			{
-				if (!_isName) SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+				if (!_isName)
+				{
+					SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+					inventory* temp = (inventory*)SCENEMANAGER->findScene("ÀÎº¥Åä¸®¾À");
+					temp->setDestScene("UI");
+				}
+
 			}
 		
 			else if (PtInRect(&_Info[1].rc, _ptMouse))

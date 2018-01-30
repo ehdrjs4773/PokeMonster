@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "battleScene.h"
 #include "stageManager.h"
-
+#include "player.h"
 
 
 battleScene::battleScene()
@@ -602,9 +602,9 @@ void battleScene::update()
 				}
 				else
 				{
-					// test
-					SCENEMANAGER->init("¿ùµå¸Ê¾À");
 					SCENEMANAGER->changeScene(_destScene);
+					if (_enemyType == ENEMY_TRAINNER)
+						DATABASE->getPlayerMemory()->setBadgeCount(DATABASE->getPlayerMemory()->getBadgeCount() + 1);
 				}
 			}
 			else
@@ -612,8 +612,6 @@ void battleScene::update()
 				_attackTime++;
 				if (_attackTime % 50 == 0)
 				{
-					// test
-					SCENEMANAGER->init("¿ùµå¸Ê¾À");
 					SCENEMANAGER->changeScene(_destScene);
 				}
 			}

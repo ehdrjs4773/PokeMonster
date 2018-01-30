@@ -214,6 +214,7 @@ void battleSceneUI::keyControl()
 			{
 				_isBagSelect = true;
 				SCENEMANAGER->changeScene("ÀÎº¥Åä¸®¾À");
+				SCENEMANAGER->findScene("ÀÎº¥Åä¸®¾À")->setDestScene("battleScene");
 			}
 			else if (_selectArrowPoint.x == 1 && _selectArrowPoint.y == 1)
 			{

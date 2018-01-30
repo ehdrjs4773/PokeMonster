@@ -27,7 +27,157 @@ HRESULT normalMap::init()
 
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
+	int level = 5 + 5 * _player->getBadgeCount();
+	_vPokemon.clear();
+	//메타몽 , 냐옹 , 레트라 , 럭키 , 켄타우로스 , 캥카
+	pokemon* temp[6];
+	skill* tempSkill;
+	for (int i = 0; i < 6; ++i)
+	{
+		temp[i] = new pokemon;
 
+		if (i == 0)
+		{
+			temp[i]->init("메타몽", level);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("할퀴기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("불꽃펀치");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 1)
+		{
+			temp[i]->init("냐옹", level);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("할퀴기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("고양이돈받기");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 2)
+		{
+			temp[i]->init("레트라", level);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("할퀴기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("필살앞니");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 3)
+		{
+			temp[i]->init("럭키", level);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("할퀴기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("알폭탄");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 4)
+		{
+			temp[i]->init("켄타우로스", level);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("할퀴기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("돌진");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 5)
+		{
+			temp[i]->init("캥카", level);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("할퀴기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("잼잼펀치");
+			temp[i]->addSkill(tempSkill);
+		}
+		_vPokemon.push_back(temp[i]);
+	}
+
+	vector<pokemon*>* realPokemonVector = new vector<pokemon*>;
+	switch (_player->getBadgeCount())
+	{
+	case 0:
+		realPokemonVector->push_back(_vPokemon[0]);
+		break;
+
+	case 1:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		break;
+
+	case 2:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		break;
+
+	case 3:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		break;
+
+	case 4:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		realPokemonVector->push_back(_vPokemon[4]);
+		break;
+
+	default:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		realPokemonVector->push_back(_vPokemon[4]);
+		realPokemonVector->push_back(_vPokemon[5]);
+		break;
+	}
+	DATABASE->setVEnemyPokemon(realPokemonVector);
 	
 	return S_OK;
 }
@@ -94,7 +244,8 @@ void normalMap::collision()
 			}
 		}
 
-		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
+			!_player->isAllDie())
 		{
 			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
