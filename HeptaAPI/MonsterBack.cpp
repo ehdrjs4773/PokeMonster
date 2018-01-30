@@ -216,12 +216,10 @@ MonsterBack::~MonsterBack()
 
 						if (_inventory->getCurrentItem()->getName() == "ppÆ÷¼Ç")
 						{
-							if (i > 4)
-							{
-								i = 4;
-							}
-
-							(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->getCurrentPP() + _inventory->getCurrentItem()->getItemAbility());
+							(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[0]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[0]->getMaxPP());
+							(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[1]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[1]->getMaxPP());
+							(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[2]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[2]->getMaxPP());
+							(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[3]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[3]->getMaxPP());
 						}
 
 					}
