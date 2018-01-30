@@ -532,7 +532,18 @@ void battleScene::update()
 
 						if (_enemyImageRect.left > LIMIT_X_RIGHT)
 						{
-							_enemyCurrentPokemon++;
+							int changePokemon = 0;
+							for (int i = 0; i < _enemyPokemon->size(); ++i)
+							{
+								if ((*_enemyPokemon)[i]->getCurrentHP() != 0)
+								{
+									changePokemon = i;
+									break;
+								}
+
+								changePokemon = _enemyPokemon->size();
+							}
+							_enemyCurrentPokemon = changePokemon;
 							if (_enemyCurrentPokemon >= _enemyPokemon->size())
 							{
 								_enemyCurrentPokemon--;
@@ -562,7 +573,18 @@ void battleScene::update()
 
 						if (_playerImageRect.right < LIMIT_X_LEFT)
 						{
-							_playerCurrentPokemon++;
+							int changePokemon = 0;
+							for (int i = 0; i < _playerPokemon->size(); ++i)
+							{
+								if ((*_playerPokemon)[i]->getCurrentHP() != 0)
+								{
+									changePokemon = i;
+									break;
+								}
+
+								changePokemon = _playerPokemon->size();
+							}
+							_playerCurrentPokemon = changePokemon;
 							if (_playerCurrentPokemon >= _playerPokemon->size())
 							{
 								_playerCurrentPokemon--;
