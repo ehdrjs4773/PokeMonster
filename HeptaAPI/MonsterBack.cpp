@@ -23,7 +23,6 @@ MonsterBack::~MonsterBack()
 	 IMAGEMANAGER->addImage("cancle", ".\\bmps\\PokeBack\\cancle.bmp", 104, 45, false, true, MAGENTA);
 	 IMAGEMANAGER->addImage("PokeSelect", ".\\bmps\\PokeBack\\DogamSelect.bmp", 239, 92, false, true, MAGENTA);
 	 IMAGEMANAGER->addImage("PokeMonCatch", ".\\bmps\\PokeBack\\DogamMonsterIn.bmp", 239, 92, false, true, MAGENTA);
-	 IMAGEMANAGER->addFrameImage("이상해씨", ".\\bmps\\MonsterBag\\이상해씨s.bmp", 80, 40, 2, 1, false, true, MAGENTA);
 	 IMAGEMANAGER->addImage("pokeChange", ".\\bmps\\PokeBack\\pokeChange.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	
 
@@ -206,7 +205,20 @@ MonsterBack::~MonsterBack()
 				 {
 					if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
 					{
-						 (*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
+						if (_inventory->getCurrentItem()->getType() == ITEM_POTION)
+						{
+							if(_inventory->getCurrentItem()->getName() == "hp포션")
+							{
+							(*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
+							}
+
+							if (_inventory->getCurrentItem()->getName() == "pp포션")
+							{
+								(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->getCurrentPP() + _inventory->getCurrentItem()->getItemAbility());
+							}
+
+						}
+
 					}
 				 }
 			 }

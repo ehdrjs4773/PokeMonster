@@ -56,14 +56,10 @@ HRESULT UI::init()
 	_PlayerBage.rc7 = RectMakeCenter(380, 80, 35, 35);
 	_PlayerBage.rc8 = RectMakeCenter(470, 80, 35, 35);
 
-	_PlayerBage.bage1 = false;
-	_PlayerBage.bage2 = false;
-	_PlayerBage.bage3 = false;
-	_PlayerBage.bage4 = false;
-	_PlayerBage.bage5 = false;
-	_PlayerBage.bage6 = false;
-	_PlayerBage.bage7 = false;
-	_PlayerBage.bage8 = false;
+	for (int i = 0 ; i < 8; i++)
+	{
+		_PlayerBage.bage[i] = false;
+	}
 
 
 	//======= ºÒ°ª~========
@@ -94,7 +90,11 @@ void UI::update(void)
 		
 			else if (PtInRect(&_Info[2].rc, _ptMouse))
 			{
-				if (!_isName) SCENEMANAGER->changeScene("PokeInfo");
+				if (!_isName)
+				{
+					SCENEMANAGER->init("PokeInfo");
+					SCENEMANAGER->changeScene("PokeInfo");
+				}
 			}
 			else if (PtInRect(&_Info[3].rc, _ptMouse))
 			{
@@ -126,8 +126,14 @@ void UI::update(void)
 		}
 	}
 
+	for (int i = 0 ;i < 8; i++)
+	{
+		if (DATABASE->getIsStageClear(i + 1) == true)
+		{
+			_PlayerBage.bage[i] = true;
+		}
 
-
+	}
 }
 void UI::render(void) 
 {
@@ -158,19 +164,60 @@ void UI::render(void)
 		TextOut(getMemDC(), 220, 180, currentMoney, strlen(currentMoney));
 		//Retanle(getMemDC(),_NameExit.left, _NameExit.top, _NameExit.right, _NameExit.bottom);
 		
-		if (_PlayerBage.bage1) IMAGEMANAGER->findImage("bage1")->render(getMemDC(),_PlayerBage.rc1.left, _PlayerBage.rc1.top);
-		if (_PlayerBage.bage2) IMAGEMANAGER->findImage("bage2")->render(getMemDC(), _PlayerBage.rc2.left, _PlayerBage.rc2.top);
-		if (_PlayerBage.bage3) IMAGEMANAGER->findImage("bage3")->render(getMemDC(), _PlayerBage.rc3.left, _PlayerBage.rc3.top);
-		if (_PlayerBage.bage4) IMAGEMANAGER->findImage("bage4")->render(getMemDC(), _PlayerBage.rc4.left, _PlayerBage.rc4.top);
-		if (_PlayerBage.bage5) IMAGEMANAGER->findImage("bage5")->render(getMemDC(), _PlayerBage.rc5.left, _PlayerBage.rc5.top);
-		if (_PlayerBage.bage6) IMAGEMANAGER->findImage("bage6")->render(getMemDC(), _PlayerBage.rc6.left, _PlayerBage.rc6.top);
-		if (_PlayerBage.bage7) IMAGEMANAGER->findImage("bage7")->render(getMemDC(), _PlayerBage.rc7.left, _PlayerBage.rc7.top);
-		if (_PlayerBage.bage8) IMAGEMANAGER->findImage("bage8")->render(getMemDC(), _PlayerBage.rc8.left, _PlayerBage.rc8.top);
 
-		if (_PlayerBage.bage1, _PlayerBage.bage2, _PlayerBage.bage3, _PlayerBage.bage4, _PlayerBage.bage5, _PlayerBage.bage6, _PlayerBage.bage7, _PlayerBage.bage8)
-		{
-			IMAGEMANAGER->findImage("kingbage")->render(getMemDC(), 15, 25);
-		}
+
+
+		
+			if (_PlayerBage.bage[0])
+			{
+				IMAGEMANAGER->findImage("bage1")->render(getMemDC(), _PlayerBage.rc1.left, _PlayerBage.rc1.top);
+			}
+
+			if (_PlayerBage.bage[1])
+			{
+			IMAGEMANAGER->findImage("bage2")->render(getMemDC(), _PlayerBage.rc2.left, _PlayerBage.rc2.top);
+			}
+
+			if (_PlayerBage.bage[2])
+			{
+			IMAGEMANAGER->findImage("bage3")->render(getMemDC(), _PlayerBage.rc3.left, _PlayerBage.rc3.top);
+			}
+
+			if (_PlayerBage.bage[3])
+			{
+			IMAGEMANAGER->findImage("bage4")->render(getMemDC(), _PlayerBage.rc4.left, _PlayerBage.rc4.top);
+			}
+
+			if (_PlayerBage.bage[4])
+			{
+			IMAGEMANAGER->findImage("bage5")->render(getMemDC(), _PlayerBage.rc5.left, _PlayerBage.rc5.top);
+			}
+
+			if (_PlayerBage.bage[5])
+			{
+			IMAGEMANAGER->findImage("bage6")->render(getMemDC(), _PlayerBage.rc6.left, _PlayerBage.rc6.top);
+			}
+
+			if (_PlayerBage.bage[6])
+			{
+			IMAGEMANAGER->findImage("bage7")->render(getMemDC(), _PlayerBage.rc7.left, _PlayerBage.rc7.top);
+			}
+
+			if (_PlayerBage.bage[7])
+			{
+		 	IMAGEMANAGER->findImage("bage8")->render(getMemDC(), _PlayerBage.rc8.left, _PlayerBage.rc8.top);
+			}
+
+
+	
+
+			if (_PlayerBage.bage[0] == true && _PlayerBage.bage[1] == true && _PlayerBage.bage[2] == true && _PlayerBage.bage[3] == true && _PlayerBage.bage[4] == true &&
+				_PlayerBage.bage[5] == true && _PlayerBage.bage[6] == true && _PlayerBage.bage[7] == true)
+			{
+				IMAGEMANAGER->findImage("kingbage")->render(getMemDC(), 15, 25);
+			}
+
+		
 	}
 
 }

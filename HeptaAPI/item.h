@@ -51,6 +51,7 @@ public:
 
 	int getItemAbility() { return _ability; } // 아이템 능력치 가져가는 함수
 	ITEM_TYPE getType() { return _itemKind; } //아이템 종류 가져가는 함수
+	string getName() { return _name; }
 
 
 };

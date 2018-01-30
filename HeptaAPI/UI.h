@@ -14,7 +14,7 @@ struct InfoRect
 
 struct PlayerBage
 {
-	bool bage1, bage2, bage3, bage4, bage5, bage6, bage7, bage8;
+	bool bage[8];
 	image* bage1image, bage2image, bage3image, bage4image, bage5image, bage6image, bage7image, bage8image;
 	RECT rc1, rc2, rc3, rc4, rc5, rc6, rc7, rc8;
 };

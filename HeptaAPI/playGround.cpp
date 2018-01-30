@@ -142,10 +142,12 @@ HRESULT playGround::init()
 	//DATABASE->setVPlayerPokemon(vPokemon);
 	//DATABASE->setVEnemyPokemon(vPokemon2);
 
-	//SCENEMANAGER->init("PokeInfo");
-	//SCENEMANAGER->init("UI");
+	SCENEMANAGER->init("PokeInfo");
+	SCENEMANAGER->init("UI");
+	SCENEMANAGER->init("¿ÀÇÁ´×¾À");
+	
 
-	//SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
+	SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
 
 	return S_OK;
 }

@@ -239,8 +239,7 @@ void shopScene::shopBuyMenuDraw() //상점 사러가기 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEX_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene("인벤토리씬");
-		SCENEMANAGER->init("인벤토리씬");
+		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 		_selectItem[INDEX_BUTTON_CANCEL].Selected = false;
 	}
 	

@@ -143,9 +143,14 @@ void worldMapScene::render()
 
 	for (int i = 0; i < GYM_MAX; i++)
 	{
+		if (DATABASE->getIsStageClear(i + 1) == true)
+		{
+			_isClear[i] = true;
+		}
+
 		if (_isClear[i] == true)
 		{
-
+			
 			IMAGEMANAGER->findImage("clear")->render(getMemDC(), _select[i].pt.x, _select[i].pt.y + 50);
 		}
 	}
