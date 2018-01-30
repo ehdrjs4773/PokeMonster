@@ -239,6 +239,12 @@ void guardian1::render()
 	}
 	stageManager::render();
 
+
+	RECT hitBox = { _gymLeaderRc.left - 3, _gymLeaderRc.top - 3, _gymLeaderRc.right + 3, _gymLeaderRc.bottom + 3 };
+	Rectangle(getMemDC(), hitBox.left, hitBox.top, hitBox.right, hitBox.bottom);
+	Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);
+	Rectangle(getMemDC(), _player->getPlayerRc().left, _player->getPlayerRc().top, _player->getPlayerRc().right, _player->getPlayerRc().bottom);
+
 }
 void guardian1::collision()
 {
@@ -275,7 +281,7 @@ void guardian1::collision()
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
-			DATABASE->getPlayerMemory()->isAllDie())
+			!_player->isAllDie())
 		{
 			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");

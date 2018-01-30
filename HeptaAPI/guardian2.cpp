@@ -261,7 +261,7 @@ void guardian2::collision()
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
-			DATABASE->getPlayerMemory()->isAllDie())
+			!_player->isAllDie())
 		{
 			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
