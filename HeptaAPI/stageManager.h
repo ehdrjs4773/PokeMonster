@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
-#include "player.h"
 
+class player;
 
 
 class stageManager : public gameNode
@@ -22,5 +22,6 @@ public:
 	void render();
 
 	inline bool getIsWin() { return _isWin; }
+	inline void setPlayerAddressLink(player* player) { _player = player; }
 };
 

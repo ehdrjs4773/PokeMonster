@@ -25,13 +25,13 @@
 #include "guardian4.h"	// 정보번호 12
 #include "champion.h"	// 정보번호 13
 
-
+#include "player.h"
 
 
 class playGround : public gameNode
 {
 private:
-
+	player* _player;
 	gameNode* _currentScene;
 
 public:

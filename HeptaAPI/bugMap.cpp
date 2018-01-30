@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "bugMap.h"
 
+#include "player.h"
 
 
 bugMap::bugMap()

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "guardian3.h"
+#include "player.h"
 
 
 

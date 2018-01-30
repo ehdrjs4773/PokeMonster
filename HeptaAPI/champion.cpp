@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "champion.h"
 
+#include "player.h"
 
 
 champion::champion()

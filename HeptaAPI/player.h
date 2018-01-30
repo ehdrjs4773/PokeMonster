@@ -1,5 +1,7 @@
 #pragma once
 #include "gameNode.h"
+#include "pokemon.h"
+#include <vector>
 
 enum playerDirection
 {
@@ -27,6 +29,8 @@ private:
 
 	animation* _playerMotion;
 
+	vector<pokemon*> _vPokemon;
+
 
 public:
 	player();
@@ -42,13 +46,16 @@ public:
 	//static void _frontStop(void* obj);
 	//static void _backStop(void* obj);
 
-	inline void setPlayerPt(POINT pt) { _x = pt.x; _y = pt.y; }
+	inline void setPlayerPt(POINT pt)
+	{
+		_x = pt.x;
+		_y = pt.y;
+		_playerRc = RectMakeCenter(_x, _y, _player->getFrameWidth(), _player->getFrameHeight());
+	}
 
 	inline RECT getPlayerRc() { return _playerRc; }
 	inline int  setCurrentStage(int x) {  return _currentStage = x; }
 
-
-	
 
 	//플레이어 방향 접근자,설정자
 	playerDirection getPlayerDirection(void) { return _playerDirection; }

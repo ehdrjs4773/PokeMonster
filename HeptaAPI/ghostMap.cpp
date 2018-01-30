@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ghostMap.h"
 
+#include "player.h"
 
 
 ghostMap::ghostMap()

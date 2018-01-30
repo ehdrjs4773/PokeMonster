@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "fighterMap.h"
+#include "player.h"
+
 fighterMap::fighterMap()
 
 {

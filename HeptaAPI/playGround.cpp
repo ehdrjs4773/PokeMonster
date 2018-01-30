@@ -15,6 +15,9 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	gameNode::init(true);
+	_player = new player;
+	_player->init();
+	DATABASE->setPlayerMemory(_player);
 
 	this->imageInit();
 
@@ -136,11 +139,11 @@ HRESULT playGround::init()
 	vPokemon2->push_back(dandaegi);
 	vPokemon2->push_back(ggorat);
 
-	DATABASE->setVPlayerPokemon(vPokemon);
-	DATABASE->setVEnemyPokemon(vPokemon2);
+	//DATABASE->setVPlayerPokemon(vPokemon);
+	//DATABASE->setVEnemyPokemon(vPokemon2);
 
-	SCENEMANAGER->init("PokeInfo");
-	SCENEMANAGER->init("UI");
+	//SCENEMANAGER->init("PokeInfo");
+	//SCENEMANAGER->init("UI");
 
 	//SCENEMANAGER->changeScene("오프닝씬");
 
@@ -197,8 +200,8 @@ void playGround::update(void)
 	//--------수테이지 테스트----------
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))	//오박사
 	{
-		SCENEMANAGER->changeScene("스테이지13");
-		SCENEMANAGER->init("스테이지13");
+		SCENEMANAGER->changeScene("스테이지0");
+		SCENEMANAGER->init("스테이지0");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD1))	//비행
 	{

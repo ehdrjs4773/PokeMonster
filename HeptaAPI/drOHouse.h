@@ -10,8 +10,9 @@ private:
 	image* _drO;			//오박사 이미지
 
 	float _x, _y;			//오박사 x,y
-	RECT _drORc;		//오박사 렉트
-
+	RECT _gymLeaderRc;		//오박사 렉트
+	
+	bool _isMonsterSelect;
 	
 
 public:

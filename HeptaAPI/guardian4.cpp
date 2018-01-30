@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "guardian4.h"
 
+#include "player.h"
 
 
 guardian4::guardian4()

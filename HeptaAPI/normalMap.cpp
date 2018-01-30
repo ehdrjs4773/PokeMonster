@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "normalMap.h"
 
+#include "player.h"
 
 
 normalMap::normalMap()

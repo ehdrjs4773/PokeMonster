@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "steelMap.h"
+#include "player.h"
 
 
 

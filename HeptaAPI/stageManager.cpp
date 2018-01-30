@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "stageManager.h"
+#include "player.h"
 
 stageManager::stageManager()
+	: _player(NULL)
 {
 }
 stageManager::~stageManager()
@@ -12,7 +14,7 @@ stageManager::~stageManager()
 HRESULT stageManager::init()
 {
 	_gymLeader = IMAGEMANAGER->addFrameImage("npc", ".\\bmps\\map\\ÀÎ°ÔÀÓnpc.bmp", 325, 28, 13, 1, false, true, MAGENTA);
-	_player = new player;
+	this->setPlayerAddressLink(DATABASE->getPlayerMemory());
 	_player->init();
 
 	return S_OK;

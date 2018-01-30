@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "iceMap.h"
 
+#include "player.h"
 
 
 iceMap::iceMap()

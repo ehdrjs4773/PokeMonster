@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "flyMap.h"
 
+#include "player.h"
 flyMap::flyMap()
 {
 }

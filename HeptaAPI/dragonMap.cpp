@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "dragonMap.h"
 
+#include "player.h"
 
 
 dragonMap::dragonMap()

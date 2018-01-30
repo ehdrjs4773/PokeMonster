@@ -4,6 +4,7 @@
 #include <map>
 
 class pokemon;
+class player;
 
 class elements
 {
@@ -51,6 +52,7 @@ private:
 private:
 	vPokemon* _vPlayerPokemon;
 	vPokemon* _vEnemyPokemon;
+	player* _playerMemory;
 
 	// 포켓몬 종족값 등록한 맵
 	arrElement _mTotalElement;
@@ -79,5 +81,8 @@ public:
 	inline void setVEnemyPokemon(vPokemon* poke) { _vEnemyPokemon = poke; }
 
 	inline bool getIsStageClear(int num) { return _isStageClear[num - 1]; }
+
+	inline void setPlayerMemory(player* player) { _playerMemory = player; }
+	inline player* getPlayerMemory() { return _playerMemory; }
 };
 
