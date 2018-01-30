@@ -7,6 +7,7 @@
 
 guardian1::guardian1()
 {
+	_isWin = false;
 }
 
 
@@ -38,7 +39,6 @@ HRESULT guardian1::init()
 	}
 
 	
-	_isWin = false;
 	
 
 

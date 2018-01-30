@@ -5,6 +5,7 @@
 
 flyMap::flyMap()
 {
+	_isWin = false;
 }
 flyMap::~flyMap()
 {
@@ -25,7 +26,7 @@ HRESULT flyMap::init()
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
 
-	_isWin = false;
+	
 
 	// ¿©±â¶û
 	int level = 5 + 5 * _player->getBadgeCount();
@@ -142,7 +143,7 @@ void flyMap::render()
 	}
 	stageManager::render();
 	//IMAGEMANAGER->findImage("npc")->frameRender(getMemDC(), _x, _y, 0, 0);
-	Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);
+	//Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);
 }
 
 void flyMap::collision()

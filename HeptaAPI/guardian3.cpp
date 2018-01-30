@@ -6,6 +6,7 @@
 
 guardian3::guardian3()
 {
+	_isWin = false;
 }
 
 
@@ -33,7 +34,7 @@ HRESULT guardian3::init()
 	{
 		_player->setPlayerPt(PointMake(240, 340));
 	}
-	_isWin = false;
+	
 	return S_OK;
 }
 

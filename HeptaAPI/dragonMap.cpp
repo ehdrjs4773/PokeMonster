@@ -7,6 +7,7 @@
 
 dragonMap::dragonMap()
 {
+	_isWin = false;
 }
 
 
@@ -27,7 +28,7 @@ HRESULT dragonMap::init()
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
 
-	_isWin = false;
+	
 
 	return S_OK;
 }

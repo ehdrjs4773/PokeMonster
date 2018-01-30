@@ -7,6 +7,7 @@
 
 champion::champion()
 {
+	_isWin = false;
 }
 
 
@@ -28,7 +29,7 @@ HRESULT champion::init()
 
 
 	
-	_isWin = false;
+	
 
 	return S_OK;
 }
