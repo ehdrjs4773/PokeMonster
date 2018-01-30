@@ -497,6 +497,11 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 		{
 			SCENEMANAGER->changeScene("UI");
 		}
+		else if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
+			_battleScene->getBattleSceneUI()->selectReset();
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
 		else
 		{
 			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
@@ -620,9 +625,21 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		if (SCENEMANAGER->getLastSceneName() == "PokeInfo")
+		{
+			SCENEMANAGER->changeScene("UI");
+		}
+		else if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
 			_battleScene->getBattleSceneUI()->selectReset();
-		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
+
+	
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 }
@@ -748,7 +765,19 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		if (SCENEMANAGER->getLastSceneName() == "PokeInfo")
+		{
+			SCENEMANAGER->changeScene("UI");
+		}
+		else if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
+			_battleScene->getBattleSceneUI()->selectReset();
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 
@@ -859,7 +888,19 @@ void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
-		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		if (SCENEMANAGER->getLastSceneName() == "PokeInfo")
+		{
+			SCENEMANAGER->changeScene("UI");
+		}
+		else if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
+			_battleScene->getBattleSceneUI()->selectReset();
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+		}
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 
