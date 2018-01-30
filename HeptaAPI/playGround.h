@@ -8,6 +8,7 @@
 #include "inventory.h"
 #include "UI.h"
 #include "MonsterBack.h"
+#include "Ending.h"
 //--------수테이지------
 
 #include "drOHouse.h"	// 정보번호 0

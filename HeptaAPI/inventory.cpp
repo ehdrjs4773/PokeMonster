@@ -1049,7 +1049,7 @@ void inventory::KeyControl()
 
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
-		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		if (_destScene == "battleScene")
 		{
 			_battleScene->getBattleSceneUI()->selectReset();
 			SCENEMANAGER->changeScene(_destScene);

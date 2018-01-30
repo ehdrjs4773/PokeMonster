@@ -32,7 +32,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("PokeInfo", new MonsterBack);
 	SCENEMANAGER->addScene("UI", new UI);
 	SCENEMANAGER->init("인벤토리씬");
-
+	SCENEMANAGER->addScene("ending", new Ending);
 	//--------수테이지 테스트----------
 	SCENEMANAGER->addScene("스테이지0", new drOHouse);
 	SCENEMANAGER->addScene("스테이지1", new steelMap);
@@ -54,6 +54,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->init("PokeInfo");
 	SCENEMANAGER->init("UI");
 	SCENEMANAGER->init("오프닝씬");
+	SCENEMANAGER->init("ending");
 	
 	SCENEMANAGER->changeScene("오프닝씬");
 

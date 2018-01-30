@@ -58,12 +58,6 @@ HRESULT battleScene::init(int stage)
 	_fight = PLAYER_ATTACK;
 	_end = END_END;
 
-	// UI 초기화
-	if (_UI == NULL)
-		_UI = new battleSceneUI;
-	_UI->setMemoryAddressLink(this);
-	_UI->init();
-
 	// 사용할 이미지 등록
 	IMAGEMANAGER->addFrameImage("battle_player", ".\\bmps\\battleScene\\battle_player.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addFrameImage("battle_player_ball", ".\\bmps\\battleScene\\battle_player_ball.bmp", POKEMON_WIDTH * 8, POKEMON_HEIGHT, 8, 1, false, true, MAGENTA);
@@ -104,6 +98,12 @@ HRESULT battleScene::init(int stage)
 	// 플레이어, 적 죽었는지 초기화 == 일단 둘 다 false
 	_enemyIsDie = false;
 	_playerIsDie = false;
+
+	// UI 초기화
+	if (_UI == NULL)
+		_UI = new battleSceneUI;
+	_UI->setMemoryAddressLink(this);
+	_UI->init();
 
 	return S_OK;
 }
@@ -335,13 +335,14 @@ void battleScene::update()
 							skillKey = this->elementString(tempEl) + "_player";
 						if (_attackTime == 1)
 							EFFECTMANAGER->play(skillKey, WINSIZEX / 2, WINSIZEY / 2);
+						else if (_attackTime == 2)
+							(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
 						else
 						{
 							if (EFFECTMANAGER->isEffectEnd(skillKey))
 							{
 								if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
 								{
-									(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
 									(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
 
 									if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
@@ -477,13 +478,14 @@ void battleScene::update()
 						ELEMENT tempEl = (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getElement();
 						if (_attackTime == 1)
 							EFFECTMANAGER->play(this->elementString(tempEl) + "_enemy", WINSIZEX / 2, WINSIZEY / 2);
+						else if (_attackTime == 2)
+							(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
 						else
 						{
 							if (EFFECTMANAGER->isEffectEnd(this->elementString(tempEl) + "_enemy"))
 							{
 								if (_playerHPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP()))
 								{
-									(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
 									(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
 
 									if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP() <= 0)
@@ -603,8 +605,6 @@ void battleScene::update()
 				else
 				{
 					SCENEMANAGER->changeScene(_destScene);
-					if (_enemyType == ENEMY_TRAINNER)
-						DATABASE->getPlayerMemory()->setBadgeCount(DATABASE->getPlayerMemory()->getBadgeCount() + 1);
 				}
 			}
 			else
@@ -613,6 +613,8 @@ void battleScene::update()
 				if (_attackTime % 50 == 0)
 				{
 					SCENEMANAGER->changeScene(_destScene);
+					if (_enemyType == ENEMY_TRAINNER)
+						DATABASE->getPlayerMemory()->setBadgeCount(DATABASE->getPlayerMemory()->getBadgeCount() + 1);
 				}
 			}
 		break;
@@ -853,6 +855,13 @@ string battleScene::elementString(ELEMENT el)
 	}
 
 	return temp;
+}
+
+void battleScene::setProgressBar()
+{
+	_enemyHPBar->setGauge((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP(), (int)true);
+	_playerHPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP(), (int)true);
+	_playerEXPBar->setGauge((*_playerPokemon)[_playerCurrentPokemon]->getCurrentEXP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxEXP(), (int)false);
 }
 
 // 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수

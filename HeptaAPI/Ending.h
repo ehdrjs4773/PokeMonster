@@ -4,6 +4,10 @@
 
 class Ending : public gameNode
 {
+private : 
+	int _x, _y;
+
+
 public:
 	Ending();
 	~Ending();

@@ -90,7 +90,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
 		{
 			if (message.message == WM_QUIT) break;
-
 			TranslateMessage(&message);		//키보드 입력 시 그 메시지 처리 담당
 			DispatchMessage(&message);		//실제로 윈도우에 메시지를 전달해주는 역할
 		}

@@ -251,6 +251,7 @@ void battleSceneUI::selectReset()
 	_isPokemonSelect = false;
 	_isBagSelect = false;
 	_isRunAwaySelect = false;
+	_battleScene->setProgressBar();
 }
 
 void battleSceneUI::printElement(ELEMENT el)

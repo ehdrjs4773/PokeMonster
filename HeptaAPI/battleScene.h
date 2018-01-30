@@ -121,6 +121,7 @@ public:
 
 	void frameUpdate();
 	string elementString(ELEMENT el);
+	void setProgressBar();
 
 	// 배틀할 때 데미지를 어떻게 해야하나 판정해주는 함수
 	DAMAGE_JUDGEMENT judgement(ELEMENT attackerSkill, ELEMENT defencer);

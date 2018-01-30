@@ -67,7 +67,8 @@ public:
 	animation* getPlayerMotion(void) { return _playerMotion; }
 	void setPlayerMotion(animation* ani) { _playerMotion = ani; }
 
-	inline int getBadgeCount() { return _badgeCount; }
+	inline int getBadgeCount() {
+		return _badgeCount; }
 	inline void setBadgeCount(int count) { _badgeCount = count; }
 	inline bool isAllDie() { return _isAllDie; }
 };

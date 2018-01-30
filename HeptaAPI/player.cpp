@@ -3,6 +3,7 @@
 
 player::player()
 {
+	_badgeCount = 0;
 }
 
 
@@ -73,7 +74,6 @@ HRESULT player::init()
 	_playerMotion = KEYANIMANAGER->findAnimation("µÚ");
 
 	DATABASE->setVPlayerPokemon(&_vPokemon);
-	_badgeCount = 0;
 
 	_isAllDie = false;
 
@@ -97,9 +97,13 @@ void player::update()
 		_isAllDie = true;
 	}
 
+	int sum = 0;
 	for (int i = 0; i < 8; ++i)
-		_badgeCount += (int)DATABASE->getIsStageClear(i);
-	
+	{
+		sum += (int)DATABASE->getIsStageClear(i);
+	}
+	_badgeCount = sum;
+
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		_playerDirection = GOLD_RIGHT_MOVE;
