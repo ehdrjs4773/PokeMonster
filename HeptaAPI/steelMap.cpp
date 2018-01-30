@@ -59,9 +59,9 @@ void steelMap::render()
 		IMAGEMANAGER->findImage("°­Ã¶NPC")->render(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top);
 	}
 
-	Rectangle(getMemDC(), _player->getPlayerRc().left, _player->getPlayerRc().top, _player->getPlayerRc().right, _player->getPlayerRc().bottom);
+	//Rectangle(getMemDC(), _player->getPlayerRc().left, _player->getPlayerRc().top, _player->getPlayerRc().right, _player->getPlayerRc().bottom);
 	stageManager::render();
-	Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);
+	//Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);
 }
 
 void steelMap::collision()
