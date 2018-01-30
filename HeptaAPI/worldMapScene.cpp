@@ -206,4 +206,9 @@ void worldMapScene::selectMove()
 		SCENEMANAGER->init("스테이지0");
 	}
 
+	if (KEYMANAGER->isOnceKeyDown('S'))
+	{
+		SCENEMANAGER->changeScene("상점씬");
+		SCENEMANAGER->init("상점씬");
+	}
 }
