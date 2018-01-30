@@ -512,8 +512,14 @@ void inventory::UtilMenuDraw() //인벤토리 유틸 Menu 그려주는 함수
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
 		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
 			_battleScene->getBattleSceneUI()->selectReset();
-		SCENEMANAGER->changeScene(_destScene);
+			SCENEMANAGER->changeScene(_destScene);
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(_destScene);
+		}
 		
 	
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
@@ -646,8 +652,15 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
 		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
 			_battleScene->getBattleSceneUI()->selectReset();
-		SCENEMANAGER->changeScene(_destScene);
+			SCENEMANAGER->changeScene(_destScene);
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(_destScene);
+		}
+
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 }
@@ -774,8 +787,14 @@ void inventory::BallMenuDraw() //인벤토리 볼 Menu 그려주는 함수
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
 		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
 			_battleScene->getBattleSceneUI()->selectReset();
-		SCENEMANAGER->changeScene(_destScene);
+			SCENEMANAGER->changeScene(_destScene);
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(_destScene);
+		}
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 
@@ -904,9 +923,17 @@ void inventory::MachineMenuDraw() //인벤토리 머신 Menu 그려주는 함수
 	}
 	if (_selectItem[INDEXS_BUTTON_CANCEL].Selected) //취소 버튼
 	{
+	
 		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
 			_battleScene->getBattleSceneUI()->selectReset();
-		SCENEMANAGER->changeScene(_destScene);
+			SCENEMANAGER->changeScene(_destScene);
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(_destScene);
+		}
+			
 		_selectItem[INDEXS_BUTTON_CANCEL].Selected = false;
 	}
 
@@ -1023,8 +1050,14 @@ void inventory::KeyControl()
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
 		if (SCENEMANAGER->getLastSceneName() == "battleScene")
+		{
 			_battleScene->getBattleSceneUI()->selectReset();
-		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+			SCENEMANAGER->changeScene(_destScene);
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(_destScene);
+		}
 	}
 
 }
