@@ -2,6 +2,7 @@
 #include "champion.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 champion::champion()
@@ -65,7 +66,10 @@ void champion::render()
 {
 
 	IMAGEMANAGER->findImage("Ã¨ÇÇ¾ğ¸Ê")->render(getMemDC());
-	IMAGEMANAGER->findImage("Ã¨ÇÇ¾ğNPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("Ã¨ÇÇ¾ğNPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 }
 
@@ -105,9 +109,12 @@ void champion::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("½ºÅ×ÀÌÁö1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("½ºÅ×ÀÌÁö13");
+			tempBattle->init(13);
 		}
 	}
 }

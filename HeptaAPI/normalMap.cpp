@@ -2,6 +2,7 @@
 #include "normalMap.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 normalMap::normalMap()
@@ -50,7 +51,10 @@ void normalMap::update()
 void normalMap::render()
 {
 	IMAGEMANAGER->findImage("노말맵")->render(getMemDC());
-	IMAGEMANAGER->findImage("노말NPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("노말NPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 
 }
@@ -90,9 +94,12 @@ void normalMap::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("스테이지4");
+			tempBattle->init(4);
 		}
 	}
 }

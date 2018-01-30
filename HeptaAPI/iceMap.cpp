@@ -2,6 +2,7 @@
 #include "iceMap.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 iceMap::iceMap()
@@ -52,7 +53,10 @@ void iceMap::render()
 {
 	
 	IMAGEMANAGER->findImage("얼음맵")->render(getMemDC());
-	IMAGEMANAGER->findImage("얼음NPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("얼음NPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 }
 void iceMap::collision()
@@ -88,12 +92,14 @@ void iceMap::collision()
 					temp.bottom + (_player->getPlayerRc().bottom - _player->getPlayerRc().top) / 2));
 			}
 		}
-
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("스테이지8");
+			tempBattle->init(8);
 		}
 	}
 }

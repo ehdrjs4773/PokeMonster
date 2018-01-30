@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "steelMap.h"
 #include "player.h"
-
+#include "battleScene.h"
 
 
 steelMap::steelMap()
@@ -99,9 +99,12 @@ void steelMap::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("스테이지1");
+			tempBattle->init(1);
 		}
 	}
 }

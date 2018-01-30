@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "fighterMap.h"
 #include "player.h"
+#include "battleScene.h"
 
 fighterMap::fighterMap()
 
@@ -46,7 +47,10 @@ void fighterMap::update()
 void fighterMap::render()
 {
 	IMAGEMANAGER->findImage("격투맵")->render(getMemDC());
-	IMAGEMANAGER->findImage("격투NPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("격투NPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 	//IMAGEMANAGER->findImage("npc")->frameRender(getMemDC(), _x, _y, 4, 0);
 }
@@ -87,9 +91,12 @@ void fighterMap::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("스테이지2");
+			tempBattle->init(2);
 		}
 	}
 }

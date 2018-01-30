@@ -2,6 +2,7 @@
 #include "ghostMap.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 ghostMap::ghostMap()
@@ -51,7 +52,10 @@ void ghostMap::render()
 {
 	
 	IMAGEMANAGER->findImage("고스트맵")->render(getMemDC());
-	IMAGEMANAGER->findImage("고스트NPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("고스트NPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 
 }
@@ -92,9 +96,12 @@ void ghostMap::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("스테이지3");
+			tempBattle->init(3);
 		}
 	}
 }

@@ -136,7 +136,10 @@ void flyMap::update()
 void flyMap::render()
 {
 	IMAGEMANAGER->findImage("비행맵")->render(getMemDC());
-	IMAGEMANAGER->findImage("비행NPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("비행NPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 	//IMAGEMANAGER->findImage("npc")->frameRender(getMemDC(), _x, _y, 0, 0);
 	Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);

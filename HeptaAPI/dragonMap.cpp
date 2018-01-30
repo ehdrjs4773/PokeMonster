@@ -2,6 +2,7 @@
 #include "dragonMap.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 dragonMap::dragonMap()
@@ -52,7 +53,10 @@ void dragonMap::render()
 {
 	
 	IMAGEMANAGER->findImage("µå·¡°ï¸Ê")->render(getMemDC());
-	IMAGEMANAGER->findImage("µå·¡°ïNPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("µå·¡°ïNPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 }
 void dragonMap::collision()
@@ -91,9 +95,12 @@ void dragonMap::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("½ºÅ×ÀÌÁö1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("½ºÅ×ÀÌÁö5");
+			tempBattle->init(5);
 		}
 	}
 }

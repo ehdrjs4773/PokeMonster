@@ -2,6 +2,7 @@
 #include "bugMap.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 bugMap::bugMap()
@@ -51,7 +52,10 @@ void bugMap::render()
 {
 	
 	IMAGEMANAGER->findImage("¹ú·¹¸Ê")->render(getMemDC());
-	IMAGEMANAGER->findImage("¹ú·¹NPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("¹ú·¹NPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 }
 
@@ -88,12 +92,14 @@ void bugMap::collision()
 					temp.bottom + (_player->getPlayerRc().bottom - _player->getPlayerRc().top) / 2));
 			}
 		}
-
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("½ºÅ×ÀÌÁö1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("½ºÅ×ÀÌÁö6");
+			tempBattle->init(6);
 		}
 	}
 }

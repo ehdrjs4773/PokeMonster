@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "guardian3.h"
 #include "player.h"
-
+#include "battleScene.h"
 
 
 guardian3::guardian3()
@@ -62,7 +62,10 @@ void guardian3::update()
 void guardian3::render()
 {
 	IMAGEMANAGER->findImage("»çÃµ¿Õ3¸Ê")->render(getMemDC());
-	IMAGEMANAGER->findImage("»çÃµ¿Õ3_¿¡½ºÆÛNPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("»çÃµ¿Õ3_¿¡½ºÆÛNPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 
 }
@@ -102,9 +105,12 @@ void guardian3::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("½ºÅ×ÀÌÁö1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("½ºÅ×ÀÌÁö11");
+			tempBattle->init(11);
 		}
 	}
 }

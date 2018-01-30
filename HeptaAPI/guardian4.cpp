@@ -2,6 +2,7 @@
 #include "guardian4.h"
 
 #include "player.h"
+#include "battleScene.h"
 
 
 guardian4::guardian4()
@@ -64,7 +65,10 @@ void guardian4::update()
 void guardian4::render()
 {
 	IMAGEMANAGER->findImage("»çÃµ¿Õ4¸Ê")->render(getMemDC());
-	IMAGEMANAGER->findImage("»çÃµ¿Õ4_¾ÇNPC")->render(getMemDC(), _x, _y);
+	if (!_isWin)
+	{
+		IMAGEMANAGER->findImage("»çÃµ¿Õ4_¾ÇNPC")->render(getMemDC(), _x, _y);
+	}
 	stageManager::render();
 
 }
@@ -104,9 +108,12 @@ void guardian4::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("½ºÅ×ÀÌÁö1");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->setDestScene("½ºÅ×ÀÌÁö12");
+			tempBattle->init(12);
 		}
 	}
 }
