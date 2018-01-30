@@ -16,14 +16,13 @@ battleScene::~battleScene()
 HRESULT battleScene::init()
 {
 	// 적 타입 가져오기 (나중에 DATABASE 이용해서 가져올 생각)
-	//if (_enemyType == ENEMY_WILD)
-	//	;
-	//else if (_enemyType == ENEMY_TRAINNER)
-	//{
-	//	string tempPath = ".\\bmps\\battleScene\\" + _destScene + "_enemy.bmp";
-	//	IMAGEMANAGER->addImage(_destScene + "_enemy", tempPath.c_str(), POKEMON_WIDTH, POKEMON_HEIGHT, false, true, MAGENTA);
-	//}
-	_enemyType = ENEMY_WILD;
+	if (_enemyType == ENEMY_WILD)
+		;
+	else if (_enemyType == ENEMY_TRAINNER)
+	{
+		string tempPath = ".\\bmps\\battleScene\\" + _destScene + "_enemy.bmp";
+		IMAGEMANAGER->addImage(_destScene + "_enemy", tempPath.c_str(), POKEMON_WIDTH, POKEMON_HEIGHT, false, true, MAGENTA);
+	}
 	
 	// 내부저장소(메모리)에서 포켓몬 가져오기
 	if (DATABASE->getVPlayerPokemon()->size() == 0) return E_FAIL;

@@ -12,6 +12,8 @@ private:
 	float _x, _y;			//체육관 관장 x,y
 	RECT _gymLeaderRc;		//체육관 관장 렉트
 
+
+
 public:
 	flyMap();
 	~flyMap();

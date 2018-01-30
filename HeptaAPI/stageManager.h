@@ -1,8 +1,8 @@
 #pragma once
 #include "gameNode.h"
+#include <vector>
 
 class player;
-
 
 class stageManager : public gameNode
 {
@@ -11,6 +11,7 @@ protected:
 	image* _gymLeader;		//체육관 관장
 
 	bool _isWin;
+	vector<pokemon*> _vPokemon;
 
 public:
 	stageManager();

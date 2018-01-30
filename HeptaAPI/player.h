@@ -26,6 +26,7 @@ private:
 	float _speed;
 	playerDirection _playerDirection;
 	int _currentStage;
+	int _badgeCount;
 
 	animation* _playerMotion;
 
@@ -64,5 +65,7 @@ public:
 	//플레이어 모션 접근자,설정자
 	animation* getPlayerMotion(void) { return _playerMotion; }
 	void setPlayerMotion(animation* ani) { _playerMotion = ani; }
+
+	inline int getBadgeCount() { return _badgeCount; }
 };
 

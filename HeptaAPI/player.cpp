@@ -73,6 +73,7 @@ HRESULT player::init()
 	_playerMotion = KEYANIMANAGER->findAnimation("µÚ");
 
 	DATABASE->setVPlayerPokemon(&_vPokemon);
+	_badgeCount = 0;
 
 	return S_OK;
 }
@@ -83,7 +84,8 @@ void player::release()
 
 void player::update()
 {		
-	
+	for (int i = 0; i < 8; ++i)
+		_badgeCount += (int)DATABASE->getIsStageClear(i);
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{

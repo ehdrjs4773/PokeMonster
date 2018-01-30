@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "flyMap.h"
-
 #include "player.h"
+#include "battleScene.h"
+
 flyMap::flyMap()
 {
 }
@@ -25,6 +26,84 @@ HRESULT flyMap::init()
 
 
 	_isWin = false;
+
+	int level = 5 + 5 * _player->getBadgeCount();
+	_vPokemon.clear();
+	// 구구, 깨비참, 피존, 깨비드릴조, 피존투, 파오리
+	pokemon* temp[6];
+	for (int i = 0; i < 6; ++i)
+	{
+		temp[i] = new pokemon;
+		
+		if (i == 0)
+		{
+			temp[i]->init("구구", level);
+		}
+		else if (i == 1)
+		{
+			temp[i]->init("깨비참", level);
+		}
+		else if (i == 2)
+		{
+			temp[i]->init("피죤", level);
+		}
+		else if (i == 3)
+		{
+			temp[i]->init("깨비드릴조", level);
+		}
+		else if (i == 4)
+		{
+			temp[i]->init("피죤투", level);
+		}
+		else if (i == 5)
+		{
+			temp[i]->init("파오리", level);
+		}
+	}
+
+	vector<pokemon*>* realPokemonVector = new vector<pokemon*>;
+	switch (_player->getBadgeCount())
+	{
+		case 0:
+			realPokemonVector->push_back(_vPokemon[0]);
+		break;
+		
+		case 1:
+			realPokemonVector->push_back(_vPokemon[0]);
+			realPokemonVector->push_back(_vPokemon[1]);
+		break;
+		
+		case 2:
+			realPokemonVector->push_back(_vPokemon[0]);
+			realPokemonVector->push_back(_vPokemon[1]);
+			realPokemonVector->push_back(_vPokemon[2]);
+		break;
+		
+		case 3:
+			realPokemonVector->push_back(_vPokemon[0]);
+			realPokemonVector->push_back(_vPokemon[1]);
+			realPokemonVector->push_back(_vPokemon[2]);
+			realPokemonVector->push_back(_vPokemon[3]);
+		break;
+		
+		case 4:
+			realPokemonVector->push_back(_vPokemon[0]);
+			realPokemonVector->push_back(_vPokemon[1]);
+			realPokemonVector->push_back(_vPokemon[2]);
+			realPokemonVector->push_back(_vPokemon[3]);
+			realPokemonVector->push_back(_vPokemon[4]);
+		break;
+
+		default:
+			realPokemonVector->push_back(_vPokemon[0]);
+			realPokemonVector->push_back(_vPokemon[1]);
+			realPokemonVector->push_back(_vPokemon[2]);
+			realPokemonVector->push_back(_vPokemon[3]);
+			realPokemonVector->push_back(_vPokemon[4]);
+			realPokemonVector->push_back(_vPokemon[5]);
+		break;
+	}
+	DATABASE->setVEnemyPokemon(realPokemonVector);
 
 	return S_OK;
 }
@@ -90,7 +169,9 @@ void flyMap::collision()
 		{
 			SCENEMANAGER->changeScene("battleScene");
 			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지1");
+			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지7");
+			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
+			tempBattle->setEnemyType(ENEMY_TRAINNER);
 		}
 	}
 }
