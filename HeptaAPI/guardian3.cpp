@@ -34,6 +34,159 @@ HRESULT guardian3::init()
 	{
 		_player->setPlayerPt(PointMake(240, 340));
 	}
+
+	// ¿©±â¶û
+	int level = 50;
+	_vPokemon.clear();
+	// ±¸±¸, ±úºñÂü, ÇÇÁ¸, ±úºñµå¸±Á¶, ÇÇÁ¸Åõ, ÆÄ¿À¸®
+	pokemon* temp[6];
+	skill* tempSkill;
+	for (int i = 0; i < 6; ++i)
+	{
+		temp[i] = new pokemon;
+
+		if (i == 0)
+		{
+			temp[i]->init("°í¶óÆÄ´ö", level);
+			tempSkill = new skill;
+			tempSkill->init("¼ù°¡¶ôÈÖ±â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("¿°µ¿·Â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("ÁöÁø");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("µ¹Áø");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 1)
+		{
+			temp[i]->init("°ñ´ö", level);
+			tempSkill = new skill;
+			tempSkill->init("¼ù°¡¶ôÈÖ±â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("¿°µ¿·Â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("ÁöÁø");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("µ¹Áø");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 2)
+		{
+			temp[i]->init("½½¸®ÆÛ", level);
+			tempSkill = new skill;
+			tempSkill->init("¼ù°¡¶ôÈÖ±â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("¿°µ¿·Â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("ÁöÁø");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("µ¹Áø");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 3)
+		{
+			temp[i]->init("½½¸®ÇÁ", level);
+			tempSkill = new skill;
+			tempSkill->init("¼ù°¡¶ôÈÖ±â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("¿°µ¿·Â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("ÁöÁø");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("µ¹Áø");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 4)
+		{
+			temp[i]->init("À±°Ö¶ó", level);
+			tempSkill = new skill;
+			tempSkill->init("¼ù°¡¶ôÈÖ±â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("¿°µ¿·Â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("ÁöÁø");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("µ¹Áø");
+			temp[i]->addSkill(tempSkill);
+		}
+		else if (i == 5)
+		{
+			temp[i]->init("ÈÄµò", level);
+			tempSkill = new skill;
+			tempSkill->init("¼ù°¡¶ôÈÖ±â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("¿°µ¿·Â");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("ÁöÁø");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("µ¹Áø");
+			temp[i]->addSkill(tempSkill);
+		}
+		_vPokemon.push_back(temp[i]);
+	}
+
+	vector<pokemon*>* realPokemonVector = new vector<pokemon*>;
+	switch (_player->getBadgeCount())
+	{
+	case 0:
+		realPokemonVector->push_back(_vPokemon[0]);
+		break;
+
+	case 1:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		break;
+
+	case 2:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		break;
+
+	case 3:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		break;
+
+	case 4:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		realPokemonVector->push_back(_vPokemon[4]);
+		break;
+
+	default:
+		realPokemonVector->push_back(_vPokemon[0]);
+		realPokemonVector->push_back(_vPokemon[1]);
+		realPokemonVector->push_back(_vPokemon[2]);
+		realPokemonVector->push_back(_vPokemon[3]);
+		realPokemonVector->push_back(_vPokemon[4]);
+		realPokemonVector->push_back(_vPokemon[5]);
+		break;
+	}
+	DATABASE->setVEnemyPokemon(realPokemonVector);
 	
 	return S_OK;
 }
@@ -106,7 +259,7 @@ void guardian3::collision()
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY) &&
-			!_player->isAllDie())
+			DATABASE->getPlayerMemory()->isAllDie())
 		{
 			// ¿©±â¶û
 			SCENEMANAGER->changeScene("battleScene");
