@@ -267,7 +267,10 @@ void battleScene::update()
 							_playerImageRect.bottom--;
 
 							if (_attackTime == 20)
+							{
 								(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
+								(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
+							}
 						}
 						else if (_attackTime <= 40)
 						{
@@ -280,8 +283,6 @@ void battleScene::update()
 						{
 							if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
 							{
-								(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
-
 								if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
 								{
 									if (!_isGetEXP)
@@ -333,18 +334,20 @@ void battleScene::update()
 							skillKey = "고무고무난타";
 						else
 							skillKey = this->elementString(tempEl) + "_player";
+
 						if (_attackTime == 1)
 							EFFECTMANAGER->play(skillKey, WINSIZEX / 2, WINSIZEY / 2);
 						else if (_attackTime == 2)
+						{
 							(*_enemyPokemon)[_enemyCurrentPokemon]->hitDamager(calcDamage((*_playerPokemon)[_playerCurrentPokemon], (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()], (*_enemyPokemon)[_enemyCurrentPokemon]));
+							(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
+						}
 						else
 						{
 							if (EFFECTMANAGER->isEffectEnd(skillKey))
 							{
 								if (_enemyHPBar->isChangeDone((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP(), (*_enemyPokemon)[_enemyCurrentPokemon]->getMaxHP()))
 								{
-									(*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->useSkill();
-
 									if ((*_enemyPokemon)[_enemyCurrentPokemon]->getCurrentHP() <= 0)
 									{
 										if (!_isGetEXP)
@@ -442,7 +445,10 @@ void battleScene::update()
 							_enemyImageRect.bottom++;
 
 							if (_attackTime == 20)
+							{
 								(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
+								(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
+							}
 						}
 						else if (_attackTime <= 40)
 						{
@@ -455,8 +461,6 @@ void battleScene::update()
 						{
 							if (_playerHPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP()))
 							{
-								(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
-
 								if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP() <= 0)
 								{
 									_sequence = BATTLE_END;
@@ -475,19 +479,26 @@ void battleScene::update()
 					}
 					else if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getType() == SKILL_SPECIAL)
 					{
-						ELEMENT tempEl = (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getElement();
+						ELEMENT tempEl = (*_playerPokemon)[_playerCurrentPokemon]->getVSkill()[_UI->getCurrentPlayerSkill()]->getElement();
+						string skillKey;
+						if ((*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->getName() == "고무고무난타")
+							skillKey = "고무고무난타_e";
+						else
+							skillKey = this->elementString(tempEl) + "_enemy";
+
 						if (_attackTime == 1)
-							EFFECTMANAGER->play(this->elementString(tempEl) + "_enemy", WINSIZEX / 2, WINSIZEY / 2);
+							EFFECTMANAGER->play(skillKey, WINSIZEX / 2, WINSIZEY / 2);
 						else if (_attackTime == 2)
+						{
 							(*_playerPokemon)[_playerCurrentPokemon]->hitDamager(calcDamage((*_enemyPokemon)[_enemyCurrentPokemon], (*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()], (*_playerPokemon)[_playerCurrentPokemon]));
+							(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
+						}
 						else
 						{
 							if (EFFECTMANAGER->isEffectEnd(this->elementString(tempEl) + "_enemy"))
 							{
 								if (_playerHPBar->isChangeDone((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP(), (*_playerPokemon)[_playerCurrentPokemon]->getMaxHP()))
 								{
-									(*_enemyPokemon)[_enemyCurrentPokemon]->getVSkill()[_UI->getCurrentEnemySkill()]->useSkill();
-
 									if ((*_playerPokemon)[_playerCurrentPokemon]->getCurrentHP() <= 0)
 									{
 										_sequence = BATTLE_END;
@@ -636,14 +647,16 @@ void battleScene::render()
 		case BATTLE_INTRO:
 			DIALOGUE->render(getMemDC());
 			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
-			IMAGEMANAGER->findImage(_destScene + "_enemy")->render(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+			if (_enemyType == ENEMY_TRAINNER)
+				IMAGEMANAGER->findImage(_destScene + "_enemy")->render(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 		break;
 		
 		case BATTLE_BALLTHROW:
 			DIALOGUE->render(getMemDC());
 			IMAGEMANAGER->findImage("battle_player_ball")->frameRender(getMemDC(), LIMIT_X_LEFT, LIMIT_Y_BOTTOM - POKEMON_HEIGHT, _frameX, 0);
 			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
-			IMAGEMANAGER->findImage(_destScene + "_enemy")->render(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+			if (_enemyType == ENEMY_TRAINNER)
+				IMAGEMANAGER->findImage(_destScene + "_enemy")->render(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 		break;
 		
 		case BATTLE_SELECT:

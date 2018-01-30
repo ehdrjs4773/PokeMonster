@@ -6,6 +6,7 @@
 
 drOHouse::drOHouse()
 {
+	_isWin = false;
 }
 
 

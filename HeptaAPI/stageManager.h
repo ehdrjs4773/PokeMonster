@@ -13,6 +13,9 @@ protected:
 	bool _isWin;
 	vector<pokemon*> _vPokemon;
 
+	int _regenTime;
+	int _currentStage;
+
 public:
 	stageManager();
 	~stageManager();
@@ -21,6 +24,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void regenPokemon();
 
 	inline bool getIsWin() { return _isWin; }
 	inline void setIsWin(bool win) { _isWin = win; }

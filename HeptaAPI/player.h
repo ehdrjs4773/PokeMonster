@@ -56,20 +56,33 @@ public:
 	}
 
 	inline RECT getPlayerRc() { return _playerRc; }
-	inline int  setCurrentStage(int x) {  return _currentStage = x; }
+	inline void setCurrentStage(int x) {  _currentStage = x; }
 
 
 	//플레이어 방향 접근자,설정자
-	playerDirection getPlayerDirection(void) { return _playerDirection; }
-	void setPlayerDirection(playerDirection direction) { _playerDirection = direction; }
+	inline playerDirection getPlayerDirection(void) { return _playerDirection; }
+	inline void setPlayerDirection(playerDirection direction) { _playerDirection = direction; }
+	inline int getCurrengStage() { return _currentStage; }
 
 	//플레이어 모션 접근자,설정자
 	animation* getPlayerMotion(void) { return _playerMotion; }
 	void setPlayerMotion(animation* ani) { _playerMotion = ani; }
 
-	inline int getBadgeCount() {
-		return _badgeCount; }
+	inline int getBadgeCount() { return _badgeCount; }
 	inline void setBadgeCount(int count) { _badgeCount = count; }
 	inline bool isAllDie() { return _isAllDie; }
+
+	inline int getMaxLevel()
+	{
+		int max = 0;
+		for (int i = 0; i < _vPokemon.size(); ++i)
+		{
+			if (max < _vPokemon[i]->getLevel())
+				max = _vPokemon[i]->getLevel();
+		}
+
+		return max;
+	}
+
 };
 

@@ -43,31 +43,97 @@ HRESULT flyMap::init()
 		{
 			temp[i]->init("구구", level);
 			tempSkill = new skill;
-			tempSkill->init("몸통박치기");
+			tempSkill->init("에어슬래쉬");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
-			tempSkill->init("고무고무난타");
+			tempSkill->init("칼바람");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("날개치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("쪼기");
 			temp[i]->addSkill(tempSkill);
 		}
 		else if (i == 1)
 		{
 			temp[i]->init("깨비참", level);
+			tempSkill = new skill;
+			tempSkill->init("에어슬래쉬");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("칼바람");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("날개치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("쪼기");
+			temp[i]->addSkill(tempSkill);
 		}
 		else if (i == 2)
 		{
 			temp[i]->init("피죤", level);
+			tempSkill = new skill;
+			tempSkill->init("에어슬래쉬");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("칼바람");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("날개치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("쪼기");
+			temp[i]->addSkill(tempSkill);
 		}
 		else if (i == 3)
 		{
 			temp[i]->init("깨비드릴조", level);
+			tempSkill = new skill;
+			tempSkill->init("에어슬래쉬");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("칼바람");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("날개치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("쪼기");
+			temp[i]->addSkill(tempSkill);
 		}
 		else if (i == 4)
 		{
 			temp[i]->init("피죤투", level);
+			tempSkill = new skill;
+			tempSkill->init("에어슬래쉬");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("칼바람");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("날개치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("쪼기");
+			temp[i]->addSkill(tempSkill);
 		}
 		else if (i == 5)
 		{
 			temp[i]->init("파오리", level);
+			tempSkill = new skill;
+			tempSkill->init("에어슬래쉬");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("칼바람");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("날개치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("쪼기");
+			temp[i]->addSkill(tempSkill);
 		}
 		_vPokemon.push_back(temp[i]);
 	}

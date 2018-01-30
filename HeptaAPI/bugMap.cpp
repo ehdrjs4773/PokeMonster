@@ -42,7 +42,7 @@ HRESULT bugMap::init()
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
-			tempSkill->init("실뿜기");
+			tempSkill->init("돌진");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
 			tempSkill->init("스피드스타");
@@ -58,7 +58,7 @@ HRESULT bugMap::init()
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
-			tempSkill->init("실뿜기");
+			tempSkill->init("돌진");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
 			tempSkill->init("스피드스타");
@@ -90,7 +90,7 @@ HRESULT bugMap::init()
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
-			tempSkill->init("실뿜기");
+			tempSkill->init("돌진");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
 			tempSkill->init("스피드스타");
@@ -106,7 +106,7 @@ HRESULT bugMap::init()
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
-			tempSkill->init("실뿜기");
+			tempSkill->init("돌진");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
 			tempSkill->init("스피드스타");
@@ -122,7 +122,7 @@ HRESULT bugMap::init()
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
-			tempSkill->init("실뿜기");
+			tempSkill->init("돌진");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
 			tempSkill->init("스피드스타");

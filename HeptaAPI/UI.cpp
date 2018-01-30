@@ -98,8 +98,8 @@ void UI::update(void)
 			{
 				if (!_isName)
 				{
-					SCENEMANAGER->init("PokeInfo");
 					SCENEMANAGER->changeScene("PokeInfo");
+					SCENEMANAGER->init("PokeInfo");
 				}
 			}
 			else if (PtInRect(&_Info[3].rc, _ptMouse))

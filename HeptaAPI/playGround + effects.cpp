@@ -10,6 +10,7 @@ void playGround::imageInit()
 	EFFECTMANAGER->addEffect("노말_enemy", ".\\bmps\\effects\\beamEnemy.bmp", 1280, 224, 320, 224, 1.0f, 0.1f, 1);
 
 	EFFECTMANAGER->addEffect("고무고무난타", ".\\bmps\\effects\\beamPlayer_TEST.bmp", 1280, 224, 320, 224, 1.0f, 0.1f, 1);
+	EFFECTMANAGER->addEffect("고무고무난타_e", ".\\bmps\\effects\\beamEnemy_TEST.bmp", 1280, 224, 320, 224, 1.0f, 0.1f, 1);
 
 	EFFECTMANAGER->addEffect("불_player", ".\\bmps\\effects\\firePlayer.bmp", 1280, 224, 320, 224, 1.0f, 0.1f, 1);
 	EFFECTMANAGER->addEffect("불_enemy", ".\\bmps\\effects\\fireEnemy.bmp", 1280, 224, 320, 224, 1.0f, 0.1f, 1);
