@@ -73,14 +73,14 @@ void worldMapScene::update()
 
 	if (_select[GYM_0].Selected) //1번째 체육관 
 	{
-		SCENEMANAGER->changeScene("인벤토리씬");
-		SCENEMANAGER->init("인벤토리씬");
+		SCENEMANAGER->changeScene("스테이지1");
+		SCENEMANAGER->init("스테이지1");
 		_select[GYM_0].Selected = false;
 	}
 	if (_select[GYM_1].Selected) //2번째 체육관
 	{
-		SCENEMANAGER->changeScene("상점씬");
-		SCENEMANAGER->init("상점씬");
+		SCENEMANAGER->changeScene("스테이지2");
+		SCENEMANAGER->init("스테이지2");
 		_select[GYM_1].Selected = false;
 	}
 	if (_select[GYM_2].Selected) //3번째 체육관 
@@ -198,6 +198,12 @@ void worldMapScene::selectMove()
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
 		SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	{
+		SCENEMANAGER->changeScene("스테이지0");
+		SCENEMANAGER->init("스테이지0");
 	}
 
 }
