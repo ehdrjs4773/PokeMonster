@@ -27,10 +27,12 @@ HRESULT flyMap::init()
 
 	_isWin = false;
 
+	// 여기랑
 	int level = 5 + 5 * _player->getBadgeCount();
 	_vPokemon.clear();
 	// 구구, 깨비참, 피존, 깨비드릴조, 피존투, 파오리
 	pokemon* temp[6];
+	skill* tempSkill;
 	for (int i = 0; i < 6; ++i)
 	{
 		temp[i] = new pokemon;
@@ -38,6 +40,12 @@ HRESULT flyMap::init()
 		if (i == 0)
 		{
 			temp[i]->init("구구", level);
+			tempSkill = new skill;
+			tempSkill->init("몸통박치기");
+			temp[i]->addSkill(tempSkill);
+			tempSkill = new skill;
+			tempSkill->init("고무고무난타");
+			temp[i]->addSkill(tempSkill);
 		}
 		else if (i == 1)
 		{
@@ -170,12 +178,12 @@ void flyMap::collision()
 
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			// 여기랑
 			SCENEMANAGER->changeScene("battleScene");
-			SCENEMANAGER->init("battleScene");
-			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지7");
 			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
 			tempBattle->setEnemyType(ENEMY_TRAINNER);
-			tempBattle->init();
+			tempBattle->setDestScene("스테이지7");
+			tempBattle->init(7);
 		}
 	}
 }

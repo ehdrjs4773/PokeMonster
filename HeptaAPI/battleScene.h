@@ -113,7 +113,8 @@ public:
 	battleScene();
 	~battleScene();
 
-	HRESULT init();
+	HRESULT init(int stage);
+	void setGymLeaderName(int stage);
 	void release();
 	void update();
 	void render();

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "battleScene.h"
+#include "stageManager.h"
 
 
 
@@ -13,14 +14,14 @@ battleScene::~battleScene()
 {
 }
 
-HRESULT battleScene::init()
+HRESULT battleScene::init(int stage)
 {
 	// 적 타입 가져오기 (나중에 DATABASE 이용해서 가져올 생각)
 	if (_enemyType == ENEMY_WILD)
 		;
 	else if (_enemyType == ENEMY_TRAINNER)
 	{
-		string tempPath = ".\\bmps\\battleScene\\" + _destScene + "_enemy.bmp";
+		string tempPath = ".\\bmps\\battleScene\\enemy\\" + _destScene + "_enemy.bmp";
 		IMAGEMANAGER->addImage(_destScene + "_enemy", tempPath.c_str(), POKEMON_WIDTH, POKEMON_HEIGHT, false, true, MAGENTA);
 	}
 	
@@ -83,7 +84,9 @@ HRESULT battleScene::init()
 	if (_enemyType == ENEMY_WILD)
 		DIALOGUE->replaceAll("@", "야생의 " + (*_enemyPokemon)[_enemyCurrentPokemon]->getName());
 	else if (_enemyType == ENEMY_TRAINNER)
-		;
+	{
+		this->setGymLeaderName(stage);
+	}
 
 	DIALOGUE->replaceAll("#", (*_playerPokemon)[_playerCurrentPokemon]->getName());
 
@@ -103,6 +106,64 @@ HRESULT battleScene::init()
 	_playerIsDie = false;
 
 	return S_OK;
+}
+
+void battleScene::setGymLeaderName(int stage)
+{
+	switch (stage)
+	{
+		case 1:
+			DIALOGUE->replaceAll("@", "규리");
+		break;
+		
+		case 2:
+			DIALOGUE->replaceAll("@", "사도");
+		break;
+		
+		case 3:
+			DIALOGUE->replaceAll("@", "유빈");
+		break;
+		
+		case 4:
+			DIALOGUE->replaceAll("@", "꼭두");
+		break;
+		
+		case 5:
+			DIALOGUE->replaceAll("@", "이향");
+		break;
+		
+		case 6:
+			DIALOGUE->replaceAll("@", "호일");
+		break;
+		
+		case 7:
+			DIALOGUE->replaceAll("@", "비상");
+		break;
+		
+		case 8:
+			DIALOGUE->replaceAll("@", "류옹");
+		break;
+		
+		case 9:
+			DIALOGUE->replaceAll("@", "시바");
+		break;
+		
+		case 10:
+			DIALOGUE->replaceAll("@", "독수");
+		break;
+		
+		case 11:
+			DIALOGUE->replaceAll("@", "일목");
+		break;
+		
+		case 12:
+			DIALOGUE->replaceAll("@", "카렌");
+		break;
+		
+		case 13:
+			DIALOGUE->replaceAll("@", "레드");
+		break;
+	}
 }
 
 void battleScene::release()
@@ -158,6 +219,7 @@ void battleScene::update()
 			_attackTime = 0;
 			_isGetEXP = false;
 			_monsterBall = RectMake(LIMIT_X_LEFT - 70, LIMIT_Y_BOTTOM - 120, 70, 60);
+			_enemyImageRect = RectMake(LIMIT_X_RIGHT - POKEMON_WIDTH, LIMIT_Y_TOP, POKEMON_WIDTH, POKEMON_HEIGHT);
 			_isMonsterCatch = false;
 		break;
 
@@ -466,6 +528,8 @@ void battleScene::update()
 								_sequence = BATTLE_FINAL;
 								DIALOGUE->loadingTextFile(".\\textData\\battleScene_final_win.txt");
 								_attackTime = 0;
+								stageManager* tempStage = (stageManager*)SCENEMANAGER->findScene(_destScene);
+								tempStage->setIsWin(true);
 							}
 							else
 							{
@@ -574,12 +638,14 @@ void battleScene::render()
 		case BATTLE_INTRO:
 			DIALOGUE->render(getMemDC());
 			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
+			IMAGEMANAGER->findImage(_destScene + "_enemy")->render(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 		break;
 		
 		case BATTLE_BALLTHROW:
 			DIALOGUE->render(getMemDC());
 			IMAGEMANAGER->findImage("battle_player_ball")->frameRender(getMemDC(), LIMIT_X_LEFT, LIMIT_Y_BOTTOM - POKEMON_HEIGHT, _frameX, 0);
 			IMAGEMANAGER->findImage("battle_player")->frameRender(getMemDC(), _playerImageRect.left, _playerImageRect.top, _frameX, 0);
+			IMAGEMANAGER->findImage(_destScene + "_enemy")->render(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
 		break;
 		
 		case BATTLE_SELECT:
@@ -611,7 +677,12 @@ void battleScene::render()
 	}
 	if (!(_isMonsterCatch &&
 		_fight == PLAYER_CATCH))
+	{
+		if (!(_enemyType == ENEMY_TRAINNER &&
+			(_sequence == BATTLE_INTRO ||
+			 _sequence == BATTLE_BALLTHROW)))
 		IMAGEMANAGER->findImage((*_enemyPokemon)[_enemyCurrentPokemon]->getName() + "_front")->frameRender(getMemDC(), _enemyImageRect.left, _enemyImageRect.top);
+	}
 
 	_UI->render();
 

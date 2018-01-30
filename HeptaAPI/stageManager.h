@@ -23,6 +23,7 @@ public:
 	void render();
 
 	inline bool getIsWin() { return _isWin; }
+	inline void setIsWin(bool win) { _isWin = win; }
 	inline void setPlayerAddressLink(player* player) { _player = player; }
 };
 

@@ -95,14 +95,50 @@ void drOHouse::update()
 				if (_selectNum == 0)
 				{
 					temp->init("파이리", 5);
+					skill* tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
 				}
 				else if (_selectNum == 1)
 				{
 					temp->init("꼬부기", 5);
+					skill* tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
 				}
 				else
 				{
 					temp->init("이상해씨", 5);
+					skill* tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
+					tempSkill = new skill;
+					tempSkill->init("불대문자");
+					temp->addSkill(tempSkill);
 				}
 
 				DATABASE->getVPlayerPokemon()->push_back(temp);
