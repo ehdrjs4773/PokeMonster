@@ -179,7 +179,6 @@ HRESULT champion::init()
 	}
 	DATABASE->setVEnemyPokemon(realPokemonVector);
 	
-	
 
 	return S_OK;
 }
@@ -191,6 +190,7 @@ void champion::release()
 
 void champion::update()
 {
+	if (SOUNDMANAGER->isPlaySound("·¹µåÀÇ Å×¸¶°î"))SOUNDMANAGER->stop("·¹µåÀÇ Å×¸¶°î");
 	stageManager::update();
 	collision();
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
@@ -263,6 +263,7 @@ void champion::collision()
 			!_player->isAllDie())
 		{
 			// ¿©±â¶û
+			SOUNDMANAGER->play("·¹µåÀÇ Å×¸¶°î", 1.0f);
 			SCENEMANAGER->changeScene("battleScene");
 			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
 			tempBattle->setEnemyType(ENEMY_TRAINNER);

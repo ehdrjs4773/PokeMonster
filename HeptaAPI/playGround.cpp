@@ -15,6 +15,14 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	gameNode::init(true);
+
+	//»ç¿îµå 
+	SOUNDMANAGER->addSound("¹èÆ²¾À Å×¸¶°î", "battleBgm.mp3", true, true);
+	SOUNDMANAGER->addSound("·¹µåÀÇ Å×¸¶°î", ".//bossBgm.mp3", true, true);
+	SOUNDMANAGER->addSound("¿À¹Ú»ç Å×¸¶°î", "drOBgm.mp3", true, true);
+	SOUNDMANAGER->addSound("¿ùµå¸Ê Å×¸¶°î", "worldBgm.mp3", true, true);
+
+
 	_player = new player;
 	_player->init();
 	DATABASE->setPlayerMemory(_player);

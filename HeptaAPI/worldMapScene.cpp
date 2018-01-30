@@ -21,6 +21,9 @@ worldMapScene::~worldMapScene()
 
 HRESULT worldMapScene::init()
 {
+	
+
+
 	IMAGEMANAGER->addImage("¹è°æ", ".\\bmps\\worldMapScene\\worldmap1.bmp", WINSIZEX, WINSIZEY, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("Ç¥½Ã", ".\\bmps\\worldMapScene\\select.bmp", 50, 78, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("clear", ".\\bmps\\worldMapScene\\clear.bmp", 101, 42, true, true, RGB(255, 0, 255));
@@ -69,6 +72,8 @@ void worldMapScene::release()
 }
 void worldMapScene::update()
 {
+	if (!SOUNDMANAGER->isPlaySound("¿ùµå¸Ê Å×¸¶°î")) SOUNDMANAGER->play("¿ùµå¸Ê Å×¸¶°î", 1.0f);
+
 	selectMove();
 
 	if (_select[GYM_0].Selected) //1¹øÂ° Ã¼À°°ü 

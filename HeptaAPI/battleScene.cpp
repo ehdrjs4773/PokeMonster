@@ -16,6 +16,10 @@ battleScene::~battleScene()
 
 HRESULT battleScene::init(int stage)
 {
+	//»ç¿îµå
+	if (!SOUNDMANAGER->isPlaySound("·¹µåÀÇ Å×¸¶°î")) SOUNDMANAGER->play("¹èÆ²¾À Å×¸¶°î", 1.0f);
+	if (SOUNDMANAGER->isPlaySound("¿ùµå¸Ê Å×¸¶°î")) SOUNDMANAGER->stop("¿ùµå¸Ê Å×¸¶°î");
+
 	// Àû Å¸ÀÔ °¡Á®¿À±â (³ªÁß¿¡ DATABASE ÀÌ¿ëÇØ¼­ °¡Á®¿Ã »ı°¢)
 	if (_enemyType == ENEMY_WILD)
 		;
@@ -638,6 +642,8 @@ void battleScene::update()
 				else
 				{
 					SCENEMANAGER->changeScene(_destScene);
+					SOUNDMANAGER->stop("¹èÆ²¾À Å×¸¶°î");
+					if (!SOUNDMANAGER->isPlaySound("¿ùµå¸Ê Å×¸¶°î")) SOUNDMANAGER->play("¿ùµå¸Ê Å×¸¶°î", 1.0f);
 				}
 			}
 			else
@@ -646,6 +652,8 @@ void battleScene::update()
 				if (_attackTime % 50 == 0)
 				{
 					SCENEMANAGER->changeScene(_destScene);
+					SOUNDMANAGER->stop("¹èÆ²¾À Å×¸¶°î");
+					if (!SOUNDMANAGER->isPlaySound("¿ùµå¸Ê Å×¸¶°î")) SOUNDMANAGER->play("¿ùµå¸Ê Å×¸¶°î", 1.0f);
 					if (_enemyType == ENEMY_TRAINNER)
 						DATABASE->getPlayerMemory()->setBadgeCount(DATABASE->getPlayerMemory()->getBadgeCount() + 1);
 				}

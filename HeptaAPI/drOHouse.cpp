@@ -17,6 +17,9 @@ drOHouse::~drOHouse()
 HRESULT drOHouse::init()
 {
 	stageManager::init();
+	//»ç¿îµå
+	if (SOUNDMANAGER->isPlaySound("¿ùµå¸Ê Å×¸¶°î")) SOUNDMANAGER->stop("¿ùµå¸Ê Å×¸¶°î");
+
 	_background = IMAGEMANAGER->addImage("¿À¹Ú»ç¸Ê", ".\\bmps\\map\\¿À¹Ú»ç.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	_drO = IMAGEMANAGER->addFrameImage("drO", ".\\bmps\\drHouseScene\\drO.bmp", 68, 24, 4, 1, false, true, MAGENTA);
 	_shopNPC = IMAGEMANAGER->addImage("»óÁ¡NPC", ".\\bmps\\map\\»óÁ¡NPC.bmp", 17, 25, false, true, MAGENTA);
@@ -38,13 +41,15 @@ HRESULT drOHouse::init()
 
 	SCENEMANAGER->init("¿ùµå¸Ê¾À");
 
-	_startingMonster[0] = "ÆÄÀÌ¸®";
+	_startingMonster[0] = "¸®ÀÚ¸ù";
 	_startingMonster[1] = "²¿ºÎ±â";
 	_startingMonster[2] = "ÀÌ»óÇØ¾¾";
 
 	_selectNum = 0;
 
 	_dialogueTime = 0;
+
+	SOUNDMANAGER->play("¿À¹Ú»ç Å×¸¶°î", 1.0f);
 
 	return S_OK;
 }
@@ -65,6 +70,7 @@ void drOHouse::update()
 			if (_player->getPlayerRc().top >= WINSIZEY)
 			{
 				SCENEMANAGER->changeScene("¿ùµå¸Ê¾À");
+				SOUNDMANAGER->stop("¿À¹Ú»ç Å×¸¶°î");
 			}
 		}
 		else
@@ -100,7 +106,7 @@ void drOHouse::update()
 
 				if (_selectNum == 0)
 				{
-					temp->init("ÆÄÀÌ¸®", 5);
+					temp->init("¸®ÀÚ¸ù", 99);
 					skill* tempSkill = new skill;
 					tempSkill->init("ºÒ´ë¹®ÀÚ");
 					temp->addSkill(tempSkill);
