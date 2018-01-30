@@ -65,6 +65,8 @@ MonsterBack::~MonsterBack()
 
 	 _CancleRc = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 25, 104, 45);
 
+	 _inventory = (inventory*)SCENEMANAGER->findScene("인벤토리씬");
+
 	 return S_OK;
 
 
@@ -109,16 +111,13 @@ MonsterBack::~MonsterBack()
 				 
 				if(PtInRect(&_PokeInfo[i].rc, _ptMouse))
 				{
-						if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-						{
-							if (_PokeInfo[0].Catch == true) _PokeInfo[0].Catch = false;
-							else if (_PokeInfo[1].Catch == true) _PokeInfo[1].Catch = false;
-							else if (_PokeInfo[2].Catch == true) _PokeInfo[2].Catch = false;
-							else if (_PokeInfo[3].Catch == true) _PokeInfo[3].Catch = false;
-							else if (_PokeInfo[4].Catch == true) _PokeInfo[4].Catch = false;
-							else if (_PokeInfo[5].Catch == true) _PokeInfo[5].Catch = false;
-							_PokeInfo[i].Catch = true;
-						}
+					if (_PokeInfo[0].Catch == true) _PokeInfo[0].Catch = false;
+					else if (_PokeInfo[1].Catch == true) _PokeInfo[1].Catch = false;
+					else if (_PokeInfo[2].Catch == true) _PokeInfo[2].Catch = false;
+					else if (_PokeInfo[3].Catch == true) _PokeInfo[3].Catch = false;
+					else if (_PokeInfo[4].Catch == true) _PokeInfo[4].Catch = false;
+					else if (_PokeInfo[5].Catch == true) _PokeInfo[5].Catch = false;
+					_PokeInfo[i].Catch = true;
 				 }
 			 }
 		 }
@@ -189,10 +188,13 @@ MonsterBack::~MonsterBack()
 
 
 	// ================= 인벤토리에서 회복약 사용했을때! ===============================//
+
 	 if (SCENEMANAGER->getLastSceneName() == "인벤토리씬")
 	 {
 		 if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		 {		 //마우스로 취소 키를 눌렀을 경우~
+
+			 string temp = SCENEMANAGER->getLastSceneName();
 			 if (PtInRect(&_CancleRc, _ptMouse))
 			 {
 				 SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
@@ -201,31 +203,30 @@ MonsterBack::~MonsterBack()
 			 //아이템 사용~ 하는거
 			 for (int i = 0; i < DATABASE->getVPlayerPokemon()->size(); i++)
 			 {
-				 if(KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-				 {
-					if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
+				if (PtInRect(&_PokeInfo[i].rc, _ptMouse))
+				{
+					if (_inventory->getCurrentItem()->getType() == ITEM_POTION)
 					{
-						if (_inventory->getCurrentItem()->getType() == ITEM_POTION)
+						if(_inventory->getCurrentItem()->getName() == "hp포션")
 						{
-							if(_inventory->getCurrentItem()->getName() == "hp포션")
-							{
 							(*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
-							}
+							_PokeInfo[i]._playerHpBar->setGauge((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP(), (*DATABASE->getVPlayerPokemon())[i]->getMaxHP());
+							SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+						}
 
-							if (_inventory->getCurrentItem()->getName() == "pp포션")
+						if (_inventory->getCurrentItem()->getName() == "pp포션")
+						{
+							if (i > 4)
 							{
-								if (i > 4)
-								{
-									i = 4;
-								}
-
-								(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->getCurrentPP() + _inventory->getCurrentItem()->getItemAbility());
+								i = 4;
 							}
 
+							(*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->setCurrentPP((*DATABASE->getVPlayerPokemon())[i]->getVSkill()[i]->getCurrentPP() + _inventory->getCurrentItem()->getItemAbility());
 						}
 
 					}
-				 }
+
+				}
 			 }
 		 }
 		 //키로 취소를 눌렀을 경우

@@ -107,3 +107,15 @@ void item::InvenRender(HDC hdc, image* img, int destX, int destY) //Inventory re
 	sprintf(temp, "%d", _itemNum);
 	TextOut(hdc, destX + 130, destY + 45, temp, strlen(temp));
 }
+
+void item::setItemInfo(item* item)
+{
+	_image = item->_image;
+	_rc = item->_rc;
+	_itemKind = item->_itemKind;
+	_description = item->_description;
+	_ability = item->_ability;
+	_price = item->_price;
+	_name = item->_name;
+	_itemNum = item->_itemNum;
+}

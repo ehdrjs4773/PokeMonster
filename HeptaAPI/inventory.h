@@ -133,7 +133,7 @@ public:
 	mapItemIter findNum(int arrNum);
 
 	item* getCurrentItem() { return _currentItem; }
-	
+
 	inline void changeWS(int WS) { _WS = WS; }
 
 
