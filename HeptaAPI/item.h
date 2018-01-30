@@ -53,6 +53,7 @@ public:
 	ITEM_TYPE getType() { return _itemKind; } //아이템 종류 가져가는 함수
 	string getName() { return _name; }
 
+	void setItemInfo(item* item);
 
 };
 

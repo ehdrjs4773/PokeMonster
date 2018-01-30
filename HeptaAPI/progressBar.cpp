@@ -112,9 +112,20 @@ void progressBar::render()
 
 }
 
-void progressBar::setGauge(float currentGauge, float maxGauge)
+void progressBar::setGauge(float currentGauge, float maxGauge, int isHP)
 {
 	_width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();
+
+	if (isHP == 1)
+	{
+		int percent = (currentGauge / maxGauge) * 100;
+		if (percent > 50)
+			_progressBarTop = _high;
+		else if (percent > 30)
+			_progressBarTop = _middle;
+		else
+			_progressBarTop = _low;
+	}
 }
 
 void progressBar::setGauge(float currentGauge, float maxGauge, bool isHP)

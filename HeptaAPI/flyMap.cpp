@@ -15,6 +15,7 @@ flyMap::~flyMap()
 HRESULT flyMap::init()
 {
 	stageManager::init();
+
 	_background = IMAGEMANAGER->addImage("비행맵", ".\\bmps\\map\\비행.bmp", WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	_gymLeader = IMAGEMANAGER->addImage("비행NPC", ".\\bmps\\map\\비행NPC.bmp", 25, 28, false, true, MAGENTA);
 

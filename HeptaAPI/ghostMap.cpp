@@ -18,6 +18,7 @@ ghostMap::~ghostMap()
 HRESULT ghostMap::init()
 {
 	stageManager::init();
+
 	_background = IMAGEMANAGER->addImage("고스트맵", ".\\bmps\\map\\고스트.bmp", 0, 0, WINSIZEX, WINSIZEY, false, true, MAGENTA);
 	_gymLeader = IMAGEMANAGER->addImage("고스트NPC", ".\\bmps\\map\\고스트NPC.bmp", 25, 28, false, true, MAGENTA);
 	_player->setCurrentStage(3); //현재 스테이지 정보 넘겨준다
@@ -40,6 +41,7 @@ void ghostMap::release()
 void ghostMap::update()
 {
 	stageManager::update();
+	collision();
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
 	if (_player->getPlayerRc().top >= WINSIZEY)

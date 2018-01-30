@@ -56,6 +56,7 @@ void guardian1::release()
 void guardian1::update()
 {
 	stageManager::update();
+	collision();
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
 	if (_player->getPlayerRc().top >= WINSIZEY)

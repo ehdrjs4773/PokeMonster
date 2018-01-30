@@ -549,7 +549,9 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	{
 		if (_invenSlot_POTION[0].number > 0)
 		{
-			_currentItem = _invenSlot_POTION[0].itm;
+			item* tempItem = new item;
+			tempItem->setItemInfo(_invenSlot_POTION[0].itm);
+			_currentItem = tempItem;
 			SCENEMANAGER->changeScene("PokeInfo");
 			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[0].itm->setItemNum(_invenSlot_POTION[0].itm->getItemNum() - 1);
@@ -562,7 +564,9 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	{
 		if (_invenSlot_POTION[1].number > 0)
 		{
-			_currentItem = _invenSlot_POTION[1].itm;
+			item* tempItem = new item;
+			tempItem->setItemInfo(_invenSlot_POTION[1].itm);
+			_currentItem = tempItem;
 			SCENEMANAGER->changeScene("PokeInfo");
 			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[1].itm->setItemNum(_invenSlot_POTION[1].itm->getItemNum() - 1);
@@ -574,7 +578,9 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	{
 		if (_invenSlot_POTION[2].number > 0)
 		{
-			_currentItem = _invenSlot_POTION[2].itm;
+			item* tempItem = new item;
+			tempItem->setItemInfo(_invenSlot_POTION[2].itm);
+			_currentItem = tempItem;
 			SCENEMANAGER->changeScene("PokeInfo");
 			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[2].itm->setItemNum(_invenSlot_POTION[2].itm->getItemNum() - 1);
@@ -586,7 +592,9 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	{
 		if (_invenSlot_POTION[3].number > 0)
 		{
-			_currentItem = _invenSlot_POTION[3].itm;
+			item* tempItem = new item;
+			tempItem->setItemInfo(_invenSlot_POTION[3].itm);
+			_currentItem = tempItem;
 			SCENEMANAGER->changeScene("PokeInfo");
 			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[3].itm->setItemNum(_invenSlot_POTION[3].itm->getItemNum() - 1);
@@ -598,7 +606,9 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	{
 		if (_invenSlot_POTION[4].number > 0)
 		{
-			_currentItem = _invenSlot_POTION[4].itm;
+			item* tempItem = new item;
+			tempItem->setItemInfo(_invenSlot_POTION[4].itm);
+			_currentItem = tempItem;
 			SCENEMANAGER->changeScene("PokeInfo");
 			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[4].itm->setItemNum(_invenSlot_POTION[4].itm->getItemNum() - 1);
@@ -610,7 +620,9 @@ void inventory::PotionMenuDraw() // 인벤토리 포션 Menu 그려주는 함수
 	{
 		if (_invenSlot_POTION[5].number > 0)
 		{
-			_currentItem = _invenSlot_POTION[5].itm;
+			item* tempItem = new item;
+			tempItem->setItemInfo(_invenSlot_POTION[5].itm);
+			_currentItem = tempItem;
 			SCENEMANAGER->changeScene("PokeInfo");
 			SCENEMANAGER->init("PokeInfo");
 			_invenSlot_POTION[5].itm->setItemNum(_invenSlot_POTION[5].itm->getItemNum() - 1);
