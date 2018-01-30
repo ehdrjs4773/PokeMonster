@@ -39,11 +39,13 @@ HRESULT guardian1::init()
 	}
 
 	// 여기랑
-	int level = 50;
+	int level =  50;
 	_vPokemon.clear();
 	// 구구, 깨비참, 피존, 깨비드릴조, 피존투, 파오리
 	pokemon* temp[6];
 	skill* tempSkill;
+
+
 	for (int i = 0; i < 6; ++i)
 	{
 		temp[i] = new pokemon;
@@ -197,6 +199,8 @@ HRESULT guardian1::init()
 	return S_OK;
 
 
+
+
 }
 
 void guardian1::release()
@@ -222,6 +226,8 @@ void guardian1::update()
 		SCENEMANAGER->init("스테이지10");
 	
 	}
+
+
 }
 
 void guardian1::render()
