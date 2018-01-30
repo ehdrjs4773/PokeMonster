@@ -98,7 +98,7 @@ MonsterBack::~MonsterBack()
 				 }
 	
 	
-				 _PokeInfo[i]._playerHpBar->setGauge(((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()), ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()));
+				 _PokeInfo[i]._playerHpBar->setGauge(((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP()), ((*DATABASE->getVPlayerPokemon())[i]->getMaxHP()), (int)true);
 	
 		 }
 	 if (!_isChange)
@@ -210,8 +210,8 @@ MonsterBack::~MonsterBack()
 						if(_inventory->getCurrentItem()->getName() == "hp포션")
 						{
 							(*DATABASE->getVPlayerPokemon())[i]->setCurrentHP((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP() + _inventory->getCurrentItem()->getItemAbility());
-							_PokeInfo[i]._playerHpBar->setGauge((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP(), (*DATABASE->getVPlayerPokemon())[i]->getMaxHP());
-							SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
+							_PokeInfo[i]._playerHpBar->setGauge((*DATABASE->getVPlayerPokemon())[i]->getCurrentHP(), (*DATABASE->getVPlayerPokemon())[i]->getMaxHP(), (int)true);
+							//SCENEMANAGER->changeScene(SCENEMANAGER->getLastSceneName());
 						}
 
 						if (_inventory->getCurrentItem()->getName() == "pp포션")
