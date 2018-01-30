@@ -27,7 +27,7 @@ HRESULT iceMap::init()
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
 
-	_isWin = false;
+	_isWin = true;
 	return S_OK;
 }
 

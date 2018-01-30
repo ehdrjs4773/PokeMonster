@@ -92,11 +92,11 @@ void drOHouse::update()
 			{
 				pokemon* temp = new pokemon;
 
-				if (_selectNum = 0)
+				if (_selectNum == 0)
 				{
 					temp->init("파이리", 5);
 				}
-				else if (_selectNum = 1)
+				else if (_selectNum == 1)
 				{
 					temp->init("꼬부기", 5);
 				}

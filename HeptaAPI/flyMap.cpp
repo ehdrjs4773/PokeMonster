@@ -59,6 +59,7 @@ HRESULT flyMap::init()
 		{
 			temp[i]->init("파오리", level);
 		}
+		_vPokemon.push_back(temp[i]);
 	}
 
 	vector<pokemon*>* realPokemonVector = new vector<pokemon*>;
@@ -114,6 +115,7 @@ void flyMap::release()
 void flyMap::update()
 {
 	stageManager::update();
+	this->collision();
 	_gymLeaderRc = RectMake(_x, _y, _gymLeader->getWidth(), _gymLeader->getHeight());
 
 	if (_player->getPlayerRc().top >= WINSIZEY)
@@ -129,6 +131,7 @@ void flyMap::render()
 	IMAGEMANAGER->findImage("비행NPC")->render(getMemDC(), _x, _y);
 	stageManager::render();
 	//IMAGEMANAGER->findImage("npc")->frameRender(getMemDC(), _x, _y, 0, 0);
+	Rectangle(getMemDC(), _gymLeaderRc.left, _gymLeaderRc.top, _gymLeaderRc.right, _gymLeaderRc.bottom);
 }
 
 void flyMap::collision()
@@ -172,6 +175,7 @@ void flyMap::collision()
 			SCENEMANAGER->findScene("battleScene")->setDestScene("스테이지7");
 			battleScene* tempBattle = (battleScene*)SCENEMANAGER->findScene("battleScene");
 			tempBattle->setEnemyType(ENEMY_TRAINNER);
+			tempBattle->init();
 		}
 	}
 }
