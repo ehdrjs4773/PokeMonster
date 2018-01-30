@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "bugMap.h"
-
 #include "player.h"
 #include "battleScene.h"
 
@@ -56,7 +55,6 @@ HRESULT bugMap::init()
 		{
 			temp[i]->init("단데기", level);
 			tempSkill = new skill;
-			tempSkill = new skill;
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
 			tempSkill = new skill;
@@ -103,7 +101,7 @@ HRESULT bugMap::init()
 		}
 		else if (i == 4)
 		{
-			temp[i]->init("버터풀", level);
+			temp[i]->init("버터플", level);
 			tempSkill = new skill;
 			tempSkill->init("시그널빔");
 			temp[i]->addSkill(tempSkill);
